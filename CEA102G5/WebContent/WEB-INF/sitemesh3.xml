@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+
+
+  <mapping path="/back_end/*" decorator="/back_end/util/back_end_header.jsp"/>
+  <mapping path="/front_end/front_end_index.jsp" decorator="/front_end/decorators/front_end_header.jsp"/>
+  
+  <mapping path="/front_end/lesson/*">
+     <decorator>/front_end/decorators/lessonSlidebar.jsp</decorator>
+     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+   </mapping>
+
+  <mapping path="/front_end/commodity/*">
+    <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+    <mapping path="/front_end/cart/*">
+    <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+    <mapping path="/front_end/recipe/*">
+    <decorator>/front_end/decorators/recipeSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+  <mapping path="/front_end/member/*">
+    <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+ 
+  
+   <mapping path="/back_end/back_end_login.jsp" exclue="true"/>
+   <mapping path="/front_end/front_end_login.jsp" exclue="true"/>
+</sitemesh> 

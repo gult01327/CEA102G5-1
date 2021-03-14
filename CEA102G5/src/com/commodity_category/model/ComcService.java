@@ -36,5 +36,13 @@ public class ComcService {
 		
 		return comcVO;
 	}
+	
+	public List<ComcVO> getComCountByComc(){
+		return dao.getComCountByComc();
+	}
+	
+	public List<ComVO> getComsByComcIDwithSales(int comcID){
+		return dao.getAllComsByComcIDWithSales(comcID);
+	}
 
 }

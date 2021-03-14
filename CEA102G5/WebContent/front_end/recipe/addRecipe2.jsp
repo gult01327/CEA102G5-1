@@ -4,7 +4,14 @@
 <%@ page import="com.commodity.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>  
-<% MemVO memVO = (MemVO) session.getAttribute("memVO"); %>
+<% MemVO memVO = (MemVO) session.getAttribute("memVO"); 
+	if(memVO==null){
+		String location = request.getServletPath();
+		session.setAttribute("location", location);
+		response.sendRedirect(request.getContextPath()+"/front_end/member/login.jsp");
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,10 +76,10 @@
         margin-bottom: 30px;
     }
     #ingredients{
-        border: 2px solid black;
+        
         border-radius: 4px;
         width: 520px;
-        height: 110px;
+        height: auto;
         text-align:center;
         margin-left: 150px;
         margin-bottom: 50px;
@@ -80,7 +87,7 @@
     #step{
         border: 2px solid black;
         border-radius: 4px;
-        width: 550px;
+        width: 600px;
         text-align:center;
         margin-left: 150px;
         margin-bottom: 50px;
@@ -128,14 +135,14 @@
     	margin-left: 20px;
     }
     #showIngredient{
-    	 border: 2px solid black;
+    	 
     }
     #ingTable{
     	width:780px;
     }
     #calculate{
     	width:100%;
-    	border: 2px solid black;
+    	
     	margin-top:525px;
     	margin-left:50px;
     }
@@ -143,6 +150,17 @@
     	margin-top:50px;
     	margin-left:50px;
     }
+    
+    #index{
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 10px;
+        margin-right: 20px;
+        margin-top: 80px;
+        font-family:fantasy;
+        font-size: x-large;
+    }
+    
 
 
     </style>
@@ -152,8 +170,8 @@
 <img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">½s¿è­¹ÃÐ</font>
 <hr><p>
 
-		<h4><a href="<%=request.getContextPath() %>/front_end/commodity/comindex.jsp">¦^°Ó«°­º­¶</a></h4>
-<form method="post" action="<%=request.getContextPath() %>/front_end/recipe/rec.do" enctype="multipart/form-data">
+		<h4><a href="<%=request.getContextPath() %>/front_end/recipe/recIndex.jsp">¦^­¹ÃÐ­º­¶</a></h4>
+<form method="post" action="<%=request.getContextPath() %>/recipe/rec.do" enctype="multipart/form-data">
     
     <div id="all">
         <div id="left">
@@ -180,7 +198,7 @@
                 <option value="10">10</option>
                 <option value="15">15</option>
                 <option value="25">25</option>
-                <option value="30+">30+</option>
+                <option value="30">30+</option>
             </select><br>
             <font size="+2">­¹§÷</font><br><br>
 
@@ -207,7 +225,7 @@
         <div id="right">
             <input type="submit" value="µo¥¬­¹ÃÐ"><br><br>
             <input type="hidden" name="action" value="addRecipe">
-            <input type="hidden" name="memID" value="1">
+            <input type="hidden" name="memID" value="${memVO.memID}">
             <button>Àx¦s­¹ÃÐ</button><br><br>
             <button>¨ú®ø</button><br><br>
             <button>§R°£­¹ÃÐ</button>
@@ -241,7 +259,7 @@
   </div>
 </form>
     <script type="text/javascript">
-    	
+   
     $("#showIngredient").on("click",".ingredientsRemove",function(){
 		$(this).parents("tr").remove();
 		calculate();
@@ -313,7 +331,7 @@
     var count = 10;
     var count2 = 0;
     var count3 = 30;
-    
+    var indexCount = 1;
 	function addBox(){
             var div = document.createElement('div');
            
@@ -332,7 +350,7 @@
             img.setAttribute('id','img'+count);
             img.setAttribute('src','<%=request.getContextPath()%>/resource/images/upload.png');
             img.setAttribute('width','200px');
-            img.setAttribute('height','162px');
+            img.setAttribute('height','188px');
             file.setAttribute('name','stepPic'+count);
             var textBox = document.createElement("textarea");
             var imgRemove = document.createElement("img");
@@ -349,8 +367,14 @@
             div.setAttribute('id',count2);
             label.setAttribute('id',count);
             textBox.id = count3;
+            var index = document.createElement('div');
+            index.setAttribute('id','index');
+            index.setAttribute('class','indexClass');
+            index.innerText = indexCount;
+            indexCount++;
             var left = document.getElementById('left');
             document.getElementById("step").appendChild(div);
+            document.getElementById(count2).appendChild(index);
             document.getElementById(count2).appendChild(label);
             document.getElementById(count).appendChild(file);
             document.getElementById(count).appendChild(hidden);
@@ -369,7 +393,17 @@
         }
 
     $( function() {
-    $( "#step" ).sortable();
+    $( "#step" ).sortable({
+    	 cursor:"crosshair",
+         opacity:0.6,
+         update:function(){
+             var count = 1;
+             $(".indexClass").each(function(){
+                 $(this).text(count);
+                 count++;
+             });
+         }
+    });
     $( "#step" ).disableSelection();
   } );
     

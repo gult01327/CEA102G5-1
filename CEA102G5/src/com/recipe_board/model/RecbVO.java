@@ -2,15 +2,18 @@ package com.recipe_board.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class RecbVO implements Serializable {
 	
 	private Integer recbID;
 	private Integer recID;
 	private Integer memID;
+	private String memName;
 	private String recbContent;
-	private Date recbTime;
+	private Timestamp recbTime;
 	private Integer recbStatus;
+	private Long recbTimeLong;
 	
 	
 	public RecbVO() {
@@ -48,6 +51,16 @@ public class RecbVO implements Serializable {
 		this.memID = memID;
 	}
 
+	
+	public String getMemName() {
+		return memName;
+	}
+
+
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+
 
 	public String getRecbContent() {
 		return recbContent;
@@ -59,16 +72,6 @@ public class RecbVO implements Serializable {
 	}
 
 
-	public Date getRecbTime() {
-		return recbTime;
-	}
-
-
-	public void setRecbTime(Date recbTime) {
-		this.recbTime = recbTime;
-	}
-
-
 	public Integer getRecbStatus() {
 		return recbStatus;
 	}
@@ -77,6 +80,29 @@ public class RecbVO implements Serializable {
 	public void setRecbStatus(Integer recbStatus) {
 		this.recbStatus = recbStatus;
 	}
+
+
+	public Timestamp getRecbTime() {
+		return recbTime;
+	}
+
+
+	public void setRecbTime(Timestamp recbTime) {
+		this.recbTime = recbTime;
+	}
+
+
+	public Long getRecbTimeLong() {
+		return recbTimeLong;
+	}
+
+
+	public void setRecbTimeLong(Long recbTimeLong) {
+		this.recbTimeLong = recbTimeLong;
+	}
+
+	
+
 	
 	
 	

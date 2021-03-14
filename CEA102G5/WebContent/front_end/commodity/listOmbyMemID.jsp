@@ -49,18 +49,11 @@
 
 </head>
 <body bgcolor=#E8FFE8>
-
-
-
-	<tr><td>
-		 <img src="<%=request.getContextPath() %>/resource/images/food.jpg" height="100" width="100"><font size="+3">所有訂單主檔列表</font><br>
-		 <h4><a href="<%=request.getContextPath()%>/back_end/commodity/comSelectPage.jsp"><img src="<%=request.getContextPath() %>/resource/images/3.jpg" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
+<h2 class="page-title text-center" style='color:black;'>Order Master</h2>
 	
-<table>
-	<tr>
-		<th>訂單主檔ID</th>
-		<th>會員ID</th>
+<table style='width:1100px;  border: 1px solid #CCCCFF;'>
+	<tr style='border: 1px solid #CCCCFF;'>
+		<th >訂單主檔ID</th>
 		<th>訂單總金額</th>
 		<th>訂單狀態</th>
 		<th>出貨狀態</th>
@@ -73,9 +66,8 @@
 	</tr>
 	<%@ include file="page1.file" %>  
 	<c:forEach var="omVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr ${(omVO.omID == param.omID)?'bgcolor=#CCCCFF':''}>
+		<tr style='border: 1px solid #CCCCFF;' ${(omVO.omID == param.omID)?'bgcolor=#CCCCFF':''}>
 			<td>${omVO.omID}</td>
-			<td>${omVO.memID}</td>
 			<td>$ ${omVO.omPrice}</td>
 			<td>${omVO.omPay==1?"已付款":"已取消"}</td>
 			<td>${omVO.omShip==1?"已出貨":"未出貨"}</td>

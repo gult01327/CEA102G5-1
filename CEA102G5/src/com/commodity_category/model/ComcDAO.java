@@ -37,7 +37,12 @@ public class ComcDAO implements ComcDAO_Interface {
 	private static final String DELETE_COMMC = "DELETE FROM COMMODITY_CATEGORY WHERE COMC_ID = ?";	
 	
 	private static final String UPDATE = "UPDATE COMMODITY_CATEGORY SET COMC_NAME=? WHERE COMC_ID = ?";
-	
+	private static final String GET_COM_COUNT_BYCOMCID = "SELECT C.COMC_ID,COMC_NAME,COMC_PICSRC,COUNT(COM_ID) FROM COMMODITY C LEFT JOIN commodity_category Y \r\n" + 
+			"ON C.COMC_ID = Y.COMC_ID GROUP BY C.COMC_ID";
+	private static final String GET_COM_BYCOMCID_WITH_SALES="SELECT C.COM_ID,COMC_ID,COM_NAME,COM_PRICE,SUM(ORDD_COUNT) AS COM_SALES \r\n" + 
+			"FROM COMMODITY C LEFT JOIN ORDER_DETAIL D ON C.COM_ID = D.COM_ID\r\n" + 
+			"WHERE COMC_ID = ? GROUP BY C.COM_ID\r\n" + 
+			"ORDER BY COM_SALES DESC";
 	@Override
 	public void insert(ComcVO comcVO) {
 		Connection con =null;
@@ -332,6 +337,111 @@ public class ComcDAO implements ComcDAO_Interface {
 		}
 		
 		return set;
+	}
+
+	@Override
+	public List<ComcVO> getComCountByComc() {
+		List<ComcVO> list = new ArrayList<ComcVO>();
+		ComcVO comcVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_COM_COUNT_BYCOMCID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				comcVO = new ComcVO();
+				comcVO.setComcID(rs.getInt("COMC_ID"));
+				comcVO.setComcName(rs.getString("COMC_NAME"));
+				comcVO.setComcPicSrc(rs.getString("COMC_PICSRC"));
+				comcVO.setComCount(rs.getInt("COUNT(COM_ID)"));
+				
+				list.add(comcVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<ComVO> getAllComsByComcIDWithSales(int comcID) {
+		List<ComVO> list = new ArrayList<ComVO>();
+		ComVO comVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_COM_BYCOMCID_WITH_SALES);
+			pstmt.setInt(1, comcID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				comVO = new ComVO();
+				comVO.setComID(rs.getInt("COM_ID"));
+				comVO.setComName(rs.getString("COM_NAME"));
+				comVO.setComPrice(rs.getInt("COM_PRICE"));
+				comVO.setComSales(rs.getInt("COM_SALES"));
+				
+				list.add(comVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }

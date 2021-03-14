@@ -9,46 +9,10 @@
 <html>
 <head><title>會員常用地址列表 - listAllMemRec.jsp</title>
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resource/css/checkOut.css">
-<style>
-  table#table-1 {
-	background-color:#E8FFE8;
-    border: 2px solid black;
-    text-align: ;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 950px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
 
 </head>
-<body bgcolor=#E8FFE8>
-	<tr><td>
-		 
-		 <h4><a href="<%=request.getContextPath()%>/front_end/commodity/comindex.jsp"><img src="<%=request.getContextPath() %>/resource/images/3.jpg" width="100" height="100" border="0">回商城首頁</a></h4>
-	</td></tr><br><br>
+
 	<a href="<%=request.getContextPath()%>/front_end/member/addMemRec.jsp">新增常用地址</a>
 <table>
 	<tr>
@@ -116,5 +80,5 @@
 	        console.log(Selected);
 	    }
 </script>
-</body>
+
 </html>

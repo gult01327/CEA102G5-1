@@ -2,6 +2,7 @@ package com.member.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.json.JSONObject;
 
 import com.commodity.model.ComVO;
 import com.member.model.MailService;
@@ -75,8 +78,8 @@ public class MemServlet extends HttpServlet {
 					if(memVO.getMemPassword().equals(memPassword)) {
 						session.setAttribute("memVO", memVO);
 						String location = (String)session.getAttribute("location");
-						ComVO comVO = (ComVO)session.getAttribute("comVO");
 						if(location!=null) {
+							ComVO comVO = (ComVO)session.getAttribute("comVO");
 							session.removeAttribute("location");
 							session.removeAttribute("comVO");
 							request.setAttribute("comVO", comVO);
@@ -86,6 +89,7 @@ public class MemServlet extends HttpServlet {
 							
 							return;
 						}
+						session.removeAttribute("location");
 						String url = "/front_end/commodity/comindex.jsp";
 						RequestDispatcher successView = request.getRequestDispatcher(url);
 						successView.forward(request, response);
@@ -339,11 +343,19 @@ public class MemServlet extends HttpServlet {
 				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/forgetPw.jsp");
 				failView.forward(request, response);
 			}
-			
-			
-			
-			
-			
+		}
+		
+		if("getMemByAjax".equals(action)) {
+			Integer memID = new Integer(request.getParameter("memID"));
+			MemService memSvc = new MemService();
+			MemVO memVO = memSvc.getOneMem(memID);
+			String jsonStr = new JSONObject(memVO).toString();
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonStr);
+			out.flush();
+			out.close();
 		}
 		
 		

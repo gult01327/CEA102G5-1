@@ -35,11 +35,11 @@
 </ul>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/back_end/member/addMem.jsp'>查看食譜收藏</a> </li>
+  <li><a href='<%=request.getContextPath()%>/front_end/recipe/recMemFavorite.jsp'>查看食譜收藏</a> </li>
 </ul>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/back_end/member/addMem.jsp'>查看食譜列表</a> </li>
+  <li><a href='<%=request.getContextPath()%>/front_end/recipe/listRecbyMemID.jsp'>查看食譜列表</a> </li>
 </ul>
 </body>
 

@@ -14,6 +14,12 @@ public class RecsVO implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public String getRecsPicSrc() {
+		String str = "?id="+this.recsID+"&table=RECIPE_STEP&column=RECS_PICTURE&idname=RECS_ID";
+		return str;
+	}
 
 
 	public Integer getRecsID() {

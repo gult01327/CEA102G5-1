@@ -204,7 +204,7 @@
         </div>
         <div id="right">
             <button id="submitbtn">發布食譜</button><br><br>
-            <button>儲存食譜</button><br><br>
+            <input type = 'button' id ='btn' value='點我'><br><br>
             <button>取消</button><br><br>
             <button>刪除食譜</button>
 
@@ -232,7 +232,9 @@
 
     <script type="text/javascript">
     	
-   
+   	$("#right").on("click","#btn",function(){
+   		console.log("OK");
+   	});
     
     
         function init(){

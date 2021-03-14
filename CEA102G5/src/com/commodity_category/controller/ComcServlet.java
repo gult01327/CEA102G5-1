@@ -2,6 +2,7 @@ package com.commodity_category.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -119,6 +120,22 @@ public class ComcServlet extends HttpServlet {
 			
 			
 		}
+		
+		if("listComforByComcIDwithSales".equals(action)) {
+			Integer comcID = new Integer(request.getParameter("comcID"));
+			ComcService comcSvc = new ComcService();
+			List<ComVO> list = comcSvc.getComsByComcIDwithSales(comcID);
+			String jsonStr = new JSONArray(list).toString();
+			
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonStr);
+			out.flush();
+			out.close();
+			
+		}
+		
 	}
 
 }

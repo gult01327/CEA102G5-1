@@ -6,6 +6,7 @@ import java.sql.Date;
 public class RecVO implements Serializable {
 	private Integer recID;
 	private Integer memID;
+	private String memName;
 	private String recName;
 	private byte[] recPicture1;
 	private byte[] recPicture2;
@@ -29,11 +30,23 @@ public class RecVO implements Serializable {
 		super();
 	}
 
-
+	public String getRecPicSrc() {
+		String src = "?id="+this.recID+"&table=RECIPE&column=REC_PICTURE_1&idname=REC_ID";
+		
+		return src;
+	}
 	public Integer getRecID() {
 		return recID;
 	}
 
+	
+	public String getMemName() {
+		return memName;
+	}
+
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 
 	public void setRecID(Integer recID) {
 		this.recID = recID;

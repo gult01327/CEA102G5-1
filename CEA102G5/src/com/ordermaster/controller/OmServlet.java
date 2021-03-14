@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cart.model.CartVO;
+import com.member_recipient.model.MemrService;
+import com.member_recipient.model.MemrVO;
 import com.orderdetail.model.OdService;
 import com.orderdetail.model.OdVO;
 import com.ordermaster.model.OmService;
@@ -51,22 +53,17 @@ public class OmServlet extends HttpServlet {
 		if("BUY".equals(action)) {
 
 			try {
-				String omrAdd = request.getParameter("omrAdd");
-				System.out.println(omrAdd);
-				String omrName = request.getParameter("omrName");
-				System.out.println(omrName);
-				String omrPhone = request.getParameter("omrPhone");
-				System.out.println(omrPhone);
 				Integer memID = new Integer(request.getParameter("memID"));
 				Integer memrID = new Integer(request.getParameter("memrID"));
-				String amount = (String)session.getAttribute("amount");
-				Integer omPrice = new Integer(amount);
+				Integer omPrice = new Integer(request.getParameter("totalAmount"));
+				MemrService memrSvc = new MemrService();
+				MemrVO memrVO = memrSvc.getByMemrID(memrID);
 				List<CartVO> checkOutList = (List<CartVO>)session.getAttribute("checkOutList");
 				session.removeAttribute("amount");
 				session.removeAttribute("checkOutList");
 				
 				OdService odSvc = new OdService();
-				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, omrName,omrPhone,omrAdd);
+				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, memrVO.getMemrName(),memrVO.getMemrPhone(),memrVO.getMemrAddress());
 				
 				request.setAttribute("omVO", omVO);//¨S¥Î¨ì
 				String url = "/front_end/commodity/listOmbyMemID.jsp";

@@ -6,4 +6,5 @@ public interface RecbDAO_interface {
 	public RecbVO insertMsg(RecbVO recbVO);
 	public List<RecbVO> getAllByRecID(Integer recID);
 	public void deleteByRecbID(Integer recbID);
+	public void updateRecbStatus(Integer recbID, Integer recbStatus);
 }

@@ -26,5 +26,9 @@ public class RecbService {
 	public void deleteMsgByRecbID(Integer recbID) {
 		dao.deleteByRecbID(recbID);
 	}
+	
+	public void updateRecbStatus(Integer recbID, Integer recbStatus) {
+		dao.updateRecbStatus(recbID, recbStatus);
+	}
 
 }

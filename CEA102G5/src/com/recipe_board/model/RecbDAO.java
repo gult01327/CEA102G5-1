@@ -25,11 +25,13 @@ private static DataSource ds = null;
 		}	
 	}
 	
-	private static final String INSERT_STMT = "INSERT INTO RECIPE_BOARD (REC_ID,MEM_ID,RECB_CONTENT) VALUES (?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO RECIPE_BOARD (REC_ID,MEM_ID,RECB_CONTENT,RECB_STATUS) VALUES (?,?,?,?)";
 	private static final String GET_ALL_BY_RECID_STMT = "SELECT RECB_ID,REC_ID,B.MEM_ID,MEM_NAME,RECB_CONTENT,RECB_STATUS,RECB_TIME\r\n" + 
 			"FROM RECIPE_BOARD B LEFT JOIN MEMBER_INFO M ON B.MEM_ID=M.MEM_ID\r\n" + 
-			"WHERE REC_ID = ? ORDER BY RECB_ID;";
+			"WHERE REC_ID = ? AND RECB_STATUS=0 ORDER BY RECB_ID;";
 	private static final String DELETE_BY_RECBID = "DELETE FROM RECIPE_BOARD WHERE RECB_ID=?";
+	private static final String UPDATE_RECB_STATUS = "UPDATE RECIPE_BOARD SET RECB_STATUS = ? WHERE RECB_ID=?";
+	
 	@Override
 	public RecbVO insertMsg(RecbVO recbVO) {
 		Connection con = null;
@@ -43,6 +45,7 @@ private static DataSource ds = null;
 			pstmt.setInt(1, recbVO.getRecID());
 			pstmt.setInt(2, recbVO.getMemID());
 			pstmt.setString(3, recbVO.getRecbContent());
+			pstmt.setInt(4, 0);
 			
 			pstmt.executeUpdate();
 			
@@ -155,6 +158,41 @@ private static DataSource ds = null;
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_BY_RECBID);
 			pstmt.setInt(1, recbID);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					// TODO Auto-generated catch block
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void updateRecbStatus(Integer recbID, Integer recbStatus) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_RECB_STATUS);
+			pstmt.setInt(1, recbStatus);
+			pstmt.setInt(2, recbID);
 			pstmt.executeUpdate();
 			
 		} catch (SQLException se) {

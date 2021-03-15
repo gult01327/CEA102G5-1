@@ -66,7 +66,7 @@ height:auto;
                             <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
 									<div class="widget widget_posts_widget">
 										<h3 class="widget-title">Newest Posts</h3>
-									<c:forEach var="recVO" items="${recSvc.all}" begin="0" end="2">
+									<c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}" begin="0" end="2">
 										<div class="item">
 											<div class="thumb"> 
 												<img src = "<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" max-width=100>

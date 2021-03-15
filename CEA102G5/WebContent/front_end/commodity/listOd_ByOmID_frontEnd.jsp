@@ -106,7 +106,7 @@
         <img class='star' id='star3' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
         <img class='star' id='star4' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
         <img class='star' id='star5' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
-        <input id='score' type="hidden" value="">
+        <input id='score' name='score' type="hidden" value="">
     </div>
         <textarea id='msgText' cols="60" rows="10" placeholder="½Ð¿é¤Jµû»ù"></textarea>
       </div>

@@ -12,6 +12,11 @@
 <html>
 <head><title>所有審核中食譜主檔 - listAllRec.jsp</title>
  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+
+</head>
+<body>
 <style>
   table#table-1 {
 	background-color:#E8FFE8;
@@ -31,7 +36,7 @@
 
 <style>
   table {
-	width: 1600px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -46,34 +51,25 @@
 </style>
 
 
-</head>
-<body bgcolor=#E8FFE8>
-
-
-	<tr><td>
-		 <img src="<%=request.getContextPath() %>/resource/images/food.jpg" height="100" width="100"><font size="+3">所有審核中食譜主檔</font><br>
-		 <h4><a href="<%=request.getContextPath()%>/back_end/commodity/comSelectPage.jsp"><img src="<%=request.getContextPath() %>/resource/images/3.jpg" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-	
+<h2 class="page-title text-center" style='color:black;'>Recipe Unreviewed</h2>	
 <table>
 	<tr>
 		<th>食譜主檔ID</th>
 		<th>會員ID</th>
 		<th>食譜標題</th>
 		<th>食譜圖片</th>
-		<th>食譜簡介</th>
 		<th>食譜狀態</th>
 		<th>審核食譜</th>
 		<th>查看食譜明細</th>
-	</tr>  
+	</tr>
+	<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemService"></jsp:useBean>  
 	<%@ include file="page1.file" %>  
 	<c:forEach var="recVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
 		<tr class='tabletr'>
 			<td>${recVO.recID}</td>
-			<td>${recVO.memID}</td>
+			<td>${memSvc.getOneMem(recVO.memID).memName}</td>
 			<td>${recVO.recName}</td>
 			<td><img src="<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" height="100" width="100"></td>
-			<td>${recVO.recContent}</td>
 			<td class='status' value='${recVO.recStatus}'>${(recVO.recStatus==1)?'審核中':'已生效'}</td>
 
 

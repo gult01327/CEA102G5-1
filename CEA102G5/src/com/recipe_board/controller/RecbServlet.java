@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -109,9 +110,30 @@ public class RecbServlet extends HttpServlet {
 			out.print(str);
 			out.flush();
 			out.close();
-			
-
-			
+		}
+		
+		if("updateMsgStatus".equals(action)) {
+			Integer recbID = new Integer(request.getParameter("recbID"));
+			String str = request.getParameter("recbStatus");
+			Integer recbStatus = null;
+			if(str.equals("1")) {
+				recbStatus = 0;
+			}else {
+				recbStatus = 1;
+			}
+			RecbService recbSvc = new RecbService();
+			recbSvc.updateRecbStatus(recbID, recbStatus);
+			String url = "/back_end/recipe/listAllRecb_Report.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		
+		if("addRecbReply".equals(action)) {
+			Integer recbrID = new Integer(request.getParameter("recbrID"));
+			String recbrReply = request.getParameter("msgReport");
+			Integer recbrStatus = 1;
+			RecbrService recbrSvc = new RecbrService();
+			recbrSvc.updateRecbrReply(recbrID, recbrReply, recbrStatus);
 			
 		}
 	}

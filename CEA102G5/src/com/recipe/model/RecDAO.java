@@ -43,7 +43,7 @@ public class RecDAO implements RecDAO_interface {
 	private static final String UPDATE_RECIPE_STMT ="UPDATE RECIPE SET REC_NAME=? ,"
 			+ "REC_PICTURE_1=?,REC_CAL=?,REC_CARB=?,REC_PROT=?,REC_FAT=?,REC_STATUS=?,REC_CONTENT=?,"
 			+ "REC_SIZE=?,REC_COOKTIME=? WHERE REC_ID=?";
-	private static final String GET_ALL_BY_STATUS = "SELECT * FROM RECIPE WHERE REC_STATUS=?";
+	private static final String GET_ALL_BY_STATUS = "SELECT * FROM RECIPE WHERE REC_STATUS=? ORDER BY REC_TIME DESC";
 	
 	@Override
 	public void insertWithReciRecs(RecVO recVO,List<ReciVO> reciList,List<RecsVO> recsList) {

@@ -2,7 +2,14 @@
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
-<% MemVO memVO = (MemVO)session.getAttribute("memVO"); %>
+<% MemVO memVO = (MemVO)session.getAttribute("memVO"); 
+	if(memVO==null){
+	String location = request.getServletPath();
+	session.setAttribute("location", location);
+	response.sendRedirect(request.getContextPath()+"/front_end/member/login.jsp");
+	return;
+}
+%>
 
 <!DOCTYPE html>
 <html>

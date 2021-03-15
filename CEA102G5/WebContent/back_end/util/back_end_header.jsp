@@ -6,9 +6,12 @@
 
 <head>
 
+
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
+
+
     
     
     <!-- link -->
@@ -245,6 +248,7 @@ div.memberListMain{
     <c:set var="listAllFun" value='${pageContext.request.contextPath}/back_end/function_info/listAllFun.jsp' />
     <c:set var="addAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/addAdmin.jsp' />
     <c:set var="listAllAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/listAllAdmin.jsp' />
+    
 
 <!-- 商城 -->
 <!-- 商品類別     -->
@@ -259,14 +263,17 @@ div.memberListMain{
 
 <!-- 訂單 -->
 <c:set var="listAllOm" value='${pageContext.request.contextPath}/back_end/commodity/listAllOm.jsp' />
+
 <!-- 會員 -->
 <c:set var="memSelect" value='${pageContext.request.contextPath}/back_end/member/memSelect.jsp' />
 <c:set var="listAllMem" value='${pageContext.request.contextPath}/back_end/member/listAllMem.jsp' />
 <c:set var="listOneMem" value='${pageContext.request.contextPath}/back_end/member/listOneMem.jsp' />
 <c:set var="updateMem" value='${pageContext.request.contextPath}/back_end/member/updateMem.jsp' />
 <!-- 食譜 -->
+<c:set var="listAllRec_Approve" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec_Approve.jsp' />
 <c:set var="listAllRec" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec.jsp' />
-
+<c:set var="listAllRecReport" value='${pageContext.request.contextPath}/back_end/recipe/listAllRecReport.jsp' />
+<c:set var="listAllRecbReport" value='${pageContext.request.contextPath}/back_end/recipe/listAllRecb_Report.jsp' />
     <div class="site">
         <div class="topbar">
             <div class="container">
@@ -476,10 +483,15 @@ div.memberListMain{
 		                            	<li><a href=${listAllCom}>商品列表</a></li>
                                     </div>
                                     <div id=Recipe>
-                                    	<li><a href=${listAllRec}>食譜列表</a></li>
+                                   
+                                    	<li><a href=${listAllRec_Approve}>食譜列表(已審核)</a></li>
+                                    	<li><a href=${listAllRec}>食譜列表(未審核)</a></li>
+                                    	<li><a href=${listAllRecReport}>食譜檢舉列表</a></li>
+                                    	<li><a href=${listAllRecbReport}>食譜留言檢舉列表</a></li>
                                     </div>
                                     
                                     <div id=Order>
+                                   		<li><a href=${listAllOm}>訂單列表</a></li>
                                    		<li><a href=${listAllOm}>訂單列表</a></li>
                                     </div>
                                     <div id=Member>

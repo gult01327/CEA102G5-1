@@ -245,6 +245,12 @@ div.memberListMain{
     <c:set var="listAllFun" value='${pageContext.request.contextPath}/back_end/function_info/listAllFun.jsp' />
     <c:set var="addAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/addAdmin.jsp' />
     <c:set var="listAllAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/listAllAdmin.jsp' />
+<!-- 	預約 -->
+	<c:set var="addRes" value="${pageContext.request.contextPath}/back_end/reservation/addReservation.jsp" />
+    <c:set var="searchRes" value="${pageContext.request.contextPath}/back_end/reservation/searchReservation.jsp" />
+    <c:set var="searchResByMem" value="${pageContext.request.contextPath}/back_end/reservation/listByMember.jsp" />
+    <c:set var="searchResByLes" value="${pageContext.request.contextPath}/back_end/reservation/listByLesson.jsp" />
+    <c:set var="updateRes" value="${pageContext.request.contextPath}/back_end/reservation/updateReservation.jsp" />
 
 <!-- 商城 -->
 <!-- 商品類別     -->
@@ -326,6 +332,7 @@ div.memberListMain{
                                             <li><a href="#">Course</a></li>
                                             <li><a href="#">Coach</a></li>
                                             <li><a href="#">Talent</a></li>
+                                            <li><a href="#">Reservation</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -463,6 +470,13 @@ div.memberListMain{
                                         <li><a href=${updateTal}>編輯專長</a></li>
                                         <li><a href=${talResult} class=disabled>查詢結果</a></li>
                                         <li><a href=${listAllTal}>專長列表</a></li>
+                                    </div>
+                                    <div id=Reservation>
+                                        <li><a href=${addRes}>新增預約</a></li>
+                                        <li><a href=${searchRes}>搜尋預約</a></li> 
+                                        <li><a href=${updateRes}>編輯預約</a></li> 
+                                        <li><a href=${searchResByMem} class=disabled>會員預約</a></li>
+                                        <li><a href=${searchResByLes} class=disabled>課堂預約</a></li>                                    
                                     </div>
                                     <div id=CommodityCategory>
                                     	<li><a href=${addComc}>新增類別</a></li>

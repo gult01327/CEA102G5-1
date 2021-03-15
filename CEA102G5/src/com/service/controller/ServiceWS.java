@@ -28,7 +28,6 @@ import com.lesson.model.LesVO;
 import com.member.model.MemService;
 import com.member.model.MemVO;
 import com.service.model.ChatMessage;
-import com.service.model.SessionInfo;
 
 import com.service.model.JedisHandleMessage;
 

@@ -236,6 +236,39 @@
 		<url-pattern>/back_end/back_end_index.jsp</url-pattern>
 	</filter-mapping>
 
+<servlet>
+		<servlet-name>LesrServlet</servlet-name>
+		<servlet-class>com.lesson_reservation.controller.LesrServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LesrServlet</servlet-name>
+		<url-pattern>/lesson.reservation/lesr.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LesrServlet</servlet-name>
+		<url-pattern>/back_end/lesson.reservation/lesr.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LesrServlet</servlet-name>
+		<url-pattern>/front_end/lesson.reservation/lesr.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LesfServlet</servlet-name>
+		<servlet-class>com.lesson_favorites.controller.LesfServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LesfServlet</servlet-name>
+		<url-pattern>/lesson.favorites/lesf.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LesfServlet</servlet-name>
+		<url-pattern>/back_end/lesson.favorites/lesf.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LesfServlet</servlet-name>
+		<url-pattern>/front_end/lesson.favorites/lesf.do</url-pattern>
+	</servlet-mapping>
 
 
 	<filter>

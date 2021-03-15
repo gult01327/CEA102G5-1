@@ -13,7 +13,8 @@
 %>
 <html>
 <head><title>所有訂單主檔 - listAllOm.jsp</title>
-
+</head>
+<body>
 <style>
   table#table-1 {
 	background-color:#E8FFE8;
@@ -46,9 +47,6 @@
     text-align: center;
   }
 </style>
-
-</head>
-<body bgcolor=#E8FFE8>
 <h2 class="page-title text-center" style='color:black;'>Order Master</h2>
 	
 <table style='width:1100px;  border: 1px solid #CCCCFF;'>
@@ -66,7 +64,7 @@
 	</tr>
 	<%@ include file="page1.file" %>  
 	<c:forEach var="omVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr style='border: 1px solid #CCCCFF;' ${(omVO.omID == param.omID)?'bgcolor=#CCCCFF':''}>
+		<tr}>
 			<td>${omVO.omID}</td>
 			<td>$ ${omVO.omPrice}</td>
 			<td>${omVO.omPay==1?"已付款":"已取消"}</td>
@@ -78,9 +76,7 @@
 			<td>${omVO.omTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/ordermaster/om.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="查看訂單明細">
-			    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
-			    <input type="hidden" name="whichPage"	value="<%=whichPage%>">  
+			    <input type="submit" value="查看訂單明細">  
 			    <input type="hidden" name="omID" value="${omVO.omID}">
 			    <input type="hidden" name="action" value="ListOd_ByOmID"></FORM>
 			</td>
@@ -89,9 +85,7 @@
 </table>
 <%@ include file="page2.file" %>
 
-<%if (request.getAttribute("list")!=null){%>
-       <jsp:include page="/back_end/commodity/listOd_ByOmID.jsp" />
-<%} %>
+
 
 </body>
 </html>

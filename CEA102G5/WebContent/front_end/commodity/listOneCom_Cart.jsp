@@ -41,8 +41,10 @@
                                         <h1 class="product-title">${comVO.comName}</h1>
                                         <div class="product-price">
                                             <ins>$${comVO.comPrice }</ins>
+                                            <p>${comVO.comWeight} ${comVO.comUnit} /份</p>
                                         </div>
                                         <div class="mb-3">
+                                        	
                                             <p>${comVO.comContent}</p>
                                         </div>
                                         <form class="cart">
@@ -87,25 +89,63 @@
                                                                                                                 商品脂質含量:${comVO.comFat}g<br>
                                                 </p>
                                             </div>
+<jsp:useBean id="comSvc" scope="page" class="com.commodity.model.ComService"></jsp:useBean>                                                   
                                             <div id="tab-reviews" class="tab-pane fade">
                                                 <div class="single-comments-list mt-0">
                                                     <div class="mb-2">
-                                                        <h2 class="comment-title">2 reviews for Orange Juice</h2>
+                                                        <h2 class="comment-title">${comSvc.getAllComComment(comVO.comID).size()} messages for ${comVO.comName}</h2>
                                                     </div>
+<c:forEach var="comComtVO" items="${comSvc.getAllComComment(comVO.comID)}" >
                                                     <ul class="comment-list">
                                                         <li>
                                                             <div class="comment-container">
                                                                 <div class="comment-author-vcard">
-                                                                    <img alt="" src="<%=request.getContextPath()%>/resource/images/avatar/avatar.png" />
+                                                                    <img alt="" src="<%=request.getContextPath()%>/ComPicReader${comComtVO.memPicSrc}&pic=1" width='50px' height='50px' />
                                                                 </div>
                                                                 <div class="comment-author-info">
-                                                                    <span class="comment-author-name">admin</span>
-                                                                    <a href="#" class="comment-date">July 27, 2016</a>
-                                                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                                                                    <span class="comment-author-name">${comComtVO.memName}</span>
+                                                                    <c:if test="${comComtVO.odPoint == 1}">
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    </c:if>
+                                                                    <c:if test="${comComtVO.odPoint == 2}">
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    </c:if>
+                                                                    <c:if test="${comComtVO.odPoint == 3}">
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    </c:if>
+                                                                    <c:if test="${comComtVO.odPoint == 4}">
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                                                                    </c:if>
+                                                                    <c:if test="${comComtVO.odPoint == 5}">
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                                                                    </c:if>
+
+                                                                    <p>${comComtVO.odMessage}</p>
                                                                 </div>
                                                             </div>
                                                         </li>                             
                                                     </ul>
+</c:forEach>
                                                 </div>
                                             </div>
                                         </div>

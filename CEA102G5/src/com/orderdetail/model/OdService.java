@@ -39,6 +39,13 @@ public class OdService {
 		return list;
 	}
 	
+	public void addMessage(Integer omID, Integer comID, String odMessage, String column) {
+		String sql = "UPDATE ORDER_DETAIL SET "+ column +"=? WHERE ORDM_ID=? AND COM_ID=?";
+		dao.addMessage(omID, comID, odMessage, sql);
+		
+		
+	}
+	
 	
 
 }

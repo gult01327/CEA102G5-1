@@ -8,7 +8,8 @@
 
 <html>
 <head><title>訂單明細 - listOd_ByOmID.jsp</title>
-
+</head>
+<body>
 <style>
   table#table-2 {
 	background-color: #CCCCFF;
@@ -28,7 +29,7 @@
 
 <style>
   table {
-	width: 1400px;
+	width: 800px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -40,18 +41,7 @@
     padding: 5px;
   }
 </style>
-
-</head>
-<body bgcolor='white'>
-
-</head>
-<body bgcolor=#E8FFE8>
-
-
-
-	
-<img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">訂單明細列表</font>
-<h4><a href="<%=request.getContextPath()%>/back_end/commodity/comSelectPage.jsp"><img src="<%=request.getContextPath()%>/resource/images/3.jpg" width="100" height="100" border="0">回後台首頁</a></h4>
+<h2 class="page-title text-center" style='color:black;'>Order Detail</h2>
 
 
 <table>

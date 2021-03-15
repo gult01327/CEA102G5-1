@@ -30,16 +30,19 @@
     <title>食譜明細</title>
 	
 	
+
+<body bgcolor=#E8FFE8>
  <style>
     #left{
         
-        width: 1000px;
-        height: 1000px;
+        width: 100%;
+        height: 100%;
         margin: 0px auto;
+        margin-bottom:50px;
     }
     #title{
         
-        width: 300px;
+        width: 350px;
         display: inline-block;
         margin-left: 50px;
         margin-top: 50px;
@@ -76,6 +79,7 @@
     #cooktimeNum{
         margin-top: 50px;
         margin-left: 250px;
+        font-size: larger;
     }
     table {
 	width: 200px;
@@ -91,8 +95,10 @@
       margin-left: 82px;
       
   }
-  #leftTable{
-      margin-left: 30px;
+  #leftTable,td{
+      margin-left: 5px;
+      padding: 6px;
+      text-align: center;
   }
   #rightTable{
       margin-left: 100px;
@@ -114,7 +120,7 @@
         margin-top: 80px;
         margin-left: 60px;
         
-        width: 530px;
+        width: 400px;
         vertical-align : top;
     }
     #cotent{
@@ -151,7 +157,7 @@
         margin-left: 130px;
     }
     #favRec{
-    	margin-left: 130px;
+    	margin-left: 140px;
     	cursor:pointer;
     	font-size:large;
 
@@ -181,9 +187,13 @@
     }
     .boardmemPic{
         border-radius: 50%;
+        width:100px;
+        height:100px;
     }
     .boardmemPic2{
         border-radius: 50%;
+        width:100px;
+        height:100px;
     }
     #boardText{
         margin-top: 50px;
@@ -194,6 +204,8 @@
     }
     #boardbtn{
         vertical-align: bottom;
+        margin-top:30px;
+        margin-left:500px;
     }
     .boardmsg{
         display: inline-block;
@@ -212,13 +224,14 @@
         margin-left: 140px;
     }
     #report{
+    	display:inline-block;
     	margin-left: 195px;  
     }
     .report{
         display: inline-block;
         float: right;
         vertical-align: top;
-        margin-right: 250px;
+        margin-right: 30px;
         cursor:pointer;
         color:blue;
     }
@@ -226,7 +239,7 @@
     	display: inline-block;
         float: right;
         vertical-align: top;
-        margin-right: 250px;
+        margin-right: 30px;
         cursor:pointer;
         color:blue;
     }
@@ -236,7 +249,8 @@
 
 
 </style>
-<body bgcolor=#E8FFE8>
+
+
 <h2 class="page-title text-center" style='color:black;'>Recipe Detail</h2>
     <div id='parent'></div>
     
@@ -250,16 +264,16 @@
             <img src="<%=request.getContextPath()%>/ComPicReader<%=memVO.getMemPicSrc()%>&pic=1" alt="" width="100px">
             <span id="authorName"><%=memVO.getMemName()%></span>
             <br><br><span>此作者共有<%=list.size()%>食譜</span><br>
-            <br><span id = 'howManyFav'>50人收藏</span><br>
-            <span id='favRec'><img class='heart' id='heart' src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px'>
-            <h3 id='h5fav'>點擊收藏</h3>
+            <br><span id = 'howManyFav'></span><br>
+            <span id='favRec'><img class='heart' id='heart' src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='40px'>
+            <h5 id='h5fav'>點擊收藏</h5>
             </span>
-            <a href='#boardtextbox' id='link'><h3>食譜留言</h3></a>
-            <%if(memVO2!=null){%><a href='javascript:presses()'><h3 id='report'>食譜檢舉</h3></a><%}%>          
+            <a href='#boardtextbox' id='link'><h5>食譜留言</h5></a>
+            <%if(memVO2!=null){%><a href='javascript:presses()'><h5 id='report'>食譜檢舉</h5></a><%}%>          
         	<input type="hidden" id="sessionMemID" value="${memVO2.memID}"/>
         </div>
         <div id='contentDiv'>
-            <h3 id='content'>${recVO.recContent}</h3>
+            <h5 id='content'>${recVO.recContent}</h5>
         </div>
         <div id='recipeContent'>
             <span id='size'>份量</span>
@@ -268,7 +282,7 @@
             <span id='cooktimeNum'>${recVO.recCooktime}分鐘</span>
         </div>
         <div id='recIng'>
-            <h2>食材組成</h2>
+            <h3>食材組成</h3>
             
             <table id='leftTable'>
                 <tr>
@@ -300,7 +314,7 @@
         </div>
 
         <div id='recStep'>
-            <h2>食譜步驟</h2><hr>
+            <h3>食譜步驟</h3><hr>
             <%int count = 1; %>
 <c:forEach var="recsVO" items="${recsSvc. getAllStepsByRecID(recVO.recID)}">
             <div id='stepblock'>
@@ -312,13 +326,13 @@
 </c:forEach>
         </div>
         <div id='board'>
-        	<h1>留言</h1>
+        	<h3>留言</h3>
             <div id='msgDiv'>
             
             </div>
             <div  id='boardText'>
                 <img class='boardmemPic2' src="<%=request.getContextPath()%>/resource/images/user.png" alt="" width="100px" height="100px">
-                <textarea name="" id="boardtextbox" cols="50" rows="10" placeholder="請輸入留言"></textarea>
+                <textarea name="" id="boardtextbox" style='width:500px;height:150px' cols="50" rows="10" placeholder="請輸入留言"></textarea>
                 <input id='boardbtn' type="button" value="發表留言">
             </div>
         </div>
@@ -496,14 +510,14 @@
 			success:function(data){
 				 var html = '';
 				 for(let i = 0 ; i<data.length ; i++){
-			         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader?id="+ data[i].memID +"&table=MEMBER_INFO&column=MEM_PICTURE&idname=MEM_ID&pic=1' width='100px' height='100px'>";
+			         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader?id="+ data[i].memID +"&table=MEMBER_INFO&column=MEM_PICTURE&idname=MEM_ID&pic=1' width='50px' height='50px'>";
 			         html += "   <div class='boardmsg'>"+data[i].recbContent+"</div>";
 			         if(sessionMemID != data[i].memID && sessionMemID != ''){
-			        	 html += "<div class='report'><h4 class='reporth4'>檢舉此留言</h4>";
+			        	 html += "<div class='report'><h6 class='reporth4'>檢舉此留言</h6>";
 			        	 html += "<input type='hidden' class='recbID' value='"+data[i].recbID+"'>"
 			        	 html += "<input type='hidden' class='msgMemID' value='"+data[i].memID+"'></div>"
 			         }else if(sessionMemID == data[i].memID){
-			        	 html += "<div class='deleteMsg'><h4 class='deleteMsgh4'>刪除此留言</h4>";
+			        	 html += "<div class='deleteMsg'><h6 class='deleteMsgh4'>刪除此留言</h6>";
 			        	 html += "<input type='hidden' class='recbID' value='"+data[i].recbID+"'></div>"
 			         }
 			         html += "<div class='boardmemName'>"+data[i].memName+"</div>";		         
@@ -560,7 +574,7 @@
 			ifModified:true,
 			success:function(data){
 				 var html = '';
-		         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader${memVO2.memPicSrc}&pic=1' width='100px' height='100px'>";
+		         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader${memVO2.memPicSrc}&pic=1'>";
 		         html += "   <div class='boardmsg'>"+data.recbContent+"</div>";
 		         html += "<div class='deleteMsg'><h4 class='deleteMsgh4'>刪除此留言</h4>";
 	        	 html += "<input type='hidden' class='recbID' value='"+data.recbID+"'></div>"

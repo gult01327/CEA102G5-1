@@ -46,15 +46,42 @@
 </style>
 
 </head>
-<body bgcolor=#E8FFE8>
+<body>
+<style>
+  table#table-1 {
+	background-color:#E8FFE8;
+    border: 2px solid black;
+    text-align: ;
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
 
+<style>
+  table {
+	width: 1400px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  table, th, td {
+    border: 1px solid #CCCCFF;
+  }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
 
+</style>
 
-	<tr><td>
-		 <img src="<%=request.getContextPath() %>/resource/images/food.jpg" height="100" width="100"><font size="+3">所有訂單主檔列表</font><br>
-		 <h4><a href="<%=request.getContextPath()%>/back_end/commodity/comSelectPage.jsp"><img src="<%=request.getContextPath() %>/resource/images/3.jpg" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-	
+<h2 class="page-title text-center" style='color:black;'>Order Master</h2>	
 <table>
 	<tr>
 		<th>訂單主檔ID</th>
@@ -105,10 +132,8 @@
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/ordermaster/om.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="查看訂單明細">
-			    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
-			    <input type="hidden" name="whichPage"	value="<%=whichPage%>">  
 			    <input type="hidden" name="omID" value="${omVO.omID}">
-			    <input type="hidden" name="action" value="ListOd_ByOmID"></FORM>
+			    <input type="hidden" name="action" value="ListOd_ByOmID_ForBack"></FORM>
 			</td>
 		</tr>
 	</c:forEach>

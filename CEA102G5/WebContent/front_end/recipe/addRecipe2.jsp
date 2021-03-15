@@ -4,28 +4,16 @@
 <%@ page import="com.commodity.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>  
-<% MemVO memVO = (MemVO) session.getAttribute("memVO"); 
-	if(memVO==null){
-		String location = request.getServletPath();
-		session.setAttribute("location", location);
-		response.sendRedirect(request.getContextPath()+"/front_end/member/login.jsp");
-		return;
-	}
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>編輯食譜</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/resource/css/lightbox.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <title>編輯食譜</title>    
+</head>
+<body>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
     <style>
     #all{
 		width: 1500px;
@@ -61,18 +49,22 @@
         margin-top: 10px;
         border: 2px solid black;
         border-radius: 4px;
+        width:500px;
+        height:200px;
     }
     #size{
-        width: 150px;
-        height: 30px;
+    	margin-left:-20px;
+ 		width:150px;
+ 		display:inline-block;
     }
     #fontSize{
         margin-left: 120px;
+       
     }
     #cooktime{
-        margin-left: 80px;
-        width: 150px;
-        height: 30px;
+    	display:inline-block;
+        margin-left: 100px;
+ 		width:150px;
         margin-bottom: 30px;
     }
     #ingredients{
@@ -91,6 +83,8 @@
         text-align:center;
         margin-left: 150px;
         margin-bottom: 50px;
+        margin-top:30px;
+        padding:5px;
     }
 
     button{
@@ -120,6 +114,7 @@
         border-radius: 5px;
         resize: none;
     }
+
     img{
         cursor: pointer;
         border: solid;
@@ -133,6 +128,8 @@
   	}
     textarea.textbox{
     	margin-left: 20px;
+    	width:200px;
+    	height:150px;
     }
     #showIngredient{
     	 
@@ -142,9 +139,6 @@
     }
     #calculate{
     	width:100%;
-    	
-    	margin-top:525px;
-    	margin-left:50px;
     }
     #calbtn{
     	margin-top:50px;
@@ -160,17 +154,19 @@
         font-family:fantasy;
         font-size: x-large;
     }
-    
-
+    img.stepPic{
+    	vertical-align: top;
+    	width:200px;
+    	height:150px;
+    }
+    label.labelPic{
+    	vertical-align: top;
+    }
 
     </style>
-         
-</head>
-<body bgcolor=#E8FFE8>
-<img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">編輯食譜</font>
-<hr><p>
+    
+<h2 class="page-title text-center" style='color:black;'>Add Recipe</h2><hr>
 
-		<h4><a href="<%=request.getContextPath() %>/front_end/recipe/recIndex.jsp">回食譜首頁</a></h4>
 <form method="post" action="<%=request.getContextPath() %>/recipe/rec.do" enctype="multipart/form-data">
     
     <div id="all">
@@ -184,8 +180,8 @@
              </label><br><br><br>
              
              <font size="+2">食譜簡介</font><br>
-             <textarea name="intro" id="ta" cols="52" rows="8" placeholder="輸入食譜描述(最多200字)" maxlength="200"></textarea><br>
-             <font size="+2">份量(人份)</font> <font size="+2" id="fontSize">烹調時間(分鐘)</font><br>
+             <textarea  class='intro' name="intro" id="ta"  placeholder="輸入食譜描述(最多200字)" maxlength="200"></textarea><br><br>
+             <font size="+2">份量(人份)</font> <font size="+2" id="fontSize">烹調時間(分鐘)</font><br><br>
              <select name="size" id="size">
                  <option value="-1">未設定</option>
                  <option value="2">2人份</option>
@@ -201,10 +197,11 @@
                 <option value="30">30+</option>
             </select><br>
             <font size="+2">食材</font><br><br>
+             <div id="calculate"></div>
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
    				請選擇食材
-  			</button><br>
+  			</button><br><br>
   			
   			
   			<div id="showIngredient">
@@ -214,7 +211,7 @@
   		
 
              
-            <font size="+2">步驟</font><br>
+            <font size="+2">步驟</font><br><br>
             <input type="button" onclick="addBox()" value="添加步驟">
             <div id="step">
 
@@ -226,14 +223,9 @@
             <input type="submit" value="發布食譜"><br><br>
             <input type="hidden" name="action" value="addRecipe">
             <input type="hidden" name="memID" value="${memVO.memID}">
-            <button>儲存食譜</button><br><br>
-            <button>取消</button><br><br>
-            <button>刪除食譜</button>
+
             
-            <div id="calculate">
-  				
-  				
-  			</div>
+           
 
 
         </div>
@@ -348,9 +340,8 @@
             var img = document.createElement("img");
             var br = document.createElement("br");
             img.setAttribute('id','img'+count);
+            img.setAttribute('class','stepPic');
             img.setAttribute('src','<%=request.getContextPath()%>/resource/images/upload.png');
-            img.setAttribute('width','200px');
-            img.setAttribute('height','188px');
             file.setAttribute('name','stepPic'+count);
             var textBox = document.createElement("textarea");
             var imgRemove = document.createElement("img");
@@ -366,6 +357,7 @@
             count3++;
             div.setAttribute('id',count2);
             label.setAttribute('id',count);
+            label.setAttribute('class','labelPic');
             textBox.id = count3;
             var index = document.createElement('div');
             index.setAttribute('id','index');

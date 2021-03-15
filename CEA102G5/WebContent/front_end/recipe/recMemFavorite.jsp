@@ -21,14 +21,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>食譜首頁</title>
 </head>
+
+
+<body bgcolor="#E8FFE8">
 <style>
     #select{
-        width: 1000px;
+        width: 100%;
         
         margin-left: 100px;
     }
     #selectType{
-        width: 100px;
+        width: 200px;
         height: 30px;
     }
     #selectText{
@@ -47,22 +50,25 @@
         font-size: large;
     }
     #showRec{
-        width:1000px;
+        width:100%;
         margin-top: 30px;
         margin-left: 100px;
     }
     #oneRec{
-        width: 1000px;
+        width: 100%;
         border: 1px solid black;
         border-radius: 5px;
         padding-top: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
+        margin-top:50px;
+        margin-bottom:50px;
     }
     #recPic{
-        width:250px;
-        height: 230px;
+        width:200px;
+        height: 200px;
     }
     #recName{
+    	width:300px;
         font-size: x-large;
     }
     #recAuthor{
@@ -87,11 +93,9 @@
 
 
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<body bgcolor="#E8FFE8">
+
     <div id="parent">
         <div id='select'>
-            <span><a href="<%=request.getContextPath()%>/front_end/recipe/recIndex.jsp">回食譜首頁</a></span>
             <span><h2>${memVO2.memName}您好，您的收藏食譜如下:</h2></span>
         </div>
 
@@ -135,11 +139,11 @@
 		html += "<div><span id='titleNum'>共"+data.length+"筆</span></div><hr>";
 		for(let i = 0 ;i<data.length;i++){
 			html += "<div id='oneRec'><img id='recPic' src='<%=request.getContextPath()%>/ComPicReader"+data[i].recPicSrc+"&pic=1'>";
-			html += "<div id='recbody'><span id='recName'><a href='<%=request.getContextPath()%>/recipe/rec.do?action=GetRecDetail_ByrecID&recID="+data[i].recID+"'><b>"+data[i].recName+"</b></a></span><br>";
+			html += "<div id='recbody'><span id='recName'><a href='<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID="+data[i].recID+"'><b>"+data[i].recName+"</b></a></span><br>";
 			html += "<span class='recAuthor' id='recAuthor'>"+data[i].memID+"</span><br><br>";
 			html += "<span id='recContent'>"+data[i].recContent+"</span><br><br>";
 			html += "<span id='recCal'>總熱量: "+data[i].recCal+"</span><br><br><br>";
-			html += "<span id='recFav'>5人收藏</span></div></div>";
+			html += "</div></div>";
 
 		}
 		$("#showRec").html(html);

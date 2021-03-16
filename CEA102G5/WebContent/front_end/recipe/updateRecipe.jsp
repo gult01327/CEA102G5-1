@@ -15,13 +15,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人修改食譜</title>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/resource/css/lightbox.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+
+   
+         
+</head>
+<body>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style>
     #all{
 		width: 1500px;
@@ -57,18 +56,22 @@
         margin-top: 10px;
         border: 2px solid black;
         border-radius: 4px;
+        width:500px;
+        height:200px;
     }
     #size{
-        width: 150px;
-        height: 30px;
+    	margin-left:-20px;
+ 		width:150px;
+ 		display:inline-block;
     }
     #fontSize{
         margin-left: 120px;
+       
     }
     #cooktime{
-        margin-left: 80px;
-        width: 150px;
-        height: 30px;
+    	display:inline-block;
+        margin-left: 100px;
+ 		width:150px;
         margin-bottom: 30px;
     }
     #ingredients{
@@ -83,10 +86,12 @@
     #step{
         border: 2px solid black;
         border-radius: 4px;
-        width: 600px;
+        width: 800px;
         text-align:center;
-        margin-left: 150px;
+        margin-left: 0px;
         margin-bottom: 50px;
+        margin-top:30px;
+        padding:5px;
     }
 
     button{
@@ -116,6 +121,7 @@
         border-radius: 5px;
         resize: none;
     }
+
     img{
         cursor: pointer;
         border: solid;
@@ -129,23 +135,24 @@
   	}
     textarea.textbox{
     	margin-left: 20px;
+    	width:450px;
+    	height:150px;
     }
     #showIngredient{
     	 
     }
     #ingTable{
     	width:780px;
+    	margin-top:50px;
     }
     #calculate{
     	width:100%;
-    	
-    	margin-top:525px;
-    	margin-left:50px;
     }
     #calbtn{
     	margin-top:50px;
     	margin-left:50px;
     }
+    
     #index{
         display: inline-block;
         vertical-align: top;
@@ -155,17 +162,20 @@
         font-family:fantasy;
         font-size: x-large;
     }
+    img.imgStep{
+    	vertical-align: top;
+    	width:200px;
+    	height:150px;
+    }
+    label.labelPic{
+    	vertical-align: top;
+    }
+
 
 
     </style>
-         
-</head>
-<body bgcolor=#E8FFE8>
-<img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">個人修改食譜</font>
-<hr><p>
-
-		<h4><a href="<%=request.getContextPath() %>/front_end/commodity/comindex.jsp">回商城首頁</a></h4>
-<form method="post" action="<%=request.getContextPath() %>/recipe/rec.do" enctype="multipart/form-data">
+<h2 class="page-title text-center" style='color:black;'>Update Recipe</h2><hr>
+<form method="post" action="<%=request.getContextPath() %>/front_end/recipe/rec.do" enctype="multipart/form-data">
     
     <div id="all"> 
         <div id="left">
@@ -195,7 +205,7 @@
                 <option value="30"${(recVO.recCooktime==30)?'selected':''}>30+</option>
             </select><br>
             <font size="+2">食材</font><br><br>
-
+			  <div id="calculate"></div>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
    				請選擇食材
   			</button><br>
@@ -208,7 +218,7 @@
   		
 
              
-            <font size="+2">步驟</font><br>
+            <br><font size="+2">步驟</font><br>
             <input type="button" onclick="addBox()" value="添加步驟">
             <div id="step">
 
@@ -221,14 +231,9 @@
             <input type="hidden" name="action" value="updateRecipe">
             <input type="hidden" name="memID" value="${memVO.memID}">
             <input type="hidden" name="recID" value="${recVO.recID}">
-            <button>儲存食譜</button><br><br>
-            <button>取消</button><br><br>
-            <button>刪除食譜</button>
+
             
-            <div id="calculate">
-  				
-  				
-  			</div>
+          
 
 
         </div>
@@ -394,60 +399,61 @@
     var count3 = 30;
     var indexCount = 1;
 	function addBox(){
-            var div = document.createElement('div');
-           
-            var label = document.createElement("label");
-            
-            var file = document.createElement("input");
-            var hidden = document.createElement("input");
-            hidden.setAttribute('type','hidden');
-            hidden.setAttribute('name','fileName');
-            hidden.setAttribute('value','stepPic'+count);
-            var hidden2 = document.createElement("input");
-            hidden2.setAttribute('type','hidden');
-            hidden2.setAttribute('name','recsID');
-            
-            file.setAttribute('id','file');
-            file.setAttribute('type','file');
-            file.setAttribute('style','display:none;');
-            var img = document.createElement("img");
-            var br = document.createElement("br");
-            img.setAttribute('id','img'+count);
-            img.setAttribute('class','imgStep');
-            img.setAttribute('src','<%=request.getContextPath()%>/resource/images/upload.png');
-            img.setAttribute('width','200px');
-            img.setAttribute('height','188px');
-            file.setAttribute('name','stepPic'+count);
-            var textBox = document.createElement("textarea");
-            var imgRemove = document.createElement("img");
-            imgRemove.setAttribute('src','<%=request.getContextPath()%>/resource/images/trash.png');
-            imgRemove.setAttribute('class','imgRemove');
-            textBox.setAttribute('cols',30);
-            textBox.setAttribute('rows',10);
-            textBox.setAttribute('class','textbox');
-            textBox.setAttribute('name','stepText');
-            count++;
-            count2++;
-            imgRemove.setAttribute('onclick','remove()');
-            count3++;
-            div.setAttribute('id',count2);
-            label.setAttribute('id',count);
-            textBox.id = count3;
-            var index = document.createElement('div');
-            index.setAttribute('id','index');
-            index.setAttribute('class','indexClass');
-            index.innerText = indexCount;
-            indexCount++;
-            var left = document.getElementById('left');
-            document.getElementById("step").appendChild(div);
-            document.getElementById(count2).appendChild(index);
-            document.getElementById(count2).appendChild(label);
-            document.getElementById(count).appendChild(file);
-            document.getElementById(count).appendChild(hidden);
-            document.getElementById(count).appendChild(hidden2);
-            document.getElementById(count).appendChild(img);
-            document.getElementById(count2).appendChild(textBox);
-            document.getElementById(count2).appendChild(imgRemove);
+        var div = document.createElement('div');
+        
+        var label = document.createElement("label");
+        
+        var file = document.createElement("input");
+        var hidden = document.createElement("input");
+        hidden.setAttribute('type','hidden');
+        hidden.setAttribute('name','fileName');
+        hidden.setAttribute('value','stepPic'+count);
+        var hidden2 = document.createElement("input");
+        hidden2.setAttribute('type','hidden');
+        hidden2.setAttribute('name','recsID');
+        
+        file.setAttribute('class','file');
+        file.setAttribute('type','file');
+        file.setAttribute('style','display:none;');
+        var img = document.createElement("img");
+        var br = document.createElement("br");
+        img.setAttribute('id','img'+count);
+        img.setAttribute('class','imgStep');
+        img.setAttribute('src','<%=request.getContextPath()%>/resource/images/upload.png');
+        img.setAttribute('width','200px');
+        img.setAttribute('height','188px');
+        file.setAttribute('name','stepPic'+count);
+        var textBox = document.createElement("textarea");
+        var imgRemove = document.createElement("img");
+        imgRemove.setAttribute('src','<%=request.getContextPath()%>/resource/images/trash.png');
+        imgRemove.setAttribute('class','imgRemove');
+        textBox.setAttribute('cols',30);
+        textBox.setAttribute('rows',10);
+        textBox.setAttribute('class','textbox');
+        textBox.setAttribute('name','stepText');
+        count++;
+        count2++;
+        imgRemove.setAttribute('onclick','remove()');
+        count3++;
+        div.setAttribute('id',count2);
+        label.setAttribute('id',count);
+        label.setAttribute('class','labelPic');
+        textBox.id = count3;
+        var index = document.createElement('div');
+        index.setAttribute('id','index');
+        index.setAttribute('class','indexClass');
+        index.innerText = indexCount;
+        indexCount++;
+        var left = document.getElementById('left');
+        document.getElementById("step").appendChild(div);
+        document.getElementById(count2).appendChild(index);
+        document.getElementById(count2).appendChild(label);
+        document.getElementById(count).appendChild(file);
+        document.getElementById(count).appendChild(hidden);
+        document.getElementById(count).appendChild(hidden2);
+        document.getElementById(count).appendChild(img);
+        document.getElementById(count2).appendChild(textBox);
+        document.getElementById(count2).appendChild(imgRemove);
 
             // if(count>=15){
             // var btn = document.getElementById('btn');

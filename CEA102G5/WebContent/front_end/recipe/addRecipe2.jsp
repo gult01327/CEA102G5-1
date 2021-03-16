@@ -79,9 +79,9 @@
     #step{
         border: 2px solid black;
         border-radius: 4px;
-        width: 600px;
+        width: 800px;
         text-align:center;
-        margin-left: 150px;
+        margin-left: 0px;
         margin-bottom: 50px;
         margin-top:30px;
         padding:5px;
@@ -128,7 +128,7 @@
   	}
     textarea.textbox{
     	margin-left: 20px;
-    	width:200px;
+    	width:450px;
     	height:150px;
     }
     #showIngredient{

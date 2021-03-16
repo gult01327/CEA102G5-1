@@ -17,7 +17,7 @@ public class LesDAO implements LesDAO_interface {
 
 	private static final String INSERT = "INSERT INTO LESSON (COA_ID,TAL_ID,LES_NAME,LES_DATE,LES_TIME,LES_PICTURE"
 			+ ",LES_VIDEO,LES_BEGIN,LES_END,LES_AVAILABLE,LES_PRICE)" + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String ALL = "SELECT * FROM LESSON order by LES_DATE";
+	private static final String ALL = "SELECT * FROM LESSON";
 	private static final String BYCOACH = "SELECT * FROM LESSON where COA_ID=? order by LES_DATE";
 	private static final String ONE = "SELECT * FROM LESSON where LES_ID=?";
 	private static final String UPDATE = "UPDATE LESSON set LES_NAME=?,LES_PRICE=?,LES_PICTURE=?,LES_VIDEO=? WHERE LES_ID=?";

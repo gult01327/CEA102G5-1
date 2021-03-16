@@ -216,7 +216,9 @@
 		$("#showRecr").html(html);
 	}
 </script>
-			
+<script type="text/javascript">
+	var servletPathName ="${pageContext.request.requestURI}";
+</script>			
 
 
 </body>

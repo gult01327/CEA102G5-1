@@ -115,7 +115,7 @@
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
                                     <a href="shop-detail.html">
-                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" width='100px' height='100px' />
+                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="width:100px height=100px max-width=100%" />
                                     </a>
                                     <div class="product-action">
                                         <span class="add-to-cart">

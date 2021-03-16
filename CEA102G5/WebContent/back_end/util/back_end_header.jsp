@@ -269,6 +269,15 @@ div.memberListMain{
 <c:set var="listAllMem" value='${pageContext.request.contextPath}/back_end/member/listAllMem.jsp' />
 <c:set var="listOneMem" value='${pageContext.request.contextPath}/back_end/member/listOneMem.jsp' />
 <c:set var="updateMem" value='${pageContext.request.contextPath}/back_end/member/updateMem.jsp' />
+
+
+<!-- 預約 -->
+<c:set var="addRes" value="${pageContext.request.contextPath}/back_end/reservation/addReservation.jsp" />
+<c:set var="searchRes" value="${pageContext.request.contextPath}/back_end/reservation/searchReservation.jsp" />
+<c:set var="searchResByMem" value="${pageContext.request.contextPath}/back_end/reservation/listByMember.jsp" />
+<c:set var="searchResByLes" value="${pageContext.request.contextPath}/back_end/reservation/listByLesson.jsp" />
+<c:set var="updateRes" value="${pageContext.request.contextPath}/back_end/reservation/updateReservation.jsp" />
+
 <!-- 食譜 -->
 <c:set var="listAllRec_Approve" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec_Approve.jsp' />
 <c:set var="listAllRec" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec.jsp' />

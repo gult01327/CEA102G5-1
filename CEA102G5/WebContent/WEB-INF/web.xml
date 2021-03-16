@@ -216,6 +216,43 @@
 		<servlet-name>RecServlet</servlet-name>
 		<url-pattern>/front_end/recipe/rec.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+	    <servlet-name>RecbServlet</servlet-name>
+	    <servlet-class>com.recipe_board.controller.RecbServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>RecbServlet</servlet-name>
+	    <url-pattern>/recipeb/recb.do</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
+		<servlet-name>RecbServlet</servlet-name>
+		<url-pattern>/back_end/recipeb/recb.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RecbServlet</servlet-name>
+		<url-pattern>/front_end/recipeb/recb.do</url-pattern>
+	</servlet-mapping>
+  
+  	<servlet>
+	    <servlet-name>RecrServlet</servlet-name>
+	    <servlet-class>com.recipe_report.controller.RecrServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>RecrServlet</servlet-name>
+	    <url-pattern>/reciper/recr.do</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
+		<servlet-name>RecrServlet</servlet-name>
+		<url-pattern>/back_end/reciper/recr.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RecrServlet</servlet-name>
+		<url-pattern>/front_end/reciper/recr.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	
 
 
 	

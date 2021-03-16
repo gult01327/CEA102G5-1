@@ -12,6 +12,8 @@ public class OdVO implements Serializable {
 	private Integer odReturn;
 	private String odReason;
 	private Date odRtime;
+	private String odMessage;
+	private String odResponse;
 	
 	public OdVO() {
 		super();
@@ -21,6 +23,18 @@ public class OdVO implements Serializable {
 		return src;
 	}
 	
+	public String getOdMessage() {
+		return odMessage;
+	}
+	public void setOdMessage(String odMessage) {
+		this.odMessage = odMessage;
+	}
+	public String getOdResponse() {
+		return odResponse;
+	}
+	public void setOdResponse(String odResponse) {
+		this.odResponse = odResponse;
+	}
 	public Integer getOmID() {
 		return omID;
 	}

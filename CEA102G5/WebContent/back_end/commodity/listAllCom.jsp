@@ -14,6 +14,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+
+<title>所有商品資料 </title>
+</head>
+<body bgcolor=#E8FFE8>
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -33,7 +37,7 @@
 
 <style>
   table {
-	width: 1600px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -46,15 +50,8 @@
     text-align: center;
   }
 </style>
-<title>所有商品資料 </title>
-</head>
-<body bgcolor=#E8FFE8>
-<img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">所有商品資料列表</font>
+<h2 class="page-title text-center" style='color:black;'>All Commodity</h2>
 <hr><p>
-
-		<h4><a href="<%=request.getContextPath()%>/back_end/commodity/comSelectPage.jsp"><img src="<%=request.getContextPath()%>/resource/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>	
-		<br><br>
-
 
 <table>
 	<tr>
@@ -62,7 +59,6 @@
 		<th>商品名稱</th>
 		<th>商品價格</th>
 		<th>商品圖片</th>
-		<th>商品圖片2</th>
 		<th>商品簡介</th>
 		<th>商品狀態</th>
 		<th>商品重量</th>
@@ -85,7 +81,6 @@
 			<td>${comVO.comName}</td>
 			<td>$ ${comVO.comPrice}</td>
 			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" height="100" width="100"></td>
-			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=2" height="100" width="100"></td>
 			<td>${comVO.comContent}</td>
 			<td>${comVO.comStatus}</td>
 			<td>${comVO.comWeight}</td>

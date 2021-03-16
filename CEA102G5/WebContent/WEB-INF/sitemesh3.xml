@@ -14,7 +14,16 @@
     <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
   </mapping>
-    <mapping path="/front_end/cart/*">
+    <mapping path="/front_end/member_recipient/*">
+    <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+      <mapping path="/front_end/ordermaster/*">
+    <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+  
+  <mapping path="/front_end/cart/*">
     <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
   </mapping>

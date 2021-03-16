@@ -52,14 +52,14 @@ height:auto;
                             
 					<!-- 左邊商品列 -->
                             <div class="widget widget-products">
-                                <h3 class="widget-title">New  Commodity</h3>
+                                <h3 class="widget-title">HOT SALES Commodity</h3>
                                 <ul class="product-list-widget">
                                 
 <!--                                 蝶帶出銷量前幾的商品 -->
 					                <jsp:useBean id="comSvc" class="com.commodity.model.ComService"/> 
 									<c:forEach var="comVO" items="${comSvc.allForComindex}" begin="0" end="2">
 										<li>
-										 <a href="#">
+										 <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
 										 <img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" max-width=100>
 										 <span>${comVO.comName}</span>
 									     </a>

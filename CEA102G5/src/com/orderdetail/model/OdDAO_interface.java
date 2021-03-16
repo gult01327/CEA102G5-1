@@ -11,4 +11,5 @@ public interface OdDAO_interface {
     public void delete(Integer omID,Integer comID );
     public CartVO findByPrimaryKey(Integer omID,Integer comID);
     public List<OdVO> getAllByOmID(Integer omID);
+    public void addMessage(Integer omID, Integer comID, String odMessage, String sql);
 }

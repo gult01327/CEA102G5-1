@@ -7,39 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-
 </head>
-<style>
-#ingredients{
-    
-    width: 800px;
-    
-    margin-top: 50px;
-}
-
-table {
-	width: 500px;
-	background-color: #E8FFE8;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-
-
-
-</style>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<div bgcolor=#E8FFE8>
     <div id="header">
         <label>
         	<b>按商品關鍵字搜尋: </b>
@@ -93,9 +61,28 @@ table {
 			cache:false,
 			ifModified:true,
 			success:function(data){
-				
-				 generateIngTable(data);
-				 calculate();
+				 var aChecked = $("input[name='alreadyChecked']").val();
+				 if(typeof(aChecked)=='undefined'){
+					 generateIngTable(data);
+					 calculate();
+				 }else{
+					 var html = '';
+					 for(let i = 0 ;i<data.length;i++){
+						 html += "<tr>";
+							html += "<input type='hidden' name='alreadyChecked' value='"+data[i].comID +"'>";
+							html += "<td>"+data[i].comName+"</td>";
+							html += "<td class='cal'>"+ data[i].comCal +"</td>";
+							html += "<td class='carb'>"+data[i].comCarb+"</td>";
+							html += "<td class='pro'>"+data[i].comPro+"</td>";
+							html += "<td class='fat'>"+data[i].comFat+"</td>";
+							html += "<td><input type='text' class = 'ingNums' name='ingNums' style='width:150px' placeholder='請輸入食材克數' ></td>";
+							html += "<td><img class='ingredientsRemove' src='<%=request.getContextPath()%>/resource/images/trash.png'></td>";
+							html +="</tr>";	
+					 }
+					 $("#ingTable").append(html);
+				 }
+				 
+				 
 			}
 			
 		});	
@@ -191,7 +178,7 @@ table {
 	
 	function generateTable(data){
 		var html = "";
-		html = "<input type='button' id='confirm' value='確認帶回'>";
+		html = "<input type='button' id='confirm' data-dismiss='modal' value='確認帶回'>";
 		html+="<table><tr><td>勾選食材</td><td>食材名稱</td><td>食材圖片</td></tr>";
 		for(let i = 0;i<data.length;i++){
 			html+="<tr><td><input type='checkbox' name='checkComID' value='"+data[i].comID+"'></td>";
@@ -207,5 +194,5 @@ table {
 </script>
     
 
-</div>
+
 </html>

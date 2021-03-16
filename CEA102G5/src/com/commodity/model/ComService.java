@@ -3,6 +3,8 @@ package com.commodity.model;
 import java.util.List;
 import java.util.Map;
 
+import com.util.model.ComCommentVO;
+
 public class ComService {
 	private ComDAO_interface dao;
 	
@@ -80,6 +82,8 @@ public class ComService {
 		return dao.getAllForComindex();
 	}
 	
-	
+	public List<ComCommentVO> getAllComComment(Integer comID){
+		return dao.getAllComComment(comID);
+	}
 	
 }

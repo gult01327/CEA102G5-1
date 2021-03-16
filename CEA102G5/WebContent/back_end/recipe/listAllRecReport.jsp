@@ -5,11 +5,8 @@
 
 <html>
 <head><title>所有審核中食譜檢舉 - listAllRecReport.jsp</title>
- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
- <link rel="stylesheet" href="<%=request.getContextPath() %>/resource/css/lightbox.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+</head>
+<body>
 <style>
   table#table-1 {
 	background-color:#E8FFE8;
@@ -46,17 +43,13 @@
   }
 </style>
 
-
-</head>
-<body bgcolor=#E8FFE8>
-		 <img src="<%=request.getContextPath() %>/resource/images/food.jpg" height="100" width="100"><font size="+3">所有審核中食譜檢舉</font><br>
-		 <h4><a href="<%=request.getContextPath()%>/back_end/commodity/comSelectPage.jsp"><img src="<%=request.getContextPath() %>/resource/images/3.jpg" width="100" height="100" border="0">回後台首頁</a></h4><br>
+<h2 class="page-title text-center" style='color:black;'>Recipe Report</h2>
 			<br> <select id='selectStatus'>
 				<option value="0">未審核</option>
                 <option value="1">已審核</option>
 			</select>
-			
-			
+<div id='showRecr'></div>				
+
 <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -93,11 +86,14 @@
       </div>
       
       
-<div id='showRecr'></div>	
+
 
 
 <script type="text/javascript">
-
+	$(document).on('show.bs.modal', '.modal', function () {
+	  $(this).appendTo('body');
+	});
+	
 	$("#msgBtn").click(function(){
 
 		var msgRecrID = $("#msgRecrID").val();
@@ -126,6 +122,7 @@
 				$(this).text(msgReport);
 				$("#msgReport").val('');
 				$("#replyModal").modal("hide");
+				$("#successDivImg").attr("src","<%=request.getContextPath()%>/resource/images/success.png");
 				$("#successMsg").text("已成功送出檢舉");
 				$("#successModal").modal("show");
 			}
@@ -143,6 +140,7 @@
 	
 	$("#selectStatus").change(function(){
 		var selectStatus = $("#selectStatus").val();
+		console.log(selectStatus);
 		$.ajax({
 			url:"<%=request.getContextPath()%>/reciper/recr.do",
 			type:"post",
@@ -179,6 +177,12 @@
 
 	
 	function generateTable(data){
+		if(data == ""){
+			var html = "";
+			$("#showRecr").html(html);
+			return;
+		}
+		
 		var html = "";
 		html += "<table><tr><th>食譜主檔ID</th><th>食譜標題</th><th>食譜圖片</th><th>檢舉者ID</th><th>食譜檢舉內容</th><th>食譜審核狀態</th><th>食譜回覆內容</th><th>查看食譜明細</th>";
 		if(data[0].recrStatus == '0'){
@@ -211,12 +215,10 @@
 		
 		$("#showRecr").html(html);
 	}
-
-	
-	
-	
 </script>
+			
 
 
 </body>
+
 </html>

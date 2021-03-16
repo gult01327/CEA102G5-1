@@ -13,6 +13,8 @@ public interface ComcDAO_Interface {
      public void delete(int comcID);
      public ComcVO findByPrimaryKey(int comcID);
      public List<ComcVO> getAll();
+     public List<ComcVO> getComCountByComc();
+     public List<ComVO> getAllComsByComcIDWithSales(int comcID);
      //查詢某部門的員工(一對多)(回傳 Set)
      public Set<ComVO> getComsByComcID(int comcID);
 

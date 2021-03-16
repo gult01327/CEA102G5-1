@@ -41,9 +41,10 @@ public class OdDAO implements OdDAO_interface {
 	private static final String DELETE_CART_BY_MEMCOMID_STMT = 
 			"DELETE FROM CART_DETAIL WHERE MEM_ID=? AND COM_ID=?";
 	private static final String GETALLBYOMIDJOIN_STMT = 
-			"SELECT ORDM_ID,D.COM_ID,COM_NAME,COM_PICTURE,ORDD_COUNT,ORDD_PRICE,ORDD_RETURN,ORDD_REASON,ORDD_RTIME\r\n" + 
+			"SELECT ORDM_ID,D.COM_ID,COM_NAME,COM_PICTURE,ORDD_COUNT,ORDD_PRICE,ORDD_RETURN,ORDD_MESSAGE,ORDD_RESPONSE,ORDD_REASON,ORDD_RTIME\r\n" + 
 			"FROM ORDER_DETAIL D LEFT JOIN COMMODITY C ON D.COM_ID = C.COM_ID\r\n" + 
 			"WHERE ORDM_ID = ?";
+	
 	@Override
 	public void insert(List<CartVO> list, OmVO omVO) {
 		Connection con = null;
@@ -180,6 +181,8 @@ public class OdDAO implements OdDAO_interface {
 				odVO.setOdReturn(rs.getInt("ORDD_RETURN"));
 				odVO.setOdReason(rs.getString("ORDD_REASON"));
 				odVO.setOdRtime(rs.getDate("ORDD_RTIME"));
+				odVO.setOdMessage(rs.getString("ORDD_MESSAGE"));
+				odVO.setOdResponse(rs.getString("ORDD_RESPONSE"));
 				
 				list.add(odVO);
 			}
@@ -211,6 +214,40 @@ public class OdDAO implements OdDAO_interface {
 		
 		
 		return list;
+		
+	}
+	@Override
+	public void addMessage(Integer omID, Integer comID, String odMessage, String sql) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, odMessage);
+			pstmt.setInt(2, omID);
+			pstmt.setInt(3, comID);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 		
 	}
 

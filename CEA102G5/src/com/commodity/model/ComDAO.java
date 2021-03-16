@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 
 import com.mysql.cj.protocol.Resultset;
+import com.util.model.ComCommentVO;
 
 public class ComDAO implements ComDAO_interface {
 	private static DataSource ds = null;
@@ -51,7 +52,10 @@ public class ComDAO implements ComDAO_interface {
 	private static final String DELETE =
 	"DELETE FROM COMMODITY WHERE COM_ID=?";
 	
-	
+	private static final String GET_ALL_COM_COMMENT = "SELECT M.MEM_ID,MEM_NAME,COM_ID,ORDD_MESSAGE,ORDD_POINT \r\n" + 
+			"FROM ORDER_DETAIL D LEFT JOIN order_master M ON D.ORDM_ID = M.ORDM_ID\r\n" + 
+			"LEFT JOIN MEMBER_INFO I ON M.MEM_ID = I.MEM_ID\r\n" + 
+			"WHERE COM_ID=? AND ORDD_MESSAGE IS NOT NULL";
 	@Override
 	public void insert(ComVO comVO) {
 		Connection con = null;
@@ -455,6 +459,65 @@ public class ComDAO implements ComDAO_interface {
 				}				
 			}
 		}
+		return list;
+	}
+
+	@Override
+	public List<ComCommentVO> getAllComComment(Integer comID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ComCommentVO comComtVO = null;
+		List<ComCommentVO> list = new ArrayList<ComCommentVO>();
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_COM_COMMENT);
+			pstmt.setInt(1, comID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				comComtVO = new ComCommentVO();
+				comComtVO.setMemID(rs.getInt("MEM_ID"));
+				comComtVO.setMemName(rs.getString("MEM_NAME"));
+				comComtVO.setOdMessage(rs.getString("ORDD_MESSAGE"));
+				comComtVO.setOdPoint(rs.getInt("ORDD_POINT"));
+				
+				list.add(comComtVO);
+			}
+			
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+		}
+		
 		return list;
 	}
 

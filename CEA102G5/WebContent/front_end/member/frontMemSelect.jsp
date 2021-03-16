@@ -2,7 +2,14 @@
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
-<% MemVO memVO = (MemVO)session.getAttribute("memVO"); %>
+<% MemVO memVO = (MemVO)session.getAttribute("memVO"); 
+	if(memVO==null){
+	String location = request.getServletPath();
+	session.setAttribute("location", location);
+	response.sendRedirect(request.getContextPath()+"/front_end/member/login.jsp");
+	return;
+}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -35,11 +42,11 @@
 </ul>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/back_end/member/addMem.jsp'>查看食譜收藏</a> </li>
+  <li><a href='<%=request.getContextPath()%>/front_end/recipe/recMemFavorite.jsp'>查看食譜收藏</a> </li>
 </ul>
 
 <ul>
-  <li><a href='<%=request.getContextPath()%>/back_end/member/addMem.jsp'>查看食譜列表</a> </li>
+  <li><a href='<%=request.getContextPath()%>/front_end/recipe/listRecbyMemID.jsp'>查看食譜列表</a> </li>
 </ul>
 </body>
 

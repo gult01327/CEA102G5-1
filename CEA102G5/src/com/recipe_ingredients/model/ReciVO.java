@@ -7,6 +7,11 @@ public class ReciVO implements Serializable {
 	private Integer recID;
 	private Integer comID;
 	private Integer reciNums;
+	private String  comName;
+	private Float comCal;
+	private Float comCarb;
+	private Float comPro;
+	private Float comFat;
 	
 	public ReciVO() {
 		super();
@@ -36,6 +41,49 @@ public class ReciVO implements Serializable {
 	public void setReciNums(Integer reciNums) {
 		this.reciNums = reciNums;
 	}
+
+	public String getComName() {
+		return comName;
+	}
+
+	public void setComName(String comName) {
+		this.comName = comName;
+	}
+
+	public Float getComCal() {
+		return comCal;
+	}
+
+	public void setComCal(Float comCal) {
+		this.comCal = comCal;
+	}
+
+	public Float getComCarb() {
+		return comCarb;
+	}
+
+	public void setComCarb(Float comCarb) {
+		this.comCarb = comCarb;
+	}
+
+	public Float getComPro() {
+		return comPro;
+	}
+
+	public void setComPro(Float comPro) {
+		this.comPro = comPro;
+	}
+
+	public Float getComFat() {
+		return comFat;
+	}
+
+	public void setComFat(Float comFat) {
+		this.comFat = comFat;
+	}
+	
+	
+	
 	
 	
 	

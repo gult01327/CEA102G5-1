@@ -1,6 +1,7 @@
 package com.ordermaster.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cart.model.CartVO;
+import com.member_recipient.model.MemrService;
+import com.member_recipient.model.MemrVO;
 import com.orderdetail.model.OdService;
 import com.orderdetail.model.OdVO;
 import com.ordermaster.model.OmService;
@@ -51,22 +54,17 @@ public class OmServlet extends HttpServlet {
 		if("BUY".equals(action)) {
 
 			try {
-				String omrAdd = request.getParameter("omrAdd");
-				System.out.println(omrAdd);
-				String omrName = request.getParameter("omrName");
-				System.out.println(omrName);
-				String omrPhone = request.getParameter("omrPhone");
-				System.out.println(omrPhone);
 				Integer memID = new Integer(request.getParameter("memID"));
 				Integer memrID = new Integer(request.getParameter("memrID"));
-				String amount = (String)session.getAttribute("amount");
-				Integer omPrice = new Integer(amount);
+				Integer omPrice = new Integer(request.getParameter("totalAmount"));
+				MemrService memrSvc = new MemrService();
+				MemrVO memrVO = memrSvc.getByMemrID(memrID);
 				List<CartVO> checkOutList = (List<CartVO>)session.getAttribute("checkOutList");
 				session.removeAttribute("amount");
 				session.removeAttribute("checkOutList");
 				
 				OdService odSvc = new OdService();
-				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, omrName,omrPhone,omrAdd);
+				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, memrVO.getMemrName(),memrVO.getMemrPhone(),memrVO.getMemrAddress());
 				
 				request.setAttribute("omVO", omVO);//¨S¥Î¨ì
 				String url = "/front_end/commodity/listOmbyMemID.jsp";
@@ -81,7 +79,6 @@ public class OmServlet extends HttpServlet {
 		}
 		
 		if("ListOd_ByOmID".equals(action)) {
-			String requestURL = request.getParameter("requestURL");
 			try {
 				Integer omID = new Integer(request.getParameter("omID"));
 				
@@ -89,7 +86,7 @@ public class OmServlet extends HttpServlet {
 				List<OdVO> list = odSvc.getAllByOmID(omID);
 				
 				request.setAttribute("list", list);
-				String url = requestURL;
+				String url = "/front_end/commodity/listOd_ByOmID_frontEnd.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 			} catch (Exception e) {
@@ -132,6 +129,35 @@ public class OmServlet extends HttpServlet {
 			
 		}
 		
+		if("addMsg".equals(action)) {
+			Integer omID = new Integer(request.getParameter("omID"));
+			Integer comID = new Integer(request.getParameter("comID"));
+			String odMessage = request.getParameter("msgText");
+			String column = request.getParameter("column");
+			OdService odSvc = new OdService();
+			odSvc.addMessage(omID, comID, odMessage, column);
+			
+			
+			String str= "success";
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(str);
+			out.flush();
+			out.close();
+		}
+		
+		if("ListOd_ByOmID_ForBack".equals(action)) {
+			Integer omID = new Integer(request.getParameter("omID"));
+			
+			OdService odSvc = new OdService();
+			List<OdVO> list = odSvc.getAllByOmID(omID);
+			
+			request.setAttribute("list", list);
+			String url = "/back_end/commodity/listOd_ByOmID.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
 		
 		
 	}

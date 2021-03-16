@@ -9,11 +9,13 @@ import com.recipe_step.model.RecsVO;
 
 public interface RecDAO_interface {
 	public void insertWithReciRecs(RecVO recVO,List<ReciVO> reciList,List<RecsVO> recsList);
-    public void update(RecVO recVO);
+	public void updateStatus(Integer recID);
+	public void updateBonus(Integer memID);
+    public void update(RecVO recVO,List<ReciVO> reciList,List<RecsVO> recsList);
     public void delete(Integer recID);
     public RecVO findByPrimaryKey(Integer recID);
     public List<RecVO> getAll();
     public List<RecVO> getAllByMemID(Integer memID);
-    //萬用複合查詢
-    public List<RecVO> getAll(Map<String,String[]> map);
+    public List<RecVO> getAllByStatus(Integer recStatus);
+    public List<RecVO> getAllByCondition(String column,String value);
 }

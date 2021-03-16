@@ -22,6 +22,8 @@ import com.commodity.model.ComService;
 import com.commodity.model.ComVO;
 import com.member.model.MemVO;
 import com.mysql.cj.xdevapi.JsonArray;
+import com.recipe.model.RecService;
+import com.recipe.model.RecVO;
 
 
 /**
@@ -43,7 +45,6 @@ public class CartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request,response);
 	}
 
@@ -62,7 +63,6 @@ public class CartServlet extends HttpServlet {
 			CartService cartSvc = new CartService();
 			List<CartVO> list = cartSvc.getAllByMemID(memID);
 			String jsonStr = new JSONArray(list).toString();
-			System.out.println(jsonStr);
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
@@ -91,7 +91,13 @@ public class CartServlet extends HttpServlet {
 		if("ADD".equals(action)) {
 			Object memVO = session.getAttribute("memVO");
 			String location = request.getParameter("location");
+			Integer comID = new Integer(request.getParameter("comID"));
+			ComService comSvc = new ComService();
+			
+			
 			if(memVO==null) {
+				ComVO comVO = comSvc.getOneCom(comID);
+				session.setAttribute("comVO", comVO);
 				session.setAttribute("location", location);
 				response.sendRedirect(request.getContextPath()+"/front_end/member/login.jsp");
 				return;
@@ -106,7 +112,7 @@ public class CartServlet extends HttpServlet {
 				List list = cartSvc.getAllByMemID(memID);
 				//宣告一個VO將值包裝進去判斷集合內是否有一樣的物件
 				CartVO cartVO = new CartVO();
-				Integer comID = new Integer(request.getParameter("comID"));
+				
 				Integer cardCount = new Integer(request.getParameter("cardCount"));
 				cartVO.setComID(comID);
 				cartVO.setMemID(memID);
@@ -116,21 +122,20 @@ public class CartServlet extends HttpServlet {
 					CartVO inCartVO = (CartVO) list.get(list.indexOf(cartVO));
 					Integer addCount = inCartVO.getCardCount() + cartVO.getCardCount();
 					CartVO newCartVO = cartSvc.updateCart(comID, addCount,memID);
-					ComService comSvc = new ComService();
-					ComVO comVO = comSvc.getOneCom(comID);
-					request.setAttribute("comVO", comVO);
-					String url = "/front_end/commodity/listOneCom_Cart.jsp";
-					RequestDispatcher successView = request.getRequestDispatcher(url);
-					successView.forward(request, response);
+					
+//					ComVO comVO = comSvc.getOneCom(comID);
+//					request.setAttribute("comVO", comVO);
+//					String url = "/front_end/commodity/listOneCom_Cart.jsp";
+//					RequestDispatcher successView = request.getRequestDispatcher(url);
+//					successView.forward(request, response);
 				} else {
 					//如果沒有重複的呼叫service insert插入一筆資料
 					CartVO newCartVO = cartSvc.addCart(memID, comID, cardCount);
-					ComService comSvc = new ComService();
-					ComVO comVO = comSvc.getOneCom(comID);
-					request.setAttribute("comVO", comVO);
-					String url = "/front_end/commodity/listOneCom_Cart.jsp";
-					RequestDispatcher successView = request.getRequestDispatcher(url);
-					successView.forward(request, response);
+//					ComVO comVO = comSvc.getOneCom(comID);
+//					request.setAttribute("comVO", comVO);
+//					String url = "/front_end/commodity/listOneCom_Cart.jsp";
+//					RequestDispatcher successView = request.getRequestDispatcher(url);
+//					successView.forward(request, response);
 				} 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -148,6 +153,8 @@ public class CartServlet extends HttpServlet {
 				Integer size = list.size();
 				PrintWriter out = response.getWriter();
 				out.print(size);
+				out.flush();
+				out.close(); 
 				
 //				String url = "/front_end/commodity/listAllCart.jsp";
 //				RequestDispatcher successView = request.getRequestDispatcher(url);
@@ -163,7 +170,6 @@ public class CartServlet extends HttpServlet {
 				
 				//抓取checkbox的comID為一個String陣列，強轉成Integer陣列
 				String[] arr = request.getParameterValues("checkComID");
-				System.out.println(arr[0]);
 				Integer[] checkComID =new Integer[arr.length];
 				for(int i = 0 ;i<checkComID.length;i++) {
 					checkComID[i] = Integer.parseInt(arr[i]);
@@ -205,15 +211,16 @@ public class CartServlet extends HttpServlet {
 		if("minusCount".equals(action)) {
 			try {
 				Integer comID = new Integer(request.getParameter("comID"));
-				System.out.println(comID);
+
 				Integer cardCount = new Integer(request.getParameter("cardCount"));
-				System.out.println(cardCount);
-				Integer memID = new Integer(request.getParameter("memID"));
+				MemVO memVO = (MemVO)session.getAttribute("memVO");
+				Integer memID = memVO.getMemID();
 				CartService cartSvc = new CartService();
 				CartVO cartVO = cartSvc.updateCart(comID, cardCount-1,memID);
 				PrintWriter out = response.getWriter();
 				out.print("123");
-				
+				out.flush();
+				out.close();
 				
 //				String url = "/front_end/commodity/listAllCart.jsp";
 //				RequestDispatcher successView = request.getRequestDispatcher(url);
@@ -234,6 +241,8 @@ public class CartServlet extends HttpServlet {
 				cartSvc.updateCart(comID, cardCount + 1,memID);
 				PrintWriter out = response.getWriter();
 				out.print(cardCount++);
+				out.flush();
+				out.close();
 //				String url = "/front_end/commodity/listAllCart.jsp";
 //				RequestDispatcher successView = request.getRequestDispatcher(url);
 //				successView.forward(request, response);
@@ -241,6 +250,60 @@ public class CartServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		if("addCartfromRecipe".equals(action)) {
+			Object memVO = session.getAttribute("memVO");
+			String location = request.getParameter("location");
+			Integer recID = new Integer(request.getParameter("recID"));
+			String[] arr = request.getParameterValues("comIDForCarts");
+			System.out.println(location);
+			System.out.println(Arrays.toString(arr));
+			System.out.println(recID);
+			if(memVO == null) {
+				RecService recSvc = new RecService();
+				RecVO recVO = recSvc.getOneRec(recID);
+				session.setAttribute("recVO", recVO);
+				session.setAttribute("location", location);
+				String str = "0";
+				PrintWriter out = response.getWriter();
+				out.print(str);
+				out.flush();
+				out.close();
+				
+			}else {
+				MemVO memVO2 = (MemVO) memVO;
+				Integer memID = memVO2.getMemID();
+				Integer[] comIDArr = new Integer[arr.length];
+				for(int i = 0 ; i<comIDArr.length;i++) {
+					comIDArr[i] = Integer.parseInt(arr[i]);
+				}
+				CartService cartSvc = new CartService();
+				List<CartVO> list = cartSvc.getAllByMemID(memID);
+				CartVO cartVO = null;
+				for(int i = 0 ; i<comIDArr.length;i++) {
+					cartVO = new CartVO();
+					cartVO.setComID(comIDArr[i]);
+					cartVO.setMemID(memID);
+					
+					//若購物車內有相同物件
+					if(list.contains(cartVO)) {
+						CartVO inCartVO = list.get(list.indexOf(cartVO));
+						Integer addCount = inCartVO.getCardCount() + 1;
+						cartSvc.updateCart(inCartVO.getComID(), addCount, inCartVO.getMemID());
+						
+						
+					}else {
+						cartSvc.addCart(cartVO.getMemID(), cartVO.getComID(), 1);
+					}
+				}
+				Integer count = comIDArr.length;
+				PrintWriter out = response.getWriter();
+				out.print(count);
+				out.flush();
+				out.close();
+				
+			}
+	}
 
 	}
 }

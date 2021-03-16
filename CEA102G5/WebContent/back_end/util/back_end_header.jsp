@@ -342,6 +342,7 @@ div.memberListMain{
                                             <li><a href="#">Course</a></li>
                                             <li><a href="#">Coach</a></li>
                                             <li><a href="#">Talent</a></li>
+                                            <li><a href="#">Reservation</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">

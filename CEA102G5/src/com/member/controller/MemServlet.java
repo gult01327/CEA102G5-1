@@ -114,9 +114,9 @@ public class MemServlet extends HttpServlet {
 		
 		if("logout".equals(action)) {
 			session.removeAttribute("memVO");
-			String url = "/front_end/commodity/comindex.jsp";
-			RequestDispatcher successView = request.getRequestDispatcher(url);
-			successView.forward(request, response);
+			String location = request.getParameter("location");
+			System.out.println(location);
+			response.sendRedirect(location);
 		}
 		
 		
@@ -137,6 +137,28 @@ public class MemServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		if("checkAccount".equals(action)) {
+			String memAccount = request.getParameter("account");
+			MemVO memVO = new MemVO();
+			memVO.setMemAccount2(memAccount.toLowerCase());
+			
+			MemService memSvc = new MemService();
+			List<MemVO> list = memSvc.getAll();
+			String result = null;
+			if(list.contains(memVO)) {
+				result = "isAdded";
+			}else {
+				result = "OK";
+			}
+			
+			response.setContentType("text/html");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+			
 		}
 		
 		if("insert".equals(action)) {
@@ -195,10 +217,11 @@ public class MemServlet extends HttpServlet {
 				}else {
 					errorMsgs.add("請上傳圖片");
 				}
-				
+				String memAccountLower = memAccount.toLowerCase();
 				MemVO memVO = new MemVO();
 				memVO.setMemName(memName);
 				memVO.setMemAccount(memAccount);
+				memVO.setMemAccount2(memAccountLower);
 				memVO.setMemPassword(memPassword);
 				memVO.setMemPhone(memPhone);
 				memVO.setMemEmail(memEmail);
@@ -211,20 +234,20 @@ public class MemServlet extends HttpServlet {
 				
 				if(!errorMsgs.isEmpty()) {
 					request.setAttribute("memVO", memVO);
-					RequestDispatcher failView = request.getRequestDispatcher("/back_end/member/addMem.jsp");
+					RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
 					failView.forward(request, response);
 				}
 				
 				
 				memSvc.addMem(memName, memAccount, memPassword, memPhone, memEmail, memPicture);
 				
-				String url = "/back_end/member/listAllMem.jsp";
+				String url = "/front_end/member/login2.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 				
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failView = request.getRequestDispatcher("/back_end/member/addMem.jsp");
+				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/addMem.jsp");
 				failView.forward(request, response);
 			}
 			
@@ -303,9 +326,20 @@ public class MemServlet extends HttpServlet {
 				
 				MemService memSvc = new MemService();
 				memSvc.updateMem(memID, memName, memPassword, memPhone, memEmail, memPicture);
-				String url = "/front_end/member/frontMemSelect.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);
-				successView.forward(request, response);
+				
+				if("front".equals(request.getParameter("where"))) {
+					String url = "/front_end/member/frontMemSelect.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}else {
+					request.setAttribute("memVO", memVO);
+					String url = "/back_end/member/listAllMem.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+					
+				}
+				
+				
 				
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());

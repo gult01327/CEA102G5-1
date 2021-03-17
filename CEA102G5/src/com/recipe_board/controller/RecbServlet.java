@@ -84,7 +84,7 @@ public class RecbServlet extends HttpServlet {
 		if("deleteMsg".equals(action)) {
 			Integer recbID = new Integer(request.getParameter("recbID"));
 			RecbService recbSvc = new RecbService();
-			recbSvc.deleteMsgByRecbID(recbID);
+			recbSvc.updateRecbStatus(recbID, 1);
 			String str = "success";
 			
 			response.setContentType("text/html");

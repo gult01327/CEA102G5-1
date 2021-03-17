@@ -349,7 +349,7 @@
               <font id='successMsg' color='red'></font>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+              <button id='close' type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
             </div>
           </div>
         </div>
@@ -529,7 +529,7 @@
 		});
     });
     
-    $("#msgDiv").on("click","h4.deleteMsgh4",function(){
+    $("#msgDiv").on("click","h6.deleteMsgh4",function(){
     	var recbID = $(this).next().val();
 		var div = $(this).parents("div.boardText");
     	$.ajax({
@@ -576,7 +576,7 @@
 				 var html = '';
 		         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader${memVO2.memPicSrc}&pic=1'>";
 		         html += "   <div class='boardmsg'>"+data.recbContent+"</div>";
-		         html += "<div class='deleteMsg'><h4 class='deleteMsgh4'>刪除此留言</h4>";
+		         html += "<div class='deleteMsg'><h6 class='deleteMsgh4'>刪除此留言</h6>";
 	        	 html += "<input type='hidden' class='recbID' value='"+data.recbID+"'></div>"
 		         html += "<div class='boardmemName'>"+data.memName+"</div>"
 		         html += "  <div class='msgdate'>發布於剛剛...</div></div>";
@@ -750,6 +750,9 @@
 						var str = "已成功添加"+data+"筆商品至購物車! 請前往查看!"
 						$("#successMsg").text(str);
 						$("#successModal").modal("show");
+						$("#close").click(function(){
+							window.location.reload();
+						});
 					}
 				}
 			});

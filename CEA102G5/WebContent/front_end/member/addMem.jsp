@@ -66,7 +66,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/back_end/member/mem.do" name="form1" enctype="multipart/form-data">
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front_end/member/mem.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td>·|­û¦WºÙ:</td>

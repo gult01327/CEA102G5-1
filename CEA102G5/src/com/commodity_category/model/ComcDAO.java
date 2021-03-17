@@ -37,7 +37,7 @@ public class ComcDAO implements ComcDAO_Interface {
 	private static final String DELETE_COMMC = "DELETE FROM COMMODITY_CATEGORY WHERE COMC_ID = ?";	
 	
 	private static final String UPDATE = "UPDATE COMMODITY_CATEGORY SET COMC_NAME=? WHERE COMC_ID = ?";
-	private static final String GET_COM_COUNT_BYCOMCID = "SELECT C.COMC_ID,COMC_NAME,COMC_PICSRC,COUNT(COM_ID) FROM COMMODITY C LEFT JOIN commodity_category Y \r\n" + 
+	private static final String GET_COM_COUNT_BYCOMCID = "SELECT C.COMC_ID,COMC_NAME,COUNT(COM_ID) FROM COMMODITY C LEFT JOIN commodity_category Y \r\n" + 
 			"ON C.COMC_ID = Y.COMC_ID GROUP BY C.COMC_ID";
 	private static final String GET_COM_BYCOMCID_WITH_SALES="SELECT C.COM_ID,COMC_ID,COM_NAME,COM_PRICE,SUM(ORDD_COUNT) AS COM_SALES \r\n" + 
 			"FROM COMMODITY C LEFT JOIN ORDER_DETAIL D ON C.COM_ID = D.COM_ID\r\n" + 
@@ -357,7 +357,6 @@ public class ComcDAO implements ComcDAO_Interface {
 				comcVO = new ComcVO();
 				comcVO.setComcID(rs.getInt("COMC_ID"));
 				comcVO.setComcName(rs.getString("COMC_NAME"));
-				comcVO.setComcPicSrc(rs.getString("COMC_PICSRC"));
 				comcVO.setComCount(rs.getInt("COUNT(COM_ID)"));
 				
 				list.add(comcVO);

@@ -52,7 +52,6 @@
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/member_recipient/memr.do" style="margin-bottom: 0px;">
 			    <input id="test" type="submit" value="½T»{¦a§}"> 
 				<input type="hidden" id="checked" name="checkedAdd" value="">
-			    <input type="hidden" name="memrID" value="${memrVO.memrID}">
 			    <input type="hidden" name="action" value="confirmADD">
 			   </FORM>
 			   

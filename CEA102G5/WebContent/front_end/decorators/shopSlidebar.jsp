@@ -26,7 +26,7 @@ height:auto;
                         <div class="sidebar">
                             <div class="widget widget-product-search">
                                 <form class="form-search">
-                                    <input type="text" class="search-field" placeholder="Search Commodity…" value="" name="s" />
+                                    <input type="text" autocomplete="off" class="search-field" placeholder="Search Commodity…" value="" name="s" />
                                     <input type="submit" value="Search" id="inToRight1" />
                                 </form>
                             </div>

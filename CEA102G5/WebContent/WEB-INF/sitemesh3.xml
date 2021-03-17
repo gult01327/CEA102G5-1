@@ -19,7 +19,7 @@
     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
   </mapping>
       <mapping path="/front_end/ordermaster/*">
-    <decorator>/front_end/decorators/shopSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
   </mapping>
   

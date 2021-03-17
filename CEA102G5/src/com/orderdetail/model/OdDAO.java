@@ -217,7 +217,7 @@ public class OdDAO implements OdDAO_interface {
 		
 	}
 	@Override
-	public void addMessage(Integer omID, Integer comID, String odMessage, String sql) {
+	public void addMessage(Integer omID, Integer comID, String odMessage, String sql, Integer odPoint) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -225,8 +225,9 @@ public class OdDAO implements OdDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, odMessage);
-			pstmt.setInt(2, omID);
-			pstmt.setInt(3, comID);
+			pstmt.setInt(2, odPoint);
+			pstmt.setInt(3, omID);
+			pstmt.setInt(4, comID);
 			
 			pstmt.executeUpdate();
 			

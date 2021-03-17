@@ -40,6 +40,10 @@ public class MemDAO implements MemDAO_Interface {
 	private static final String FIND_BY_ACCOUNT = "SELECT * FROM MEMBER_INFO WHERE MEM_ACCOUNT=?";
 	
 	private static final String UPDATE_PASSWORD_STMT = "UPDATE MEMBER_INFO SET MEM_PASSWORD=? WHERE MEM_ID=?";
+	private static final String GET_MEM_BONUS = "SELECT M.MEM_ID,MEM_NAME, SUM(REC_BONUS) AS MEM_BONUS \r\n" + 
+			"FROM MEMBER_INFO M LEFT JOIN RECIPE R ON M.MEM_ID = R.MEM_ID\r\n" + 
+			"WHERE M.MEM_ID =? GROUP BY MEM_ID";
+	
 	@Override
 	public void insert(MemVO memVO) {
 		Connection con = null;
@@ -226,6 +230,7 @@ public class MemDAO implements MemDAO_Interface {
 				memVO.setMemID(rs.getInt("MEM_ID"));
 				memVO.setMemName(rs.getString("MEM_NAME"));
 				memVO.setMemAccount(rs.getString("MEM_ACCOUNT"));
+				memVO.setMemAccount2(rs.getString("MEM_ACCOUNT").toLowerCase());
 				memVO.setMemPassword(rs.getString("MEM_PASSWORD"));
 				memVO.setMemPhone(rs.getString("MEM_PHONE"));
 				memVO.setMemEmail(rs.getString("MEM_EMAIL"));
@@ -376,4 +381,56 @@ public class MemDAO implements MemDAO_Interface {
 		
 	}
 
+	@Override
+	public MemVO getMemBonus(Integer memID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemVO memVO = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_BONUS);
+			pstmt.setInt(1, memID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				memVO = new MemVO();
+				memVO.setMemID(rs.getInt("MEM_ID"));
+				memVO.setMemName(rs.getString("MEM_NAME"));
+				memVO.setMemBonus(rs.getInt("MEM_BONUS"));
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. no this member :"+se.getMessage());
+		} finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(pstmt!=null) {
+				
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return memVO;
+	}
 }

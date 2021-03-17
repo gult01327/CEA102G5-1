@@ -6,153 +6,144 @@
 <head>
     <meta charset="utf-8">
     <title>EATIN登入介面</title>
-    <style>
-        html {
-            background-color: #E8FFE8;
-        }
-        #wrapper{
-            margin-top: 15px;
-            margin-left: -10px;
-        }
-        
-        .wrapper {
-            margin: 140px 0 140px auto;
-            width: 1284px;
-        }
-        
-        .loginBox {
-            background-color: #F0F4F6;
-            /*上divcolor*/
-            border: 1px solid #BfD6E1;
-            border-radius: 5px;
-            color: #444;
-            font: 14px 'Microsoft YaHei', '微軟雅黑';
-            margin: 0 auto;
-            width: 388px
-        }
-        
-        .loginBox .loginBoxCenter {
-            border-bottom: 1px solid #DDE0E8;
-            padding: 24px;
-        }
-        
-        .loginBox .loginBoxCenter p {
-            margin-bottom: 10px
-        }
-        
-        .loginBox .loginBoxButtons {
-            /*background-color: #F0F4F6;*/
-            /*下divcolor*/
-            border-top: 0px solid #FFF;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            line-height: 28px;
-            overflow: hidden;
-            padding: 20px 24px;
-            vertical-align: center;
-            filter: alpha(Opacity=80);
-            -moz-opacity: 0.5;
-            opacity: 0.5;
-        }
-        
-        .loginBox .loginInput {
-            border: 1px solid #D2D9dC;
-            border-radius: 2px;
-            color: #444;
-            font: 12px 'Microsoft YaHei', '微軟雅黑';
-            padding: 8px 14px;
-            margin-bottom: 8px;
-            width: 310px;
-        }
-        
-        .loginBox .loginInput:FOCUS {
-            border: 1px solid #B7D4EA;
-            box-shadow: 0 0 8px #B7D4EA;
-        }
-        
-        .loginBox .loginBtn {
-            background-image: -moz-linear-gradient(to bottom, blue, #85CFEE);
-            border: 1px solid #98CCE7;
-            border-radius: 20px;
-            box-shadow: inset rgba(255, 255, 255, 0.6) 0 1px 1px, rgba(0, 0, 0, 0.1) 0 1px 1px;
-            color: #444;
-            /*登入*/
-            cursor: pointer;
-            float: right;
-            font: bold 13px Arial;
-            padding: 10px 50px;
-        }
-        
-        .loginBox .loginBtn:HOVER {
-            background-image: -moz-linear-gradient(to top, blue, #85CFEE);
-        }
-        
-        .loginBox a.forgetLink {
-            color: #ABABAB;
-            cursor: pointer;
-            float: right;
-            font: 11px/20px Arial;
-            text-decoration: none;
-            vertical-align: middle;
-            /*忘記密碼*/
-        }
-        
-        .loginBox a.forgetLink:HOVER {
-            color: #000000;
-            text-decoration: none;
-            /*忘記密碼*/
-        }
-        
-        .loginBox input#remember {
-            vertical-align: middle;
-        }
-        
-        .loginBox label[for="remember"] {
-            font: 11px Arial;
-        }
-    </style>
-</head>
 <body>
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-    <img src="<%=request.getContextPath() %>/resource/images/food.jpg" height="100" width="100"><font size="+3">EATIN 登入頁面</font>
-	<font style="color:red" size="+5">${success}</font>
-<hr><p>
-<h3>Welcome to EATIN!</h3>
-<a href="<%=request.getContextPath() %>/front_end/commodity/comindex.jsp">回商城首頁</a>
-    <div id="wrapper" class="wrapper">
-        <form action="<%=request.getContextPath() %>/front_end/member/mem.do" method="post">
-            <div class="loginBox">
-                <div class="loginBoxCenter">
-                    <p><label for="username">使用者名稱：</label></p>
-                    <!--autofocus 規定當頁面載入時按鈕應當自動地獲得焦點。 -->
-                    <!-- placeholder提供可描述輸入欄位預期值的提示資訊-->
-                    <p><input type="text" id="text" name="memAccount" class="loginInput" autofocus="autofocus" required="required" autocomplete="off" placeholder="請輸入EATIN會員帳號" value="" /></p>
-                    <!-- required 規定必需在提交之前填寫輸入欄位-->
-                    <p><label for="password">密碼：</label></p>
-                    <p><input type="password" id="password" name="memPassword" class="loginInput" required="required" placeholder="請輸入EATIN會員密碼" value="" /></p>
-                    <p><a class="forgetLink" href="<%=request.getContextPath()%>/front_end/member/forgetPw.jsp">忘記密碼?</a></p>
-                   
-                    
-                </div>
-                <div class="loginBoxButtons">
-
-					<input type="submit" value="登入" class="loginBtn">
+<style>
+#tip{
+	display:inline-block;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resource/css/login.css">
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+<form action="<%=request.getContextPath()%>/front_end/member/mem.do" method="post">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="user" type="text" name="memAccount" class="input" required='required' autocomplete="off">
+					
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" type="password"  name="memPassword" class="input" data-type="password" required='required'>
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign In">
 					<input type="hidden" name="action" value="login">
-                   
-                    <div> <a href="<%=request.getContextPath() %>/back_end/member/addMem.jsp">新使用者註冊</a></div>
-                </div>
-            </div>
-        </form>
-    </div>
+				</div>
+</form>
+				<div class="hr"></div>
+				<div class="foot-lnk">
+					<a href="<%=request.getContextPath()%>/front_end/member/forgetPw.jsp" style="color:red;">Forgot Password?</a>
+				</div>
+			</div>
+<form action="<%=request.getContextPath()%>/front_end/member/mem.do" method="post" enctype="multipart/form-data">
+			<div class="sign-up-htm">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="user" type="text"  name="memName" class="input" required='required'>
+					
+				</div>
+				<div class="group">
+					<label for="account" class="label">Account</label>
+					<input id="account" type="text" name="memAccount" class="input" required='required'>
+					<div id='show'></div>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" type="password"  name="memPassword" class="input" required='required'>
+					
+				</div>
+				<div class="group">
+					<label for="phone" class="label">Mem phone</label>
+					<input id="phone" type="text" name="memPhone" class="input" required='required'>
+					
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Email Address</label>
+					<input id="pass" type="email" name="memEmail" class="input" required='required'>
+					
+				</div>
+					<div class="group">
+					<label for="pass" class="label">Mem picture</label>
+					<label class="label">
+						<input id="pic" name="memUpfile" type="file" style="display:none;" required='required'> 
+						<img alt="" src="<%=request.getContextPath()%>/resource/images/upload.png" style="width:100px; height:80px;">
+					</label> 
+				</div>
+				<div class="group">
+					<input type="submit" class="button" value="Sign Up">
+					<input type="hidden" name="action" value="insert">
+				</div>
+				<div class="hr"></div>
+
+			</div>
+</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+$(".login-wrap").on("blur","#account",function(){
+	let html = '';
+	let account = $("#account").val();
+	if(account == ''){
+		$("#show").html(html);
+		return;
+	}
+	$.ajax({
+		url:"<%=request.getContextPath() %>/member/mem.do",
+		type:"post",
+		data:{
+			action:"checkAccount",
+			account:account
+		},
+		cache:false,
+		ifModified:true,
+		success:function(data){
+			if(data == "isAdded"){
+				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>帳號重複，請重新輸入</font>";
+				$("#show").html(html);
+// 				
+			}else{
+				html += "<font style='margin-top:10px; margin-left:120px; color:#00ff14;'>此帳號可以使用!</font>";
+				$("#show").html(html);
+			}
+		}
+	});
+	
+	
+	
+	console.log("OK");
+	
+});
+	
+
+
+
+$(".login-wrap").on("change","input[type='file']",function(e){
+    let file = e.target.files[0];
+    let img = $(this).parent().children("img")[0];
+    console.log(img);
+
+            if(file.type.indexOf('image') > -1){
+                
+
+                let reader = new FileReader();
+                reader.addEventListener('load',function(e){
+                    let result = e.target.result;
+                    
+                    img.src=result; 
+                });
+                reader.readAsDataURL(file);
+            }else{
+                alert('別亂傳，請上傳圖片檔!');
+            }
+    });
+
+</script>
+
 </body>
-
-
 </html>

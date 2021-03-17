@@ -115,17 +115,16 @@
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
                                     <a href="shop-detail.html">
-                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" width='100px' height='100px' />
+                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
                                     </a>
                                     <div class="product-action">
                                         <span class="add-to-cart">
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+                                            <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                                            <input type="hidden" id="comID" value="${comVO.comID}">
                                         </span>
                                         <span class="wishlist">
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-                                        </span>
-                                        <span class="quickview">
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
                                         </span>
                                         <span class="compare">
                                             Sales:${comVO.comSales}
@@ -144,11 +143,21 @@
 </c:forEach>
 </div>
 
- 
-
-<%@ include file="page2.file" %>
 
 </div>
+ 
+<div>
+<%@ include file="page2.file" %>
+</div>
+						<div class="pagination">
+							<a class="prev page-numbers" href="#">First Page</a>
+                            <a class="prev page-numbers" href="#">Prev</a>
+                            <a class="page-numbers" href="#">1</a>
+                            <span class="page-numbers current">2</span>
+                            <a class="page-numbers" href="#">3</a>
+                            <a class="next page-numbers" href="#">Next</a>
+                            <a class="next page-numbers" href="#">Last Page</a>
+                        </div>
 
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
@@ -190,7 +199,7 @@
 			var html = "";
 			for(let i = 0 ; i<data.length ; i++){
 				html += "<div class='col-md-4 col-sm-6 product-item text-center mb-3'><div class='product-thumb'>";
-				html += "<a href='shop-detail.html'><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].comPicSrc+"&pic=1' alt='' /></a>";
+				html += "<a href='shop-detail.html'><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].comPicSrc+"&pic=1' alt='' style='height:200px;' /></a>";
 				html += "<div class='product-action'><span class='add-to-cart'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to cart'></a></span>";
 				html += "<span class='wishlist'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to wishlist'></a></span>";
 				html += "<span class='quickview'><a href='#' data-toggle='tooltip' data-placement='top' title='Quickview'></a></span>";
@@ -199,7 +208,31 @@
 			}
 			$(".product-grid").html(html);
 		}	
-			
+		
+		$(".add-to-cart").click(function(){
+			let memID = $(this).children().next().next().val();
+			let comID = $(this).children().next().next().next().val();
+			console.log(memID);
+			console.log(comID);
+			if(memID == ""){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location=<%=request.getServletPath()%>&comID="+comID+"";
+				return;
+			}
+			$.ajax({
+				url:"<%=request.getContextPath()%>/cart/comCart.do",
+				type:"post",
+				data:{
+					action:"ADD",
+					comID:comID,
+					cardCount:1
+				},
+				cache:false,
+				ifModified :true,
+				success : function(){
+					window.location.reload();
+				}
+			});
+		})
     </script>
 
 </body>

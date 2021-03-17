@@ -58,6 +58,10 @@ public class MemService {
 		
 		dao.updateMemPassword(password, memID);
 	}
+	
+	public MemVO getMemBonus(Integer memID) {
+		return dao.getMemBonus(memID);
+	}
 
 	
 	

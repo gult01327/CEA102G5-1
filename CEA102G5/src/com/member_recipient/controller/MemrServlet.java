@@ -76,20 +76,24 @@ public class MemrServlet extends HttpServlet {
 		if("confirmADD".equals(action)) {
 			try {
 				Integer memrID = new Integer(request.getParameter("checkedAdd"));
-				
+				String checkwhere = request.getParameter("checkWhere");
 				MemrService memrSvc = new MemrService();
 				MemrVO memrVO = memrSvc.getByMemrID(memrID);
 				
-				request.setAttribute("memrVO", memrVO);
-				String url = "/front_end/commodity/Checkout.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);
-				successView.forward(request, response);
+				
+
+					request.setAttribute("memrVO", memrVO);
+					String url = "/front_end/commodity/Checkout.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);					
+
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 		}
+		
 		
 		if("getOne_For_Update".equals(action)) {
 			try {

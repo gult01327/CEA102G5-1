@@ -7,6 +7,7 @@ public class MemVO implements Serializable {
 	private Integer memID;
 	private String memName;
 	private String memAccount;
+	private String memAccount2;
 	private String memPassword;
 	private String memPhone;
 	private String memEmail;
@@ -104,11 +105,19 @@ public class MemVO implements Serializable {
 		this.memPicture = memPicture;
 	}
 
+	public String getMemAccount2() {
+		return memAccount2;
+	}
+
+	public void setMemAccount2(String memAccount2) {
+		this.memAccount2 = memAccount2;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((memAccount == null) ? 0 : memAccount.hashCode());
+		result = prime * result + ((memAccount2 == null) ? 0 : memAccount2.hashCode());
 		return result;
 	}
 
@@ -121,13 +130,17 @@ public class MemVO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		MemVO other = (MemVO) obj;
-		if (memAccount == null) {
-			if (other.memAccount != null)
+		if (memAccount2 == null) {
+			if (other.memAccount2 != null)
 				return false;
-		} else if (!memAccount.equals(other.memAccount))
+		} else if (!memAccount2.equals(other.memAccount2))
 			return false;
 		return true;
 	}
+
+	
+
+	
 	
 	
 	

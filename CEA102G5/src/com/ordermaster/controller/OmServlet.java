@@ -67,7 +67,7 @@ public class OmServlet extends HttpServlet {
 				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, memrVO.getMemrName(),memrVO.getMemrPhone(),memrVO.getMemrAddress());
 				
 				request.setAttribute("omVO", omVO);//¨S¥Î¨ì
-				String url = "/front_end/commodity/listOmbyMemID.jsp";
+				String url = "/front_end/member/listOmbyMemID.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 				
@@ -86,7 +86,7 @@ public class OmServlet extends HttpServlet {
 				List<OdVO> list = odSvc.getAllByOmID(omID);
 				
 				request.setAttribute("list", list);
-				String url = "/front_end/commodity/listOd_ByOmID_frontEnd.jsp";
+				String url = "/front_end/member/listOd_ByOmID_frontEnd.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 			} catch (Exception e) {
@@ -134,8 +134,9 @@ public class OmServlet extends HttpServlet {
 			Integer comID = new Integer(request.getParameter("comID"));
 			String odMessage = request.getParameter("msgText");
 			String column = request.getParameter("column");
+			Integer odPoint = new Integer(request.getParameter("score"));
 			OdService odSvc = new OdService();
-			odSvc.addMessage(omID, comID, odMessage, column);
+			odSvc.addMessage(omID, comID, odMessage, column,odPoint);
 			
 			
 			String str= "success";

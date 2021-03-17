@@ -226,7 +226,7 @@
                             
                             <c:if test="${!empty sessionScope.memVO}">
                             	<li><a href=${mem}>${memVO.memName}</a></li>
-                                <li><a href="<%=request.getContextPath() %>/front_end/member/mem.do?action=logout">LogOut</a></li>
+                                <li><a href="<%=request.getContextPath() %>/front_end/member/mem.do?action=logout&location=<%=request.getRequestURI()%>">LogOut</a></li>
                             </c:if>
                             </ul>
                         </div>
@@ -285,7 +285,7 @@
                                 </ul>
                             </nav>
                      <div class="btn-wrap">
-                     	<c:if test="${!empty memVO}">
+                     	<c:if test="${!empty sessionScope.memVO}">
                      	<jsp:useBean id="cartSvc" class="com.cart.model.CartService"></jsp:useBean>
                      	<jsp:useBean id="comSvc" class="com.commodity.model.ComService"></jsp:useBean>
                      	<c:set var="cartTotalPrice" value="0" />
@@ -325,7 +325,6 @@
 <!--                                         購物車頁面 -->
                                             <a href="<%=request.getContextPath()%>/front_end/commodity/listAllCart2.jsp" class="view-cart">View cart</a>
 <!--                                             結帳頁面 -->
-                                            <a href="#" class="checkout">Checkout</a>
                                         </p>
                                     </div>
                                 </div>

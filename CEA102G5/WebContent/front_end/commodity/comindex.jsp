@@ -120,9 +120,9 @@
                                     <div class="product-action">
                                         <span class="add-to-cart">
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+                                        </span>
                                             <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
                                             <input type="hidden" id="comID" value="${comVO.comID}">
-                                        </span>
                                         <span class="wishlist">
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
                                         </span>
@@ -201,17 +201,19 @@
 				html += "<div class='col-md-4 col-sm-6 product-item text-center mb-3'><div class='product-thumb'>";
 				html += "<a href='shop-detail.html'><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].comPicSrc+"&pic=1' alt='' style='height:200px;' /></a>";
 				html += "<div class='product-action'><span class='add-to-cart'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to cart'></a></span>";
+				html += "<input type='hidden' id='memID' value='${sessionScope.memVO.memID}'>";
+				html += "<input type='hidden' id='comID' value='"+data[i].comID+"'>";
 				html += "<span class='wishlist'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to wishlist'></a></span>";
-				html += "<span class='quickview'><a href='#' data-toggle='tooltip' data-placement='top' title='Quickview'></a></span>";
+
 				html += "<span class='compare'>Sales:"+data[i].comSales+"</span></div></div>";
 			 	html += "<div class='product-info'><a href='<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID="+data[i].comID+"'><h2 class='title'>"+data[i].comName+"</h2><span class='price'><ins>$"+data[i].comPrice+"</ins></span></a></div></div>";
 			}
 			$(".product-grid").html(html);
 		}	
-		
-		$(".add-to-cart").click(function(){
-			let memID = $(this).children().next().next().val();
-			let comID = $(this).children().next().next().next().val();
+		$(".product-grid").on("click",".add-to-cart",function(){
+			let memID = $(this).next().val();
+			let comID = $(this).next().next().val();
+			console.log($(this));
 			console.log(memID);
 			console.log(comID);
 			if(memID == ""){
@@ -232,7 +234,7 @@
 					window.location.reload();
 				}
 			});
-		})
+		});
     </script>
 
 </body>

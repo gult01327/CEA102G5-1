@@ -13,6 +13,7 @@
 }
 </style>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resource/css/login.css">
+
 <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
@@ -22,12 +23,13 @@
 <form action="<%=request.getContextPath()%>/front_end/member/mem.do" method="post">
 				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text" name="memAccount" class="input" required='required' autocomplete="off">
-					
+					<input id="user" type="text" name="memAccount" value="${param.memAccount}" class="input" required='required' autocomplete="off">
+					<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.memAccount}</font>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
 					<input id="pass" type="password"  name="memPassword" class="input" data-type="password" required='required'>
+					<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.memPassword}</font>
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Sign In">
@@ -106,10 +108,11 @@ $(".login-wrap").on("blur","#account",function(){
 			if(data == "isAdded"){
 				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>帳號重複，請重新輸入</font>";
 				$("#show").html(html);
-// 				
+				$(".button").attr("disabled",true);
 			}else{
 				html += "<font style='margin-top:10px; margin-left:120px; color:#00ff14;'>此帳號可以使用!</font>";
 				$("#show").html(html);
+				$(".button").attr("disabled",false);
 			}
 		}
 	});

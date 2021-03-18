@@ -3,8 +3,10 @@ package com.member.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,7 +56,7 @@ public class MemServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		if("login".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String,String> errorMsgs = new LinkedHashMap<String, String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			
 			
@@ -62,12 +64,12 @@ public class MemServlet extends HttpServlet {
 				String memAccount = request.getParameter("memAccount").trim();
 				
 				if(memAccount==null || memAccount.trim().length()==0) {
-					errorMsgs.add("會員帳號請勿空白");
+					errorMsgs.put("memAccount","會員帳號請勿空白");
 				}
 				String memPassword = request.getParameter("memPassword").trim();
 				
 				if(memPassword==null||memPassword.trim().length()==0) {
-					errorMsgs.add("會員密碼請勿空白");
+					errorMsgs.put("memPassword","會員密碼請勿空白");
 				}
 				
 				MemVO memVO = null;
@@ -94,17 +96,17 @@ public class MemServlet extends HttpServlet {
 						RequestDispatcher successView = request.getRequestDispatcher(url);
 						successView.forward(request, response);
 					}else {
-						errorMsgs.add("密碼有誤，請重新輸入");
+						errorMsgs.put("memPassword","密碼有誤，請重新輸入");
 						RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
 						failView.forward(request, response);
 					}
 				} catch (Exception e) {
-					errorMsgs.add("帳號有誤，查無此人");
+					errorMsgs.put("memAccount","帳號有誤，查無此人");
 					RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
 					failView.forward(request, response);
 				}
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				errorMsgs.put("exception",e.getMessage());
 				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
 				failView.forward(request, response);
 			}
@@ -241,7 +243,7 @@ public class MemServlet extends HttpServlet {
 				
 				memSvc.addMem(memName, memAccount, memPassword, memPhone, memEmail, memPicture);
 				
-				String url = "/front_end/member/login2.jsp";
+				String url = "/front_end/member/login.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 				

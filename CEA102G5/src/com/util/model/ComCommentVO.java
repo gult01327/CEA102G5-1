@@ -7,17 +7,30 @@ public class ComCommentVO implements Serializable {
 	private String memName;
 	private Integer comID;
 	private String odMessage;
+	private String odResponse;
 	private Integer odPoint;
+	private Integer ordmID;
 	
-	
-	public ComCommentVO() {
-		super();
-	}
 	public String getMemPicSrc() {
 		String src = "?id="+ this.memID +"&table=MEMBER_INFO&column=MEM_PICTURE&idname=MEM_ID";
 		return src;
 	}
-
+	
+	public Integer getOrdmID() {
+		return ordmID;
+	}
+	public void setOrdmID(Integer ordmID) {
+		this.ordmID = ordmID;
+	}
+	public String getOdResponse() {
+		return odResponse;
+	}
+	public void setOdResponse(String odResponse) {
+		this.odResponse = odResponse;
+	}
+	public ComCommentVO() {
+		super();
+	}
 	public Integer getMemID() {
 		return memID;
 	}

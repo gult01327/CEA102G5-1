@@ -44,7 +44,8 @@ public class OdDAO implements OdDAO_interface {
 			"SELECT ORDM_ID,D.COM_ID,COM_NAME,COM_PICTURE,ORDD_COUNT,ORDD_PRICE,ORDD_RETURN,ORDD_MESSAGE,ORDD_RESPONSE,ORDD_REASON,ORDD_RTIME\r\n" + 
 			"FROM ORDER_DETAIL D LEFT JOIN COMMODITY C ON D.COM_ID = C.COM_ID\r\n" + 
 			"WHERE ORDM_ID = ?";
-	
+	private static final String UPDATEBY =
+			"UPDATE order_detail SET ORDD_RESPONSE = ? WHERE COM_ID = ? AND ORDM_ID = ?";
 	@Override
 	public void insert(List<CartVO> list, OmVO omVO) {
 		Connection con = null;
@@ -251,5 +252,43 @@ public class OdDAO implements OdDAO_interface {
 		}
 		
 	}
+	@Override
+	public void updateByodResponse(List<OdVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATEBY);
+			 for(OdVO odVO : list) {
+			     pstmt.setString(1, odVO.getOdResponse());
+			     pstmt.setInt(2, odVO.getComID());
+			     pstmt.setInt(3, odVO.getOmID());
+			
+			     pstmt.executeUpdate();   
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					// TODO Auto-generated catch block
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}			
+		}
+	}
+		
+
 
 }

@@ -67,7 +67,7 @@ public class OmServlet extends HttpServlet {
 				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, memrVO.getMemrName(),memrVO.getMemrPhone(),memrVO.getMemrAddress());
 				
 				request.setAttribute("omVO", omVO);//¨S¥Î¨ì
-				String url = "/front_end/member/listOmbyMemID.jsp";
+				String url = "/front_end/credit/credit.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 				

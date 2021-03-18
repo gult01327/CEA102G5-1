@@ -2,19 +2,19 @@ package com.util.model;
 
 import java.io.Serializable;
 
-public class RecbrUtilVO implements Serializable {
-	private Integer recbID;
-	private Integer recID;
-	private Integer bMemID;
-	private String recbContent;
-	private Integer recbStatus;
-	private Integer recbrID;
-	private Integer rMemID;
-	private String recbrContent;
-	private Integer recbrStatus;
-	private String recbrReply;
+public class RecbrUtilVO implements Serializable{
+	Integer recbID;
+	Integer recID;
+	Integer bMemID;
+	String recbContent;
+	Integer recbStatus;
+	Integer recbrID;
+	Integer rMemID;
+	String recbrContent;
+	Integer recbrStatus;
+	String recbrReply;
 	
-	public RecbrUtilVO () {
+	public RecbrUtilVO() {
 		super();
 	}
 
@@ -58,8 +58,6 @@ public class RecbrUtilVO implements Serializable {
 		this.recbStatus = recbStatus;
 	}
 
-	
-
 	public Integer getRecbrID() {
 		return recbrID;
 	}
@@ -99,7 +97,6 @@ public class RecbrUtilVO implements Serializable {
 	public void setRecbrReply(String recbrReply) {
 		this.recbrReply = recbrReply;
 	}
-	
 	
 	
 }

@@ -42,6 +42,11 @@ div.pagination{
 	margin:20 auto;
 }
 
+div.masonry-item{
+	min-height:320px;
+
+}
+
 
 </style>
 

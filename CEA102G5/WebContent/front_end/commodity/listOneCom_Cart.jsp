@@ -7,7 +7,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  ComVO comVO = (ComVO) request.getAttribute("comVO"); //123CartServlet.java(Controller), 存入req的comVO物件
+  ComVO comVO = (ComVO) request.getAttribute("comVO"); //12CartServlet.java(Controller), 存入req的comVO物件
 %>
 <%MemVO memVO = (MemVO) session.getAttribute("memVO"); %>
 

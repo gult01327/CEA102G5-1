@@ -37,7 +37,7 @@
 
 <style>
   table {
-	width: 1050px;
+	width: 800px;
 
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -64,9 +64,6 @@
 		<th>商品圖片</th>
 		<th>訂購數量</th>
 		<th>商品單價</th>
-		<th>退貨狀態</th>
-		<th>退貨原因</th>
-		<th>退貨日期</th>
 		<th>會員留言</th>
 		<th>管理員回覆</th>
 		<th>寫評價</th>
@@ -79,9 +76,6 @@
 			<td><img src = "<%=request.getContextPath()%>/ComPicReader${odVO.comPicSrc}&pic=1" height="100" width="100"></td>
 			<td>${odVO.odCount}</td>
 			<td>$ ${odVO.odPrice}</td>
-			<td>${odVO.odReturn==0?"未退貨":"已退貨"}</td>
-			<td>${odVO.odReason}</td>
-			<td>${odVO.odRtime}</td>
 			<td id='showMsg'>${odVO.odMessage}</td>
 			<td>${odVO.odResponse}</td>
 			<td><input class = 'msg' type='button' value='寫評價' ${odVO.odMessage==null? "" : "disabled='disabled'"} />

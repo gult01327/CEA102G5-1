@@ -46,6 +46,8 @@ public class OdService {
 		
 	}
 	
-	
+	public void updateByComComment(List<OdVO> list) {
+		dao.updateByodResponse(list);
+	}
 
 }

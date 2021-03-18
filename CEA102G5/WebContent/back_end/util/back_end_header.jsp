@@ -260,7 +260,7 @@ div.memberListMain{
 <c:set var="comSelectPage" value='${pageContext.request.contextPath}/back_end/commodity/comSelectPage.jsp' />
 <c:set var="updateCom" value='${pageContext.request.contextPath}/back_end/commodity/updateCom.jsp' />
 <c:set var="listCom_ByCompositeQuery" value='${pageContext.request.contextPath}/back_end/commodity/listCom_ByCompositeQuery.jsp' />
-
+<c:set var="listAllComComment" value='${pageContext.request.contextPath}/back_end/commodity/listAllComComment.jsp' />
 <!-- 訂單 -->
 <c:set var="listAllOm" value='${pageContext.request.contextPath}/back_end/commodity/listAllOm.jsp' />
 
@@ -509,7 +509,7 @@ div.memberListMain{
                                     
                                     <div id=Order>
                                    		<li><a href=${listAllOm}>訂單列表</a></li>
-                                   		<li><a href=${listAllOm}>訂單列表</a></li>
+                                   		<li><a href=${listAllComComment}>未回覆清單</a></li>
                                     </div>
                                     <div id=Member>
                                     	<li><a href=${memSelect}>搜尋會員</a></li>

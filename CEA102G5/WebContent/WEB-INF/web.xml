@@ -284,7 +284,14 @@
 		<servlet-name>LesfServlet</servlet-name>
 		<url-pattern>/front_end/lesson.favorites/lesf.do</url-pattern>
 	</servlet-mapping>
-	
+	<servlet>
+	    <servlet-name>ComCommentServlet</servlet-name>
+	    <servlet-class>com.util.controller.ComCommentServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+		<servlet-name>ComCommentServlet</servlet-name>
+		<url-pattern>/back_end/commodity/ComComment.do</url-pattern>
+	</servlet-mapping>
 	
 	
 

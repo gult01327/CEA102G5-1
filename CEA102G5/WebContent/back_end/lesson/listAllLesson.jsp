@@ -68,7 +68,7 @@
     
 <%--     <c:if test="${!empty openAddPage}"> --%>
 <!-- 	    <script type="text/javascript"> -->
-// 	    	$("#addModal").modal('show');
+<!--  	    	$("#addModal").modal('show'); -->
 <!-- 	    </script> -->
 <%--     </c:if> --%>
  

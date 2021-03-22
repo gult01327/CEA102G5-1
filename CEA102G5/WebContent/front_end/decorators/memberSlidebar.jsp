@@ -29,7 +29,8 @@
                                         <li><a href="<%=request.getContextPath()%>/front_end/member/listOmbyMemID.jsp">個人訂單清單</a></li>
                                         <li><a href="<%=request.getContextPath()%>/front_end/recipe/listRecbyMemID.jsp">個人食譜清單</a></li>
                                         <li><a href="<%=request.getContextPath()%>/front_end/recipe/recMemFavorite.jsp">食譜收藏清單</a></li>
-                                        <li><a href="<%=request.getContextPath()%>/front_end/lesson_favorites.jsp/listFavorites.jsp">課程收藏清單</a></li>                                        
+                                        <li><a href="<%=request.getContextPath()%>/front_end/lesson.favorites/lesf.do?action=getOne&mem_ID=${sessionScope.memVO.memID}">課程收藏清單</a></li>                                        
+                                        <li><a href="<%=request.getContextPath()%>/front_end/lesson.reservation/lesr.do?action=getOne1&mem_ID=${sessionScope.memVO.memID}">個人課程清單</a></li>                                       
                                     </div>
                                 </ul>
                             </div>

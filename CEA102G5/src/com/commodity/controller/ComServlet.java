@@ -397,8 +397,8 @@ public class ComServlet extends HttpServlet {
 				ComService comSvc = new ComService();
 				List<ComVO> list = comSvc.getAll(map);
 				//查詢完成 準備轉交
-				request.setAttribute("listCom_ByCompositeQueryFS", list);
-				String url = "/front_end/commodity/comindex.jsp";
+				session.setAttribute("category_list", list);
+				String url = "/front_end/commodity/comindex_category.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 				

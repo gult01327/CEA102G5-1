@@ -336,6 +336,7 @@ div.memberListMain{
                                     <li>
                                         <a href="<%=request.getContextPath()%>/back_end/back_end_index.jsp">Home</a>
                                     </li>
+                                   	<c:if test='${funList.contains("課程")}'>
                                     <li class="dropdown">
                                         <a href="#">Course</a>
                                         <ul class="sub-menu">
@@ -345,6 +346,8 @@ div.memberListMain{
                                             <li><a href="#">Reservation</a></li>
                                         </ul>
                                     </li>
+                                    </c:if>
+                                    <c:if test='${funList.contains("商城")}'>
                                     <li class="dropdown">
                                         <a href="#">Mall</a>
                                         <ul class="sub-menu">
@@ -353,18 +356,24 @@ div.memberListMain{
                                             <li><a href="#">Order</a></li>
                                         </ul>
                                     </li>
+                                    </c:if>
+                                    <c:if test='${funList.contains("食譜") }'>
                                     <li class="dropdown">
                                         <a href="#">Recipe</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Recipe</a></li>
                                         </ul>
                                     </li>
+                                    </c:if>
+                                    <c:if test='${funList.contains("會員") }'>
                                     <li class="dropdown">
                                         <a href="#">Member</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Member</a></li>
                                         </ul>
                                     </li>
+                                    </c:if>
+                                    <c:if test='${funList.contains("管理員") }'>
                                     <li class="dropdown">
                                         <a href="#">Admin</a>
                                         <ul class="sub-menu">
@@ -372,6 +381,7 @@ div.memberListMain{
                                             <li><a href="#">Function</a></li>
                                         </ul>
                                     </li>
+                                    </c:if>
                                     <li>
                                     <c:if test="${empty sessionScope.coaVO}">
                                     	<img src="${pageContext.request.contextPath}/resource/images/admin.jpg" width=30px></img>

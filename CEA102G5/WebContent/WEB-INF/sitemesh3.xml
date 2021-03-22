@@ -39,4 +39,6 @@
   
    <mapping path="/back_end/back_end_login.jsp" exclue="true"/>
    <mapping path="/front_end/front_end_login.jsp" exclue="true"/>
+   
+   <mapping path="/front_end/front_end_index.jsp" exclue="true"/>
 </sitemesh> 

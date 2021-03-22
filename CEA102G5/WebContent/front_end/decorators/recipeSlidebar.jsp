@@ -31,7 +31,7 @@ height:auto;
 	<sitemesh:write property='body' />
 </div>
 <div class="col-md-3 col-md-pull-9">
-                        <div class="sidebar">
+                     <div class="sidebar">
                             <div class="widget widget-product-search">
                             <h3 class="widget-title">Search</h3>
 										<form class="form-search" action='<%=request.getContextPath()%>/front_end/recipe/rec.do'>
@@ -48,7 +48,7 @@ height:auto;
 										</form>
 							</div>
                             <c:if test="${not empty memVO}">
-                            	 <div class="widget widget-product-categories">
+                            <div class="widget widget-product-categories">
                                 <h3 class="widget-title">Action</h3>
                                 <ul class="product-categories">
                                     <div>
@@ -81,8 +81,9 @@ height:auto;
 									</c:forEach>
 									</div>
 
+					</div>
 </div>
-
+</div>
 <script type="text/javascript">
 
 </script>

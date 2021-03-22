@@ -283,21 +283,12 @@ public class ComServlet extends HttpServlet {
 						is.close();
 
 				} catch (Exception e) {
-					errorMsgs.add("有問題");
+					errorMsgs.add("圖片1有問題");
 				}
 				
 				byte[] comPicture2 =null;
 				
-				try {
-						Part part = request.getPart("upfile2");
-						InputStream is = part.getInputStream();
-						comPicture2 = new byte[is.available()];
-						is.read(comPicture2);
-						is.close();
 
-				} catch (Exception e) {
-					errorMsgs.add("有問題");
-				}
 				
 				String comContent = request.getParameter("comContent");
 				int comStatus = Integer.parseInt(request.getParameter("comStatus"));

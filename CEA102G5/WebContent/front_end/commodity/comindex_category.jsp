@@ -9,15 +9,13 @@
 <%@ page import="com.member.model.*"%>       
 
 <%
- 	ComService comSvc = new ComService();
- 	List<ComVO> list = comSvc.getAllForComindex();
+	List<ComVO> list = (List<ComVO>)session.getAttribute("category_list");
  	pageContext.setAttribute("list",list);//¬°¤F¤À­¶	
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
 %>
-	<%CartService cartSvc = new CartService(); 
-%>
-<%MemVO memVO = (MemVO) session.getAttribute("memVO"); %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +50,7 @@
 </head>
 <body bgcolor=#E8FFE8>
 
-	<%@ include file="page1.file" %> 
+	<%@ include file="page1_category.file" %> 
 <div id="cf">
 <div class="category-carousel-2 mb-3" data-auto-play="true" data-desktop="3" data-laptop="3" data-tablet="2" data-mobile="1">
                             <div class="cat-item">
@@ -69,7 +67,7 @@
                             <div class="cat-item">
                                 <div class="cats-wrap" data-bg-color="#c6e6f6">
                                     <a class='getComBycomcID' href="<%=request.getContextPath()%>/front_end/commodity_category/comc.do?action=listComforByComcIDwithSales&comcID=<%=countList.get(3).getComcID()%>">
-                                    	<input type='hidden' value='<%=countList.get(3).getComcID()%>'>
+                                    	<input type='hidden' value='<%=countList.get(2).getComcID()%>'>
                                         <img src="<%=request.getContextPath()%>/resource/images/category/seafood2.png" alt="" />
                                         <h2 class="category-title">
                                             Seafood<mark class="count">(<%=countList.get(3).getComCount()%>)</mark>
@@ -147,7 +145,7 @@
 </div>
  
 <div>
-<%@ include file="page2.file" %>
+<%@ include file="page2_category.file" %>
 </div>
 
 
@@ -172,9 +170,6 @@
 		$(".product-grid").on("click",".add-to-cart",function(){
 			let memID = $(this).next().val();
 			let comID = $(this).next().next().val();
-			console.log($(this));
-			console.log(memID);
-			console.log(comID);
 			if(memID == ""){
 				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location=<%=request.getServletPath()%>&comID="+comID+"";
 				return;

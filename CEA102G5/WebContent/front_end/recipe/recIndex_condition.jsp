@@ -4,8 +4,8 @@
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.recipe.model.*"%>
 <%@ page import="java.util.*"%>
-<% RecService recSvc2 = new RecService();
-   List<RecVO> list = recSvc2.getRecByStatus(2);	  	
+<%
+	List<RecVO> list = (List<RecVO>) session.getAttribute("conditionList");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,15 +17,13 @@
 </head>
 
 <body>
-<jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
 <jsp:useBean id="memSvc" scope='page' class="com.member.model.MemService"/>
 <jsp:useBean id="jedis" scope='page' class="jedis.util.favorite.JedisHandleFavorite"/>
 <h2 class="page-title text-center" style='color:black;'>Recipe List</h2>
 <div class="blog-list">
-
 <%@ include file="page1.file" %> 
-<c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<div class="blog-list-item">
+	<c:forEach var="recVO" items="${sessionScope.conditionList}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<div class="blog-list-item">
 			<div class="col-md-6">
 				<div class="post-thumbnail">
 						<a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}"> 
@@ -66,10 +64,11 @@
 				</div>
 			</div>
 		</div>
-</c:forEach>
+	</c:forEach>
+
+<%@include file="page2.file" %>       
+
 </div>
-<%@ include file="page2.file" %>
-        
         
 <script type="text/javascript">
 </script>

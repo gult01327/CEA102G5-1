@@ -64,23 +64,13 @@ pageContext.setAttribute("list",list);
 
 <table>
 	<tr>
-		<th>商品編號</th>
-		<th>商品類別</th>
 		<th>商品名稱</th>
 		<th>商品價格</th>
 		<th>商品圖片</th>
 <!-- 		<th>商品圖片2</th> -->
 		<th>商品簡介</th>
-		<th>商品狀態</th>
-		<th>商品重量</th>
-		<th>商品單位</th>
-		<th>商品熱量(cal)</th>
-		<th>商品碳水(g)</th>
-		<th>商品蛋白質(g)</th>
-		<th>商品脂肪(g)</th>
-		<th>商品特性</th>
 		<th>商品銷量</th>
-		<th>商品創建時間</th>
+
 		
 		
 	</tr>
@@ -88,36 +78,13 @@ pageContext.setAttribute("list",list);
 	<c:forEach var="comVO" items="${list}">
 		
 		<tr>
-			<td>${comVO.comID}</td>
-			<td>
-			<c:forEach var="comcVO" items="${comcSvc.all}">
-                    <c:if test="${comVO.comcID==comcVO.comcID}">
-	                   ${comcVO.comcName}
-                    </c:if>
-                </c:forEach>
-			</td>
 			<td>${comVO.comName}</td>
 			<td>$ ${comVO.comPrice}</td>
 			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" height="100" width="100"></td>
 <%-- 			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=2" height="100" width="100"></td> --%>
 			<td>${comVO.comContent}</td>
-			<td>
-			<c:if test="${comVO.comStatus==1}">
-				下架
-			</c:if>
-			<c:if test="${comVO.comStatus==0}">
-				上架
-			</c:if>
-			</td>
-			<td>${comVO.comWeight}</td>
-			<td>${comVO.comUnit}</td>
-			<td>${comVO.comCal}</td>
-			<td>${comVO.comCarb}</td>
-			<td>${comVO.comPro}</td>
-			<td>${comVO.comFat}</td>
-			<td>${comVO.comProp}</td>
 			<td>${comVO.comSales}</td>
-			<td>${comVO.comTime}</td>
+
 <!-- 			<td> -->
 <%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/commodity/com.do" style="margin-bottom: 0px;"> --%>
 <!-- 			     <input type="submit" value="修改"> -->

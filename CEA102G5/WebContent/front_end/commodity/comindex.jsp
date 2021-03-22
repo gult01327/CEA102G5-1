@@ -8,10 +8,12 @@
 <%@ page import="com.commodity_category.model.*"%>
 <%@ page import="com.member.model.*"%>       
 
+
 <%
  	ComService comSvc = new ComService();
  	List<ComVO> list = comSvc.getAllForComindex();
- 	pageContext.setAttribute("list",list);//為了分頁	
+ 	pageContext.setAttribute("list",list);
+
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
 %>
@@ -25,7 +27,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-<title>所有商品資料 </title>
+<title>商城首頁</title>
 <style>
 		#cf{
 			text-align: center;
@@ -109,22 +111,26 @@
                                 </div>
                             </div>
                         </div>
+<div style='margin-bottom: 40px;'>
+<%@ include file="pagen1.file" %>
+</div>
+
 <div class="product-grid">
 
 <c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
-                                    <a href="shop-detail.html">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
                                         <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
                                     </a>
                                     <div class="product-action">
                                         <span class="add-to-cart">
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
                                         </span>
-                                            <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
-                                            <input type="hidden" id="comID" value="${comVO.comID}">
+                                        <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                                        <input type="hidden" id="comID" value="${comVO.comID}">
                                         <span class="wishlist">
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
+
                                         </span>
                                         <span class="compare">
                                             Sales:${comVO.comSales}
@@ -147,7 +153,7 @@
 </div>
  
 <div>
-<%@ include file="page2.file" %>
+<%@ include file="pagen2.file" %>
 </div>
 
 
@@ -167,8 +173,25 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
      <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
+
     
-    <script type="text/javascript">	
+    <script type="text/javascript">
+
+	    $(document).ready(function(){
+	
+	
+	        $(".wishlist").each(function(){
+		console.log("123");
+// 	        	var memID=${memVO.memID};
+// 	        	let comID=$(this).prev().attr('value');
+// 	            if (memID===null){
+	            $(this).prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+// 	            }
+	        });
+	
+	
+	
+	    });
 		$(".product-grid").on("click",".add-to-cart",function(){
 			let memID = $(this).next().val();
 			let comID = $(this).next().next().val();
@@ -194,6 +217,7 @@
 				}
 			});
 		});
+		
     </script>
 
 </body>

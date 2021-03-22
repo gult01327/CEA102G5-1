@@ -71,7 +71,7 @@ public class LesServlet extends HttpServlet {
 				String lesBeginStr = req.getParameter("lesBegin").trim();
 				java.sql.Date lesBegin = null;
 				if (!lesBeginStr.matches(dateReg)) {
-					errorMsgs.put("lesBegin", "格式錯誤!");
+					errorMsgs.put("lesBegin", "格式錯誤");
 				} else {
 					lesBegin = strToDate(lesBeginStr);
 					lesVO.setLesBegin(lesBegin);
@@ -125,7 +125,6 @@ public class LesServlet extends HttpServlet {
 				res.sendRedirect(req.getContextPath()+"/back_end/lesson/listAllLesson.jsp");
 				return;
 			} catch (Exception e) {
-				req.setAttribute("lesVO", lesVO);
 				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/lesson/addLesson.jsp");
 				failureView.forward(req, res);
 				return;

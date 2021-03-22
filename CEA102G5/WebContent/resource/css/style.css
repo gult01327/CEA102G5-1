@@ -4375,7 +4375,7 @@
         .mini-cart-wrap .widget-shopping-cart-content .cart-list {
             padding: 30px;
             margin: 0;
-            max-height: 373px;
+            max-height: 300px;
             overflow: auto;
             border-bottom: 1px solid #f1eeea;
         }

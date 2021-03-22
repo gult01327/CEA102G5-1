@@ -12,7 +12,7 @@
 <%
  	ComService comSvc = new ComService();
  	List<ComVO> list = comSvc.getAllForComindex();
- 	pageContext.setAttribute("list",list);//¬°¤F¤À­¶	
+ 	pageContext.setAttribute("list",list);
 
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
@@ -27,7 +27,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-<title>©Ò¦³°Ó«~¸ê®Æ </title>
+<title>�ӫ�����</title>
 <style>
 		#cf{
 			text-align: center;

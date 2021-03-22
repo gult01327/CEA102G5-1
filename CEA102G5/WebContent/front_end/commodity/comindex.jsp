@@ -8,10 +8,18 @@
 <%@ page import="com.commodity_category.model.*"%>
 <%@ page import="com.member.model.*"%>       
 
-<%
- 	ComService comSvc = new ComService();
- 	List<ComVO> list = comSvc.getAllForComindex();
- 	pageContext.setAttribute("list",list);//為了分頁
+<%	
+	List<ComVO> list =null;
+	if (request.getAttribute("listCom_ByCompositeQueryFS")==null){
+		//無搜尋結果
+		ComService comSvc = new ComService();
+	 	list = comSvc.getAllForComindex();
+	}else{
+		//有搜尋結果
+		list = (List<ComVO>)request.getAttribute("listCom_ByCompositeQueryFS");
+	}
+
+	pageContext.setAttribute("list",list);//為了分頁
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
 %>
@@ -114,7 +122,7 @@
 <c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
-                                    <a href="shop-detail.html">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
                                         <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
                                     </a>
                                     <div class="product-action">
@@ -199,7 +207,7 @@
 			var html = "";
 			for(let i = 0 ; i<data.length ; i++){
 				html += "<div class='col-md-4 col-sm-6 product-item text-center mb-3'><div class='product-thumb'>";
-				html += "<a href='shop-detail.html'><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].comPicSrc+"&pic=1' alt='' style='height:200px;' /></a>";
+				html += "<a href='<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID="+data[i].comID+"'><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].comPicSrc+"&pic=1' alt='' style='height:200px;' /></a>";
 				html += "<div class='product-action'><span class='add-to-cart'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to cart'></a></span>";
 				html += "<input type='hidden' id='memID' value='${sessionScope.memVO.memID}'>";
 				html += "<input type='hidden' id='comID' value='"+data[i].comID+"'>";

@@ -8,10 +8,12 @@
 <%@ page import="com.commodity_category.model.*"%>
 <%@ page import="com.member.model.*"%>       
 
+
 <%
  	ComService comSvc = new ComService();
  	List<ComVO> list = comSvc.getAllForComindex();
- 	pageContext.setAttribute("list",list);//¬°¤F¤À­¶	
+ 	pageContext.setAttribute("list",list);//Â¬Â°Â¤FÂ¤Ã€Â­Â¶	
+
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
 %>
@@ -25,7 +27,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-<title>©Ò¦³°Ó«~¸ê®Æ </title>
+<title>Â©Ã’Â¦Â³Â°Ã“Â«~Â¸ÃªÂ®Ã† </title>
 <style>
 		#cf{
 			text-align: center;
@@ -114,7 +116,7 @@
 <c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
-                                    <a href="shop-detail.html">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
                                         <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
                                     </a>
                                     <div class="product-action">
@@ -167,6 +169,7 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
      <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
+
     
     <script type="text/javascript">	
 		$(".product-grid").on("click",".add-to-cart",function(){

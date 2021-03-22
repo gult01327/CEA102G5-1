@@ -31,7 +31,7 @@
 
 <style>
   table {
-	width: 950px;
+	width: 900px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -45,10 +45,9 @@
   }
 </style>
 
-	<a href="<%=request.getContextPath()%>/front_end/member/addMemRec.jsp">新增常用地址</a>
+
 <table>
 	<tr>
-		<th>勾選常用地址</th>
 		<th>收貨人名稱</th>
 		<th>收貨人電話</th>
 		<th>收貨人地址</th>
@@ -58,7 +57,6 @@
 	
 	<c:forEach var="memrVO" items="${memrSvc.getAllByMemID(memVO.getMemID())}">
 		<tr>
-			<td><input type="checkbox"  name="checkmemrID" value="${memrVO.memrID}"></td>
 			<td>${memrVO.memrName}</td>
 			<td>${memrVO.memrPhone}</td>
 			<td>${memrVO.memrAddress}</td>
@@ -81,11 +79,15 @@
 			  
 	
 </table>
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/member_recipient/memr.do" style="margin-bottom: 0px;">
-			    <input id="test" type="submit" value="確認地址"> 
-				<input type="hidden" id="checked" name="checkedAdd" value="">
-			    <input type="hidden" name="action" value="confirmADD">
-			   </FORM>
+
+			    <input id="newAdd" type="button" value="新增地址"> 
+
+<script type="text/javascript">
+$("#newAdd").click(function(){
+	window.location.href = "<%=request.getContextPath()%>/front_end/member/addMemRec.jsp";
+});
+
+</script>
 			   
 <script type = "text/javascript">
 	$(document).ready(function(){

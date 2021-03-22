@@ -279,6 +279,7 @@ div.memberListMain{
 <c:set var="updateRes" value="${pageContext.request.contextPath}/back_end/reservation/updateReservation.jsp" />
 
 <!-- 食譜 -->
+<c:set var="listAllRec_Stop" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec_Stop.jsp' />
 <c:set var="listAllRec_Approve" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec_Approve.jsp' />
 <c:set var="listAllRec" value='${pageContext.request.contextPath}/back_end/recipe/listAllRec.jsp' />
 <c:set var="listAllRecReport" value='${pageContext.request.contextPath}/back_end/recipe/listAllRecReport.jsp' />
@@ -511,8 +512,9 @@ div.memberListMain{
                                     </div>
                                     <div id=Recipe>
                                    
-                                    	<li><a href=${listAllRec_Approve}>食譜列表(已審核)</a></li>
+                                    	<li><a href=${listAllRec_Approve}>食譜列表(已生效)</a></li>
                                     	<li><a href=${listAllRec}>食譜列表(未審核)</a></li>
+                                    	<li><a href=${listAllRec_Stop}>食譜列表(已下架)</a></li>
                                     	<li><a href=${listAllRecReport}>食譜檢舉列表</a></li>
                                     	<li><a href=${listAllRecbReport}>食譜留言檢舉列表</a></li>
                                     </div>

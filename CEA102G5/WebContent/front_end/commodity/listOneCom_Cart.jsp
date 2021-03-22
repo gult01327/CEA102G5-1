@@ -84,7 +84,7 @@
                                                     <br>
                                                     <h4>商品基本營養成分</h4>
                                                                                                                 商品熱量:${comVO.comCal}g<br>
-                                                                                                                商品碳水化合物含量:${comVO.comCarb}g<br>
+                                                                                                                商品碳水化合物含量:${comVO.comCarb}g<br> 
                                                                                                                 商品蛋白質含量:${comVO.comPro}g<br>
                                                                                                                 商品脂質含量:${comVO.comFat}g<br>
                                                 </p>

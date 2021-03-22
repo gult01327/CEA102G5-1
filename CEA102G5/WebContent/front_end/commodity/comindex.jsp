@@ -8,18 +8,12 @@
 <%@ page import="com.commodity_category.model.*"%>
 <%@ page import="com.member.model.*"%>       
 
-<%	
-	List<ComVO> list =null;
-	if (request.getAttribute("listCom_ByCompositeQueryFS")==null){
-		//µL·j´Mµ²ªG
-		ComService comSvc = new ComService();
-	 	list = comSvc.getAllForComindex();
-	}else{
-		//¦³·j´Mµ²ªG
-		list = (List<ComVO>)request.getAttribute("listCom_ByCompositeQueryFS");
-	}
 
-	pageContext.setAttribute("list",list);//¬°¤F¤À­¶
+<%
+ 	ComService comSvc = new ComService();
+ 	List<ComVO> list = comSvc.getAllForComindex();
+ 	pageContext.setAttribute("list",list);//Â¬Â°Â¤FÂ¤Ã€Â­Â¶	
+
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
 %>
@@ -33,7 +27,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-<title>©Ò¦³°Ó«~¸ê®Æ </title>
+<title>Â©Ã’Â¦Â³Â°Ã“Â«~Â¸ÃªÂ®Ã† </title>
 <style>
 		#cf{
 			text-align: center;
@@ -65,7 +59,7 @@
 <div class="category-carousel-2 mb-3" data-auto-play="true" data-desktop="3" data-laptop="3" data-tablet="2" data-mobile="1">
                             <div class="cat-item">
                                 <div class="cats-wrap" data-bg-color="#f8c9c2">
-                                    <a class='getComBycomcID' href='#'>
+                                    <a class='getComBycomcID' href="<%=request.getContextPath()%>/front_end/commodity_category/comc.do?action=listComforByComcIDwithSales&comcID=<%=countList.get(1).getComcID()%>">
                                     	<input type='hidden' value='<%=countList.get(1).getComcID()%>'>
                                         <img src="<%=request.getContextPath()%>/resource/images/category/meat.png" alt="" />
                                         <h2 class="category-title">
@@ -76,18 +70,18 @@
                             </div>
                             <div class="cat-item">
                                 <div class="cats-wrap" data-bg-color="#c6e6f6">
-                                    <a class='getComBycomcID' href="#">
-                                    	<input type='hidden' value='<%=countList.get(2).getComcID()%>'>
+                                    <a class='getComBycomcID' href="<%=request.getContextPath()%>/front_end/commodity_category/comc.do?action=listComforByComcIDwithSales&comcID=<%=countList.get(3).getComcID()%>">
+                                    	<input type='hidden' value='<%=countList.get(3).getComcID()%>'>
                                         <img src="<%=request.getContextPath()%>/resource/images/category/seafood2.png" alt="" />
                                         <h2 class="category-title">
-                                            Seafood<mark class="count">(<%=countList.get(2).getComCount()%>)</mark>
+                                            Seafood<mark class="count">(<%=countList.get(3).getComCount()%>)</mark>
                                         </h2>
                                     </a>
                                 </div>
                             </div>
                             <div class="cat-item">
                                 <div class="cats-wrap" data-bg-color="#FFBB66">
-                                    <a class='getComBycomcID' href="#">
+                                    <a class='getComBycomcID' href="<%=request.getContextPath()%>/front_end/commodity_category/comc.do?action=listComforByComcIDwithSales&comcID=<%=countList.get(0).getComcID()%>">
                                     	<input type='hidden' value='<%=countList.get(0).getComcID()%>'>
                                         <img src="<%=request.getContextPath()%>/resource/images/category/fruits2.png" alt="" />
                                         <h2 class="category-title">
@@ -98,20 +92,20 @@
                             </div>
                             <div class="cat-item">
                                 <div class="cats-wrap" data-bg-color="#66CDAA">
-                                    <a href="#">
+                                    <a href="<%=request.getContextPath()%>/front_end/commodity_category/comc.do?action=listComforByComcIDwithSales&comcID=<%=countList.get(2).getComcID()%>">
                                         <img src="<%=request.getContextPath()%>/resource/images/category/vegetables.png" alt="" />
                                         <h2 class="category-title">
-                                            Vegetables <mark class="count">(6)</mark>
+                                            Vegetables <mark class="count">(<%=countList.get(2).getComCount()%>)</mark>
                                         </h2>
                                     </a>
                                 </div>
                             </div>
                             <div class="cat-item">
                                 <div class="cats-wrap" data-bg-color="#e0d1a1">
-                                    <a href="#">
+                                    <a href="<%=request.getContextPath()%>/front_end/commodity_category/comc.do?action=listComforByComcIDwithSales&comcID=<%=countList.get(4).getComcID()%>">
                                         <img src="<%=request.getContextPath()%>/resource/images/category/Seasoning.png" alt="" />
                                         <h2 class="category-title">
-                                            Seasoning <mark class="count">(6)</mark>
+                                            Seasoning <mark class="count">(<%=countList.get(4).getComCount()%>)</mark>
                                         </h2>
                                     </a>
                                 </div>
@@ -157,15 +151,7 @@
 <div>
 <%@ include file="page2.file" %>
 </div>
-						<div class="pagination">
-							<a class="prev page-numbers" href="#">First Page</a>
-                            <a class="prev page-numbers" href="#">Prev</a>
-                            <a class="page-numbers" href="#">1</a>
-                            <span class="page-numbers current">2</span>
-                            <a class="page-numbers" href="#">3</a>
-                            <a class="next page-numbers" href="#">Next</a>
-                            <a class="next page-numbers" href="#">Last Page</a>
-                        </div>
+
 
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
@@ -183,41 +169,9 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
      <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
-    <script type="text/javascript">
-			$(".getComBycomcID").click(function(){
-				var comcID = $(this).children().val();
 
-					$.ajax({
-						url:"<%=request.getContextPath()%>/commodity_category/comc.do",
-						type:"post",
-						data:{
-							action:"listComforByComcIDwithSales",
-							comcID:comcID
-						},
-						dataType:"json",
-						cache:false,
-						ifModified :true,
-						success : function(data){
-							generateTable(data);
-						}
-						
-					});
-			});
-		function generateTable(data){
-			var html = "";
-			for(let i = 0 ; i<data.length ; i++){
-				html += "<div class='col-md-4 col-sm-6 product-item text-center mb-3'><div class='product-thumb'>";
-				html += "<a href='<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID="+data[i].comID+"'><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].comPicSrc+"&pic=1' alt='' style='height:200px;' /></a>";
-				html += "<div class='product-action'><span class='add-to-cart'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to cart'></a></span>";
-				html += "<input type='hidden' id='memID' value='${sessionScope.memVO.memID}'>";
-				html += "<input type='hidden' id='comID' value='"+data[i].comID+"'>";
-				html += "<span class='wishlist'><a href='#' data-toggle='tooltip' data-placement='top' title='Add to wishlist'></a></span>";
-
-				html += "<span class='compare'>Sales:"+data[i].comSales+"</span></div></div>";
-			 	html += "<div class='product-info'><a href='<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID="+data[i].comID+"'><h2 class='title'>"+data[i].comName+"</h2><span class='price'><ins>$"+data[i].comPrice+"</ins></span></a></div></div>";
-			}
-			$(".product-grid").html(html);
-		}	
+    
+    <script type="text/javascript">	
 		$(".product-grid").on("click",".add-to-cart",function(){
 			let memID = $(this).next().val();
 			let comID = $(this).next().next().val();

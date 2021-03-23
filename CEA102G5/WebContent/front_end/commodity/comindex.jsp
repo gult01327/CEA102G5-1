@@ -156,7 +156,6 @@
 <%@ include file="pagen2.file" %>
 </div>
 
-
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>

@@ -41,6 +41,7 @@ public class AdmiServlet extends HttpServlet{
 			String identity = req.getParameter("identity");
 			String account = req.getParameter("account");
 			String password = req.getParameter("password");
+			
 			if(identity.equals("coach")) {
 				CoaService coaSvc = new CoaService();
 				CoaVO coaVO = coaSvc.getByAccount(account);
@@ -164,6 +165,7 @@ public class AdmiServlet extends HttpServlet{
 				return;
 			}
 		}
+		
 		if(action.equals("back")) {
 			try {
 				Integer admID = new Integer(req.getParameter("admID"));

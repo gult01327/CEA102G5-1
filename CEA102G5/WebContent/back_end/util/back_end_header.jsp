@@ -30,14 +30,9 @@
     <title>EatinBack</title>
     
     <style>
-    li.contact-icon img{
-    	max-width:100%;
+    .contact-icon>a>img{
+    	max-width:50%;
     }
-    li.contact-icon{
-    	width:30px;
-    	
- }
-
     
 * {
 	list-style: none;
@@ -218,12 +213,11 @@ div.memberListMain{
  
 }
 
+   .header-right{
+    margin-right:-40px;
+    }
 
-
-
-    
-    
-    </style>
+ 	</style>
    
 </head>
 
@@ -244,10 +238,11 @@ div.memberListMain{
     <c:set var="talResult" value='${pageContext.request.contextPath}/back_end/talent/listOneTalent.jsp' />
     <c:set var="listAllTal" value='${pageContext.request.contextPath}/back_end/talent/listAllTalent.jsp' />
     <c:set var="listLesByCoa" value='${pageContext.request.contextPath}/back_end/lesson/listLessonForCoach.jsp' />
-    <c:set var="addFun" value='${pageContext.request.contextPath}/back_end/function_info/addFun.jsp' />
-    <c:set var="listAllFun" value='${pageContext.request.contextPath}/back_end/function_info/listAllFun.jsp' />
+    
+<!--管理員 -->
     <c:set var="addAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/addAdmin.jsp' />
     <c:set var="listAllAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/listAllAdmin.jsp' />
+    <c:set var="updateAdmin" value='${pageContext.request.contextPath}/back_end/admin_info/updateAdmin.jsp' />
     
 
 <!-- 商城 -->
@@ -285,55 +280,19 @@ div.memberListMain{
 <c:set var="listAllRecReport" value='${pageContext.request.contextPath}/back_end/recipe/listAllRecReport.jsp' />
 <c:set var="listAllRecbReport" value='${pageContext.request.contextPath}/back_end/recipe/listAllRecb_Report.jsp' />
     <div class="site">
-        <div class="topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="topbar-text">
-                            <span>Work time: Monday - Friday: 08AM-06PM</span>
-                            <span>Saturday - Sunday: 10AM-06PM</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="topbar-menu">
-                            <ul class="topbar-menu">
-                            <c:if test="${empty sessionScope.coaVO}">
-								          	<li class="contact-icon">
-								            	<a href="#"><img src="<%=request.getContextPath()%>/resource/images/backContact.jpg" width=50px></a>
-								            </li>
-								        
-                                	</c:if>
-                                <li>${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</li>
-                                <li><a href="<%=request.getContextPath()%>/admin_info/admi.do?action=logOut">登出</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <header id="header" class="header header-desktop header-2">
-        <div class="top-search">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form>
-                                <input type="search" class="top-search-input" name="s" placeholder="What are you looking for?" />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
                         <a href="#" id="logo">
-                            <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo.png" alt="Organik Logo" />
+                            <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo1.png" alt="Organik Logo" />
                         </a>
                     </div>
                     <div class="col-md-9">
                         <div class="header-right">
                             <nav class="menu">
-                                <ul class="main-menu">
+                                <ul class="main-menu" style="margin-right:-10px;">
                                     <li>
                                         <a href="<%=request.getContextPath()%>/back_end/back_end_index.jsp">Home</a>
                                     </li>
@@ -379,18 +338,27 @@ div.memberListMain{
                                         <a href="#">Admin</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Admin</a></li>
-                                            <li><a href="#">Function</a></li>
                                         </ul>
                                     </li>
                                     </c:if>
-                                    <li>
-                                    <c:if test="${empty sessionScope.coaVO}">
-                                    	<img src="${pageContext.request.contextPath}/resource/images/admin.jpg" width=30px></img>
+<!--                                     <li> -->
+<%--                                     <c:if test="${empty sessionScope.coaVO}"> --%>
+<%--                                     	<img src="${pageContext.request.contextPath}/resource/images/admin.jpg" width=30px></img> --%>
+<%--                                 	</c:if> --%>
+<%--                                 	<c:if test="${!empty sessionScope.coaVO}"> --%>
+<%--                                     	<img src="${pageContext.request.contextPath}${coaVO.pic}" width=30px></img> --%>
+<%--                                 	</c:if> --%>
+<!--                                 	</li> -->
+
+                            		<c:if test="${empty sessionScope.coaVO}">
+								          	<li class="contact-icon">
+								            	<a href="#" style="margin-right:-20px;"><img class="mic123" src="<%=request.getContextPath()%>/resource/images/backContact.jpg" width=50px></a>
+								            </li>
                                 	</c:if>
-                                	<c:if test="${!empty sessionScope.coaVO}">
-                                    	<img src="${pageContext.request.contextPath}${coaVO.pic}" width=30px></img>
-                                	</c:if>
-                                	</li>
+                                <li>${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</li>
+                                <li><a href="<%=request.getContextPath()%>/admin_info/admi.do?action=logOut">登出</a></li>
+
+                                	
                                 </ul>
                             </nav>
                         </div>
@@ -409,7 +377,7 @@ div.memberListMain{
                     <div class="col-xs-8">
                         <div class="header-center">
                             <a href="html-organik.html" id="logo-2">
-                                <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo.png" alt="Organik Logo" />
+                                <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo1.png" alt="Organik Logo" />
                             </a>
                         </div>
                     </div>
@@ -530,13 +498,10 @@ div.memberListMain{
                                     	<li><a href=${listAllMem}>會員列表</a></li>
                                     
                                     </div>
-                                    <div id=Function>
-                                        <li><a href=${addFun}>新增權限</a></li>
-                                        <li><a href=${listAllFun}>權限列表</a></li>
-                                    </div>
                                     <div id=Admin>
                                         <li><a href=${addAdmin}>新增帳號</a></li>
                                         <li><a href=${listAllAdmin}>帳號列表</a></li>
+                                        <li><a href=${updateAdmin} class=disabled>編輯管理員</a></li>
                                     </div>
                                 </ul>
                             </div>
@@ -545,63 +510,12 @@ div.memberListMain{
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <img src="<%=request.getContextPath()%>/resource/images/footer_logo.png" class="footer-logo" alt="" />
-                        <p>
-                            Welcome to Organik. Our products are freshly harvested, washed ready for box and finally delivered from our family farm right to your doorstep.
-                        </p>
-                        <div class="footer-social">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h3 class="widget-title">Infomation</h3>
-                            <ul>
-                                <li><a href="#">New Products</a></li>
-                                <li><a href="#">Top Sellers</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">About Our Shop</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h3 class="widget-title">Useful Link</h3>
-                            <ul>
-                                <li><a href="#">Our Team</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Secure Shopping</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="widget">
-                            <h3 class="widget-title">Subscribe</h3>
-                            <p>
-                                Enter your email address for our mailing list to keep yourself updated.
-                            </p>
-                            <form class="newsletter">
-                                <input type="email" name="EMAIL" placeholder="Your email address" required="" />
-                                <button><i class="fa fa-paper-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        
         <div class="copyright">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        Copyright © 2017 <a href="#">Organic Store</a> - All Rights Reserved.
+                         Welcome to <a href="#">EATIN Store</a> - All you need is health.
                     </div>
                     <div class="col-md-4">
                          <img src="<%=request.getContextPath()%>/resource/images/footer_payment.png" alt="" />

@@ -22,7 +22,7 @@ public class AdmiDAO implements AdmiDAO_interface {
 	private static final String UPDATE =
 			"UPDATE ADMIN_INFO set ADM_NAME=?, ADM_ACCOUNT=?, ADM_PASSWORD=? where ADM_ID=?";
 	private static final String DELETE =
-			"UPDATE ADMIN_INFO set ADM_STATUS =FALSE where ADM_ID=?";
+			"UPDATE ADMIN_INFO set  ADM_ACCOUNT =null, ADM_PASSWORD =null, ADM_STATUS =FALSE where ADM_ID=?";
 	private static final String BACK =
 			"UPDATE ADMIN_INFO set ADM_STATUS=TRUE where ADM_ID=?";
 	private static final String GET_ONE_BYID =

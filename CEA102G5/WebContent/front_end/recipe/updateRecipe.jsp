@@ -84,7 +84,7 @@
         margin-bottom: 50px;
     }
     #step{
-        border: 2px solid black;
+        box-shadow:3px 3px 5px 6px #cccccc; 
         border-radius: 4px;
         width: 800px;
         text-align:center;
@@ -98,9 +98,7 @@
         background-color:antiquewhite;
         width: 120px;
         height: 50px;
-        cursor: pointer;
-        border: 1px;
-        border-radius: 10px;
+        cursor: pointer; 
         
     }
     button:hover{
@@ -139,11 +137,11 @@
     	height:150px;
     }
     #showIngredient{
-    	 
+    	 box-shadow:3px 3px 5px 6px #cccccc; 
+    	 margin-bottom:50px;
     }
     #ingTable{
     	width:780px;
-    	margin-top:50px;
     }
     #calculate{
     	width:100%;
@@ -162,16 +160,19 @@
         font-family:fantasy;
         font-size: x-large;
     }
-    img.imgStep{
+    img.stepPic{
     	vertical-align: top;
     	width:200px;
     	height:150px;
     }
     label.labelPic{
     	vertical-align: top;
+    	width:200px;
+    	height:150px;
     }
-
-
+    div.perStep{
+    	width:100%;
+    }
 
     </style>
 <h2 class="page-title text-center" style='color:black;'>Update Recipe</h2><hr>
@@ -219,7 +220,7 @@
 
              
             <br><font size="+2">步驟</font><br>
-            <input type="button" onclick="addBox()" value="添加步驟">
+            <input type="button" id="addBtn" value="添加步驟">
             <div id="step">
 
                 
@@ -311,7 +312,7 @@
 			success:function(data){
 				for(let i = 0 ; i<data.length ; i++){
 					addBox();
-					var imgstep = $(".imgStep").get(i);
+					var imgstep = $(".stepPic").get(i);
 					var textbox = $(".textbox").get(i);
 					imgstep.setAttribute("src","<%=request.getContextPath()%>/ComPicReader"+data[i].recsPicSrc+"&pic=1");
 					textbox.innerText = data[i].recsContent;
@@ -370,6 +371,11 @@
 
     $("body").on("click",".imgRemove",function(){
         $(this).parent("div").remove();
+        var count = 1;
+        $(".indexClass").each(function(){
+            $(this).text(count);
+            count++;
+        });
         
     });
 
@@ -392,36 +398,41 @@
                     alert('別亂傳，請上傳圖片檔!');
                 }
         });
-
+    $("#addBtn").click(function(){
+    	addBox();
+    	 var count = 1;
+         $(".indexClass").each(function(){
+             $(this).text(count);
+             count++;
+         });
+    });
+    
         
-    var count = 10;
+    var count = 1000;
     var count2 = 0;
-    var count3 = 30;
+    var count3 = 3000;
     var indexCount = 1;
 	function addBox(){
-        var div = document.createElement('div');
+		var div = document.createElement('div');
         
         var label = document.createElement("label");
         
         var file = document.createElement("input");
         var hidden = document.createElement("input");
-        hidden.setAttribute('type','hidden');
-        hidden.setAttribute('name','fileName');
-        hidden.setAttribute('value','stepPic'+count);
         var hidden2 = document.createElement("input");
         hidden2.setAttribute('type','hidden');
         hidden2.setAttribute('name','recsID');
-        
-        file.setAttribute('class','file');
+        hidden.setAttribute('type','hidden');
+        hidden.setAttribute('name','fileName');
+        hidden.setAttribute('value','stepPic'+count);
+        file.setAttribute('id','file');
         file.setAttribute('type','file');
         file.setAttribute('style','display:none;');
         var img = document.createElement("img");
         var br = document.createElement("br");
         img.setAttribute('id','img'+count);
-        img.setAttribute('class','imgStep');
+        img.setAttribute('class','stepPic');
         img.setAttribute('src','<%=request.getContextPath()%>/resource/images/upload.png');
-        img.setAttribute('width','200px');
-        img.setAttribute('height','188px');
         file.setAttribute('name','stepPic'+count);
         var textBox = document.createElement("textarea");
         var imgRemove = document.createElement("img");
@@ -436,6 +447,7 @@
         imgRemove.setAttribute('onclick','remove()');
         count3++;
         div.setAttribute('id',count2);
+        div.setAttribute('class',"perStep");
         label.setAttribute('id',count);
         label.setAttribute('class','labelPic');
         textBox.id = count3;
@@ -449,17 +461,16 @@
         document.getElementById(count2).appendChild(index);
         document.getElementById(count2).appendChild(label);
         document.getElementById(count).appendChild(file);
-        document.getElementById(count).appendChild(hidden);
         document.getElementById(count).appendChild(hidden2);
+        document.getElementById(count).appendChild(hidden);
         document.getElementById(count).appendChild(img);
         document.getElementById(count2).appendChild(textBox);
         document.getElementById(count2).appendChild(imgRemove);
-
-            // if(count>=15){
-            // var btn = document.getElementById('btn');
-            //     btn.setAttribute('disabled','disabled');
-            // }
-            console.log("New elements id : " + textBox.id);
+        // if(count>=15){
+        // var btn = document.getElementById('btn');
+        //     btn.setAttribute('disabled','disabled');
+        // }
+        console.log("New elements id : " + textBox.id); 
         }
 
     $( function() {

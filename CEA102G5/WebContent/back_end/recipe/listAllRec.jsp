@@ -36,7 +36,7 @@
 
 <style>
   table {
-	width: 800px; 
+	width: 860px; 
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -74,14 +74,14 @@
 
 
 			<td>
-			    <input type="button" id='verify' value="¼f®Ö­¹ÃÐ">
+			    <input type="button" id='verify' value="¼f®Ö­¹ÃÐ" style="padding: 5px 10px; font-size:10px;">
 			    <input type="hidden" id="recID" name="recID" value="${recVO.recID}">
-				 <input type="button" id='reject' value="°h¦^­¹ÃÐ">
+				 <input type="button" id='reject' value="°h¦^­¹ÃÐ" style="padding: 5px 10px; font-size:10px;">
 
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/recipe/rec.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="¬d¬Ý­¹ÃÐ©ú²Ó">
+			    <input type="submit" value="¬d¬Ý­¹ÃÐ©ú²Ó" style="padding: 5px 10px; font-size:10px;">
 			    <input type="hidden" name="recID"	value="${recVO.recID}">
 			    <input type="hidden" name="action" value="GetRecDetail_ByrecID"></FORM>
 			</td>

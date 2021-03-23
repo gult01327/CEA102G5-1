@@ -10,7 +10,7 @@
 <body>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resource/lesson/css/coachFront.css">
 <div style='display:none;'>
 
 <form id=lessonQueryFront METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/lesson/les.do">
@@ -111,8 +111,8 @@
   </c:forEach>
   </div>
   <div id="tabs-4">
-  <c:forEach var="lesVO" items="${lesSvc.getByCoach(coaVO.coaID)}">
-    <p><a href="<%=request.getContextPath()%>/front_end/lesson/les.do?action=searchOneLesson&lesID=${lesVO.lesID}">${lesVO.lesName}</a></p>
+  <c:forEach var="lesVO" items="${lesSvc.getByCoachFront(coaVO.coaID)}">
+    <p><a href="<%=request.getContextPath()%>/front_end/lesson/les.do?action=searchOneLesson&lesID=${lesVO.lesID}">${lesVO.lesEnd}--${lesVO.lesName}</a></p>
   </c:forEach>
   </div>
   <div id="tabs-5">

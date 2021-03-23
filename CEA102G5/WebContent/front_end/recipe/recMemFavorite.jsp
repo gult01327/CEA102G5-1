@@ -52,7 +52,6 @@
     #showRec{
         width:100%;
         margin-top: 30px;
-        margin-left: 100px;
     }
     #oneRec{
         width: 100%;

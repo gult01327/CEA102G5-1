@@ -34,7 +34,7 @@
 
 <style>
   table {
-	width: 1000px;
+	width: 800px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -51,8 +51,6 @@
 	
 <table>
 	<tr>
-		<th>食譜主檔ID</th>
-		<th>會員ID</th>
 		<th>食譜標題</th>
 		<th>食譜圖片</th>
 		<th>食譜狀態</th>
@@ -62,8 +60,6 @@
 	<%@ include file="page1.file" %>  
 	<c:forEach var="recVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
 		<tr class='tabletr'>
-			<td>${recVO.recID}</td>
-			<td>${recVO.memID}</td>
 			<td>${recVO.recName}</td>
 			<td><img src="<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" height="100" width="100"></td>
 			<td class='status' value='${recVO.recStatus}'>${(recVO.recStatus==1)?'審核中':'已生效'}</td>
@@ -71,7 +67,7 @@
 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/recipe/rec.do" style="margin-bottom: 0px;">
-			    <input type="submit" id='update' value="修改食譜">
+			    <input type="submit" id='update' value="修改食譜" style="padding:5px 5px; font-size:15px;">
 			    <input type="hidden" id="recID" name="recID" value="${recVO.recID}">
 			    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
 			    <input type="hidden" name="action" value="GetOneForUpdateRec">
@@ -79,7 +75,7 @@
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/recipe/rec.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="查看食譜明細">
+			    <input type="submit" value="查看食譜明細" style="padding:5px 5px; font-size:15px;">
 			    <input type="hidden" name="recID"	value="${recVO.recID}">
 			    <input type="hidden" name="action" value="GetRecDetail_ByrecID"></FORM>
 			</td>

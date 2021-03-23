@@ -82,17 +82,15 @@ public class MemServlet extends HttpServlet {
 						session.setAttribute("memVO", memVO);
 						String location = (String)session.getAttribute("location");
 						if(location!=null) {
-							ComVO comVO = (ComVO)session.getAttribute("comVO");
-							RecVO recVO = (RecVO)session.getAttribute("recVO");
+//							ComVO comVO = (ComVO)session.getAttribute("comVO");
+//							RecVO recVO = (RecVO)session.getAttribute("recVO");
 							session.removeAttribute("location");
-							session.removeAttribute("comVO");
-							session.removeAttribute("recVO");
-							request.setAttribute("comVO", comVO);
-							request.setAttribute("recVO", recVO);
+//							session.removeAttribute("comVO");
+//							session.removeAttribute("recVO");
+//							request.setAttribute("comVO", comVO);
+//							request.setAttribute("recVO", recVO);
 							System.out.println(location);
-							RequestDispatcher successView = request.getRequestDispatcher(location);
-							successView.forward(request, response);
-							
+							response.sendRedirect("/CEA102G5"+location);
 							return;
 						}
 						session.removeAttribute("location");

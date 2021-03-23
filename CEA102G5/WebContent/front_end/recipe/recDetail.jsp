@@ -7,19 +7,12 @@
 <%@ page import="com.recipe.model.*"%>   
 
 
-<jsp:useBean id="recVO" scope="request" type="com.recipe.model.RecVO" />
+<jsp:useBean id="recVO" scope="session" type="com.recipe.model.RecVO" />
 <jsp:useBean id="reciSvc" scope="request" class="com.recipe_ingredients.model.ReciService" />
 <jsp:useBean id="recsSvc" scope="request" class="com.recipe_step.model.RecsService" />
+<jsp:useBean id="memSvc" scope="request" class="com.member.model.MemService" />
+<jsp:useBean id="recSvc" scope="request" class="com.recipe.model.RecService" />
 
-<%
-	MemVO memVO2 = (MemVO)session.getAttribute("memVO");
-	pageContext.setAttribute("memVO2", memVO2);
-	RecVO recVO2 = (RecVO) request.getAttribute("recVO");
-	MemService memSvc = new MemService();
-	MemVO memVO = memSvc.getOneMem(recVO2.getMemID());
-	RecService recSvc = new RecService();
-	List<RecVO> list = recSvc.getRecByMemID(recVO2.getMemID());
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -267,16 +260,18 @@
             <img src="<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" alt="" width="300px">
         </div>
         <div id='author' >
-            <img src="<%=request.getContextPath()%>/ComPicReader<%=memVO.getMemPicSrc()%>&pic=1" alt="" width="100px">
-            <span id="authorName"><%=memVO.getMemName()%></span>
-            <br><br><span>此作者共有<%=list.size()%>食譜</span><br>
+            <img src="<%=request.getContextPath()%>/ComPicReader${memSvc.getOneMem(recVO.memID).memPicSrc}&pic=1" alt="" width="100px">
+            <span id="authorName">${memSvc.getOneMem(recVO.memID).memName}</span>
+            <br><br><span>此作者共有${recSvc.getRecByMemID(recVO.memID).size()}食譜</span><br>
             <br><span id = 'howManyFav'></span><br>
             <span id='favRec'><img class='heart' id='heart' src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='40px'>
             <h5 id='h5fav'>點擊收藏</h5>
             </span>
             <a href='#boardtextbox' id='link'><h5>食譜留言</h5></a>
-            <%if(memVO2!=null){%><a href='javascript:presses()'><h5 id='report'>食譜檢舉</h5></a><%}%>          
-        	<input type="hidden" id="sessionMemID" value="${memVO2.memID}"/>
+            <c:if test="${not empty memVO}">
+            	<a href='javascript:presses()'><h5 id='report'>食譜檢舉</h5></a>
+            </c:if>       
+        	<input type="hidden" id="sessionMemID" value="${memVO.memID}"/>
         </div>
         <div id='contentDiv'>
             <h5 id='content'>${recVO.recContent}</h5>

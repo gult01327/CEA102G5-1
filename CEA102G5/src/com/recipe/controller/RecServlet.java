@@ -308,7 +308,7 @@ public class RecServlet extends HttpServlet {
 			RecService recSvc = new RecService();
 			RecVO recVO = recSvc.getOneRec(recID);
 			
-			request.setAttribute("recVO", recVO);
+			session.setAttribute("recVO", recVO);
 			String url = "/front_end/recipe/recDetail.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);

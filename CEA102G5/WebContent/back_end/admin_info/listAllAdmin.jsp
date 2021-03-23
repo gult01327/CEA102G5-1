@@ -12,16 +12,20 @@
 <title>Admin List</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
 
-
-</style>
 </head>
 
-
 <body>
+<style>
+	.title{
 	
-		<h3>管理員列表</h3>
+	text-align:center;
+	margin-bottom:10px;
+	}
+
+</style>
+	
+		<h4 class="title">管理員列表</h4>
 <jsp:useBean id="admiSvc" class="com.admin_info.model.AdmiService"/>
 			
 	<table class="table">
@@ -41,8 +45,8 @@
 	<tr class="admin">
 		<td class="admID" style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}" >${admiVO.admID}</td>
 		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admName}</td>
-		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admAccount}</td>
-		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admPassword}</td>
+		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"}">${admiVO.admAccount}</td>
+		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"}">${admiVO.admPassword}</td>
 		<td class="status" style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admStatus ==true?"在職":"離職"}</td>
 		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admTime}</td>
 		
@@ -93,6 +97,8 @@ $('.change').click(function(){
 		success:function(data){	
 				
 			$(this).text("離職");
+			$(this).prev().text("");
+			$(this).prev().prev().text("");
 			$(this).next().next().next().children().text("離職").css({"background-color":"#9D9D9D	","border-color":"#9D9D9D	"});
 			c =$(this).next().next().children().children("input.cc");
 			console.log(c);

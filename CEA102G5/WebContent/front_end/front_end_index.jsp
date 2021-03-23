@@ -3,14 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!doctype html>
-<html lang="en-US">
+
+<html lang="UTF-8">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="shortcut icon" href="<%=request.getContextPath()%>/resource/images/favicon.ico" />
-  <title>EATIN Shop &#8211; Homepage Main | EATIN HTML Template</title>
+  <title>EATIN Shop &#8211; Home Main | EATIN HTML Template</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/bootstrap.min.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/font-awesome.min.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/ionicons.min.css" type="text/css" media="all" />
@@ -496,6 +497,7 @@
               </div>
             </div>
           </div>
+          
           <div class="col-sm-6">
             <div data-aos="zoom-in-up">
               <div class="text-center app-desc floating">
@@ -514,177 +516,43 @@
     </div>
     <div data-aos="fade-right">
       <div class="product-carousel p-0" data-auto-play="true" data-desktop="4" data-laptop="2" data-tablet="2" data-mobile="1">
+        
+
+		<c:forEach var="comVO" items="${comSvc.allForComindex}" begin="0" end="10">
+
         <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_5.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Carrot</h2>
-              <span class="price">$12.00</span>
-            </a>
-          </div>
+       <div class="product-thumb">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
+                                    </a>
+                                    <div class="product-action">
+                                        <span class="add-to-cart">
+                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+                                        </span>
+                                        <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                                        <input type="hidden" id="comID" value="${comVO.comID}">
+                                        <span class="wishlist">
+
+                                        </span>
+                                        <span class="compare">
+                                            Sales:${comVO.comSales}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                                        <h2 class="title">${comVO.comName}</h2>
+                                        <span class="price">
+                                            <ins>$${comVO.comPrice}</ins>
+                                        </span>
+                                    </a>
+                                </div>
         </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_7.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Chinese Cabbage</h2>
-              <span class="price">$9.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <div class="badges">
-                <span class="hot">Hot</span>
-              </div>
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_8.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Tieton Cherry</h2>
-              <span class="price">$9.00</span>
-            </a>
-          </div>
-        </div>
+        </c:forEach>
+        
+        
+        
+        
       </div>
     </div>
     <div class="section pt-12">

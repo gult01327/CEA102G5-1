@@ -72,8 +72,6 @@ public class ComfServlet extends HttpServlet {
 			try {
 				String memID = request.getParameter("memID");
 				String comID = request.getParameter("comID");
-				System.out.println(memID);
-				System.out.println(comID);
 				ComfService comfSvc = new ComfService();
 				if(comfSvc.check(memID, comID)) {
 					comfSvc.deleteByRedis(memID, comID);

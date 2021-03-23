@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.type.NumericBooleanType;
 import org.json.JSONArray;
 
 import com.commodity.model.ComService;
@@ -390,6 +391,43 @@ public class ComServlet extends HttpServlet {
 		if("listCom_ByCompositeQueryFS".equals(action)) {
 			try {
 				HttpSession session = request.getSession();//???
+				String price =request.getParameter("COM_PRICE");
+				String price2 =request.getParameter("COM_PRICE2");
+				try {	Integer min,max;
+					session.removeAttribute("error");
+					if((price.trim()).length() != 0) {
+						min =Integer.parseInt(price);
+						if((price2.trim()).length() != 0) {
+						max =Integer.parseInt(price2);
+							if(min>max) {
+								session.setAttribute("error", "Min,Max大小錯誤");
+								String url = "/front_end/commodity/comindex_category.jsp";
+								RequestDispatcher successView = request.getRequestDispatcher(url);
+								successView.forward(request, response);
+							}
+						}
+					}
+					if((price2.trim()).length() != 0) {
+						 max =Integer.parseInt(price2);
+						 if((price.trim()).length() != 0) {
+							 min =Integer.parseInt(price);
+							 if(min>max) {
+									session.setAttribute("error", "Min,Max大小錯誤");
+									String url = "/front_end/commodity/comindex_category.jsp";
+									RequestDispatcher successView = request.getRequestDispatcher(url);
+									successView.forward(request, response);
+								}
+						 }
+					}
+					
+
+				}catch(NumberFormatException e) {
+					session.setAttribute("error", "請輸入數字");
+					String url = "/front_end/commodity/comindex_category.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				
 				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");//???
 				LinkedHashMap<String, String[]> map1 = new LinkedHashMap<String, String[]>(request.getParameterMap());
 				session.setAttribute("map", map1);

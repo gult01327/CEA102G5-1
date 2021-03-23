@@ -4,6 +4,7 @@ import java.util.*;
 import java.sql.*;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.naming.Context;
@@ -293,6 +294,7 @@ public class LesrDAO implements LesrDAO_interface {
 	
 			while (rs.next()) {
 				lesrVO = new LesrVO();
+				java.util.Date now = new java.util.Date();
 				lesrVO.setLesID(rs.getInt("les_ID"));		
 				lesrVO.setMemID(rs.getInt("mem_ID"));
 				lesrVO.setLesrComments(rs.getString("lesr_comments"));
@@ -301,15 +303,28 @@ public class LesrDAO implements LesrDAO_interface {
 				lesrVO.setLesrReason(rs.getString("lesr_reason"));
 				lesrVO.setLesDate(rs.getDate("les_date"));
 				DateFormat dateFo = new SimpleDateFormat("yyyy-MM-dd");
-				lesrVO.setLesrTimeLong(dateFo.format((lesrVO.getLesDate().getTime())-7*86400000));
-				System.out.println(lesrVO.getLesrTimeLong());
+				lesrVO.setLesrTimeLong(dateFo.format((lesrVO.getLesDate().getTime())-7*86400000));			
+				java.util.Date lesdate = dateFo.parse(lesrVO.getLesrTimeLong());
+				if(now.before(lesdate))	{
+					lesrVO.setStatus(true);
+				}else {
+					lesrVO.setStatus(false);
+				}
+				if(now.after(lesrVO.getLesDate())) {
+					lesrVO.setStatusNow(true);
+				}else {
+					lesrVO.setStatusNow(false);
+				}
 				set.add(lesrVO); // Store the row in the vector
 			}
-	
+	 
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {

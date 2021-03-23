@@ -54,16 +54,14 @@ th, td {
 
 </head>
 <body bgcolor='white'>
-
-
-	<table id="table-2">
-		<tr>
-			<td>
-				<h3>收藏課程</h3>
-			</td>
-		</tr>
-	</table>
-
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<style>
+table,th{
+   text-align:center;
+}
+</style>
+	
+	<h3>收藏課程</h3>	
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
 		<font style="color: red">請修正以下錯誤:</font>
@@ -74,7 +72,7 @@ th, td {
 		</ul>
 	</c:if>
 
-	<table border="1" width="750">
+	<table border="1" width="450">
 		<tr>
 			
 			<th>課程名稱</th>

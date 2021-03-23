@@ -497,6 +497,7 @@
               </div>
             </div>
           </div>
+          
           <div class="col-sm-6">
             <div data-aos="zoom-in-up">
               <div class="text-center app-desc floating">

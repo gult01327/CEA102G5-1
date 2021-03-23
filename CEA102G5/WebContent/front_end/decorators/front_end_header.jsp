@@ -23,15 +23,13 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/owl.carousel.css" type="text/css" media="all" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/owl.theme.css" type="text/css" media="all" />
     <link rel='stylesheet' href='<%=request.getContextPath()%>/resource/css/prettyPhoto.css' type='text/css' media='all' />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/style2.css" type="text/css" media="all" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/custom.css" type="text/css" media="all" />
     <link href="http://fonts.googleapis.com/css?family=Great+Vibes%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
     <title>Eatin</title>
     
     <style>
-    img.logo-image{
-    	max-width:35%;
-    }
+
 
     .contact-icon>a>img{
     	max-width:50%;
@@ -157,9 +155,16 @@
   background-color: #02F78E;
 }
 
+   .header-right{
+    margin-right:-40px;
+    }
+     #wishlist123{ 
+     top:65px !important; 
+     left:-150px; 
+     width:300px; 
     
-    
-    
+     }    
+     
     </style>
    
 </head>
@@ -190,7 +195,7 @@
                                     </li>
                                     
                                      <li>
-                                        <a href="${com}">Mall</a>
+                                        <a href="${com}">Shop</a>
                                     </li>
                                     
                                      <li>
@@ -208,49 +213,12 @@
 	
 
     <div class="site">
-        <div class="topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="topbar-text">
-                            <span>Work time: Monday - Friday: 08AM-06PM</span>
-                            <span>Saturday - Sunday: 10AM-06PM</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="topbar-menu">
-                            <ul class="topbar-menu">
-                            <c:if test="${empty sessionScope.memVO}">
-                                <li><a href="<%=request.getContextPath()%>/front_end/member/login.jsp">Login</a></li>
-                            </c:if>
-                            
-                            <c:if test="${!empty sessionScope.memVO}">
-                            	<li><a href=${mem}>${memVO.memName}</a></li>
-                                <li><a href="<%=request.getContextPath() %>/front_end/member/mem.do?action=logout&location=<%=request.getRequestURI()%>">LogOut</a></li>
-                            </c:if>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <header id="header" class="header header-desktop header-2">
-        <div class="top-search">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form>
-                                <input type="search" class="top-search-input" name="s" placeholder="What are you looking for?" />
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
                         <a href="${home}" id="logo">
-                            <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo.png" alt="Eatin Logo" />
+                            <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo1.png" alt="Eatin Logo" />
                         </a>
                     </div>
                     <div class="col-md-9">
@@ -266,25 +234,22 @@
                                     </li>
                                     
                                      <li>
-                                        <a href="${com}">Mall</a>
+                                        <a href="${com}">Shop</a>
                                     </li>
                                     
                                      <li>
                                         <a href="${les}">Course</a>
                                     </li>
-                                    <li>
-                                        <a href="${mem}">Member</a>
-                                    </li>
+<!--                                     <li> -->
+<%--                                         <a href="${mem}">Member</a> --%>
+<!--                                     </li> -->
 									<c:if test="${!empty memVO}">
-								         
 								          	<li class="contact-icon">
-								            	<a href="#"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>
+								            	<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>
 								            </li>
-								        
-								   </c:if> 
-                                </ul>
-                            </nav>
-                     <div class="btn-wrap">
+								   </c:if>
+								   <li>
+								   <div class="btn-wrap">
                      	<c:if test="${!empty sessionScope.memVO}">
                      	<jsp:useBean id="cartSvc" class="com.cart.model.CartService"></jsp:useBean>
                      	<jsp:useBean id="comSvc" class="com.commodity.model.ComService"></jsp:useBean>
@@ -296,7 +261,7 @@
                                             <i class="ion-bag"></i>
                                         </div>
                                     </div>
-                                    <div class="widget-shopping-cart-content">
+                                    <div class="widget-shopping-cart-content" id="wishlist123">
                                         <ul class="cart-list">
                                         <c:forEach var="cartVO" items="${cartSvc.getAllByMemID(memVO.memID)}">
                                         <li>
@@ -330,6 +295,25 @@
                                 </div>
                       	</c:if>
                             </div>
+								   </li>
+							<c:if test="${empty sessionScope.memVO}">
+                                <li>
+                                <a href="<%=request.getContextPath()%>/front_end/member/login.jsp">Login</a>
+                                </li>
+                            </c:if>
+                            
+                            <c:if test="${!empty sessionScope.memVO}">
+                            <li class="dropdown"><a href=${mem}>${memVO.memName}</a>
+                            	 <ul class="sub-menu">
+                    			  <li>
+                    			  	<a href="<%=request.getContextPath() %>/front_end/member/mem.do?action=logout&location=<%=request.getRequestURI()%>">登出</a>
+                    			  </li>
+                  				</ul>
+                            </li>
+                            </c:if> 
+                                </ul>
+                            </nav>
+                     
                         </div>
                     </div>
                 </div>
@@ -346,7 +330,7 @@
                     <div class="col-xs-8">
                         <div class="header-center">
                             <a href="${home}" id="logo-2">
-                                <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo.png" alt="Eatin Logo" />
+                                <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo1.png" alt="Eatin Logo" />
                             </a>
                         </div>
                     </div>
@@ -372,75 +356,24 @@
             <div class="container" style="position:relative;">
             <sitemesh:write property='body' />
             
-<div class="dialogue">
+	<div class="dialogue">
 			<div id=productArea class=productArea>
 			</div>
             <div id=messagesArea class=messagesArea>
 			</div>
- 	<div class=inputarea>
- 	<input id="message" class="text-field" type="text" placeholder="Message" onkeydown="if (event.keyCode == 13) sendMessage();" /> 
+ 		<div class=inputarea>
+ 		<input id="message" class="text-field" type="text" placeholder="Message" onkeydown="if (event.keyCode == 13) sendMessage();" /> 
+ 		</div>
  	</div>
- </div>
                 
             </div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
-                        <img src="<%=request.getContextPath()%>/resource/images/footer_logo.png" class="footer-logo" alt="" />
-                        <p>
-                            Welcome to Organik. Our products are freshly harvested, washed ready for box and finally delivered from our family farm right to your doorstep.
-                        </p>
-                        <div class="footer-social">
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h3 class="widget-title">Infomation</h3>
-                            <ul>
-                                <li><a href="#">New Products</a></li>
-                                <li><a href="#">Top Sellers</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">About Our Shop</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="widget">
-                            <h3 class="widget-title">Useful Link</h3>
-                            <ul>
-                                <li><a href="#">Our Team</a></li>
-                                <li><a href="#">Our Blog</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Secure Shopping</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="widget">
-                            <h3 class="widget-title">Subscribe</h3>
-                            <p>
-                                Enter your email address for our mailing list to keep yourself updated.
-                            </p>
-                            <form class="newsletter">
-                                <input type="email" name="EMAIL" placeholder="Your email address" required="" />
-                                <button><i class="fa fa-paper-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <div class="copyright">
+<!--         footer -->
+       <div class="copyright">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        Copyright © 2017 <a href="#">Organic Store</a> - All Rights Reserved.
+                         Welcome to <a href="#">EATIN Store</a> - All you need is health.
                     </div>
                     <div class="col-md-4">
                          <img src="<%=request.getContextPath()%>/resource/images/footer_payment.png" alt="" />

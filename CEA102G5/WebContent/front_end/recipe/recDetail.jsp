@@ -575,7 +575,7 @@
 			ifModified:true,
 			success:function(data){
 				 var html = '';
-		         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader${memVO2.memPicSrc}&pic=1'>";
+		         html += "<div class ='boardText' id='boardContent'><img class='boardmemPic' src='<%=request.getContextPath()%>/ComPicReader${memVO.memPicSrc}&pic=1'>";
 		         html += "   <div class='boardmsg'>"+data.recbContent+"</div>";
 		         html += "<div class='deleteMsg'><h6 class='deleteMsgh4'>§R°£¦¹¯d¨¥</h6>";
 	        	 html += "<input type='hidden' class='recbID' value='"+data.recbID+"'></div>"

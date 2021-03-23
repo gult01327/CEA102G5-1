@@ -37,7 +37,7 @@
 
 <style>
   table {
-	width: 1000px;
+	width: 880px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -81,21 +81,21 @@
 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/recipe/rec.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="查看該食譜">
+			    <input type="submit" value="查看該食譜" style='padding: 5px 5px; font-size:12px;'>
 			    <input type="hidden" id="recID" name="recID" value="${recbrUtilVO.recID}">
 			    <input type="hidden" name="action" value="GetRecDetail_ByrecID">
 			    </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/recipeb/recb.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="${(recbrUtilVO.recbStatus==1)?'上架該筆留言':'下架該筆留言'}">
+			    <input type="submit" value="${(recbrUtilVO.recbStatus==1)?'上架該筆留言':'下架該筆留言'}" style='padding: 5px 5px; font-size:12px; background:#AE0000; border-color:#AE0000;'>
 			    <input type="hidden" name="recbID"	value="${recbrUtilVO.recbID}">
 			    <input type="hidden" name="recbStatus"	value="${recbrUtilVO.recbStatus}">
 			    <input type="hidden" name="action" value="updateMsgStatus"></FORM>
 			</td>
 			<td>
 			  
-			    <input type="button" class='reply' value="回覆檢舉">
+			    <input type="button" class='reply' value="回覆檢舉" style='padding: 5px 5px; font-size:12px;'>
 			    <input type="hidden" class="recbrID" value="${recbrUtilVO.recbrID}">
 
 			</td>

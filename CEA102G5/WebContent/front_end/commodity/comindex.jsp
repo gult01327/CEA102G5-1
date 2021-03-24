@@ -157,23 +157,7 @@
 <%@ include file="pagen2.file" %>
 </div>
 
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/modernizr-2.7.1.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.countdown.min.js"></script>
-    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/jquery.prettyPhoto.js'></script>
-    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/jquery.prettyPhoto.init.min.js'></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/core.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/widget.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/mouse.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/slider.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.ui.touch-punch.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
-     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
-
+   
     
     <script type="text/javascript">
 

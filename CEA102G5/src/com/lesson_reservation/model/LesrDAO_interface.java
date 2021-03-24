@@ -14,6 +14,6 @@ public interface LesrDAO_interface {
           public List<LesrVO> getAll();
           public Set<LesrVO> getLesByMem(Integer memID);
           public Set<LesrVO> getMemByLes(Integer lesID);
-//          //萬用複合查詢(傳入參數型態Map)(回傳 List)
-//          public List<LesrVO> getAll(Map<String, String[]> map); 
+		  public void updateCom(LesrVO lesrVO);
+		  public void updateRea(LesrVO lesrVO);
 }

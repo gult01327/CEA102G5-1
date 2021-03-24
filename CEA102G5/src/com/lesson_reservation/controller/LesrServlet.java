@@ -8,6 +8,7 @@ import java.sql.*;
 
 import com.lesson_reservation.model.*;
 import com.lesson.model.*;
+import com.lesson_favorites.model.LesfService;
 
 public class LesrServlet extends HttpServlet {
 
@@ -232,51 +233,55 @@ public class LesrServlet extends HttpServlet {
 
 		if ("updateOne".equals(action)) { // 來自update_emp_input.jsp的請求
 
-			LesrVO lesrVO = new LesrVO();
-			String lesID = req.getParameter("les_ID");
-			String memID = req.getParameter("mem_ID");
-			String lesrComments = req.getParameter("lesr_comments").trim();
-			String lesrAnswer = req.getParameter("lesr_answer").trim();
-			Boolean lesrStatus = new Boolean(req.getParameter("lesr_status").trim());
-			String lesrReason = req.getParameter("lesr_reason").trim();
-			java.sql.Date lesrTime = java.sql.Date.valueOf(req.getParameter("lesr_time").trim());
-
-			lesrVO.setLesID(new Integer(lesID));
-			lesrVO.setMemID(new Integer(memID));
-			lesrVO.setLesrComments(lesrComments);
-			lesrVO.setLesrAnswer(lesrAnswer);
-			lesrVO.setLesrStatus(lesrStatus);
-			lesrVO.setLesrTime(lesrTime);
-
-			/*************************** 2.開始修改資料 *****************************************/
+			Integer memID = new Integer(req.getParameter("memID"));
+			Integer lesID = new Integer(req.getParameter("lesID"));
+			String lesrComments = req.getParameter("lesrComments");
 			LesrService lesrSvc = new LesrService();
-			lesrVO = lesrSvc.updateLesr(new Integer(lesID), new Integer(memID), lesrComments, lesrAnswer, lesrStatus,
-					lesrReason, lesrTime);
-			if (!lesrStatus) {
-				LesVO lesVO = new LesVO();
-				LesService lesSvc = new LesService();
-				lesID = req.getParameter("les_ID");
-				lesVO = lesSvc.searchOneByID(new Integer(lesID));
-				Integer lesAlready = (lesVO.getLesAlready()) - 1;
-				lesVO.setLesAlready(new Integer(lesAlready));
-				lesVO = lesrSvc.updateLes(new Integer(lesID), new Integer(lesAlready));
-			}
+			lesrSvc.updateCom(lesID, memID, lesrComments);
 
-			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+//			if (!lesrStatus) {
+//				LesVO lesVO = new LesVO();
+//				LesService lesSvc = new LesService();
+//				lesID = req.getParameter("les_ID");
+//				lesVO = lesSvc.searchOneByID(new Integer(lesID));
+//				Integer lesAlready = (lesVO.getLesAlready()) - 1;
+//				lesVO.setLesAlready(new Integer(lesAlready));
+//				lesVO = lesrSvc.updateLes(new Integer(lesID), new Integer(lesAlready));
+//			}
+//
+//			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+//
+//			Set<LesrVO> lesrlSet = lesrSvc.getMemByLes(new Integer(lesID));
+//			req.setAttribute("listByLesson", lesrlSet);
+//			Set<LesrVO> lesrmSet = lesrSvc.getLesByMem(new Integer(memID));
+//			req.setAttribute("listByMember", lesrmSet);
+//		
+//			req.setAttribute("lesrVO", lesrVO); // 資料庫update成功後,正確的的empVO物件,存入req
+//			req.setAttribute("les_ID", lesID);
+//
+//			String url = "/front_end/reservation/listReservation.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+//			successView.forward(req, res);
+//
+//			/*************************** 其他可能的錯誤處理 *************************************/
+		}
 
-			Set<LesrVO> lesrlSet = lesrSvc.getMemByLes(new Integer(lesID));
-			req.setAttribute("listByLesson", lesrlSet);
-			Set<LesrVO> lesrmSet = lesrSvc.getLesByMem(new Integer(memID));
-			req.setAttribute("listByMember", lesrmSet);
+		if ("updateTwo".equals(action)) { // 來自update_emp_input.jsp的請求
 
-			req.setAttribute("lesrVO", lesrVO); // 資料庫update成功後,正確的的empVO物件,存入req
-			req.setAttribute("les_ID", lesID);
-
-			String url = "/front_end/reservation/listReservation.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-			successView.forward(req, res);
-
-			/*************************** 其他可能的錯誤處理 *************************************/
+			Integer memID = new Integer(req.getParameter("memID"));
+			Integer lesID = new Integer(req.getParameter("lesID"));
+			String lesrReason = req.getParameter("lesrReason");
+			Boolean lesrStatus = false;
+			LesrService lesrSvc = new LesrService();
+			lesrSvc.updateRea(lesID, memID, lesrStatus,lesrReason);
+			
+			LesVO lesVO = new LesVO();
+			LesService lesSvc = new LesService();
+			lesVO = lesSvc.searchOneByID(new Integer(lesID));
+			Integer lesAlready = (lesVO.getLesAlready()) - 1;
+			lesVO.setLesAlready(new Integer(lesAlready));
+			lesVO = lesrSvc.updateLes(new Integer(lesID), new Integer(lesAlready));
+			
 		}
 
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
@@ -309,10 +314,10 @@ public class LesrServlet extends HttpServlet {
 			lesrVO = lesrSvc.addLesr(new Integer(lesID), new Integer(memID), lesrComments, lesrAnswer, lesrStatus,
 					lesrReason);
 			lesVO = lesrSvc.updateLes(new Integer(lesID), new Integer(lesAlready));
-			
+
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = req.getContextPath()+"/front_end/reservation/listReservation.jsp";
-			res.sendRedirect(url);		
+			String url = req.getContextPath() + "/front_end/reservation/listReservation.jsp";
+			res.sendRedirect(url);
 		}
 
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp

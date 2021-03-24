@@ -61,7 +61,12 @@
    <mapping path="/back_end/back_end_login.jsp" exclue="true"/>
    <mapping path="/back_end/back_end_newlogin.jsp" exclue="true"/>
    <mapping path="/front_end/front_end_login.jsp" exclue="true"/>
+
    <mapping path="/front_end/member/signup1_success_page.jsp" exclue="true"/>
    <mapping path="/front_end/member/signup2_success_page.jsp" exclue="true"/>   
    <mapping path="/front_end/front_end_index.jsp" exclue="true"/>
+
+   
+  <mapping path="/front_end/front_end_index.jsp" exclue="true"/>
+
 </sitemesh> 

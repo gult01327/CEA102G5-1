@@ -26,6 +26,7 @@ import org.json.JSONArray;
 
 import com.commodity.model.ComService;
 import com.commodity.model.ComVO;
+import com.mysql.cj.Session;
 
 /**
  * Servlet implementation class ComServlet
@@ -142,6 +143,13 @@ public class ComServlet extends HttpServlet {
 			}
 		}
 		
+//		String url =request.getParameter("requestURL");
+//		if (url!=null &&url.length()!=0) {
+//			url+="?action=getOne_For_Update&comcID=";
+//			url+=request.getParameter("comID");
+//		}else {
+//			url = "/back_end/commodity/updateCom.jsp";
+//		}
 		if("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -396,8 +404,61 @@ public class ComServlet extends HttpServlet {
 		
 		//來自comSelectPage.jsp的複合查詢請求
 		if("listCom_ByCompositeQuery".equals(action)) {
-			try {
+			
 				HttpSession session = request.getSession();//???
+				List<String> errorMsgs = new LinkedList<String>();
+				request.setAttribute("errorMsgs", errorMsgs);
+				String comID = request.getParameter("COM_ID");
+				try {
+					if((comID.trim()).length() != 0) {
+						
+						int comI = Integer.parseInt(request.getParameter(comID));
+					}
+					
+				} catch (NumberFormatException e) {
+					errorMsgs.add("編號請填數字");
+					String url = "/back_end/commodity/comSelectPage.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				String price =request.getParameter("COM_PRICE");
+				String price2 =request.getParameter("COM_PRICE2");
+				try {	
+					Integer min,max;
+					if((price.trim()).length() != 0) {
+						min =Integer.parseInt(price);
+						if((price2.trim()).length() != 0) {
+						max =Integer.parseInt(price2);
+							if(min>max) {
+								errorMsgs.add("Min,Max大小錯誤");
+								String url = "/back_end/commodity/comSelectPage.jsp";
+								RequestDispatcher successView = request.getRequestDispatcher(url);
+								successView.forward(request, response);
+							}
+						}
+					}
+					if((price2.trim()).length() != 0) {
+						 max =Integer.parseInt(price2);
+						 if((price.trim()).length() != 0) {
+							 min =Integer.parseInt(price);
+							 if(min>max) {
+								errorMsgs.add("Min,Max大小錯誤");
+								String url = "/back_end/commodity/comSelectPage.jsp";
+								RequestDispatcher successView = request.getRequestDispatcher(url);
+								successView.forward(request, response);
+								}
+						 }
+					}
+					
+
+				}catch(NumberFormatException e) {
+					errorMsgs.add("價格請填入數字");
+					String url = "/back_end/commodity/comSelectPage.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				
+				try {
 				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");//???
 				LinkedHashMap<String, String[]> map1 = new LinkedHashMap<String, String[]>(request.getParameterMap());
 				session.setAttribute("map", map1);
@@ -422,7 +483,8 @@ public class ComServlet extends HttpServlet {
 				HttpSession session = request.getSession();//???
 				String price =request.getParameter("COM_PRICE");
 				String price2 =request.getParameter("COM_PRICE2");
-				try {	Integer min,max;
+				try {	
+					Integer min,max;
 					session.removeAttribute("error");
 					if((price.trim()).length() != 0) {
 						min =Integer.parseInt(price);
@@ -475,7 +537,37 @@ public class ComServlet extends HttpServlet {
 			
 			
 		}
-		
+		if("comStatusChange".equals(action)) {
+			System.out.println("123");
+			Integer comID = Integer.parseInt(request.getParameter("comID"));
+			Integer comStatus = Integer.parseInt(request.getParameter("comStatus"));
+			if (comStatus==0) {
+				comStatus=1;
+			}else{
+				comStatus=0;
+			}
+			ComService comSvc=new ComService();
+			comSvc.comStatusChange(comID, comStatus);
+			String url =request.getParameter("requestURL");
+			RequestDispatcher successView =request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		if("comStatusChangeajax".equals(action)) {
+			Integer comID = Integer.parseInt(request.getParameter("comID"));
+			Integer comStatus = Integer.parseInt(request.getParameter("comStatus"));
+			System.out.println(comStatus);
+			if (comStatus==0) {
+				comStatus=1;
+			}else{
+				comStatus=0;
+			}
+			ComService comSvc=new ComService();
+			comSvc.comStatusChange(comID, comStatus);
+			PrintWriter out = response.getWriter();
+			out.print(comStatus);
+			out.flush();
+			out.close();
+		}
 		
 		
 		

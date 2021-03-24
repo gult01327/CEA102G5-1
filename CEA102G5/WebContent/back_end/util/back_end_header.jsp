@@ -360,7 +360,9 @@ div.memberListMain{
                              <li class="dropdown"><a href="#"}>${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</a>
                             	 <ul class="sub-menu" id="logoutmenu">
                     			  <li>
+                    			  <div>
                     			  	<a href="<%=request.getContextPath()%>/admin_info/admi.do?action=logOut">登出</a>
+                    			  	</div>
                     			  </li>
                   				</ul>
                             </li>

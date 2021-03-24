@@ -14,6 +14,7 @@ public class LesrVO implements java.io.Serializable {
 	private String lesrTimeLong;
 	private Boolean status;
 	private Boolean statusNow;
+	private Boolean statusComments = false;
 	
 	public LesrVO() {
 		super();	
@@ -21,6 +22,14 @@ public class LesrVO implements java.io.Serializable {
 
 	public Boolean getStatusNow() {
 		return statusNow;
+	}
+
+	public Boolean getStatusComments() {
+		return statusComments;
+	}
+
+	public void setStatusComments(Boolean statusComments) {
+		this.statusComments = statusComments;
 	}
 
 	public void setStatusNow(Boolean statusNow) {

@@ -119,6 +119,7 @@ th, td {
 		<input	type="hidden" name="lesr_status" value="<%=lesrVO.getLesrStatus()%>"> 
 		<input	type="hidden" name="lesr_reason" value="<%=lesrVO.getLesrReason()%>"> 
 		<input	type="hidden" name="lesr_time" value="<%=lesrVO.getLesrTime()%>">
+		 
 		
 		<!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
 		<input type="submit" value="送出">

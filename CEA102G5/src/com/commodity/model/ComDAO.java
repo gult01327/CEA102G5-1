@@ -60,6 +60,8 @@ public class ComDAO implements ComDAO_interface {
 			"WHERE COM_ID=? AND ORDD_MESSAGE IS NOT NULL";
 	private static final String GET_ALL_COMBYCOMID = 
 			"SELECT * FROM myproject.commodity where COM_ID=?";
+	private static final String COMSTATUSCHANGE =
+			"UPDATE COMMODITY SET COM_STATUS=? WHERE COM_ID=?";
 	
 	@Override
 	public void insert(ComVO comVO) {
@@ -606,6 +608,39 @@ public class ComDAO implements ComDAO_interface {
 		List list=com.getFavorite(1);
 		ComVO comvo =(ComVO) list.get(1);
 		System.out.println(comvo.getComID());
+	}
+	@Override
+	public void comStatusChange(int comID,int comStatus) {
+		// TODO Auto-generated method stub
+		Connection con =null;
+		PreparedStatement pstmt =null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(COMSTATUSCHANGE);
+			pstmt.setInt(1, comStatus);
+			pstmt.setInt(2, comID);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		}finally{
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

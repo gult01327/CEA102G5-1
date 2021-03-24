@@ -50,6 +50,33 @@ public class LesrService {
 		return lesrVO;
 	}
 	
+	public LesrVO updateCom(Integer lesID, Integer memID, String lesrComments) {
+
+		LesrVO lesrVO = new LesrVO();
+
+		lesrVO.setLesID(lesID);
+		lesrVO.setMemID(memID);
+		lesrVO.setLesrComments(lesrComments);
+		
+		dao.updateCom(lesrVO);
+
+		return lesrVO;
+	}
+	
+	public LesrVO updateRea(Integer lesID, Integer memID, Boolean lesrStatus ,String lesrReason) {
+
+		LesrVO lesrVO = new LesrVO();
+
+		lesrVO.setLesID(lesID);
+		lesrVO.setMemID(memID);
+		lesrVO.setLesrStatus(lesrStatus);
+		lesrVO.setLesrReason(lesrReason);
+		
+		dao.updateRea(lesrVO);
+
+		return lesrVO;
+	}
+	
 	public LesVO updateLes(Integer lesID,Integer lesAlready) {
 
 		LesVO lesVO = new LesVO();

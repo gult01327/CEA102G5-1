@@ -72,6 +72,7 @@
   </c:forEach>
   </select>
   <input type="submit" value="送出">
+  <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
   <input type="hidden" name="action" value="listCom_ByComcID_A">
   </FORM>
   
@@ -83,7 +84,7 @@
 <ul>  
   <li>   
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity/com.do" name="form1">
-        <b><font color="red">萬用複合查詢:</font></b> <br>
+        
         <b>輸入商品ID:</b>
         <input type="text" name="COM_ID" value=""><br>
            
@@ -113,6 +114,7 @@
 		        
 		        
         <input type="submit" value="送出">
+        <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
         <input type="hidden" name="action" value="listCom_ByCompositeQuery">
      </FORM>
   </li>
@@ -166,6 +168,7 @@ $(function(){
 
 <script type="text/javascript">
 	var servletPathName ="${pageContext.request.requestURI}";
+	console.log(servletPathName);
 </script>
 </body>
 

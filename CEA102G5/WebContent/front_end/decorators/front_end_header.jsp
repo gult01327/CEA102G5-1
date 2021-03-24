@@ -6,11 +6,11 @@
 <html>
 
 <head>
-
 	<script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
+   	<script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
+   
 	<!-- bootstrap lightbox -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -383,7 +383,7 @@
             <div class="backtotop" id="backtotop"></div>
         </div>
     </div>
-
+	
    
    <script type="text/javascript">
     

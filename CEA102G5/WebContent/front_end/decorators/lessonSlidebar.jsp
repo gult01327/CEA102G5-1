@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>LessonSlidebar</title>
+
 </head>
 <body>
 
@@ -74,7 +75,7 @@ height:auto;
                     </div>
 
 </div>
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/price-slider.js"></script>
 <script type="text/javascript">
 $("#inToRight2").click(
 		function(e){

@@ -46,6 +46,10 @@ public class LesrDAO implements LesrDAO_interface {
 		"UPDATE lesson set les_already=? where les_ID = ?";
 	private static final String SEARCH = 
 		"SELECT * FROM lesson_reservation where mem_ID=? and les_ID =?";
+	private static final String UPDATECOM = 
+			"UPDATE lesson_reservation set lesr_comments=? where les_ID = ? and mem_ID=?";
+	private static final String UPDATEREA = 
+			"UPDATE lesson_reservation set lesr_reason=?,lesr_status=? where les_ID = ? and mem_ID=?";
 	@Override
 	public void insert(LesrVO lesrVO) {
 
@@ -135,7 +139,94 @@ public class LesrDAO implements LesrDAO_interface {
 		}
 
 	}
+	
+	@Override
+	public void updateRea(LesrVO lesrVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATEREA);
+			
+			pstmt.setString(1, lesrVO.getLesrReason());
+			pstmt.setBoolean(2,lesrVO.getLesrStatus());
+			pstmt.setInt(3, lesrVO.getLesID());
+			pstmt.setInt(4, lesrVO.getMemID());
+			
+			
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
     
+	@Override
+	public void updateCom(LesrVO lesrVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATECOM);
+			
+			pstmt.setString(1, lesrVO.getLesrComments());
+			pstmt.setInt(2, lesrVO.getLesID());
+			pstmt.setInt(3, lesrVO.getMemID());
+			
+			
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
 	public void updateLes(LesVO lesVO) {
 
 		Connection con = null;

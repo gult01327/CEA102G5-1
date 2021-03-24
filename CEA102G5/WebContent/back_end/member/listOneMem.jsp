@@ -15,26 +15,26 @@
 
 </head>
 <body bgcolor=#E8FFE8>
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+<!-- <!-- <style> --> 
+<!-- /*   table#table-1 { */ -->
+<!-- /* 	background-color: #CCCCFF; */ -->
+<!-- /*     border: 2px solid black; */ -->
+<!-- /*     text-align: center; */ -->
+<!-- /*   } */ -->
+<!-- /*   table#table-1 h4 { */ -->
+<!-- /*     color: red; */ -->
+<!-- /*     display: block; */ -->
+<!-- /*     margin-bottom: 1px; */ -->
+<!-- /*   } */ -->
+<!-- /*   h4 { */ -->
+<!-- /*     color: blue; */ -->
+<!-- /*     display: inline; */ -->
+<!-- /*   } */ -->
+<!-- <!-- </style> --> 
 
 <style>
   table {
-	width: 900px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -51,7 +51,7 @@
 <!-- <h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
 <table id="table-1">
 	<tr><td>
-		 <h3>會員資料</h3>
+		 <h4 id="title" class="page-title text-center" style='color:black;'>One Member List</h4><br>
 		 <h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp"><img src="<%=request.getContextPath() %>/resource/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>

@@ -17,26 +17,26 @@
 </head>
 <body bgcolor=#E8FFE8>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+<!-- <!-- <style> --> 
+<!-- /*   table#table-1 { */ -->
+<!-- /* 	background-color: #CCCCFF; */ -->
+<!-- /*     border: 2px solid black; */ -->
+<!-- /*     text-align: center; */ -->
+<!-- /*   } */ -->
+<!-- /*   table#table-1 h4 { */ -->
+<!-- /*     color: red; */ -->
+<!-- /*     display: block; */ -->
+<!-- /*     margin-bottom: 1px; */ -->
+<!-- /*   } */ -->
+<!-- /*   h4 { */ -->
+<!-- /*     color: blue; */ -->
+<!-- /*     display: inline; */ -->
+<!-- /*   } */ -->
+<!-- <!-- </style> --> 
 
 <style>
   table {
-	width: 450px;
+	width: 800px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -51,10 +51,10 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>會員資料新增</h3></td><td>
+		 <h4 id="title" class="page-title text-center" style='color:black;'>Add Member</h4><br>
 		 <h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp"><img src="<%=request.getContextPath() %>/resource/images/logo.png" width="50" height="50" border="0">回首頁</a></h4>
 	</td></tr>
-</table>
+</table><br>
 
 <!-- <h3>資料新增:</h3> -->
 

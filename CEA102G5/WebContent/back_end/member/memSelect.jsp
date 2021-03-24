@@ -81,11 +81,11 @@
         <b>輸入會員狀態(如0,1,2):</b>
        <input type="text" name="mem_Status" value=""><br>
        
-    	<b>輸入會員創建時間範圍:</b>
+    	<b>輸入會員創建時間範圍:</b>起始日期<br>
 <!--        <input placeholder="ex:2021-03-24,日期大者" autocomplete="off" type=text  name=mem_Time><br>   -->
 <!-- 		<input placeholder="ex:2020-01-01,日期小者" autocomplete="off" type=text  name=mem_Time2> -->
-		 <input name="mem_Time" id="f_date1" type="text">
-		 <input name="mem_Time2" id="f_date2" type="text">
+		 <input name="mem_Time2" id="f_date1" type="text"><br>~ 終止日期
+		 <input name="mem_Time" id="f_date2" type="text"><br>
 		        
         <input type="submit" value="送出">
         <input type="hidden" name="action" value="listmem_ByCompositeQuery">

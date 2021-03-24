@@ -19,6 +19,7 @@
 
 </head>
 <body>
+<h4 id="title" class="page-title text-center" style='color:black;'>Member List</h4><br>
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -38,7 +39,7 @@
 
 <style>
   table {
-	width: 900px;
+	width: 1000px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -68,6 +69,7 @@
 		<th>修改</th>
 		<th>狀態更改</th>
 	</tr>
+	
 	<%@ include file="page1.file" %>
 	<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
 	<tr>
@@ -83,18 +85,18 @@
 			<td>${memVO.memTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
+			     <input type="submit" value="修改" style="padding:5px 5px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="啟動" style="padding:0px 0px;">
+			     <input type="submit" value="啟動" style="padding:5px 5px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action"	value="updateStatus1"></FORM>
 			     <br>
 			     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
-			      <input type="submit" value="停權" style="padding:0px 0px;">
+			      <input type="submit" value="停權" style="padding:5px 5px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action"	value="stopStatus"></FORM>					
 			</td>	

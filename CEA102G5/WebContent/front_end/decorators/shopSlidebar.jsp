@@ -54,7 +54,7 @@ height:auto;
 	                                    <div class="price_slider_amount">
 	                                    
 	                                        <input type="text" id="min_price" name="COM_PRICE" value="" data-min="0" placeholder="Min price" />
-	                                        <input type="text" id="max_price" name="COM_PRICE2" value="" data-max="300" placeholder="Max price" />
+	                                        <input type="text" id="max_price" name="COM_PRICE2" value="" data-max="1000" placeholder="Max price" />
 	                                        <input type="submit" value="Filter" id="inToRight1" />
 	                                        
 	                                        <div class="price_label" style="display:none;">
@@ -95,7 +95,26 @@ height:auto;
                     </div>
 
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/price-slider.js"></script>
+
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/modernizr-2.7.1.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.countdown.min.js"></script>
+    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/jquery.prettyPhoto.js'></script>
+    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/jquery.prettyPhoto.init.min.js'></script>
+    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/slick.min.js'></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/core.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/widget.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/mouse.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/slider.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.ui.touch-punch.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/price-slider.js"></script>
+
 <script type="text/javascript">
 </script>
 

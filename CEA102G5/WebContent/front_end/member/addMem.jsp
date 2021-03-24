@@ -12,6 +12,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>會員資料新增</title>
 
+
+
+</head>
+<body bgcolor=#E8FFE8>
+
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -43,9 +48,6 @@
     padding: 1px;
   }
 </style>
-
-</head>
-<body bgcolor=#E8FFE8>
 
 <table id="table-1">
 	<tr><td>
@@ -83,9 +85,12 @@
 		<td><input type="password" name="memPassword" size="45"
 			 value="<%=(memVO==null)?"":memVO.getMemPassword() %>" /></td>
 	</tr>
-	<tr>
+		<tr>	
 		<td>會員圖片</td>
-		<td><input type="file" name="memUpfile" id="myFile"></td>
+		<td><input type="file" name="memUpfile" id="imgINP" >
+		<img id="blah" alt="" src="<%=request.getContextPath()%>/resource/images/upload.png" 
+		style="width:100px; height:100px;"/>
+		</td>		
 	</tr>
 	<tr>
 		<td>會員電話</td>
@@ -105,6 +110,27 @@
 
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
+
+$("#imgINP").change(function(){
+	  readURL(this);
+	});
+
+
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    
+	    reader.onload = function(e) {
+	      $('#blah').attr('src', e.target.result);
+	    }
+	    
+	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
+
+	$("#imgINP").change(function() {
+	  readURL(this);
+	});
 </script>
 
 </body>

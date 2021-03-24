@@ -10,13 +10,14 @@
 <body bgcolor=#E8FFE8 onload="load()">
 <img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">後台會員管理</font>
 <hr><p>
-<h3>This is the Home page for Member: Home</h3>
+<!-- <h3>This is the Home page for Member: Home</h3> -->
 <h4><a href="<%=request.getContextPath() %>/back_end/commodity/comSelectPage.jsp">回後台商品管理</a></h4>
-
-
-<ul>
-  <li><a href='<%=request.getContextPath()%>/back_end/member/listAllMem.jsp'>所有會員列表</a>   <br><br></li>
-   <li><a href='<%=request.getContextPath()%>/front_end/member/login.jsp'>會員登入</a>   <br><br></li>
+<br>
+<h4><a href='<%=request.getContextPath()%>/front_end/member/addMem.jsp'>新增會員</a></h4>
+<br>
+<h4><a href='<%=request.getContextPath()%>/back_end/member/listAllMem.jsp'>所有會員列表</a></h4>   
+<br>
+<h4><a href='<%=request.getContextPath()%>/front_end/member/login.jsp'>會員登入</a></h4>   
   
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" >
@@ -54,17 +55,40 @@
        <input type="submit" value="送出">
      </FORM>
   </li>
-</ul>
-
-
-
-<h4><font>新增會員:</font></h4>
-<ul>
-  <li><a href='<%=request.getContextPath()%>/back_end/member/addMem.jsp'>ADD Member</a> </li>
-</ul>
-
-
-
+  
+<li>
+<h4><font color=blue>萬用複合查詢:</font></h4>
+  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" >
+       
+        <b>輸入會員編號:</b>
+        <input type="text" name="mem_ID" value=""><br>       
+       
+       <b>輸入會員帳號:</b>
+       <input type="text" name="mem_Account" value=""><br>
+       
+       <b>輸入會員密碼:</b>
+       <input type="text" name="mem_Password" value=""><br>
+    
+       <b>輸入會員信箱:</b>
+       <input type="text" name="mem_Email" value=""><br>
+           
+       <b>輸入會員電話:</b>
+       <input type="text" name="mem_Phone" value=""><br>
+       
+       <b>輸入會員紅利:</b>
+       <input type="text" name="mem_Bonus" value=""><br>
+       
+        <b>輸入會員狀態(如0,1,2):</b>
+       <input type="text" name="mem_Status" value=""><br>
+       
+    	<b>輸入會員創建時間範圍:</b>
+       <input placeholder="ex:2021-03-24,日期大者" autocomplete="off" type=text  name=mem_Time><br>  
+		<input placeholder="ex:2020-01-01,日期小者" autocomplete="off" type=text  name=mem_Time2>
+		        
+        <input type="submit" value="送出">
+        <input type="hidden" name="action" value="listmem_ByCompositeQuery">
+     </FORM> 
+</li>
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 </script>

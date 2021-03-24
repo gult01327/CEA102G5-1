@@ -67,7 +67,7 @@ public class AdmiServlet extends HttpServlet{
 				}
 			}
 			if(!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_login.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_newlogin.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -79,7 +79,7 @@ public class AdmiServlet extends HttpServlet{
 			return;
 			}catch(Exception e) {
 				errorMsgs.put("Exception",e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_login.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_newlogin.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -88,7 +88,7 @@ public class AdmiServlet extends HttpServlet{
 		if("logOut".equals(action)) {			
 			req.getSession().removeAttribute("coaVO");
 			req.getSession().removeAttribute("admiVO");
-			res.sendRedirect(req.getContextPath()+"/back_end/back_end_login.jsp");
+			res.sendRedirect(req.getContextPath()+"/back_end/back_end_newlogin.jsp");
 		}
 		
 	

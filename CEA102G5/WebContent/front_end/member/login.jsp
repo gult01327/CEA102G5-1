@@ -35,6 +35,7 @@
 					<input type="submit" class="button" value="Sign In">
 					<input type="hidden" name="action" value="login">
 				</div>
+				<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.Exception}</font>
 </form>
 				<div class="hr"></div>
 				<div class="foot-lnk">

@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>會員資料修改 - updateMem.jsp</title>
+<title>會員資料修改</title>
 </head>
 <body>
 <style>
@@ -50,7 +50,7 @@
 </style>
 
 
-<h3>資料修改:</h3>
+<!-- <h3>資料修改:</h3> -->
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -73,8 +73,11 @@
 		<td><input type="TEXT" name="memName" size="45" value="<%=memVO.getMemName()%>" /></td>
 	</tr>
 	<tr>
-		<td>商品圖片</td>
-		<td><input type="file" name="memUpfile" id="myFile" /></td>
+		<td>會員圖片</td>
+		<td><input type="file" name="memUpfile" id="imgINP">
+		<img id="blah" alt="" src="<%=request.getContextPath()%>/resource/images/upload.png" 
+		style="width:100px; height:100px; border:0; "/>
+		</td>		
 	</tr>
 
 	<tr>
@@ -101,6 +104,22 @@
 
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
+
+$("#imgINP").change(function(){
+	  readURL(this);
+	});
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();	    
+	    reader.onload = function(e) {
+	      $('#blah').attr('src', e.target.result);
+	    }	    
+	    reader.readAsDataURL(input.files[0]); // convert to base64 string
+	  }
+	}
+	$("#imgINP").change(function() {
+	  readURL(this);
+	});
 </script>
 </body>
 

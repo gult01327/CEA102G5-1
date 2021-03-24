@@ -22,7 +22,7 @@ public class BackEndLoginFilter implements Filter {
 		Object admiVO = session.getAttribute("admiVO");
 		Object coaVO = session.getAttribute("coaVO");
 		if (admiVO == null && coaVO == null) {
-			res.sendRedirect(req.getContextPath()+"/back_end/back_end_login.jsp");
+			res.sendRedirect(req.getContextPath()+"/back_end/back_end_newlogin.jsp");
 			return;
 	    }else{
 	    	chain.doFilter(request, response);

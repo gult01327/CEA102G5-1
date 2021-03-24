@@ -1,6 +1,7 @@
 package com.member.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.commodity_category.model.ComcVO;
 
@@ -22,9 +23,9 @@ public class MemService {
 		memVO.setMemEmail(memEmail);
 		memVO.setMemPicture(memPicture);
 		
-		dao.insert(memVO);
+		MemVO memVO2 = dao.insert(memVO);
 		
-		return memVO;
+		return memVO2;
 	}
 	
 	public MemVO getOneMem(Integer memID) {
@@ -63,6 +64,15 @@ public class MemService {
 		return dao.getMemBonus(memID);
 	}
 
+	public void updateStatus(MemVO memVO) {
+		
+		dao.updateStatus(memVO);		
+	}
+
+	public List<MemVO> newgetAll(Map<String, String[]> map) {
+		
+		return dao.newgetAll(map);
+	}
 	
 	
 	

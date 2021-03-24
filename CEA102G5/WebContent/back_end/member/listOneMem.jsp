@@ -11,6 +11,10 @@
 <head>
 <title>會員資料</title>
 
+
+
+</head>
+<body bgcolor=#E8FFE8>
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -30,7 +34,7 @@
 
 <style>
   table {
-	width: 1400px;
+	width: 900px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -43,9 +47,6 @@
     text-align: center;
   }
 </style>
-
-</head>
-<body bgcolor=#E8FFE8>
 
 <h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
@@ -77,7 +78,7 @@
 			<td>${memVO.memPhone}</td>
 			<td>${memVO.memEmail}</td>
 			<td>${memVO.memBonus}</td>
-			<td>${memVO.memStatus}</td>
+			<td>${memVO.memStatus == 1 ? "已啟動" : (memVO.memStatus == 2 ? "已停權" : "未啟動")}</td>
 			<td>${memVO.memTime}</td>
 	</tr>
 </table>

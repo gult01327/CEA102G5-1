@@ -35,6 +35,7 @@
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+
   }
   table, th, td {
     border: 1px solid #CCCCFF;
@@ -47,30 +48,23 @@
 
 </head>
 <body>
+
 <style>
-  table#table-1 {
-	background-color:#E8FFE8;
-    border: 2px solid black;
-    text-align: ;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
+
   h4 {
     color: blue;
     display: inline;
   }
-</style>
-
-<style>
-  table {
-	width: 1400px;
-	background-color: white;
+table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
-  }
+}
+ 
   table, th, td {
     border: 1px solid #CCCCFF;
   }
@@ -78,11 +72,14 @@
     padding: 5px;
     text-align: center;
   }
-
+  
+	input[type="submit"]{
+	padding:8px 8px;
+	}
 </style>
 
 <h2 class="page-title text-center" style='color:black;'>Order Master</h2>	
-<table>
+<table  class="omtable" style="display:block;">
 	<tr>
 		<th>訂單主檔ID</th>
 		<th>會員ID</th>
@@ -94,9 +91,9 @@
 		<th>收貨人電話</th>
 		<th>收貨人地址</th>
 		<th>訂單創立時間</th>
-		<th>修改出貨狀態</th>
+		<th>出貨狀態</th>
 		<th>取消訂單</th>
-		<th>查看訂單明細</th>
+		<th>訂單明細</th>
 	</tr>
 	<%@ include file="page1.file" %>  
 	<c:forEach var="omVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -113,7 +110,7 @@
 			<td>${omVO.omTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/ordermaster/om.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="修改出貨狀態"> 
+			    <input type="submit" value="出貨狀態"> 
 			    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
 			    <input type="hidden" name="whichPage"	value="<%=whichPage%>">
 			    <input type="hidden" name="omID" value="${omVO.omID}">
@@ -131,7 +128,7 @@
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/ordermaster/om.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="查看訂單明細">
+			    <input type="submit" value="訂單明細">
 			    <input type="hidden" name="omID" value="${omVO.omID}">
 			    <input type="hidden" name="action" value="ListOd_ByOmID_ForBack"></FORM>
 			</td>

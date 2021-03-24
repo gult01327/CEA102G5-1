@@ -83,7 +83,7 @@
 <ul>  
   <li>   
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity/com.do" name="form1">
-        <b><font color="red">萬用複合查詢:</font></b> <br>
+        
         <b>輸入商品ID:</b>
         <input type="text" name="COM_ID" value=""><br>
            
@@ -166,6 +166,7 @@ $(function(){
 
 <script type="text/javascript">
 	var servletPathName ="${pageContext.request.requestURI}";
+	console.log(servletPathName);
 </script>
 </body>
 

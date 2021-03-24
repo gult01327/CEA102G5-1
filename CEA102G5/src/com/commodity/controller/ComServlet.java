@@ -396,8 +396,61 @@ public class ComServlet extends HttpServlet {
 		
 		//來自comSelectPage.jsp的複合查詢請求
 		if("listCom_ByCompositeQuery".equals(action)) {
-			try {
+			
 				HttpSession session = request.getSession();//???
+				List<String> errorMsgs = new LinkedList<String>();
+				request.setAttribute("errorMsgs", errorMsgs);
+				String comID = request.getParameter("COM_ID");
+				try {
+					if((comID.trim()).length() != 0) {
+						
+						int comI = Integer.parseInt(request.getParameter(comID));
+					}
+					
+				} catch (NumberFormatException e) {
+					errorMsgs.add("編號請填數字");
+					String url = "/back_end/commodity/comSelectPage.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				String price =request.getParameter("COM_PRICE");
+				String price2 =request.getParameter("COM_PRICE2");
+				try {	
+					Integer min,max;
+					if((price.trim()).length() != 0) {
+						min =Integer.parseInt(price);
+						if((price2.trim()).length() != 0) {
+						max =Integer.parseInt(price2);
+							if(min>max) {
+								errorMsgs.add("Min,Max大小錯誤");
+								String url = "/back_end/commodity/comSelectPage.jsp";
+								RequestDispatcher successView = request.getRequestDispatcher(url);
+								successView.forward(request, response);
+							}
+						}
+					}
+					if((price2.trim()).length() != 0) {
+						 max =Integer.parseInt(price2);
+						 if((price.trim()).length() != 0) {
+							 min =Integer.parseInt(price);
+							 if(min>max) {
+								errorMsgs.add("Min,Max大小錯誤");
+								String url = "/back_end/commodity/comSelectPage.jsp";
+								RequestDispatcher successView = request.getRequestDispatcher(url);
+								successView.forward(request, response);
+								}
+						 }
+					}
+					
+
+				}catch(NumberFormatException e) {
+					errorMsgs.add("價格請填入數字");
+					String url = "/back_end/commodity/comSelectPage.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				
+				try {
 				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");//???
 				LinkedHashMap<String, String[]> map1 = new LinkedHashMap<String, String[]>(request.getParameterMap());
 				session.setAttribute("map", map1);
@@ -422,7 +475,8 @@ public class ComServlet extends HttpServlet {
 				HttpSession session = request.getSession();//???
 				String price =request.getParameter("COM_PRICE");
 				String price2 =request.getParameter("COM_PRICE2");
-				try {	Integer min,max;
+				try {	
+					Integer min,max;
 					session.removeAttribute("error");
 					if((price.trim()).length() != 0) {
 						min =Integer.parseInt(price);

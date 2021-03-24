@@ -1,8 +1,9 @@
-              
-        window.onload = function() {
-            load();
-            $("#basicModal").modal({ show:false});
-        };
+		$(document).ready(
+        		function() {
+                    load();
+                    $("#basicModal").modal({ show:false});
+                }
+        );
         
        
         
@@ -146,13 +147,13 @@
         		$("#pageNumBlock").css("visibility","visible");
         		for (let i = 1; i <= maxPage; i++) {
         			if (i == 1 || i == maxPage) {
-        				let a = $("<a class='page-numbers' id='pageNums'>  " + i + "  </a>");
+        				let a = $("<a class='page-numbers' href='#' id='pageNums'>  " + i + "  </a>");
         				$("#pageNumBlock").append(a);
         				if (i == nowPage) {
         					a.addClass("nowPageColor");
         				}
         			} else if (i == nowPage || i == (nowPage + 1) || i == (nowPage - 1)) {
-        				let a = $("<a class='page-numbers' id='pageNums'>" + i + "  </a>");
+        				let a = $("<a class='page-numbers' href='#' id='pageNums'>" + i + "  </a>");
         				$("#pageNumBlock").append(a);
         				if (i == nowPage) {
         					a.addClass("nowPageColor");
@@ -205,7 +206,7 @@
                         tr.append(td);
                         $("#view").append(tr);
                     }
-                    pageHandle();
                 }
             });
+            pageHandle();
         }

@@ -265,6 +265,7 @@ div.memberListMain{
 <c:set var="updateCom" value='${pageContext.request.contextPath}/back_end/commodity/updateCom.jsp' />
 <c:set var="listCom_ByCompositeQuery" value='${pageContext.request.contextPath}/back_end/commodity/listCom_ByCompositeQuery.jsp' />
 <c:set var="listAllComComment" value='${pageContext.request.contextPath}/back_end/commodity/listAllComComment.jsp' />
+<c:set var="listOneCom" value='${pageContext.request.contextPath}/back_end/commodity/listOneCom.jsp' />
 <!-- 訂單 -->
 <c:set var="listAllOm" value='${pageContext.request.contextPath}/back_end/commodity/listAllOm.jsp' />
 <c:set var="listOd_ByOmID" value='${pageContext.request.contextPath}/back_end/commodity/listOd_ByOmID.jsp' />
@@ -482,8 +483,9 @@ div.memberListMain{
                                     	<li><a href=${addCom}>新增商品</a></li>
                                     	<li><a href=${listAllCom}>商品列表</a></li>
                                     	<li><a href=${comSelectPage}>搜尋商品</a></li>
-                                    	<li><a href=${listCom_ByCompositeQuery} class=disabled>查詢結果</a></li>
-                                    	<li><a href=${updateCom} class=disabled>編輯商品</a></li>
+                                    	<a href=${listCom_ByCompositeQuery} class=disabled></a>
+                                    	<a href=${updateCom} class=disabled></a>
+                                    	<a href=${listOneCom} class=disabled></a>
 		                            	
                                     </div>
                                     <div id=Recipe>

@@ -361,6 +361,7 @@ public class AdmiDAO implements AdmiDAO_interface {
 				admiVO.setAdmName(rs.getString("ADM_name"));
 				admiVO.setAdmAccount(rs.getString("ADM_ACCOUNT"));
 				admiVO.setAdmPassword(rs.getString("ADM_PASSWORD"));
+				admiVO.setAdmStatus(rs.getBoolean("ADM_STATUS"));
 			}
 
 		} catch (SQLException se) {

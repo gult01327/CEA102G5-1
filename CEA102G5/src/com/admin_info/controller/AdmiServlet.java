@@ -59,7 +59,11 @@ public class AdmiServlet extends HttpServlet{
 					errorMsgs.put("account","無此帳號，請確認");
 				}else if(!(admiVO.getAdmPassword().equals(password))) {
 					errorMsgs.put("password","密碼錯誤，請確認");
-				}else {
+				}
+					else if (admiVO.getAdmStatus() == false){
+					errorMsgs.put("status","帳號已停權，請確認");
+				}
+				else {
 					session.setAttribute("admiVO", admiVO);
 					AutService autSvc = new AutService();
 					List<String> funList = autSvc.getFun(admiVO.getAdmID());
@@ -67,7 +71,7 @@ public class AdmiServlet extends HttpServlet{
 				}
 			}
 			if(!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_login.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_newlogin.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -79,7 +83,7 @@ public class AdmiServlet extends HttpServlet{
 			return;
 			}catch(Exception e) {
 				errorMsgs.put("Exception",e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_login.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back_end/back_end_newlogin.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -88,7 +92,7 @@ public class AdmiServlet extends HttpServlet{
 		if("logOut".equals(action)) {			
 			req.getSession().removeAttribute("coaVO");
 			req.getSession().removeAttribute("admiVO");
-			res.sendRedirect(req.getContextPath()+"/back_end/back_end_login.jsp");
+			res.sendRedirect(req.getContextPath()+"/back_end/back_end_newlogin.jsp");
 		}
 		
 	

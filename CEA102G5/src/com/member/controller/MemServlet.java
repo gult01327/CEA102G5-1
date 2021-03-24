@@ -3,6 +3,7 @@ package com.member.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 
 import com.commodity.model.ComVO;
 import com.member.model.MailService;
+import com.member.model.MailService2;
 import com.member.model.MemService;
 import com.member.model.MemVO;
 import com.recipe.model.RecVO;
@@ -62,12 +64,12 @@ public class MemServlet extends HttpServlet {
 			
 			
 			try {
-				String memAccount = request.getParameter("memAccount").trim();
+				String memAccount = request.getParameter("memAccount1").trim();
 				
 				if(memAccount==null || memAccount.trim().length()==0) {
 					errorMsgs.put("memAccount","會員帳號請勿空白");
 				}
-				String memPassword = request.getParameter("memPassword").trim();
+				String memPassword = request.getParameter("memPassword1").trim();
 				
 				if(memPassword==null||memPassword.trim().length()==0) {
 					errorMsgs.put("memPassword","會員密碼請勿空白");
@@ -79,6 +81,18 @@ public class MemServlet extends HttpServlet {
 					memVO = memSvc.getOneMemByAccount(memAccount);
 					
 					if(memVO.getMemPassword().equals(memPassword)) {
+						if (memVO.getMemStatus() == 0) {
+							errorMsgs.put("Exception","您的會員尚未啟動");
+						} else if (memVO.getMemStatus() == 2) {
+							errorMsgs.put("Exception","您的會員已停權");
+						} 
+						if(!errorMsgs.isEmpty()) {
+							request.setAttribute("memVO", memVO);
+							RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
+							failView.forward(request, response);
+							return;
+						}
+						
 						session.setAttribute("memVO", memVO);
 						String location = (String)session.getAttribute("location");
 						if(location!=null) {
@@ -150,9 +164,12 @@ public class MemServlet extends HttpServlet {
 			
 			MemService memSvc = new MemService();
 			List<MemVO> list = memSvc.getAll();
+			String memAccountReg = "^[(a-zA-Z0-9_)]{2,10}$";
 			String result = null;
 			if(list.contains(memVO)) {
 				result = "isAdded";
+			}else if(!memAccount.trim().matches(memAccountReg)){
+				result = "error";
 			}else {
 				result = "OK";
 			}
@@ -167,46 +184,46 @@ public class MemServlet extends HttpServlet {
 		}
 		
 		if("insert".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			request.setAttribute("errorMsgs", errorMsgs);
+			Map<String,String> errorMsgs = new LinkedHashMap<String, String>();
+			request.setAttribute("errorMsgs2", errorMsgs);
 			
-			try {
+//			try {
 				String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				String memAccountReg = "^[(a-zA-Z0-9_)]{2,10}$";
 				
 				String memName = request.getParameter("memName");
 				if(memName == null || memName.trim().length()==0) {
-					errorMsgs.add("會員名稱請勿空白");
+					errorMsgs.put("memName","會員名稱請勿空白");
 				}else if(!memName.trim().matches(memNameReg)) {
-					errorMsgs.add("會員名稱只能是中英文字母數字和_，且長度必須在2~10之間");
+					errorMsgs.put("memName","長度必須在2~10之間");
 				}
 				
 				String memAccount = request.getParameter("memAccount");
 				if(memAccount==null || memAccount.trim().length()==0) {
-					errorMsgs.add("會員帳號請勿空白");
+					errorMsgs.put("memAccount2","會員帳號請勿空白");
 				}else if(!memAccount.trim().matches(memAccountReg)) {
-					errorMsgs.add("會員帳號只能是英文字母數字和_，且長度必須在2~10之間");
+					errorMsgs.put("memAccount2","長度必須在2~10之間");
 				}
 
 				
 				
 				String memPassword = request.getParameter("memPassword");
 				if(memPassword==null||memPassword.trim().length()==0) {
-					errorMsgs.add("會員密碼請勿空白");
-				}else if(!memAccount.trim().matches(memAccountReg)) {
-					errorMsgs.add("會員密碼只能是英文字母數字和_，且長度必須在2~10之間");
+					errorMsgs.put("memPassword2","會員密碼請勿空白");
+				}else if(!memPassword.trim().matches(memAccountReg)) {
+					errorMsgs.put("memPassword2","長度必須在2~10之間");
 				}
 				
 				String memPhoneReg = "^[(0-9)]{2,11}$";
 				String memPhone = request.getParameter("memPhone");
 				if(memPhone==null||memPhone.trim().length()==0) {
-					errorMsgs.add("會員電話請勿空白");
+					errorMsgs.put("memPhone","會員電話請勿空白");
 				}else if(!memPhone.trim().matches(memPhoneReg)) {
-					errorMsgs.add("會員電話只能是數字和，且長度必須在2~11之間");
+					errorMsgs.put("memPhone","會員電話只能是數字，且長度必須在2~11之間");
 				}
 				String memEmail = request.getParameter("memEmail");
 				if(memEmail==null||memEmail.trim().length()==0) {
-					errorMsgs.add("會員Email請勿空白");
+					errorMsgs.put("memEmail","會員Email請勿空白");
 				}
 				
 				Part part = request.getPart("memUpfile");
@@ -220,7 +237,7 @@ public class MemServlet extends HttpServlet {
 				is.close();
 				
 				}else {
-					errorMsgs.add("請上傳圖片");
+					errorMsgs.put("memPicture","請上傳圖片");
 				}
 				String memAccountLower = memAccount.toLowerCase();
 				MemVO memVO = new MemVO();
@@ -234,27 +251,37 @@ public class MemServlet extends HttpServlet {
 				MemService memSvc = new MemService();
 				List<MemVO> list = memSvc.getAll();
 				if(list.contains(memVO)) {
-					errorMsgs.add("會員帳號重複");
+					errorMsgs.put("memAccount2","會員帳號重複");
 				}
 				
 				if(!errorMsgs.isEmpty()) {
-					request.setAttribute("memVO", memVO);
+					request.setAttribute("memVOError", memVO);
 					RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
 					failView.forward(request, response);
+					return;
 				}
 				
 				
-				memSvc.addMem(memName, memAccount, memPassword, memPhone, memEmail, memPicture);
+				MemVO newMemVO = memSvc.addMem(memName, memAccount, memPassword, memPhone, memEmail, memPicture);
 				
-				String url = "/front_end/member/login.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url);
-				successView.forward(request, response);
+				MailService2 mailSvc = new MailService2();
+		        String subject = "會員註冊驗證通知";
+		        String link = "http://localhost:8081/CEA102G5/front_end/member/mem.do?action=updateStatus&memID="+newMemVO.getMemID();
+
+				mailSvc.sendMail(newMemVO.getMemEmail(), subject, mailSvc.getMessageText(newMemVO.getMemName(),link));
 				
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/addMem.jsp");
-				failView.forward(request, response);
-			}
+				String url = "/CEA102G5/front_end/member/signup1_success_page.jsp";
+//				RequestDispatcher successView = request.getRequestDispatcher(url);
+//				successView.forward(request, response);
+				response.sendRedirect(url);
+				
+				
+				
+//			} catch (Exception e) {
+//				
+//				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
+//				failView.forward(request, response);
+//			}
 			
 			
 		}
@@ -373,7 +400,7 @@ public class MemServlet extends HttpServlet {
 				
 				String success = "驗證信已成功寄出!!!";
 				request.setAttribute("success", success);
-				String url = "/front_end/member/login.jsp";
+				String url = "/front_end/member/forget_success_page.jsp";
 				RequestDispatcher successView = request.getRequestDispatcher(url);
 				successView.forward(request, response);
 				
@@ -395,6 +422,173 @@ public class MemServlet extends HttpServlet {
 			out.print(jsonStr);
 			out.flush();
 			out.close();
+		}
+		
+		if ("updateStatus".equals(action)) { // 來自的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+		
+			Integer memID = new Integer(request.getParameter("memID"));
+			
+				MemVO memVO = new MemVO();	
+								
+				memVO.setMemStatus(1);
+				memVO.setMemID(memID);				
+//System.out.println(memVO);									
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("memVO", memVO); 
+					RequestDispatcher failureView = request.getRequestDispatcher("/front_end/member/login.jsp");
+					failureView.forward(request, response);
+					return;
+				}				
+				MemService memSvc = new MemService();	
+//System.out.println(memVO);
+				 memSvc.updateStatus(memVO);
+				
+//System.out.println(memVO);
+			
+				String url = "/front_end/member/signup2_success_page.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // login_success.jsp
+				successView.forward(request, response);
+				
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/front_end/member/login.jsp");
+				failureView.forward(request, response);
+			}
+
+		}
+		
+		
+		if ("updateStatus1".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			
+			request.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+	
+			Integer memID = new Integer(request.getParameter("memID"));
+			
+				MemVO memVO = new MemVO();	
+								
+				memVO.setMemStatus(1);
+				memVO.setMemID(memID);
+				
+//System.out.println(memVO);		
+				
+				
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("memVO", memVO); 
+					RequestDispatcher failureView = request.getRequestDispatcher("/back_end/member/memSelect.jsp");
+					failureView.forward(request, response);
+					return;
+				}		
+				MemService memSvc = new MemService();	
+				
+//System.out.println(memVO);
+				
+				 memSvc.updateStatus(memVO);
+				
+//System.out.println(memVO);
+			
+				String url = "/back_end/member/listAllMem.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // login_success.jsp
+				successView.forward(request, response);	
+
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/back_end/member/memSelect.jsp");
+				failureView.forward(request, response);
+			}
+			
+			
+
+		}
+		
+		if ("stopStatus".equals(action)) { // 來自的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+		
+			request.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+			Integer memID = new Integer(request.getParameter("memID"));
+			
+				MemVO memVO = new MemVO();	
+								
+				memVO.setMemStatus(2);
+				memVO.setMemID(memID);
+				
+//System.out.println(memVO);						
+			
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("memVO", memVO); 
+					RequestDispatcher failureView = request.getRequestDispatcher("/back_end/member/memSelect.jsp");
+					failureView.forward(request, response);
+					return;
+				}		
+				
+				MemService memSvc = new MemService();	
+				
+//System.out.println(memVO);
+				
+				 memSvc.updateStatus(memVO);
+				
+//System.out.println(memVO);
+		
+				String url = "/back_end/member/listAllMem.jsp";
+				RequestDispatcher successView = request.getRequestDispatcher(url); // login_success.jsp
+				successView.forward(request, response);			
+
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/back_end/member/memSelect.jsp");
+				failureView.forward(request, response);
+			}
+
+		}
+		
+		if ("listmem_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+//				HttpSession session = request.getSession();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				if (request.getParameter("whichPage") == null){
+					HashMap<String, String[]> map1 = new HashMap<String, String[]>(request.getParameterMap());
+					session.setAttribute("map",map1);
+					map = map1;
+				} 
+				
+				/***************************2.開始複合查詢***************************************/
+				MemService memSvc = new MemService();
+				List<MemVO> list  = memSvc.newgetAll(map);
+//System.out.println(list);				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				request.setAttribute("listmem_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = request.getRequestDispatcher("/back_end/member/listAllMem_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(request, response);
+			
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/back_end/member/memSelect.jsp");
+				failureView.forward(request, response);
+			}
 		}
 		
 		

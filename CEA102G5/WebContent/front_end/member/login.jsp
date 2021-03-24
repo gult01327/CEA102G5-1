@@ -23,18 +23,19 @@
 <form action="<%=request.getContextPath()%>/front_end/member/mem.do" method="post">
 				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text" name="memAccount" value="${param.memAccount}" class="input" required='required' autocomplete="off">
+					<input id="user" type="text" name="memAccount1" value="${param.memAccount1}" class="input" required='required' autocomplete="off">
 					<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.memAccount}</font>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password"  name="memPassword" class="input" data-type="password" required='required'>
+					<input id="pass" type="password"  name="memPassword1" class="input" data-type="password" required='required'>
 					<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.memPassword}</font>
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Sign In">
 					<input type="hidden" name="action" value="login">
 				</div>
+				<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.Exception }</font>
 </form>
 				<div class="hr"></div>
 				<div class="foot-lnk">
@@ -45,27 +46,27 @@
 			<div class="sign-up-htm">
 				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text"  name="memName" class="input" required='required'>
-					
+					<input id="user" type="text"  name="memName" class="input" required='required' value="${(not empty memVOError)?memVOError.memName:''}" >
+					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memName}</font></div>
 				</div>
 				<div class="group">
 					<label for="account" class="label">Account</label>
-					<input id="account" type="text" name="memAccount" class="input" required='required'>
-					<div id='show'></div>
+					<input id="account" type="text" name="memAccount" class="input" required='required' value="${(not empty memVOError)?memVOError.memAccount:''}">
+					<div id='show2'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memAccount2}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password"  name="memPassword" class="input" required='required'>
-					
+					<input id="pass" type="password"  name="memPassword" class="input" required='required' value="${(not empty memVOError)?memVOError.memPassword''}">
+					<div id='show'><font style='margin-top:5px; margin-left:120px; color:#FF0000;'>${errorMsgs2.memPassword2}</font></div>
 				</div>
 				<div class="group">
 					<label for="phone" class="label">Mem phone</label>
-					<input id="phone" type="text" name="memPhone" class="input" required='required'>
-					
+					<input id="phone" type="text" name="memPhone" class="input" required='required' value="${(not empty memVOError)?memVOError.memPhone''}">
+					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memPhone}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
-					<input id="pass" type="email" name="memEmail" class="input" required='required'>
+					<input id="pass" type="email" name="memEmail" class="input" required='required' value="${(not empty memVOError)?memVOError.memEmail''}">
 					
 				</div>
 					<div class="group">
@@ -107,11 +108,15 @@ $(".login-wrap").on("blur","#account",function(){
 		success:function(data){
 			if(data == "isAdded"){
 				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>帳號重複，請重新輸入</font>";
-				$("#show").html(html);
+				$("#show2").html(html);
+				$(".button").attr("disabled",true);
+			}else if(data == "error"){
+				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>長度必須在2~10之間</font>";
+				$("#show2").html(html);
 				$(".button").attr("disabled",true);
 			}else{
 				html += "<font style='margin-top:10px; margin-left:120px; color:#00ff14;'>此帳號可以使用!</font>";
-				$("#show").html(html);
+				$("#show2").html(html);
 				$(".button").attr("disabled",false);
 			}
 		}

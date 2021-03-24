@@ -5,11 +5,7 @@
 <html>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
-<%
-	MemService memSvc = new MemService();
-	List<MemVO> list = memSvc.getAll();
-	pageContext.setAttribute("list", list);
-%>
+<jsp:useBean id="listmem_ByCompositeQuery" scope="request" type="java.util.List<MemVO>" /> <!-- 於EL此行可省略 -->
 
 
 <head>
@@ -18,7 +14,7 @@
 
 
 </head>
-<body>
+<body bgcolor=#E8FFE8>
 <style>
   table#table-1 {
 	background-color: #CCCCFF;
@@ -52,6 +48,12 @@
   }
 </style>
 
+<table id="table-1">
+	<tr><td>
+		 <h3>會員資料</h3>
+		 <h4><a href="<%=request.getContextPath()%>/back_end/member/memSelect.jsp"><img src="<%=request.getContextPath()%>/resource/images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+	</td></tr>
+</table>
 
 <table>
 	<tr>
@@ -67,9 +69,10 @@
 		<th>會員創建日期</th>
 		<th>修改</th>
 		<th>狀態更改</th>
+		
 	</tr>
-	<%@ include file="page1.file" %>
-	<c:forEach var="memVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
+		<%@ include file="page1_ByCompositeQuery.file" %>
+	<c:forEach var="memVO" items="${listmem_ByCompositeQuery}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1 %>">
 	<tr>
 			<td>${memVO.memID}</td>
 			<td>${memVO.memName}</td>
@@ -83,7 +86,7 @@
 			<td>${memVO.memTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
+			     <input type="submit" value="修改" style="padding:0px 0px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
@@ -98,10 +101,11 @@
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
 			     <input type="hidden" name="action"	value="stopStatus"></FORM>					
 			</td>	
+		
 	</tr>
 	</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+<%@ include file="page2_ByCompositeQuery.file" %>
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 </script>

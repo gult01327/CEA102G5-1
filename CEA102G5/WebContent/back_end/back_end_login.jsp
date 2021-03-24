@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login_Page</title>
+<title>Login_Page </title>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resource/admin_info/css/back_login.css">
 <script src="<%= request.getContextPath()%>/resource/js/jquery-3.5.1.min.js"></script>
 </head>

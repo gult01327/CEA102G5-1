@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.commodity.model.ComVO;
+
+import jdbc.util.compositequery.CompositQuery_back_end_mem;
 
 public class MemDAO implements MemDAO_Interface {
 	private static DataSource ds = null;
@@ -43,15 +46,16 @@ public class MemDAO implements MemDAO_Interface {
 	private static final String GET_MEM_BONUS = "SELECT M.MEM_ID,MEM_NAME, SUM(REC_BONUS) AS MEM_BONUS \r\n" + 
 			"FROM MEMBER_INFO M LEFT JOIN RECIPE R ON M.MEM_ID = R.MEM_ID\r\n" + 
 			"WHERE M.MEM_ID =? GROUP BY MEM_ID";
+	private static final String UPDATESTATUS_STMT = "UPDATE member_Info set mem_Status=? where mem_ID = ?";
 	
 	@Override
-	public void insert(MemVO memVO) {
+	public MemVO insert(MemVO memVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null; 
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt = con.prepareStatement(INSERT_STMT,Statement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, memVO.getMemName());
 			pstmt.setString(2, memVO.getMemAccount());
@@ -61,6 +65,13 @@ public class MemDAO implements MemDAO_Interface {
 			pstmt.setBytes(6, memVO.getMemPicture());
 			
 			pstmt.executeUpdate();
+			
+			ResultSet rsKeys = pstmt.getGeneratedKeys();
+			rsKeys.next();
+			Integer memID = rsKeys.getInt(1);
+			
+			memVO.setMemID(memID);
+			System.out.println("自增主鍵值 = " + memID +"(剛新增成功的員工編號)");	
 			
 			
 		} catch (SQLException se) {
@@ -85,6 +96,7 @@ public class MemDAO implements MemDAO_Interface {
 				}
 			}
 		}
+		return memVO;
 		
 	}
 
@@ -277,11 +289,7 @@ public class MemDAO implements MemDAO_Interface {
 		return list;
 	}
 
-	@Override
-	public List<MemVO> getAll(Map<String, String[]> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public MemVO findByMemAccount(String memAccount) {
@@ -433,4 +441,106 @@ public class MemDAO implements MemDAO_Interface {
 		}
 		return memVO;
 	}
+	
+	@Override
+	public void updateStatus(MemVO memVO)  {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATESTATUS_STMT);
+			
+			pstmt.setInt(1, memVO.getMemStatus());
+			pstmt.setInt(2, memVO.getMemID());
+			
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
+	public List<MemVO> newgetAll(Map<String, String[]> map) {
+		List<MemVO> list = new ArrayList<MemVO>();
+		MemVO memVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			
+			con = ds.getConnection();
+			String finalSQL = "select * from member_info "
+			          + CompositQuery_back_end_mem.get_WhereCondition(map)
+			          + "order by mem_ID";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				memVO = new MemVO();
+				memVO.setMemID(rs.getInt("MEM_ID"));
+				memVO.setMemName(rs.getString("MEM_NAME"));
+				memVO.setMemAccount(rs.getString("MEM_ACCOUNT"));
+				memVO.setMemPassword(rs.getString("MEM_PASSWORD"));
+				memVO.setMemPhone(rs.getString("MEM_PHONE"));
+				memVO.setMemEmail(rs.getString("MEM_EMAIL"));
+				memVO.setMemBonus(rs.getInt("MEM_BONUS"));
+				memVO.setMemStatus(rs.getInt("MEM_STATUS"));
+				memVO.setMemTime(rs.getDate("MEM_TIME"));
+				list.add(memVO); // Store the row in the List
+			}
+	
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
 }

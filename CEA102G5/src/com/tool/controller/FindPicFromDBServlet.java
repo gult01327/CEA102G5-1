@@ -23,12 +23,13 @@ public class FindPicFromDBServlet extends HttpServlet {
 
 	
 	private static DataSource ds = null;
-	private Connection con = null;
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
+		Connection con = null;
 		try {
+			con = ds.getConnection();
 			String table = req.getParameter("table");
 			String col = req.getParameter("col");
 			String idName = req.getParameter("idName");
@@ -59,16 +60,13 @@ public class FindPicFromDBServlet extends HttpServlet {
 			out.write(b);
 			in.close();
 			out.close();
-		}
-	}
-
-	@Override
-	public void destroy() {
-		if(con!=null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+		}finally {
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -78,11 +76,8 @@ public class FindPicFromDBServlet extends HttpServlet {
 		try {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myproject");
-			con = ds.getConnection();
 		} catch (NamingException e) {
 			e.printStackTrace();
-		} catch (SQLException se) {
-			se.printStackTrace();
 		}
 	}
 	

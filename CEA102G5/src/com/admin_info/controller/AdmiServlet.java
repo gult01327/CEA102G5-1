@@ -59,7 +59,11 @@ public class AdmiServlet extends HttpServlet{
 					errorMsgs.put("account","無此帳號，請確認");
 				}else if(!(admiVO.getAdmPassword().equals(password))) {
 					errorMsgs.put("password","密碼錯誤，請確認");
-				}else {
+				}
+					else if (admiVO.getAdmStatus() == false){
+					errorMsgs.put("status","帳號已停權，請確認");
+				}
+				else {
 					session.setAttribute("admiVO", admiVO);
 					AutService autSvc = new AutService();
 					List<String> funList = autSvc.getFun(admiVO.getAdmID());

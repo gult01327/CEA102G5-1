@@ -64,12 +64,12 @@ public class MemServlet extends HttpServlet {
 			
 			
 			try {
-				String memAccount = request.getParameter("memAccount").trim();
+				String memAccount = request.getParameter("memAccount1").trim();
 				
 				if(memAccount==null || memAccount.trim().length()==0) {
 					errorMsgs.put("memAccount","會員帳號請勿空白");
 				}
-				String memPassword = request.getParameter("memPassword").trim();
+				String memPassword = request.getParameter("memPassword1").trim();
 				
 				if(memPassword==null||memPassword.trim().length()==0) {
 					errorMsgs.put("memPassword","會員密碼請勿空白");
@@ -164,9 +164,12 @@ public class MemServlet extends HttpServlet {
 			
 			MemService memSvc = new MemService();
 			List<MemVO> list = memSvc.getAll();
+			String memAccountReg = "^[(a-zA-Z0-9_)]{2,10}$";
 			String result = null;
 			if(list.contains(memVO)) {
 				result = "isAdded";
+			}else if(!memAccount.trim().matches(memAccountReg)){
+				result = "error";
 			}else {
 				result = "OK";
 			}
@@ -181,46 +184,46 @@ public class MemServlet extends HttpServlet {
 		}
 		
 		if("insert".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			request.setAttribute("errorMsgs", errorMsgs);
+			Map<String,String> errorMsgs = new LinkedHashMap<String, String>();
+			request.setAttribute("errorMsgs2", errorMsgs);
 			
-			try {
+//			try {
 				String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				String memAccountReg = "^[(a-zA-Z0-9_)]{2,10}$";
 				
 				String memName = request.getParameter("memName");
 				if(memName == null || memName.trim().length()==0) {
-					errorMsgs.add("會員名稱請勿空白");
+					errorMsgs.put("memName","會員名稱請勿空白");
 				}else if(!memName.trim().matches(memNameReg)) {
-					errorMsgs.add("會員名稱只能是中英文字母數字和_，且長度必須在2~10之間");
+					errorMsgs.put("memName","長度必須在2~10之間");
 				}
 				
 				String memAccount = request.getParameter("memAccount");
 				if(memAccount==null || memAccount.trim().length()==0) {
-					errorMsgs.add("會員帳號請勿空白");
+					errorMsgs.put("memAccount2","會員帳號請勿空白");
 				}else if(!memAccount.trim().matches(memAccountReg)) {
-					errorMsgs.add("會員帳號只能是英文字母數字和_，且長度必須在2~10之間");
+					errorMsgs.put("memAccount2","長度必須在2~10之間");
 				}
 
 				
 				
 				String memPassword = request.getParameter("memPassword");
 				if(memPassword==null||memPassword.trim().length()==0) {
-					errorMsgs.add("會員密碼請勿空白");
-				}else if(!memAccount.trim().matches(memAccountReg)) {
-					errorMsgs.add("會員密碼只能是英文字母數字和_，且長度必須在2~10之間");
+					errorMsgs.put("memPassword2","會員密碼請勿空白");
+				}else if(!memPassword.trim().matches(memAccountReg)) {
+					errorMsgs.put("memPassword2","長度必須在2~10之間");
 				}
 				
 				String memPhoneReg = "^[(0-9)]{2,11}$";
 				String memPhone = request.getParameter("memPhone");
 				if(memPhone==null||memPhone.trim().length()==0) {
-					errorMsgs.add("會員電話請勿空白");
+					errorMsgs.put("memPhone","會員電話請勿空白");
 				}else if(!memPhone.trim().matches(memPhoneReg)) {
-					errorMsgs.add("會員電話只能是數字和，且長度必須在2~11之間");
+					errorMsgs.put("memPhone","會員電話只能是數字，且長度必須在2~11之間");
 				}
 				String memEmail = request.getParameter("memEmail");
 				if(memEmail==null||memEmail.trim().length()==0) {
-					errorMsgs.add("會員Email請勿空白");
+					errorMsgs.put("memEmail","會員Email請勿空白");
 				}
 				
 				Part part = request.getPart("memUpfile");
@@ -234,7 +237,7 @@ public class MemServlet extends HttpServlet {
 				is.close();
 				
 				}else {
-					errorMsgs.add("請上傳圖片");
+					errorMsgs.put("memPicture","請上傳圖片");
 				}
 				String memAccountLower = memAccount.toLowerCase();
 				MemVO memVO = new MemVO();
@@ -248,13 +251,14 @@ public class MemServlet extends HttpServlet {
 				MemService memSvc = new MemService();
 				List<MemVO> list = memSvc.getAll();
 				if(list.contains(memVO)) {
-					errorMsgs.add("會員帳號重複");
+					errorMsgs.put("memAccount2","會員帳號重複");
 				}
 				
 				if(!errorMsgs.isEmpty()) {
-					request.setAttribute("memVO", memVO);
+					request.setAttribute("memVOError", memVO);
 					RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
 					failView.forward(request, response);
+					return;
 				}
 				
 				
@@ -273,11 +277,11 @@ public class MemServlet extends HttpServlet {
 				
 				
 				
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/addMem.jsp");
-				failView.forward(request, response);
-			}
+//			} catch (Exception e) {
+//				
+//				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
+//				failView.forward(request, response);
+//			}
 			
 			
 		}

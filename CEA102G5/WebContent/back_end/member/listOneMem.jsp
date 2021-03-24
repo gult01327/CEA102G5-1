@@ -48,7 +48,7 @@
   }
 </style>
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+<!-- <h4>此頁暫練習採用 Script 的寫法取值:</h4> -->
 <table id="table-1">
 	<tr><td>
 		 <h3>會員資料</h3>

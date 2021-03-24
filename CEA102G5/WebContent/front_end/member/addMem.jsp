@@ -51,12 +51,12 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>會員資料新增 - addMem.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp"><img src="<%=request.getContextPath() %>/resource/images/food.jpg" width="100" height="100" border="0">回首頁</a></h4>
+		 <h3>會員資料新增</h3></td><td>
+		 <h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp"><img src="<%=request.getContextPath() %>/resource/images/logo.png" width="50" height="50" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
-<h3>資料新增:</h3>
+<!-- <h3>資料新增:</h3> -->
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -85,12 +85,13 @@
 		<td><input type="password" name="memPassword" size="45"
 			 value="<%=(memVO==null)?"":memVO.getMemPassword() %>" /></td>
 	</tr>
-		<tr>	
+		<tr>
 		<td>會員圖片</td>
-		<td><input type="file" name="memUpfile" id="imgINP" >
+		<td><label style="cursor: pointer;">
+		<input type="file" name="memUpfile" id="imgINP" style="display: none;">
 		<img id="blah" alt="" src="<%=request.getContextPath()%>/resource/images/upload.png" 
-		style="width:100px; height:100px;"/>
-		</td>		
+		style="width:100px; height:100px; border:0; "/>       
+        </label></td>			
 	</tr>
 	<tr>
 		<td>會員電話</td>

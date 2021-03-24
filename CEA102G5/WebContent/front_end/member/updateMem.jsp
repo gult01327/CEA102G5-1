@@ -74,12 +74,12 @@
 	</tr>
 	<tr>
 		<td>會員圖片</td>
-		<td><input type="file" name="memUpfile" id="imgINP">
+		<td><label style="cursor: pointer;">
+		<input type="file" name="memUpfile" id="imgINP" style="display: none;">
 		<img id="blah" alt="" src="<%=request.getContextPath()%>/resource/images/upload.png" 
-		style="width:100px; height:100px; border:0; "/>
-		</td>		
+		style="width:100px; height:100px; border:0; "/>       
+        </label></td>			
 	</tr>
-
 	<tr>
 		<td>會員密碼:</td>
 		<td><input type="TEXT" name="memPassword" size="45"	value="<%=memVO.getMemPassword()%>" /></td>

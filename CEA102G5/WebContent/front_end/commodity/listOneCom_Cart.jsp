@@ -15,12 +15,17 @@
 <head>
 <title>商品資料</title>
 
-<style>
-
-</style>
 
 </head>
 <body>
+
+<style>
+
+.product-carousel .owl-buttons{
+	height:0px;
+}
+
+</style>
 <div id="main">
                             <div class="single-product">
                                 <div class="col-md-6">
@@ -164,121 +169,39 @@
                                             <h2 class="text-center section-title mtn-2 fz-24">Ingredients</h2>
                                         </div>
                                         <div class="product-carousel p-0" data-auto-play="true" data-desktop="3" data-laptop="2" data-tablet="2" data-mobile="1">
+<jsp:useBean id="comcSvc" scope="page" class="com.commodity_category.model.ComcService"></jsp:useBean>   
+<c:forEach var="comVO" items="${comcSvc.getComsByComcIDwithSales(comVO.comcID)}" end="4" >
                                             <div class="product-item text-center">
                                                 <div class="product-thumb">
-                                                    <a href="shop-detail.html">
+                                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
                                                         <div class="badges">
                                                             <span class="hot">Hot</span>
                                                         </div>
-                                                        <img src="<%=request.getContextPath()%>/resource/images/shop/shop_5.jpg" alt="" />
+                                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:250px;"/>
                                                     </a>
                                                     <div class="product-action">
-                                                        <span class="add-to-cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-                                                        </span>
-                                                        <span class="wishlist">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-                                                        </span>
-                                                        <span class="quickview">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-                                                        </span>
-                                                        <span class="compare">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"></a>
-                                                        </span>
-                                                    </div>
+				                                        <span class="add-to-cart">
+				                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+				                                        </span>
+				                                        <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+				                                        <input type="hidden" id="comID" value="${comVO.comID}">
+				                                        <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
+				                                        <span class="wishlist" style="cursor:pointer;">
+				
+				                                        </span>
+				                                        <span class="compare">
+				                                            Sales:${comVO.comSales}
+				                                        </span>
+				                                    </div>
                                                 </div>
                                                 <div class="product-info">
                                                     <a href="shop-detail.html">
-                                                        <h2 class="title">Carrot</h2>
-                                                        <span class="price">$12.00</span>
+                                                        <h2 class="title">${comVO.comName}</h2>
+                                                        <span class="price">$${comVO.comPrice}</span>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="product-item text-center">
-                                                <div class="product-thumb">
-                                                    <a href="shop-detail.html">
-                                                        <!-- <span class="outofstock"><span>Out</span>of stock</span> -->
-                                                        <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-                                                    </a>
-                                                    <div class="product-action">
-                                                        <span class="add-to-cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-                                                        </span>
-                                                        <span class="wishlist">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-                                                        </span>
-                                                        <span class="quickview">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-                                                        </span>
-                                                        <span class="compare">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-info">
-                                                    <a href="shop-detail.html">
-                                                        <h2 class="title">Sprouting Broccoli</h2>
-                                                        <span class="price">$6.00</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-item text-center">
-                                                <div class="product-thumb">
-                                                    <a href="shop-detail.html">
-                                                        <img src="<%=request.getContextPath()%>/resource/images/shop/shop_7.jpg" alt="" />
-                                                    </a>
-                                                    <div class="product-action">
-                                                        <span class="add-to-cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-                                                        </span>
-                                                        <span class="wishlist">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-                                                        </span>
-                                                        <span class="quickview">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-                                                        </span>
-                                                        <span class="compare">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-info">
-                                                    <a href="shop-detail.html">
-                                                        <h2 class="title">Chinese Cabbage</h2>
-                                                        <span class="price">$9.00</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-item text-center">
-                                                <div class="product-thumb">
-                                                    <a href="shop-detail.html">
-                                                        <div class="badges">
-                                                            <span class="hot">Hot</span>
-                                                        </div>
-                                                        <img src="<%=request.getContextPath()%>/resource/images/shop/shop_8.jpg" alt="" />
-                                                    </a>
-                                                    <div class="product-action">
-                                                        <span class="add-to-cart">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-                                                        </span>
-                                                        <span class="wishlist">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-                                                        </span>
-                                                        <span class="quickview">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-                                                        </span>
-                                                        <span class="compare">
-                                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"></a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-info">
-                                                    <a href="shop-detail.html">
-                                                        <h2 class="title">Tieton Cherry</h2>
-                                                        <span class="price">$9.00</span>
-                                                    </a>
-                                                </div>
-                                            </div>
+</c:forEach>
                                         </div>
                                     </div>
                                 </div>
@@ -295,20 +218,7 @@
 	comID = ${comVO.comID};
 </c:if>
 </script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/modernizr-2.7.1.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.countdown.min.js"></script>
-    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/jquery.prettyPhoto.js'></script>
-    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/jquery.prettyPhoto.init.min.js'></script>
-    <script type='text/javascript' src='<%=request.getContextPath()%>/resource/js/slick.min.js'></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script.js"></script>
-    
-        <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
-     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>	
-	<script type="text/javascript">
+    	<script type="text/javascript">
 	
 	 $("#single-add-to-cart").click(function(){
 		let qty = $("#quantity").val();
@@ -414,7 +324,95 @@
 			
 		 });
 		 
-	
+	 $(document).ready(function(){
+			
+	        $(".wishlist").each(function(){
+				let wishlist=$(this);
+	        	let comID =wishlist.prev().prev().val();
+				let memID = wishlist.prev().prev().prev().val();
+				let location = wishlist.prev().val();
+				if(memID===null||memID===''){
+					wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+				}else{
+					$.ajax({
+						url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+						type:"post",
+						data:{
+							action:"firstload",
+							comID:comID,
+							memID:memID,
+						},
+						cache:false,
+						ifModified :true,
+						success : function(date){
+							if(date==="true"){
+							console.log("123");
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+								
+							}else{
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+								
+							}
+						}
+					});
+				}
+	        });
+	    });
+	    
+	    $(".wishlist").click(function(){
+	    	let wishlist=$(this);
+     	let comID =wishlist.prev().prev().val();
+			let memID = wishlist.prev().prev().prev().val();
+			let location = wishlist.prev().val();
+			if(memID == ''){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
+				return;
+			}
+
+			$.ajax({
+				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+				type:"post",
+				data:{
+					action:"insertByRedis",
+					comID:comID,
+					memID:memID,
+				},
+				cache:false,
+				ifModified :true,
+				success : function(date){
+					if(date==="true"){
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+					}else{
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+					}
+				}
+			});
+			
+		 });
+	    $(".add-to-cart").click(function(){
+	    	let comID = $("#comID").val();
+			let memID = $("#memID").val();
+			if(memID == ""){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location=<%=request.getServletPath()%>&comID="+comID+"";
+				return;
+			}
+			$.ajax({
+				url:"<%=request.getContextPath()%>/cart/comCart.do",
+				type:"post",
+				data:{
+					action:"ADD",
+					comID:comID,
+					cardCount:1
+				},
+				cache:false,
+				ifModified :true,
+				success : function(){
+					window.location.reload();
+				}
+			});
+		});
 	</script>
 
 </body>

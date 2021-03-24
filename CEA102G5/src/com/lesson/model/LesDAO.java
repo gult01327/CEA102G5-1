@@ -12,19 +12,22 @@ import javax.naming.*;
 import javax.sql.*;
 
 import com.tool.controller.QueryEdit;
+import com.tool.controller.QueryEdit3;
 
 public class LesDAO implements LesDAO_interface {
+	
+	private static final String selCol ="LES_ID,COA_ID,LES_DATE,LES_TIME,LES_BEGIN,LES_END,LES_AVAILABLE,LES_ALREADY,LES_PRICE,LES_STATUS,TAL_ID,LES_NAME";
 
 	private static final String INSERT = "INSERT INTO LESSON (COA_ID,TAL_ID,LES_NAME,LES_DATE,LES_TIME,LES_PICTURE"
 			+ ",LES_VIDEO,LES_BEGIN,LES_END,LES_AVAILABLE,LES_PRICE)" + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String ALL = "SELECT * FROM LESSON";
-	private static final String BYCOACH = "SELECT * FROM LESSON where COA_ID=? and les_status=true order by LES_DATE";
+	private static final String BYCOACH = "SELECT "+selCol+" FROM LESSON where COA_ID=? and les_status=true order by LES_DATE";
 	private static final String ONE = "SELECT * FROM LESSON where LES_ID=?";
 	private static final String UPDATE = "UPDATE LESSON set LES_NAME=?,LES_PRICE=?,LES_PICTURE=?,LES_VIDEO=? WHERE LES_ID=?";
 	private static final String DELETE = "UPDATE LESSON set LES_PICTURE='',LES_VIDEO='',LES_STATUS=FALSE WHERE LES_ID=?";
-	private static final String BYCOACHFRONT = "SELECT * FROM LESSON where COA_ID=? AND LES_END>=? and les_status=true order by LES_DATE";
-	private static final String ALLTRUE = "SELECT * FROM LESSON WHERE LES_STATUS=TRUE order by LES_DATE ,LES_TIME";
-	private static final String ALLTRUEFRONT = "SELECT * FROM LESSON WHERE LES_STATUS=TRUE AND LES_END>=? order by LES_ID desc,LES_TIME";
+	private static final String BYCOACHFRONT = "SELECT "+selCol+" FROM LESSON where COA_ID=? AND LES_END>=? and les_status=true order by LES_DATE";
+	private static final String ALLTRUE = "SELECT "+selCol+" FROM LESSON WHERE LES_STATUS=TRUE order by LES_DATE ,LES_TIME";
+	private static final String ALLTRUEFRONT = "SELECT "+selCol+" FROM LESSON WHERE LES_STATUS=TRUE order by LES_END desc limit 3";
 	private static DataSource ds = null;
 	static {
 		try {
@@ -267,11 +270,9 @@ public class LesDAO implements LesDAO_interface {
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(ALL);
-			rs = pstmt.executeQuery();
-			String sql = QueryEdit.transForQuery(query, rs);
+			String sql = QueryEdit3.transForQuery(query);
 			pstmt = con.prepareStatement("SELECT COUNT(*) FROM " + sql);
-			sql = "SELECT * FROM " + sql;
+			sql = "SELECT "+selCol+" FROM " + sql;
 			map.put("sql", sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -379,10 +380,10 @@ public class LesDAO implements LesDAO_interface {
 				lesVO.setLesID(rs.getInt("LES_ID"));
 				lesVO.setCoaID(rs.getInt("COA_ID"));
 				lesVO.setTalID(rs.getInt("TAL_ID"));
-				lesVO.setLesPicture(rs.getBytes("LES_PICTURE"));
-				lesVO.setLesVideo(rs.getBytes("LES_VIDEO"));
 				lesVO.setLesName(rs.getString("LES_NAME"));
 				lesVO.setLesTime(rs.getString("LES_TIME"));
+				lesVO.setLesPicture(rs.getBytes("LES_PICTURE"));
+				lesVO.setLesVideo(rs.getBytes("LES_VIDEO"));
 				lesVO.setLesStatus(rs.getBoolean("LES_STATUS"));
 				lesVO.setLesAvailable(rs.getInt("LES_AVAILABLE"));
 				lesVO.setLesAlready(rs.getInt("LES_Already"));
@@ -531,20 +532,15 @@ public class LesDAO implements LesDAO_interface {
 	@Override
 	public Set<LesVO> getAllTrueToFront() {
 		Set<LesVO> set = new LinkedHashSet<LesVO>();
-
-		LesVO lesVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(ALLTRUEFRONT);
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-			String date = sf.format(new Date());
-			pstmt.setString(1, date);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				lesVO = new LesVO();
+				LesVO lesVO = new LesVO();
 				lesVO.setLesID(rs.getInt("LES_ID"));
 				lesVO.setCoaID(rs.getInt("COA_ID"));
 				lesVO.setTalID(rs.getInt("TAL_ID"));
@@ -648,6 +644,51 @@ public class LesDAO implements LesDAO_interface {
 			}
 		}
 		return set;
+	}
+
+	@Override
+	public String frontTotal() {
+		String total = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String date = sf.format(new Date());
+			pstmt = con.prepareStatement("SELECT COUNT(1) FROM LESSON where LES_STATUS=TRUE AND LES_END >= "+date);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				total = rs.getString(1);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return total;
 	}
 
 }

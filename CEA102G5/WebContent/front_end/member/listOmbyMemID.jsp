@@ -49,7 +49,7 @@
 </style>
 <h2 class="page-title text-center" style='color:black;'>Order Master</h2>
 	
-<table>
+<table class="table">
 	<tr style='border: 1px solid #CCCCFF;'>
 		<th >訂單主檔ID</th>
 		<th>訂單總金額</th>

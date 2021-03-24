@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -465,7 +466,15 @@ public class LesServlet extends HttpServlet {
 				} else {
 					sql = (String) session.getAttribute("sqlForFront");
 				}
+				if (sql == null) {
+					SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+					String date = sf.format(new Date());
+					sql = "SELECT "+
+					"LES_ID,COA_ID,LES_DATE,LES_TIME,LES_BEGIN,LES_END,LES_AVAILABLE,LES_ALREADY,LES_PRICE,LES_STATUS,TAL_ID,LES_NAME"
+					+" FROM LESSON where LES_STATUS=TRUE AND LES_END >= "+date;
+				}
 				if (sql != null) {
+					
 					// Âà¥æSvc
 					LesService lesSvc = new LesService();
 					Set<LesVO> set = lesSvc.getAll(sql, page, nums, orderBy);

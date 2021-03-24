@@ -16,4 +16,5 @@ public interface LesDAO_interface {
 	public Set<LesVO>getByCoachTrue(Integer coaID);
 	public Map<String,String>getAll(Map<String, String[]> query);
 	public Set<LesVO> getAll(String sql, Integer page, Integer nums, String orderBy);
+	public String frontTotal();
 }

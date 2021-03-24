@@ -50,11 +50,9 @@ div.masonry-item{
 
 </style>
 
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.css">
-<script src="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript" src="<%= request.getContextPath()%>/resource/lesson/js/frontLesson.js"></script>
 
-<jsp:useBean id="lesSvc" class="com.lesson.model.LesService"/>
 <jsp:useBean id="coaSvc" class="com.coach.model.CoaService"/>
 <jsp:useBean id="talSvc" class="com.talent.model.TalService"/>
 
@@ -118,8 +116,13 @@ div.masonry-item{
 </form>
 
 </div>
-
-<input type=hidden id=total value=${total}>
+<c:if test="${!empty total}">
+	<input type=hidden id=total value='${total}'>
+</c:if>
+<c:if test="${empty total}">
+	<jsp:useBean id="lesSvc" class="com.lesson.model.LesService"/>
+	<input type=hidden id=total value='${lesSvc.frontTotal()}'>
+</c:if>
 <span>每頁筆數</span><select id=nums>
 	<c:forEach var="val" begin="6" end="10">
 		<option ${(nums == val)?'selected':''} value=${val}>${val}筆</option>
@@ -183,22 +186,6 @@ $("#orderBy").change(function(){
 	load();
 });
 
-$("#LESDATE1").datepicker({
-	changeMonth : true,
-	changeYear : true,
-	dateFormat: "yy-mm-dd",
-	maxDate:$("#lesDate").val(),
-	onClose: function(selectedDate, inst) { 
-		let endDate = new Date(Date.parse(selectedDate));
-        endDate.setDate(endDate.getDate() + 1); 
-        $("#LESDATE2").datepicker("option", "minDate", endDate); 
-	     } 
-});
-$("#LESDATE2").datepicker({
-	changeMonth : true,
-	dateFormat: "yy-mm-dd",
-	changeYear : true
-});
 
 
 </script>

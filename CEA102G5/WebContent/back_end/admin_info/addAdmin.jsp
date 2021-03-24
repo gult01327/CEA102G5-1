@@ -8,10 +8,17 @@
 <title>Add Admin</title>
 </head>
 <body>
+<style>
+	.tittle{
+	background-color:#rgb(179, 217, 217) !important;
+	text-align:center;
+	margin-bottom:10px;
+	}
 
+</style>
 
 		
-		<h3>新增後台帳號</h3>
+		<h4 class="tittle">新增後台帳號</h4>
 	<form METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/admin_info/admi.do">
 	
 		<fieldset>

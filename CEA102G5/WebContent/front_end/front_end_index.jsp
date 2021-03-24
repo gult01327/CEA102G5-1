@@ -2,22 +2,29 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%-- <%@ page import="java.util.*"%> --%>
+<%-- <%@ page import="com.commodity.model.*"%> --%>
+<%-- <%@ page import="com.commodity_category.model.*"%> --%>
+<%-- <%@ page import="com.member.model.*"%>        --%>
+	
+<%-- <%MemVO memVO = (MemVO) session.getAttribute("memVO"); %> --%>
 <!doctype html>
-<html lang="en-US">
+
+<html lang="UTF-8">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="shortcut icon" href="<%=request.getContextPath()%>/resource/images/favicon.ico" />
-  <title>EATIN Shop &#8211; Homepage Main | EATIN HTML Template</title>
+  <title>EATIN Shop &#8211; Home Main | EATIN HTML Template</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/bootstrap.min.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/font-awesome.min.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/ionicons.min.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/owl.carousel.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/owl.theme.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/settings.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/style1.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/style2.css" type="text/css" media="all" />
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/css/custom.css" type="text/css" media="all" />
   <link href="http://fonts.googleapis.com/css?family=Great+Vibes%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -205,7 +212,23 @@
      #fdelicious{
      margin-top:60px;
      } 
-
+	.header{
+	position:absolute;
+	background-color:rgba(255, 255, 255, 0);
+	}
+	.header.scrolling-menu{
+	background:rgba(255, 255, 255, 0.8);
+	}
+	.coursetbody{
+	padding:10px;
+	background-color:#33333373;
+	color:white;
+	}
+	#coursetable{
+	width:400px;
+	margin-left:280px;
+	margin-bottom:30px;
+	}
   </style>
 </head>
 
@@ -250,6 +273,7 @@
 						</div>
 					</div>
 <div class="site">
+<!-- 導覽列 -->
   <header id="header" class="header header-desktop header-2">
     <div class="container">
       <div class="row">
@@ -274,9 +298,7 @@
                 <li>
                    <a href="${les}">Course</a>
                 </li>
-<!--                 <li> -->
-<%--                    <a href="${mem}">Member</a> --%>
-<!--                 </li> -->
+
                   <c:if test="${!empty memVO}">
 					<li class="contact-icon">
 						<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>
@@ -284,9 +306,9 @@
 				</c:if>
 					<li>
 						<div class="btn-wrap">
+                     	<jsp:useBean id="comSvc" class="com.commodity.model.ComService"></jsp:useBean>
                      	<c:if test="${!empty sessionScope.memVO}">
                      	<jsp:useBean id="cartSvc" class="com.cart.model.CartService"></jsp:useBean>
-                     	<jsp:useBean id="comSvc" class="com.commodity.model.ComService"></jsp:useBean>
                      	<c:set var="cartTotalPrice" value="0" />
                                 <div class="mini-cart-wrap">
                                     <div class="mini-cart">
@@ -354,6 +376,7 @@
                 </div>
             </div>
   </header>
+<!--   header -->
   <header class="header header-mobile" id="nav123">
     <div class="container">
       <div class="row">
@@ -388,6 +411,7 @@
     </div>
   </header>
   <div id="main">
+<!--   輪播牆 -->
     <div class="section">
       <div class="container-fluid">
         <div class="row">
@@ -409,7 +433,7 @@
                   <div class="tp-caption rs-parallaxlevel-1" data-x="center" data-hoffset="" data-y="center" data-voffset="-120" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-type="image" data-responsive_offset="on" data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]">
                     <img src="<%=request.getContextPath()%>/resource/images/slider/slide_logo2.png" style="margin-top: 100px;" />
                   </div>
-                  <a class="tp-caption btn-2 hidden-xs" href="#" data-x="['center','center','center','center']" data-y="['center','center','center','center']" data-voffset="['260','260','260','260']" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power0.easeIn","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(95,189,116);bg:rgba(51, 51, 51, 0);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[16,16,16,16]" data-paddingright="[30,30,30,30]" data-paddingbottom="[16,16,16,16]" data-paddingleft="[30,30,30,30]">Shop Now
+                  <a class="tp-caption btn-2 hidden-xs" href="${com}" data-x="['center','center','center','center']" data-y="['center','center','center','center']" data-voffset="['260','260','260','260']" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power0.easeIn","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(95,189,116);bg:rgba(51, 51, 51, 0);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[16,16,16,16]" data-paddingright="[30,30,30,30]" data-paddingbottom="[16,16,16,16]" data-paddingleft="[30,30,30,30]">Shop Now
                   </a>
                 </li>
                 <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
@@ -417,7 +441,7 @@
                   <div class="tp-caption rs-parallaxlevel-1" data-x="right" data-hoffset="" data-y="right" data-voffset="-120" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-type="image" data-responsive_offset="on" data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]">
                     <img src="<%=request.getContextPath()%>/resource/images/gym/gymp2.png" style=" margin-right:-50px;margin-top:-30px" alt="" />
                   </div>
-                  <a class="tp-caption btn-2 hidden-xs" id="gymbtn" href="#" data-x="['center','center','center','center']" data-y="['center','center','center','center']" data-voffset="['260','260','260','260']" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power0.easeIn","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:black;bg:rgba(51, 51, 51, 0);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[16,16,16,16]" data-paddingright="[30,30,30,30]" data-paddingbottom="[16,16,16,16]" data-paddingleft="[30,30,30,30]">Join Now
+                  <a class="tp-caption btn-2 hidden-xs" id="gymbtn" href="${les}" data-x="['center','center','center','center']" data-y="['center','center','center','center']" data-voffset="['260','260','260','260']" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power0.easeIn","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:black;bg:rgba(51, 51, 51, 0);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[16,16,16,16]" data-paddingright="[30,30,30,30]" data-paddingbottom="[16,16,16,16]" data-paddingleft="[30,30,30,30]">Join Now
                   </a>
                 </li>
               </ul>
@@ -426,6 +450,7 @@
         </div>
       </div>
     </div>
+<!--  歡迎橘子    -->
     <div class="section section-bg-1 section-cover pt-17 pb-3">
       <div class="container">
         <div class="row">
@@ -448,6 +473,7 @@
         </div>
       </div>
     </div>
+<!--  變換圖片牆 -->
     <div class="changepic">
       <div data-aos="zoom-out">
         <div class="text-center mb-1 section-pretitle">Tasty & Function</div>
@@ -475,6 +501,7 @@
         </div>
       </div>
     </div>
+<!--   課程   -->
     <div class="containerbg">
       <div class="section section-bg-2 section-cover pt-17 pb-3">
         <div class="row">
@@ -491,11 +518,28 @@
           </div>
           <div class="col-sm-6">
             <div class="accordion icon-left" id="accordion1">
-              <div class="gymtext">
-                <div>123455</div>
+             <jsp:useBean id="lesSvc" class="com.lesson.model.LesService"/> 
+				<c:forEach var="lesVO" items="${lesSvc.allTrueToFront}" begin="0" end="2">
+              	<div class="gymtext">
+                
+		<div>
+			<a href="<%=request.getContextPath()%>/front_end/lesson/les.do?action=searchOneLesson&lesID=${lesVO.lesID}">
+			<table class="table" id="coursetable">
+			<tbody class="coursetbody">
+			<tr><th> ${lesVO.lesName}</th><td>$ ${lesVO.lesPrice}</td></tr>
+			<tr><th>上課時間</th><td>${lesVO.lesDate} ${lesVO.lesTime}</td></tr>
+			<tr><th>報名時間</th><td>${lesVO.lesBegin}~${lesVO.lesEnd}</td></tr>
+			<tr><th>剩餘名額</th><td> ${(lesVO.lesAvailable-lesVO.lesAlready)}</td></tr>
+			</tbody>
+			</table>
+			</a>
+		</div>
+
               </div>
+              </c:forEach>
             </div>
           </div>
+          
           <div class="col-sm-6">
             <div data-aos="zoom-in-up">
               <div class="text-center app-desc floating">
@@ -506,187 +550,49 @@
         </div>
       </div>
     </div>
+<!-- 商品     -->   
     <div data-aos="zoom-out">
       <div class="related-title">
         <div class="text-center mb-1 section-pretitle" id="fdelicious">Find Delicious</div>
         <h2 class="text-center section-title mtn-2">IN Products</h2>
       </div>
     </div>
+
     <div data-aos="fade-right">
-      <div class="product-carousel p-0" data-auto-play="true" data-desktop="4" data-laptop="2" data-tablet="2" data-mobile="1">
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_5.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Carrot</h2>
-              <span class="price">$12.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_7.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Chinese Cabbage</h2>
-              <span class="price">$9.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_6.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Sprouting Broccoli</h2>
-              <span class="price">$6.00</span>
-            </a>
-          </div>
-        </div>
-        <div class="product-item text-center">
-          <div class="product-thumb">
-            <a href="shop-detail.html">
-              <div class="badges">
-                <span class="hot">Hot</span>
-              </div>
-              <img src="<%=request.getContextPath()%>/resource/images/shop/shop_8.jpg" alt="" />
-            </a>
-            <div class="product-action">
-              <span class="add-to-cart">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-              </span>
-              <span class="wishlist">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
-              </span>
-              <span class="quickview">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Quickview"></a>
-              </span>
-            </div>
-          </div>
-          <div class="product-info">
-            <a href="shop-detail.html">
-              <h2 class="title">Tieton Cherry</h2>
-              <span class="price">$9.00</span>
-            </a>
-          </div>
-        </div>
+      <div class="product-carousel p-0" data-auto-play="true" data-desktop="4" data-laptop="2" data-tablet="2" data-mobile="1" id="product-grid">
+
+		<c:forEach var="comVO" items="${comSvc.allForComindex}" begin="0" end="4">
+        		<div class="product-item text-center">
+                     <div class="product-thumb">
+                          <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                             <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
+                          </a>
+                          <div class="product-action">
+                              <span class="add-to-cart">
+                              	<a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+                              </span>
+                                <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                                <input type="hidden" id="comID" value="${comVO.comID}">
+                              <span class="wishlist">
+
+                              </span>
+                              <span class="compare">Sales:${comVO.comSales}</span>
+                         </div>
+                      </div>
+                      <div class="product-info">
+                          <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                             <h2 class="title">${comVO.comName}</h2>
+                              <span class="price">
+                                <ins>$${comVO.comPrice}</ins>
+                             </span>
+                         </a>
+                     </div>
+        		</div>
+        </c:forEach>
+        
       </div>
     </div>
+<!--  食譜    -->
     <div class="section pt-12">
       <div class="container">
         <div class="row">
@@ -703,13 +609,16 @@
           </div>
         </div>
         <div class="row">
+        <jsp:useBean id="jedis" scope='page' class="jedis.util.favorite.JedisHandleFavorite"/>
+        <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
+        <c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}" begin="0" end="2">
           <div class="col-md-4">
             <div data-aos="fade-up" data-aos-duration="100">
               <div class="blog-grid-item">
                 <div class="post-thumbnail">
-                  <a href="blog-detail.html">
+                  <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">
                     <div id="hoverimg">
-                      <img src="<%=request.getContextPath()%>/resource/images/blog/blog_1.jpg" alt="" />
+                      <img src = "<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" style="width:400px;height:250px">
                     </div>
                   </a>
                 </div>
@@ -717,112 +626,53 @@
                   <div class="entry-meta">
                     <span class="posted-on">
                       <i class="ion-calendar"></i>
-                      <span>August 9, 2016</span>
+                      <span >${recVO.recTime}</span>
                     </span>
                     <span class="comment">
-                      <i class="ion-chatbubble-working"></i> 0
+                      <i class="ion-chatbubble-working"></i> ${jedis.getHowManyFav(recVO.recID)}
                     </span>
                   </div>
-                  <a href="blog-detail.html">
-                    <h1 class="entry-title">How to steam &amp; purée your sugar pie pumkin</h1>
+                  <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">
+                    <h1 class="entry-title">${recVO.recName}</h1>
                   </a>
                   <div class="entry-content">
-                    Cut the halves into smaller pieces and place in a large pot of water with a steam basket to keep the pumpkin pieces from touching…
+                    ${recVO.recContent}
                   </div>
                   <div class="entry-more">
-                    <a href="blog-detail.html">Read more</a>
+                    <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">Read more</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div data-aos="fade-up" data-aos-duration="600">
-              <div class="blog-grid-item">
-                <div class="post-thumbnail">
-                  <a href="blog-detail.html">
-                    <img src="<%=request.getContextPath()%>/resource/images/blog/blog_2.jpg" alt="" />
-                  </a>
-                </div>
-                <div class="post-content">
-                  <div class="entry-meta">
-                    <span class="posted-on">
-                      <i class="ion-calendar"></i>
-                      <span>August 9, 2016</span>
-                    </span>
-                    <span class="comment">
-                      <i class="ion-chatbubble-working"></i> 0
-                    </span>
-                  </div>
-                  <a href="blog-detail.html">
-                    <h1 class="entry-title">Great bulk recipes to help use all your organic vegetables</h1>
-                  </a>
-                  <div class="entry-content">
-                    A fridge full of organic vegetables purchased or harvested with the best of intentions, and then life gets busy, leaving no time to peel,
-                  </div>
-                  <div class="entry-more">
-                    <a href="blog-detail.html">Read more</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="blog-grid-item">
-              <div data-aos="fade-up" data-aos-duration="1100">
-                <div class="post-thumbnail">
-                  <a href="blog-detail.html">
-                    <img src="<%=request.getContextPath()%>/resource/images/blog/blog_1.jpg" alt="" />
-                  </a>
-                </div>
-                <div class="post-content">
-                  <div class="entry-meta">
-                    <span class="posted-on">
-                      <i class="ion-calendar"></i>
-                      <span>August 9, 2016</span>
-                    </span>
-                    <span class="comment">
-                      <i class="ion-chatbubble-working"></i> 0
-                    </span>
-                  </div>
-                  <a href="blog-detail.html">
-                    <h1 class="entry-title">How can salmon be raised organically in fish farms?</h1>
-                  </a>
-                  <div class="entry-content">
-                    Organic food consumption is rapidly increasing. The heightened interest in the global environment and a willingness to look
-                  </div>
-                  <div class="entry-more">
-                    <a href="blog-detail.html">Read more</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </c:forEach>
+          
         </div>
+<!-- 只是一條線 -->
         <div class="row">
           <div class="col-sm-12" id="oneline">
             <hr class="mt-7 mb-3" />
           </div>
         </div>
-      </div>
     </div>
-      <div class="section pt-7 pb-7">
-            <div class="container" style="position:relative;">
+ </div>
+<!--  聊天室窗 -->
+ 	<div class="section pt-7 pb-7">
+       <div class="container" style="position:relative;">
             <sitemesh:write property='body' />
-            
-	<div class="dialogue">
-			<div id=productArea class=productArea>
+			<div class="dialogue">
+				<div id=productArea class=productArea></div>
+            	<div id=messagesArea class=messagesArea></div>
+ 				<div class=inputarea>
+ 					<input id="message" class="text-field" type="text" placeholder="Message" onkeydown="if (event.keyCode == 13) sendMessage();" /> 
+ 				</div>
 			</div>
-            <div id=messagesArea class=messagesArea>
-			</div>
- 		<div class=inputarea>
- 		<input id="message" class="text-field" type="text" placeholder="Message" onkeydown="if (event.keyCode == 13) sendMessage();" /> 
- 		</div>
- 		</div>
-                
-         </div>
         </div>
-<!--         footer -->
+     </div>
+     
+     
+</div>
+<!-- footer -->
     <div class="copyright">
       <div class="container">
         <div class="row">
@@ -836,7 +686,7 @@
       </div>
       <div class="backtotop" id="backtotop"></div>
     </div>
-  </div>
+  
   </div>
   <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
   <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
@@ -1505,7 +1355,10 @@
       $("#star10").attr('src', '<%=request.getContextPath()%>/resource/images/change/q_10.jpg');
 
     });
+    </script>
     
+<script type="text/javascript">
+//     對話視窗
     var contextPath = "${pageContext.request.contextPath}";
     $("div.dialogue").hide();
    
@@ -1552,14 +1405,9 @@
     	}
     	dialogue.scrollTop = dialogue.scrollHeight;
     });
-    </script>
-    
-    <script>
-    
-
-    
+ 
     <c:if test="${!empty memVO}">
-    	memID = ${memVO.memID};
+	memID = ${memVO.memID};
 	</c:if>
     
 	var MyPoint = "/ServiceWS/member/"+memID;
@@ -1724,6 +1572,51 @@
 	function disconnect() {
 		webSocket.close();
 	}
+</script>	
+<script type="text/javascript">	
+//	商品收藏
+	 $(document).ready(function(){
+			
+			
+	        $(".wishlist").each(function(){
+		console.log("123");
+//	        	var memID=${memVO.memID};
+//	        	let comID=$(this).prev().attr('value');
+//	            if (memID===null){
+	            $(this).prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+//	            }
+	        });
+	
+	
+	    });
+	    
+// 加入購物車	    
+		$("#product-grid").on("click",".add-to-cart",function(){
+			let memID = $(this).next().val();
+			let comID = $(this).next().next().val();
+			console.log($(this));
+			console.log(memID);
+			console.log(comID);
+			if(memID == ""){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location=<%=request.getServletPath()%>&comID="+comID+"";
+				return;
+			}
+			$.ajax({
+				url:"<%=request.getContextPath()%>/cart/comCart.do",
+				type:"post",
+				data:{
+					action:"ADD",
+					comID:comID,
+					cardCount:1
+				},
+				cache:false,
+				ifModified :true,
+				success : function(){
+					window.location.reload();
+					console.log("ok");
+				}
+			});
+		});
 
   </script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

@@ -26,7 +26,7 @@
 
 <style>
   table {
-	width: 1000px;
+	width: 850px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -224,7 +224,7 @@
 		for(let i = 0 ; i<data.length; i++){
 			html += "<tr class='tr'><td class='tdrecID'>"+data[i].recID+"</td><td>"+data[i].recName+"</td>";
 			html += "<td><img src='<%=request.getContextPath()%>/ComPicReader"+data[i].recPicSrc+"&pic=1' height='100' width='100'></td>";
-			html += "<td class='tdmemID'>"+data[i].memID+"</td>";
+			html += "<td class='tdmemID'>"+getMembyMemID(data[i].memID)+"</td>";
 			html += "<td>"+data[i].recrContent+"</td>";
 			if(data[i].recrStatus == '0'){
 				html += "<td>未審核</td>";
@@ -236,17 +236,37 @@
 			}else{
 				html += "<td>"+data[i].recrReplyContent+"</td>";				
 			} 
-			html += "<td><input class='checkRec' type='button' value='查看食譜明細'>";
+			html += "<td><input class='checkRec' type='button' value='查看食譜明細' style='padding: 5px 5px; font-size:12px;'>";
 			html += "<input class='checkRecID' type='hidden' value='"+data[i].recID+"'></td>";
 			if(data[i].recrStatus == '0'){
-				html += "<td><input class='updateRec' type='button' value='下架該食譜'>";
-				html += "<td><input class='reply' type='button' value='回覆食譜檢舉'>";
+				html += "<td><input class='updateRec' type='button' value='下架該食譜' style='padding: 5px 5px; font-size:12px; background:#AE0000; border-color:#AE0000'>";
+				html += "<td><input class='reply' type='button' value='回覆食譜檢舉' style='padding: 5px 5px; font-size:12px;'>";
 			}
 			html += "<input type='hidden' id='recrID' value='"+data[i].recrID+"'></td></tr>";
 		}
 		html += "</table>"
 		
 		$("#showRecr").html(html);
+	}
+	
+	function getMembyMemID(memID){
+		var memName ='';
+		$.ajax({
+			url: "<%=request.getContextPath()%>/member/mem.do",
+			type: "post",
+			data:{
+				action: "getMemByAjax",
+				memID : memID
+			},
+			dataType:"json",
+			cache:false,
+			ifModified:true,
+			async:false,
+			success:function(data){
+				memName = data.memName;
+			}
+		});
+			return memName;
 	}
 </script>
 <script type="text/javascript">

@@ -31,7 +31,7 @@
 	}
     #right{
 		width: 300px;
-
+		margin-left: -100px;
 		float: left;
 		/* background-color: rgb(42, 165, 144); */
         

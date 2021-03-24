@@ -216,6 +216,15 @@ div.memberListMain{
    .header-right{
     margin-right:-40px;
     }
+    
+    #logoutmenu{
+    min-width: 100px;
+    }
+    
+    #rowchange{
+    margin-right:0px;
+    margin-left:-30px;
+    }
 
  	</style>
    
@@ -309,10 +318,10 @@ div.memberListMain{
                                     </c:if>
                                     <c:if test='${funList.contains("商城")}'>
                                     <li class="dropdown">
-                                        <a href="#">Mall</a>
+                                        <a href="#">Shop</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">CommodityCategory</a></li>
-                                            <li><a href="#">Commodity</a></li>
+                                        	<li><a href="#">Commodity</a></li>
+                                            <li><a href="#">Category</a></li>
                                             <li><a href="#">Order</a></li>
                                         </ul>
                                     </li>
@@ -341,24 +350,22 @@ div.memberListMain{
                                         </ul>
                                     </li>
                                     </c:if>
-<!--                                     <li> -->
-<%--                                     <c:if test="${empty sessionScope.coaVO}"> --%>
-<%--                                     	<img src="${pageContext.request.contextPath}/resource/images/admin.jpg" width=30px></img> --%>
-<%--                                 	</c:if> --%>
-<%--                                 	<c:if test="${!empty sessionScope.coaVO}"> --%>
-<%--                                     	<img src="${pageContext.request.contextPath}${coaVO.pic}" width=30px></img> --%>
-<%--                                 	</c:if> --%>
-<!--                                 	</li> -->
 
                             		<c:if test="${empty sessionScope.coaVO}">
 								          	<li class="contact-icon">
 								            	<a href="#" style="margin-right:-20px;"><img class="mic123" src="<%=request.getContextPath()%>/resource/images/backContact.jpg" width=50px></a>
 								            </li>
                                 	</c:if>
-                                <li>${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</li>
-                                <li><a href="<%=request.getContextPath()%>/admin_info/admi.do?action=logOut">登出</a></li>
 
-                                	
+                             <li class="dropdown"><a href="#"}>${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</a>
+                            	 <ul class="sub-menu" id="logoutmenu">
+                    			  <li>
+                    			  <div>
+                    			  	<a href="<%=request.getContextPath()%>/admin_info/admi.do?action=logOut">登出</a>
+                    			  	</div>
+                    			  </li>
+                  				</ul>
+                            </li>
                                 </ul>
                             </nav>
                         </div>
@@ -393,8 +400,8 @@ div.memberListMain{
         </header>
         <div class="section pt-7 pb-7">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-9 col-md-push-3">
+                <div class="row" id="rowchange">
+                    <div class="col-md-10 col-md-push-2">
                         <!--內容 -->
                         <div class="category-carousel-2 mb-3" data-auto-play="true" data-desktop="3" data-laptop="3" data-tablet="2" data-mobile="1">
                             <div class="cat-item">
@@ -414,7 +421,7 @@ div.memberListMain{
   	<a id="member${memVO.memID}" href="#" class="contactMember" data-memID="member${memVO.memID}" style="order:0">
 		<li style="order:2;" class="memberID">ID:${memVO.memID}-${memVO.memName}</li>
 		<div style="order:3;" class="memberMsgLatest" id="member${memVO.memID}Latest"></div>
-		<div class="memberPic" style="order:1;"><img src="<%=request.getContextPath()%>/resource/images/3.jpg"/></div>
+		<div class="memberPic" style="order:1;"><img src="<%=request.getContextPath()%>/commodity/comPic.do${memVO.memPicSrc}&pic=1"/></div>
   	</a>
   </c:forEach>
   </ul>
@@ -433,7 +440,7 @@ div.memberListMain{
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-md-pull-9">
+                    <div class="col-md-2 col-md-pull-10">
                         <div class="sidebar">
                             <!--新刪改查link -->
                             <div class="widget widget-product-categories">
@@ -467,7 +474,7 @@ div.memberListMain{
                                         <li><a href=${searchResByMem} class=disabled>會員預約</a></li>
                                         <li><a href=${searchResByLes} class=disabled>課堂預約</a></li>                                    
                                     </div>
-                                    <div id=CommodityCategory>
+                                    <div id=Category>
                                     	<li><a href=${addComc}>新增類別</a></li>
 		                            	<li><a href=${listAllComc}>類別列表</a></li>
                                     </div>
@@ -564,11 +571,11 @@ div.memberListMain{
     $(".searchBtn a").click(function(e){
     	e.preventDefault();
     	let search = $(".searchBtn>input").val();
-    	let array = $(".contactMember").children();
+    	let array = $(".contactMember").children("li");
     	for(let i = 0; i < array.length ; i++){
-    		array.eq(i).css("display","none");
+    		array.eq(i).parent().css("display","none");
     		if ( array.eq(i).text().indexOf(search) != -1 ){
-    			array.eq(i).css("display","list-item");	
+    			array.eq(i).parent().css("display","");	
     		}
     	}
     });

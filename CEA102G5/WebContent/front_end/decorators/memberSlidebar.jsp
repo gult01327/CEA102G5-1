@@ -12,10 +12,10 @@
 
 <div class="row">
 
-<div class="col-md-9 col-md-push-3">
+<div class="col-md-10 col-md-push-2">
 	<sitemesh:write property='body' />
 </div>
-<div class="col-md-3 col-md-pull-9">
+<div class="col-md-2 col-md-pull-10">
                         <div class="sidebar">
                             <!--新刪改查link -->
                              <c:if test="${not empty sessionScope.memVO}">

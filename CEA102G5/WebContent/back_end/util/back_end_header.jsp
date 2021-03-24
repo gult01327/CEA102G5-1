@@ -267,7 +267,7 @@ div.memberListMain{
 <c:set var="listAllComComment" value='${pageContext.request.contextPath}/back_end/commodity/listAllComComment.jsp' />
 <!-- 訂單 -->
 <c:set var="listAllOm" value='${pageContext.request.contextPath}/back_end/commodity/listAllOm.jsp' />
-
+<c:set var="listOd_ByOmID" value='${pageContext.request.contextPath}/back_end/commodity/listOd_ByOmID.jsp' />
 <!-- 會員 -->
 <c:set var="memSelect" value='${pageContext.request.contextPath}/back_end/member/memSelect.jsp' />
 <c:set var="listAllMem" value='${pageContext.request.contextPath}/back_end/member/listAllMem.jsp' />
@@ -480,10 +480,11 @@ div.memberListMain{
                                     </div>
                                     <div id=Commodity>
                                     	<li><a href=${addCom}>新增商品</a></li>
+                                    	<li><a href=${listAllCom}>商品列表</a></li>
                                     	<li><a href=${comSelectPage}>搜尋商品</a></li>
                                     	<li><a href=${listCom_ByCompositeQuery} class=disabled>查詢結果</a></li>
                                     	<li><a href=${updateCom} class=disabled>編輯商品</a></li>
-		                            	<li><a href=${listAllCom}>商品列表</a></li>
+		                            	
                                     </div>
                                     <div id=Recipe>
                                    
@@ -496,13 +497,17 @@ div.memberListMain{
                                     
                                     <div id=Order>
                                    		<li><a href=${listAllOm}>訂單列表</a></li>
+                                   		<li><a href=${listOd_ByOmID} class=disabled>訂單明細</a></li>
                                    		<li><a href=${listAllComComment}>未回覆清單</a></li>
+                                   		
                                     </div>
                                     <div id=Member>
+                                    	<li><a href=${listAllMem}>會員列表</a></li>
+                                    	<li><a href=${updateMem} class=disabled>編輯會員</a></li>
                                     	<li><a href=${memSelect}>搜尋會員</a></li>
                                     	<li><a href=${listOneMem} class=disabled>搜尋結果</a></li>
-                                    	<li><a href=${updateMem} class=disabled>編輯會員</a></li>
-                                    	<li><a href=${listAllMem}>會員列表</a></li>
+                                    	
+                                    	
                                     
                                     </div>
                                     <div id=Admin>

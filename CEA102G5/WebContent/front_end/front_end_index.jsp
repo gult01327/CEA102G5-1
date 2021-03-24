@@ -226,8 +226,25 @@
 	}
 	#coursetable{
 	width:400px;
-	margin-left:280px;
+	margin-left:45%;
 	margin-bottom:30px;
+	}
+	.coursetbody:hover{
+	text-shadow:2px 2px 2px #777;
+	 -o-transition: color .3s linear;
+    -webkit-transition: color .3s linear;
+    -moz-transition: color .3s linear;
+    transition:  color .3s linear;
+	}
+	#coursetable:hover{
+	 box-shadow:3px 3px 9px white;
+	 -o-transition: color .10s linear;
+    -webkit-transition: color .10s linear;
+    -moz-transition: color .10s linear;
+    transition:  color .10s linear;
+	}
+	#changepic_text{
+	margin-bottom:20px;
 	}
   </style>
 </head>
@@ -477,9 +494,8 @@
     <div class="changepic">
       <div data-aos="zoom-out">
         <div class="text-center mb-1 section-pretitle">Tasty & Function</div>
-        <h2 class="text-center section-title mtn-2">EATIN Store</h2>
+        <h2 id="changepic_text" class="text-center section-title mtn-2">Health is Wealth</h2>
       </div>
-      <h1 class="text-center section-title mtn-2" style="opacity:0">EATIN Store</h1>
       <div class="container">
         <div class="row">
           <div class="col-6">
@@ -518,22 +534,22 @@
           </div>
           <div class="col-sm-6">
             <div class="accordion icon-left" id="accordion1">
-             <jsp:useBean id="lesSvc" class="com.lesson.model.LesService"/> 
-				<c:forEach var="lesVO" items="${lesSvc.allTrueToFront}" begin="0" end="2">
-              	<div class="gymtext">
+    <jsp:useBean id="lesSvc" class="com.lesson.model.LesService"/> 
+	<c:forEach var="lesVO" items="${lesSvc.allTrueToFront}" begin="0" end="2">
+              <div class="gymtext">
                 
-		<div>
-			<a href="<%=request.getContextPath()%>/front_end/lesson/les.do?action=searchOneLesson&lesID=${lesVO.lesID}">
-			<table class="table" id="coursetable">
-			<tbody class="coursetbody">
-			<tr><th> ${lesVO.lesName}</th><td>$ ${lesVO.lesPrice}</td></tr>
-			<tr><th>上課時間</th><td>${lesVO.lesDate} ${lesVO.lesTime}</td></tr>
-			<tr><th>報名時間</th><td>${lesVO.lesBegin}~${lesVO.lesEnd}</td></tr>
-			<tr><th>剩餘名額</th><td> ${(lesVO.lesAvailable-lesVO.lesAlready)}</td></tr>
-			</tbody>
-			</table>
-			</a>
-		</div>
+			<div data-aos="fade-right">
+				<a href="<%=request.getContextPath()%>/front_end/lesson/les.do?action=searchOneLesson&lesID=${lesVO.lesID}">
+					<table class="table" id="coursetable">
+						<tbody class="coursetbody">
+						<tr><th> ${lesVO.lesName}</th><td>$ ${lesVO.lesPrice}</td></tr>
+						<tr><th>上課時間</th><td>${lesVO.lesDate} ${lesVO.lesTime}</td></tr>
+						<tr><th>報名時間</th><td>${lesVO.lesBegin}~${lesVO.lesEnd}</td></tr>
+						<tr><th>剩餘名額</th><td> ${(lesVO.lesAvailable-lesVO.lesAlready)}</td></tr>
+						</tbody>
+					</table>
+				</a>
+			</div>
 
               </div>
               </c:forEach>
@@ -613,7 +629,7 @@
         <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
         <c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}" begin="0" end="2">
           <div class="col-md-4">
-            <div data-aos="fade-up" data-aos-duration="100">
+           <div data-aos="flip-left">
               <div class="blog-grid-item">
                 <div class="post-thumbnail">
                   <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">

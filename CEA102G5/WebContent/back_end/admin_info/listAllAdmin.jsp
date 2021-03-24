@@ -4,6 +4,11 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.admin_info.model.*"%>
 
+<%
+	AdmiService admSvc = new AdmiService();
+	List<AdmiVO> list = admSvc.getAll();
+	pageContext.setAttribute("list",list);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -17,15 +22,19 @@
 
 <body>
 <style>
-	.title{
 	
+	.title{
 	text-align:center;
-	margin-bottom:10px;
+	margin-bottom:20px;
+	
 	}
-
+	div.pagination{
+	margin:20 auto;
+}
+	
 </style>
 	
-		<h4 class="title">管理員列表</h4>
+		<h4 id="title" class="page-title text-center" style='color:black;'>Admin List</h4>
 <jsp:useBean id="admiSvc" class="com.admin_info.model.AdmiService"/>
 			
 	<table class="table">
@@ -39,8 +48,9 @@
 		<th>日期</th>
 		<th colspan=2>編輯</th>
 	</tr>
-	
-<c:forEach var="admiVO" items="${admiSvc.all}">
+						
+	<%@ include file="page1.file" %> 
+<c:forEach var="admiVO" items="${admiSvc.all}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	
 	<tr class="admin">
 		<td class="admID" style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}" >${admiVO.admID}</td>
@@ -65,11 +75,9 @@
 </c:forEach>
 
 </table>
+<%@ include file="page2.file" %>
 
-		
-		
 <script type="text/javascript">
-
 	var locate;
 $('.change').click(function(){
 	

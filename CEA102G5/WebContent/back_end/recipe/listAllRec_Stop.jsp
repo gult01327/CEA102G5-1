@@ -36,7 +36,7 @@
 
 <style>
   table {
-	width: 1000px;
+	width: 880px; 
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -72,12 +72,12 @@
 			<td class='status' value='${recVO.recStatus}'>已停權</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/recipe/rec.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="查看食譜明細">
+			    <input type="submit" value="查看食譜明細" style='padding: 5px 5px; font-size:12px;'>
 			    <input type="hidden" name="recID"	value="${recVO.recID}">
 			    <input type="hidden" name="action" value="GetRecDetail_ByrecID"></FORM>
 			</td>
 			<td>
-			    <input id="updateStatus" type="button" value="上架該食譜">
+			    <input id="updateStatus" type="button" value="上架該食譜" style='padding: 5px 5px; font-size:12px;'>
 			    <input type="hidden" name="recID"	value="${recVO.recID}">
 			</td>
 		</tr>

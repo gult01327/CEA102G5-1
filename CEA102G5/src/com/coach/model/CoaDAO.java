@@ -178,7 +178,6 @@ public class CoaDAO implements CoaDAO_interface {
 				coaVO.setCoaPassword(rs.getString("COA_PASSWORD"));
 				coaVO.setCoaSex(rs.getString("COA_SEX"));
 				coaVO.setCoaStatus(rs.getBoolean("COA_STATUS"));
-				coaVO.setCoaPicture(rs.getBytes("COA_PICTURE"));
 			}
 
 		} catch (SQLException se) {
@@ -233,7 +232,6 @@ public class CoaDAO implements CoaDAO_interface {
 				coaVO.setCoaPassword(rs.getString("COA_PASSWORD"));
 				coaVO.setCoaSex(rs.getString("COA_SEX"));
 				coaVO.setCoaStatus(rs.getBoolean("COA_STATUS"));
-				coaVO.setCoaPicture(rs.getBytes("COA_PICTURE"));
 				set.add(coaVO);
 			}
 
@@ -320,7 +318,6 @@ public class CoaDAO implements CoaDAO_interface {
 				coaVO.setCoaPassword(rs.getString("COA_PASSWORD"));
 				coaVO.setCoaSex(rs.getString("COA_SEX"));
 				coaVO.setCoaStatus(rs.getBoolean("COA_STATUS"));
-				coaVO.setCoaPicture(rs.getBytes("COA_PICTURE"));
 				set.add(coaVO);
 			}
 
@@ -376,7 +373,6 @@ public class CoaDAO implements CoaDAO_interface {
 				coaVO.setCoaPassword(rs.getString("COA_PASSWORD"));
 				coaVO.setCoaSex(rs.getString("COA_SEX"));
 				coaVO.setCoaStatus(rs.getBoolean("COA_STATUS"));
-				coaVO.setCoaPicture(rs.getBytes("COA_PICTURE"));
 				set.add(coaVO);
 			}
 
@@ -428,7 +424,6 @@ public class CoaDAO implements CoaDAO_interface {
 				coaVO.setCoaPassword(rs.getString("COA_PASSWORD"));
 				coaVO.setCoaSex(rs.getString("COA_SEX"));
 				coaVO.setCoaStatus(rs.getBoolean("COA_STATUS"));
-				coaVO.setCoaPicture(rs.getBytes("COA_PICTURE"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());

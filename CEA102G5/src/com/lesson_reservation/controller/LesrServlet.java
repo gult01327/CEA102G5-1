@@ -140,6 +140,25 @@ public class LesrServlet extends HttpServlet {
 			/*************************** 其他可能的錯誤處理 **********************************/
 
 		}
+		if ("getOne2".equals(action)) { // 來自listAllEmp.jsp的請求
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer lesID = new Integer(req.getParameter("les_ID"));
+			Integer memID = new Integer(req.getParameter("mem_ID"));
+
+			/*************************** 2.開始查詢資料 ****************************************/
+			LesrService lesrSvc = new LesrService();
+			LesrVO lesrVO = lesrSvc.getOneLesr(lesID, memID);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("lesrVO", lesrVO); // 資料庫取出的empVO物件,存入req
+			String url = "/front_end/reservation/update1Reservation.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+
+			/*************************** 其他可能的錯誤處理 **********************************/
+
+		}
 
 		if ("getOne1".equals(action)) { // 來自listAllEmp.jsp的請求
 
@@ -293,9 +312,7 @@ public class LesrServlet extends HttpServlet {
 			
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 			String url = req.getContextPath()+"/front_end/reservation/listReservation.jsp";
-			res.sendRedirect(url);
-
-			
+			res.sendRedirect(url);		
 		}
 
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp

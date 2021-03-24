@@ -13,6 +13,10 @@ public class LesService {
 	public void cancelLesson(Integer lesID) {
 		dao.delete(lesID);
 	}
+	
+	public String frontTotal() {
+		return dao.frontTotal();
+	}
 
 	public void addLesson(Integer coaID, Integer talID, String lesName, java.sql.Date lesDate, String lesTime,
 			java.sql.Date lesBegin, java.sql.Date lesEnd, byte[] lesPicture, byte[] lesVideo, Integer lesAvailable,

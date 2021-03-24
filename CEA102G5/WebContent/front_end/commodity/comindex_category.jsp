@@ -112,17 +112,18 @@
 <c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
-                                    <a href="shop-detail.html">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
                                         <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
                                     </a>
                                     <div class="product-action">
                                         <span class="add-to-cart">
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
                                         </span>
-                                            <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
-                                            <input type="hidden" id="comID" value="${comVO.comID}">
-                                        <span class="wishlist">
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to wishlist"></a>
+                                        <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                                        <input type="hidden" id="comID" value="${comVO.comID}">
+                                        <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
+                                        <span class="wishlist" style="cursor:pointer;">
+
                                         </span>
                                         <span class="compare">
                                             Sales:${comVO.comSales}
@@ -167,7 +168,73 @@
      <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
     
     <script type="text/javascript">	
-		$(".product-grid").on("click",".add-to-cart",function(){
+    $(document).ready(function(){
+		$(".wishlist").each(function(){
+				let wishlist=$(this);
+	        	let comID =wishlist.prev().prev().val();
+				let memID = wishlist.prev().prev().prev().val();
+				let location = wishlist.prev().val();
+				if(memID===null||memID===''){
+					wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+				}else{
+					$.ajax({
+						url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+						type:"post",
+						data:{
+							action:"firstload",
+							comID:comID,
+							memID:memID,
+						},
+						cache:false,
+						ifModified :true,
+						success : function(date){
+							if(date==="true"){
+							console.log("123");
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+								
+							}else{
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+								
+							}
+						}
+					});
+				}
+	        });
+	    });
+	    
+	    $(".wishlist").click(function(){
+	    	let wishlist=$(this);
+	    	let comID =wishlist.prev().prev().val();
+			let memID = wishlist.prev().prev().prev().val();
+			let location = wishlist.prev().val();
+			if(memID == ''){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
+				return;
+			}
+	
+			$.ajax({
+				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+				type:"post",
+				data:{
+					action:"insertByRedis",
+					comID:comID,
+					memID:memID,
+				},
+				cache:false,
+				ifModified :true,
+				success : function(date){
+					if(date==="true"){
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+					}else{
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+					}
+				}
+			});
+			
+		 });
+    	$(".product-grid").on("click",".add-to-cart",function(){
 			let memID = $(this).next().val();
 			let comID = $(this).next().next().val();
 			if(memID == ""){

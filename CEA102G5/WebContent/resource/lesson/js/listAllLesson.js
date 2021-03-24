@@ -1,6 +1,8 @@
-window.onload = function() {
-	getSchedule();
-};
+
+
+$(document).ready(function() {
+			getSchedule();
+		});
 
 
 function lookUp(lesID) {

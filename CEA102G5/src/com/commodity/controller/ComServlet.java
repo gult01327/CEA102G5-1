@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.hibernate.type.NumericBooleanType;
 import org.json.JSONArray;
 
 import com.commodity.model.ComService;
@@ -255,50 +256,78 @@ public class ComServlet extends HttpServlet {
 		//來自addCom.jsp的請求
 		if("insert".equals(action)) {
 			
-			List<String> errorMsgs = new LinkedList<String>();
+			Map<String,String> errorMsgs = new LinkedHashMap<String, String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			
 			try {
 				int comcID = Integer.parseInt(request.getParameter("comcID"));
 				String comName = request.getParameter("comName");
 				if(comName == null || comName.trim().length()==0) {
-					errorMsgs.add("員工姓名，請勿空白");
+					errorMsgs.put("comName","商品名稱請勿空白");
 				}
 				
 				int comPrice = 0;
 				try {
 					comPrice = Integer.parseInt(request.getParameter("comPrice"));
 				} catch (NumberFormatException e) {
-					comPrice = 0;
-					errorMsgs.add("價格請填數字");
+					errorMsgs.put("comPrice","價格請填數字");
 				}
 				
 				byte[] comPicture =null;
 				
-				try {
-						Part part = request.getPart("upfile1");
-						InputStream is = part.getInputStream();
-						comPicture = new byte[is.available()];
-						is.read(comPicture);
-						is.close();
 
-				} catch (Exception e) {
-					errorMsgs.add("圖片1有問題");
+				Part part = request.getPart("upfile1");
+				if(part.getSize()==0) {
+					errorMsgs.put("comPicture", "請上傳圖片!");
+				}
+				InputStream is = part.getInputStream();
+				comPicture = new byte[is.available()];
+				is.read(comPicture);
+				is.close();
+
+				byte[] comPicture2 =null;				
+				String comContent = request.getParameter("comContent");
+
+				int comStatus = 0;
+				try {
+					comStatus = Integer.parseInt(request.getParameter("comStatus"));
+				} catch (NumberFormatException e) {
+					errorMsgs.put("comStatus","狀態請填數字");
 				}
 				
-				byte[] comPicture2 =null;
-				
-
-				
-				String comContent = request.getParameter("comContent");
-				int comStatus = Integer.parseInt(request.getParameter("comStatus"));
-				int comWeight = Integer.parseInt(request.getParameter("comWeight"));
+				int comWeight = 0;
+				try {
+					comWeight = Integer.parseInt(request.getParameter("comWeight"));					
+				} catch (NumberFormatException e) {
+					errorMsgs.put("comWeight","重量請填數字");
+				}
 				String comUnit = request.getParameter("comUnit");
-				float comCal = Float.parseFloat(request.getParameter("comCal"));
-				float comCarb = Float.parseFloat(request.getParameter("comCarb"));
-				float comPro = Float.parseFloat(request.getParameter("comPro"));
-				float comFat = Float.parseFloat(request.getParameter("comFat"));
-				String comProp = request.getParameter("comProp");
+				float comCal = 0;
+				try {
+					Float.parseFloat(request.getParameter("comCal"));					
+				} catch (NumberFormatException e) {
+					errorMsgs.put("comCal","熱量請填數字");
+				}
+				float comCarb = 0;
+				try {
+					Float.parseFloat(request.getParameter("comCarb"));									
+				} catch (NumberFormatException e) {
+					errorMsgs.put("comCarb","碳水請填數字");
+				}
+				float comPro = 0;
+				try {
+					Float.parseFloat(request.getParameter("comPro"));									
+				} catch (NumberFormatException e) {
+					errorMsgs.put("comPro","蛋白質請填數字");
+				}
+				
+				float comFat = 0;
+				try {
+					Float.parseFloat(request.getParameter("comFat"));									
+				} catch (NumberFormatException e) {
+					errorMsgs.put("comFat","脂肪請填數字");
+				}
+				String comProp = "";
 				
 				ComVO comVO = new ComVO();
 				comVO.setComcID(comcID);
@@ -318,6 +347,7 @@ public class ComServlet extends HttpServlet {
 				
 				
 				if(!errorMsgs.isEmpty()) {
+					request.setAttribute("comVO",comVO);
 					RequestDispatcher failureView = request.getRequestDispatcher("/back_end/commodity/addCom.jsp");
 					failureView.forward(request, response);
 					return;
@@ -333,7 +363,7 @@ public class ComServlet extends HttpServlet {
 				
 				
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+				errorMsgs.put("errorMsg",e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/back_end/commodity/addCom.jsp");
 				failureView.forward(request, response);
 			}
@@ -390,6 +420,43 @@ public class ComServlet extends HttpServlet {
 		if("listCom_ByCompositeQueryFS".equals(action)) {
 			try {
 				HttpSession session = request.getSession();//???
+				String price =request.getParameter("COM_PRICE");
+				String price2 =request.getParameter("COM_PRICE2");
+				try {	Integer min,max;
+					session.removeAttribute("error");
+					if((price.trim()).length() != 0) {
+						min =Integer.parseInt(price);
+						if((price2.trim()).length() != 0) {
+						max =Integer.parseInt(price2);
+							if(min>max) {
+								session.setAttribute("error", "Min,Max大小錯誤");
+								String url = "/front_end/commodity/comindex_category.jsp";
+								RequestDispatcher successView = request.getRequestDispatcher(url);
+								successView.forward(request, response);
+							}
+						}
+					}
+					if((price2.trim()).length() != 0) {
+						 max =Integer.parseInt(price2);
+						 if((price.trim()).length() != 0) {
+							 min =Integer.parseInt(price);
+							 if(min>max) {
+									session.setAttribute("error", "Min,Max大小錯誤");
+									String url = "/front_end/commodity/comindex_category.jsp";
+									RequestDispatcher successView = request.getRequestDispatcher(url);
+									successView.forward(request, response);
+								}
+						 }
+					}
+					
+
+				}catch(NumberFormatException e) {
+					session.setAttribute("error", "請輸入數字");
+					String url = "/front_end/commodity/comindex_category.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
+				
 				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");//???
 				LinkedHashMap<String, String[]> map1 = new LinkedHashMap<String, String[]>(request.getParameterMap());
 				session.setAttribute("map", map1);

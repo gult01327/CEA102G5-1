@@ -37,6 +37,7 @@ table {
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	text-align: center;
 }
 
 table, th, td {
@@ -51,12 +52,24 @@ th, td {
 #showID {
 	color: green;
 }
+
 </style>
 
 </head>
 <body bgcolor='white'>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
+<style>
+table {
+	width: 800px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+th{
+    text-align: center;
+}
+</style>
 
 	<table id="table-2">
 		<tr>
@@ -77,16 +90,16 @@ th, td {
 	</c:if>
 	
 
-	<table border="1" width="750">
-		<tr>
-			<th>課程編號<i class="fas fa-air-freshener"></i></th>
+	<table border="1" width="900" >
+		<tr >
+			<th>課程編號</th>
 			<th>課程名稱<i class="fas fa-running"></i></th>
+			<th>報名狀態</th>
+			<th>上課日期</th>
 			<th>課後評價</th>
 			<th>課後回覆</th>
-			<th>報名狀態</th>
-			<th>取消原因</th>
-			<th>上課日期</th>
-			<th>修改</th>
+			<th>評價</th>
+			<th>課程狀態</th>
 
 		</tr>
 
@@ -100,16 +113,16 @@ th, td {
 				<td>${lesrVO.lesID}</td>
 				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesName}</td>
 				<input type='hidden' id='memID' value='${lesrVO.memID}' />
+				<td>${(lesrVO.lesrStatus=="true"?"成功":"已取消")}</td>
+				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
 				<td>${lesrVO.lesrComments}</td>
 				<td>${lesrVO.lesrAnswer}</td>
-				<td>${(lesrVO.lesrStatus=="true"?"正常":"預約取消")}</td>
-				<td>${lesrVO.lesrReason}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				<c:if test="${lesrVO.statusNow==true}">
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/front_end/lesson.reservation/lesr.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
+						<input type="submit" value="填寫評價"> <input type="hidden"
 							name="les_ID" value="${lesrVO.lesID}"> 
 							<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
 							<input
@@ -117,7 +130,23 @@ th, td {
 							type="hidden" name="action" value="getOne">
 					</FORM>
 				</td>
-
+				<td>課程已結束</td>
+				</c:if>
+				<c:if test="${lesrVO.statusNow==false}">
+					<td>上課後可填寫</td>
+					<td>
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/front_end/lesson.reservation/lesr.do"
+						style="margin-bottom: 0px;">
+						<input type="submit" value="取消"> <input type="hidden"
+							name="les_ID" value="${lesrVO.lesID}"> 
+							<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
+							<input
+							type="hidden" name="mem_ID" value="${lesrVO.memID}"> <input
+							type="hidden" name="action" value="getOne2">
+					</FORM>
+				</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

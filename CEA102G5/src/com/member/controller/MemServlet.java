@@ -118,9 +118,10 @@ public class MemServlet extends HttpServlet {
 		
 		if("logout".equals(action)) {
 			session.removeAttribute("memVO");
-			String location = request.getParameter("location");
-			System.out.println(location);
-			response.sendRedirect(location);
+//			String location = request.getParameter("location");
+//			System.out.println(location);
+			String url = "/CEA102G5/front_end/front_end_index.jsp";
+			response.sendRedirect(url);
 		}
 		
 		

@@ -72,6 +72,7 @@
   </c:forEach>
   </select>
   <input type="submit" value="送出">
+  <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
   <input type="hidden" name="action" value="listCom_ByComcID_A">
   </FORM>
   
@@ -113,6 +114,7 @@
 		        
 		        
         <input type="submit" value="送出">
+        <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
         <input type="hidden" name="action" value="listCom_ByCompositeQuery">
      </FORM>
   </li>

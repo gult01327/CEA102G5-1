@@ -46,21 +46,24 @@
 </head>
 <body bgcolor=#E8FFE8>
 <style>
-table {
-    width: 100%;
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    background-color: white;
+ table {
+	width: 1000px;
+	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	
-}
-table, th, td {
+	display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  table, th, td {
     border: 1px solid #CCCCFF;
   }
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
 </style>
-<table id="table-1" style="border:0px #cccccc solid;">
+<table id="table-1" style="border:0px #cccccc solid;" class="table table-hover">
 	<tr><td style="border:0px #cccccc solid;">
 		 <h3>商品資料</h3>
 		 <h4><a href="<%=request.getContextPath()%>/back_end/commodity/	comSelectPage.jsp">

@@ -11,14 +11,17 @@
 <html>
 <head><title>購物車列表 - listAllCart.jsp</title>
 </head>
-<body style="width:1000px">
+<body style="width:800px">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+
 <h2 class="page-title text-center" style='color:black;'>Cart List</h2>
 				<div class="section pt-7 pb-7" width='1000px'>
 					<div class="container">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="wishlist-wrap">
-									<table class="table shop-cart">
+									<table class="table shop-cart" style="width:800px">
 										<thead>
 											<tr class="cart_item">
 												<td class="product-remove">&nbsp;</td>
@@ -30,7 +33,7 @@
 											</tr>
 										</thead>
 										<tbody>
-<form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/cart/comCart.do" method="POST">
+<form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/cart/comCart.do" method="POST" id="buycarlist">
 										<jsp:useBean id="cartSvc" class="com.cart.model.CartService"></jsp:useBean>
 										<jsp:useBean id="comSvc" class="com.commodity.model.ComService"></jsp:useBean>
 										 <c:forEach var="cartVO" items="${cartSvc.getAllByMemID(memVO.memID)}">
@@ -81,7 +84,7 @@
 									</table>
 										<input id="checkAll" type='button' value='全選'> 
 									<div class="proceed-to-checkout">
-										<input type='submit' value='確認結帳'>
+										<input type='submit' value='確認結帳' id='checkout'>
 										<input type="hidden" name="action"  value="CHECKOUT">
 									</div>
 								</div>
@@ -112,6 +115,23 @@
 
 
 <script>
+	$("#checkout").click(function(e){
+		 e.preventDefault();
+		 let checkArr =new Array();
+		 console.log($(".checkComID").prop("checked"));
+		 $(".checkComID").each(function(){
+		 console.log($(this).prop("checked"));
+			 if($(this).prop("checked")){
+			 checkArr.push('123');
+			 }
+		 });
+		 if (checkArr.length===0){
+		 	swal('錯誤！', '請選擇一項商品結帳！', 'error');
+		 }else{
+			document.getElementById("buycarlist").submit();
+		 }
+			 
+	});
 	$("#checkAll").click(function(){
 		if($(this).val() == "全選"){
 			$(".checkComID").each(function(){

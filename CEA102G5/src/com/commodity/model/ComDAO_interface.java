@@ -18,5 +18,7 @@ public interface ComDAO_interface {
     //萬用複合查詢
     public List<ComVO> getAll(Map<String,String[]> map);
     public List<ComVO> getFavorite(int memID);
+    //更改上下架
+    public void comStatusChange (int comID,int comStatus);
 
 }

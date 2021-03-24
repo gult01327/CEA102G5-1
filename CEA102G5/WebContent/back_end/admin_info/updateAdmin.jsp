@@ -13,18 +13,27 @@
 </head>
 <body>
 
+<style>
+	.tittle{
+	background-color:#rgb(179, 217, 217) !important;
+	text-align:center;
+	margin-bottom:10px;
+	}
 
-		<h1>修改後台帳號</h1>
+</style>
+
+
+		<h4 class="tittle">修改後台帳號</h4>
 	<form METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/admin_info/admi.do">
 	
 		<fieldset>
-		<legend>基本資訊:</legend>
+		
 		<label for=admName>姓名</label><span style="color:red">${errorMsgs.admName}</span><br>
-		<input id=admName type=text name=admName value="${admiVO.admName}" required="required"><br>
+		<input id=admName type="text" class="form-control" placeholder="Text input" name=admName value="${admiVO.admName}" required="required"><br>
 		<label for=admAccount>帳號</label><span style="color:red">${errorMsgs.admAccount}</span><br>
-		<input id=admAccount type=text name=admAccount value="${admiVO.admAccount}" required="required"><br>
+		<input id=admAccount type="text" class="form-control" placeholder="Text input" name=admAccount value="${admiVO.admAccount}" required="required"><br>
 		<label for=admPassword>密碼</label><span style="color:red">${errorMsgs.admPassword}</span><br>
-		<input id=admPassword type=text name=admPassword value="${admiVO.admPassword}" required="required"><br>
+		<input id=admPassword type="text" class="form-control" placeholder="Text input" name=admPassword value="${admiVO.admPassword}" required="required"><br>
 		</fieldset>
 		<fieldset>
 		<legend>權限:</legend><span style="color:red">${errorMsgs.funIDs}</span><br>

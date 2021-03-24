@@ -33,11 +33,23 @@ height:auto;
 	                                    <input type="submit" value="Search" id="inToRight1" />
 	                                
 	                            </div>
+								<div style="color:red;margin:10px 5px;">
+	                            	<%
+	                            	String error=(String)session.getAttribute("error");
+	                            	if (error!=null || error!=""){%>
+	                            		<br>${error}
+	                            	<%
+	                            	session.removeAttribute("error");
+	                            	}
+	                            	%>
+								</div>
+
 	                            <div class="widget widget_price_filter">
 	                                <h3 class="widget-title">Filter by price</h3>
 	                                <div class="price_slider_wrapper">
 	                                    <div class="price_slider" style="display:none;"></div>
 	                                    <div class="price_slider_amount">
+	                                    
 	                                        <input type="text" id="min_price" name="COM_PRICE" value="" data-min="0" placeholder="Min price" />
 	                                        <input type="text" id="max_price" name="COM_PRICE2" value="" data-max="150" placeholder="Max price" />
 	                                        <input type="submit" value="Filter" id="inToRight1" />

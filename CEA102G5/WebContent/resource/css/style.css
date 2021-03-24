@@ -53,7 +53,6 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale
         }
-
         .organik-hours-support:before {
             content: "\e91e"
         }
@@ -304,7 +303,7 @@
             -webkit-appearance: button;
         }
         button, input[type="button"], input[type="reset"], input[type="submit"] {
-            padding: 12px 29px;
+            padding: 12px 20px;
             border: 1px solid;
             border-color: #5fbd74;
             border-radius: 3px;
@@ -845,8 +844,8 @@
         }
         .header {
             width: 100%;
-            margin-top: 0px;
-            margin-bottom: 0px;
+            margin-top: -10px;
+            margin-bottom: -30px;
             background-color: rgba(255, 255, 255, .3);
             position: relative;
             z-index: 99;
@@ -864,7 +863,7 @@
             -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
             -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
             box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
-            z-index: 99;
+            z-index: 999;
         }
         .header.header-3.scrolling-menu,
         .header.header-4.scrolling-menu {
@@ -1203,13 +1202,13 @@
         header.header-3 nav.menu .main-menu>li>a,
         header.header-4 nav.menu .main-menu>li>a {
             text-transform: uppercase;
-            padding: 60px 20px;
+            padding: 55px 15px;
         }
         header.header-1.scrolling-menu nav.menu .main-menu>li>a,
         header.header-2.scrolling-menu nav.menu .main-menu>li>a,
         header.header-3.scrolling-menu nav.menu .main-menu>li>a,
         header.header-4.scrolling-menu nav.menu .main-menu>li>a {
-            padding: 35px 20px;
+            padding: 35px 15px;
         }
         header.header-3 nav.menu .main-menu>li>a,
         header.header-4 nav.menu .main-menu>li>a {
@@ -1233,17 +1232,18 @@
             font-size: 15px;
         }
         .menu .main-menu .sub-menu {
+        margin-top: -30px;
             position: absolute;
-            top: 110%;
+            top: 50%;
             left: 0;
             visibility: hidden;
-            margin: 0;
-            min-width: 270px;
+/*             margin: 0; */
+            min-width: 200px;
             width: 100%;
             background-color: #fff;
             opacity: 0;
             transition: all .3s ease;
-            padding: 20px 0;
+            padding: 10px 0;
             list-style: none;
             text-align: left;
             text-transform: none;

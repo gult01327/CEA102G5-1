@@ -57,118 +57,65 @@ pageContext.setAttribute("list",list);
   	resize:none;
   }
 </style>
-<h2 class="page-title text-center" style='color:black;'>Order Detail</h2>
+<h2 class="page-title text-center" style='color:black;'>Favorite Commodity</h2>
 
 	
 
 
-<table>
+<table style="border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;">
 	<tr>
-		<th>商品編號</th>
-		<th>商品類別</th>
 		<th>商品名稱</th>
 		<th>商品價格</th>
 		<th>商品圖片</th>
 <!-- 		<th>商品圖片2</th> -->
 		<th>商品簡介</th>
-		<th>商品狀態</th>
-		<th>商品重量</th>
-		<th>商品單位</th>
-		<th>商品熱量(cal)</th>
-		<th>商品碳水(g)</th>
-		<th>商品蛋白質(g)</th>
-		<th>商品脂肪(g)</th>
-		<th>商品特性</th>
 		<th>商品銷量</th>
-		<th>商品創建時間</th>
-		
-		
 	</tr>
 
 	<c:forEach var="comVO" items="${list}">
 		
 		<tr>
-			<td>${comVO.comID}</td>
-			<td>
-			<c:forEach var="comcVO" items="${comcSvc.all}">
-                    <c:if test="${comVO.comcID==comcVO.comcID}">
-	                   ${comcVO.comcName}
-                    </c:if>
-                </c:forEach>
-			</td>
-			<td>${comVO.comName}</td>
+			<td ><a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}" style="color:blue">${comVO.comName}</a></td>
 			<td>$ ${comVO.comPrice}</td>
 			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" height="100" width="100"></td>
 <%-- 			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=2" height="100" width="100"></td> --%>
 			<td>${comVO.comContent}</td>
-			<td>
-			<c:if test="${comVO.comStatus==1}">
-				下架
-			</c:if>
-			<c:if test="${comVO.comStatus==0}">
-				上架
-			</c:if>
+			<td align="center">${comVO.comSales}</td>
+			<td align="center" style="border-top:0px #FFD382 solid;border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;">
+				<img alt="" src="<%=request.getContextPath()%>/resource/images/trash.png" id="dele">
+				<input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                <input type="hidden" id="comID" value="${comVO.comID}">
+                <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
 			</td>
-			<td>${comVO.comWeight}</td>
-			<td>${comVO.comUnit}</td>
-			<td>${comVO.comCal}</td>
-			<td>${comVO.comCarb}</td>
-			<td>${comVO.comPro}</td>
-			<td>${comVO.comFat}</td>
-			<td>${comVO.comProp}</td>
-			<td>${comVO.comSales}</td>
-			<td>${comVO.comTime}</td>
-<!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/commodity/com.do" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="修改"> -->
-<%-- 			     <input type="hidden" name="comID"  value="${comVO.comID}"> --%>
-<%-- 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller--> --%>
-<!-- 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
-<!-- 			</td> -->
-<!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/commodity/com.do" style="margin-bottom: 0px;"> --%>
-<%-- 			     <input type="submit" value="${(comVO.comStatus==0)?"下架":"上架" }"> --%>
-<%-- 			     <input type="hidden" name="comID"  value="${comVO.comID}"> --%>
-<%-- 			     <input type="hidden" name="comName"  value="${comVO.comName}"> --%>
-<%-- 			     <input type="hidden" name="comStatus"  value="${comVO.comStatus}"> --%>
-<%-- 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller--> --%>
-<!-- 			     <input type="hidden" name="action" value="comStatusChange"></FORM> -->
-<!-- 			</td> -->
 		</tr>
 	</c:forEach>
 </table>
 
 
-<div class="modal fade" id="msgTextDiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle">會員評價</h3>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div>
-        <img class='star' id='star1' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
-        <img class='star' id='star2' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
-        <img class='star' id='star3' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
-        <img class='star' id='star4' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
-        <img class='star' id='star5' src="<%=request.getContextPath()%>/resource/images/starempty.png" alt="" width="30px" height="30px">
-        <input id='score' name='score' type="hidden" value="">
-    </div>
-        <textarea id='msgText' cols="60" rows="10" placeholder="請輸入評價"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button class='submitbtn' type="button" class="btn btn-primary">送出回覆</button>
-        <input type='hidden' id='omIDforMsg' value=''>
-        <input type='hidden' id='comIDforMsg' value=''>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script type="text/javascript">
-var servletPathName ="${pageContext.request.requestURI}";
+
+$(document).on('click','#dele',function(){
+	let del=$(this);
+	console.log("123");
+	let comID =del.next().next().val();
+	let memID =del.next().val();
+	let location = del.next().next().next().val();
+	$.ajax({
+		url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+		type:"post",
+		data:{
+			action:"insertByRedis",
+			comID:comID,
+			memID:memID,
+		},
+		cache:false,
+		ifModified :true,
+		success : function(date){
+			del.parent().parent().empty();	
+		}
+	});
+	
+ });
 </script>
 
 

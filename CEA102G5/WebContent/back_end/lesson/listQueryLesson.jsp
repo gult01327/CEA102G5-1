@@ -82,7 +82,7 @@ div#sel, table#view{
 
 <div class='resultBox'>
 <div class='result' id=viewBlock>
-	<table id=view style='width:500px;'>
+	<table id=view style='width:500px;' class="table table-hover">
     	<tr id=thRow><th>課名</th><th>專長</th><th>日期</th><th>已預約</th><th>教練</th></tr>
 	</table>
 </div>

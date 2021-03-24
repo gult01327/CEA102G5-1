@@ -55,7 +55,7 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h3>填寫資料</h3>
+	<h3>填寫評價</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -85,25 +85,25 @@ th, td {
 					value="<%=lesrVO.getLesrComments()%>" /></td>
 			</tr>
 
-			<tr>
-				<td>課後回覆:</td>
-				<td><%=lesrVO.getLesrAnswer()%></td>
-			</tr>
-			<tr>
+<!-- 			<tr> -->
+<!-- 				<td>課後回覆:</td> -->
+<%-- 				<td><%=lesrVO.getLesrAnswer()%></td> --%>
+<!-- 			</tr> -->
+<!-- 			<tr> -->
 
-				<td>預約狀態:</td>
-				<td><select name="lesr_status"
-					value="<%=lesrVO.getLesrStatus()%>">
-						<option value="true">預約</option>
-						<option value="false">取消</option>
-				</select></td>
+<!-- 				<td>預約狀態:</td> -->
+<!-- 				<td><select name="lesr_status" -->
+<%-- 					value="<%=lesrVO.getLesrStatus()%>"> --%>
+<!-- 						<option value="true">預約</option> -->
+<!-- 						<option value="false">取消</option> -->
+<!-- 				</select></td> -->
 
-			</tr>
-			<tr>
-				<td>取消原因:</td>
-				<td><input type="TEXT" name="lesr_reason" size="45"
-					value="<%=lesrVO.getLesrReason()%>" /></td>
-			</tr>
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td>取消原因:</td> -->
+<!-- 				<td><input type="TEXT" name="lesr_reason" size="45" -->
+<%-- 					value="<%=lesrVO.getLesrReason()%>" /></td> --%>
+<!-- 			</tr> -->
 
 			<tr>
 				<td>上課日期:</td>
@@ -116,6 +116,8 @@ th, td {
 		<input	type="hidden" name="les_ID" value="<%=lesrVO.getLesID()%>">  
 		<input	type="hidden" name="mem_ID" value="<%=lesrVO.getMemID()%>"> 
 		<input	type="hidden" name="lesr_answer" value="<%=lesrVO.getLesrAnswer()%>">
+		<input	type="hidden" name="lesr_status" value="<%=lesrVO.getLesrStatus()%>"> 
+		<input	type="hidden" name="lesr_reason" value="<%=lesrVO.getLesrReason()%>"> 
 		<input	type="hidden" name="lesr_time" value="<%=lesrVO.getLesrTime()%>">
 		
 		<!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->

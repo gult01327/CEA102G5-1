@@ -103,12 +103,12 @@
 		</video>
 	</div>
 	<div class=infoContainer>
-		<table>
-			<tr><th>教練</th><td><a href="<%=request.getContextPath()%>/front_end/lesson/listOneCoach.jsp?coaID=${lesVO.coaID}">${lesVO.coaName}</a></td></tr>
+		<table class="table table-hover">
+			<tr id=clickCoach><th>教練</th><td><a href="<%=request.getContextPath()%>/front_end/lesson/listOneCoach.jsp?coaID=${lesVO.coaID}">${lesVO.coaName}</a></td></tr>
 			<tr><th>專長</th><td>${lesVO.talName}</td></tr>
 			<tr><th>價格</th><td>${lesVO.lesPrice}</td></tr>
-			<tr><th>上課時間</th><td>${lesVO.lesDate}-${lesVO.lesTime}</td></tr>
-			<tr><th>報名時間</th><td>${lesVO.lesBegin}-${lesVO.lesEnd}</td></tr>
+			<tr><th>上課時間</th><td>${lesVO.lesDate} ${lesVO.lesTime}</td></tr>
+			<tr><th>報名時間</th><td>${lesVO.lesBegin}~${lesVO.lesEnd}</td></tr>
 			<tr><th>剩餘名額</th><td>${(lesVO.lesAvailable-lesVO.lesAlready)}</td></tr>
 		</table>
 	</div>
@@ -146,6 +146,10 @@
 if($("#favorite").val()=="已收藏"){
 	 $("#favorite").attr("disabled","true");
 }
+
+$("#clickCoach").click(function(){
+	window.location.href = $(this).find("a").attr("href");
+});
 
 $("#favorite").on("click",function(){
 	if(memID== -1){		

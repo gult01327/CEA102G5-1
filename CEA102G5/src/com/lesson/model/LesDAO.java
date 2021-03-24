@@ -18,11 +18,11 @@ public class LesDAO implements LesDAO_interface {
 	private static final String INSERT = "INSERT INTO LESSON (COA_ID,TAL_ID,LES_NAME,LES_DATE,LES_TIME,LES_PICTURE"
 			+ ",LES_VIDEO,LES_BEGIN,LES_END,LES_AVAILABLE,LES_PRICE)" + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String ALL = "SELECT * FROM LESSON";
-	private static final String BYCOACH = "SELECT * FROM LESSON where COA_ID=? order by LES_DATE";
+	private static final String BYCOACH = "SELECT * FROM LESSON where COA_ID=? and les_status=true order by LES_DATE";
 	private static final String ONE = "SELECT * FROM LESSON where LES_ID=?";
 	private static final String UPDATE = "UPDATE LESSON set LES_NAME=?,LES_PRICE=?,LES_PICTURE=?,LES_VIDEO=? WHERE LES_ID=?";
 	private static final String DELETE = "UPDATE LESSON set LES_PICTURE='',LES_VIDEO='',LES_STATUS=FALSE WHERE LES_ID=?";
-
+	private static final String BYCOACHFRONT = "SELECT * FROM LESSON where COA_ID=? AND LES_END>=? and les_status=true order by LES_DATE";
 	private static final String ALLTRUE = "SELECT * FROM LESSON WHERE LES_STATUS=TRUE order by LES_DATE ,LES_TIME";
 	private static final String ALLTRUEFRONT = "SELECT * FROM LESSON WHERE LES_STATUS=TRUE AND LES_END>=? order by LES_ID desc,LES_TIME";
 	private static DataSource ds = null;
@@ -559,6 +559,69 @@ public class LesDAO implements LesDAO_interface {
 				lesVO.setLesEnd(rs.getDate("LES_END"));
 				set.add(lesVO);
 			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+
+	@Override
+	public Set<LesVO> getByCoachTrue(Integer coaID) {
+		Set<LesVO> set = new LinkedHashSet<LesVO>();
+
+		LesVO lesVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(BYCOACHFRONT);
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			String date = sf.format(new Date());
+			pstmt.setInt(1, coaID);
+			pstmt.setString(2, date);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				lesVO = new LesVO();
+				lesVO.setLesID(rs.getInt("LES_ID"));
+				lesVO.setCoaID(rs.getInt("COA_ID"));
+				lesVO.setTalID(rs.getInt("TAL_ID"));
+				lesVO.setLesName(rs.getString("LES_NAME"));
+				lesVO.setLesTime(rs.getString("LES_TIME"));
+				lesVO.setLesStatus(rs.getBoolean("LES_STATUS"));
+				lesVO.setLesAvailable(rs.getInt("LES_AVAILABLE"));
+				lesVO.setLesAlready(rs.getInt("LES_Already"));
+				lesVO.setLesPrice(rs.getInt("LES_PRICE"));
+				lesVO.setLesDate(rs.getDate("LES_DATE"));
+				lesVO.setLesBegin(rs.getDate("LES_BEGIN"));
+				lesVO.setLesEnd(rs.getDate("LES_END"));
+				set.add(lesVO);
+			}
+
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {

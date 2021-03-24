@@ -69,6 +69,10 @@ public class LesService {
 		return dao.getByCoach(coaID);
 	}
 	
+	public Set<LesVO> getByCoachFront(Integer coaID){
+		return dao.getByCoachTrue(coaID);
+	}
+	
 	public Set<LesVO> getAllTrueToFront() {
 		return dao.getAllTrueToFront();
 	}

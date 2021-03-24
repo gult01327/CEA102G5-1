@@ -129,7 +129,8 @@
                                         </span>
                                         <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
                                         <input type="hidden" id="comID" value="${comVO.comID}">
-                                        <span class="wishlist">
+                                        <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
+                                        <span class="wishlist" style="cursor:pointer;">
 
                                         </span>
                                         <span class="compare">
@@ -156,7 +157,6 @@
 <%@ include file="pagen2.file" %>
 </div>
 
-
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/bootstrap.min.js"></script>
@@ -179,19 +179,71 @@
 
 	    $(document).ready(function(){
 	
-	
 	        $(".wishlist").each(function(){
-		console.log("123");
-// 	        	var memID=${memVO.memID};
-// 	        	let comID=$(this).prev().attr('value');
-// 	            if (memID===null){
-	            $(this).prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
-// 	            }
+				let wishlist=$(this);
+	        	let comID =wishlist.prev().prev().val();
+				let memID = wishlist.prev().prev().prev().val();
+				let location = wishlist.prev().val();
+				if(memID===null||memID===''){
+					wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+				}else{
+					$.ajax({
+						url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+						type:"post",
+						data:{
+							action:"firstload",
+							comID:comID,
+							memID:memID,
+						},
+						cache:false,
+						ifModified :true,
+						success : function(date){
+							if(date==="true"){
+							console.log("123");
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+								
+							}else{
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+								
+							}
+						}
+					});
+				}
 	        });
-	
-	
-	
 	    });
+	    
+	    $(".wishlist").click(function(){
+	    	let wishlist=$(this);
+        	let comID =wishlist.prev().prev().val();
+			let memID = wishlist.prev().prev().prev().val();
+			let location = wishlist.prev().val();
+			if(memID == ''){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
+				return;
+			}
+
+			$.ajax({
+				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+				type:"post",
+				data:{
+					action:"insertByRedis",
+					comID:comID,
+					memID:memID,
+				},
+				cache:false,
+				ifModified :true,
+				success : function(date){
+					if(date==="true"){
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+					}else{
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+					}
+				}
+			});
+			
+		 });
 		$(".product-grid").on("click",".add-to-cart",function(){
 			let memID = $(this).next().val();
 			let comID = $(this).next().next().val();

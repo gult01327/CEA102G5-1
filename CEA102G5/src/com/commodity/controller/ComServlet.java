@@ -26,6 +26,7 @@ import org.json.JSONArray;
 
 import com.commodity.model.ComService;
 import com.commodity.model.ComVO;
+import com.mysql.cj.Session;
 
 /**
  * Servlet implementation class ComServlet
@@ -142,6 +143,13 @@ public class ComServlet extends HttpServlet {
 			}
 		}
 		
+//		String url =request.getParameter("requestURL");
+//		if (url!=null &&url.length()!=0) {
+//			url+="?action=getOne_For_Update&comcID=";
+//			url+=request.getParameter("comID");
+//		}else {
+//			url = "/back_end/commodity/updateCom.jsp";
+//		}
 		if("getOne_For_Update".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -529,7 +537,37 @@ public class ComServlet extends HttpServlet {
 			
 			
 		}
-		
+		if("comStatusChange".equals(action)) {
+			System.out.println("123");
+			Integer comID = Integer.parseInt(request.getParameter("comID"));
+			Integer comStatus = Integer.parseInt(request.getParameter("comStatus"));
+			if (comStatus==0) {
+				comStatus=1;
+			}else{
+				comStatus=0;
+			}
+			ComService comSvc=new ComService();
+			comSvc.comStatusChange(comID, comStatus);
+			String url =request.getParameter("requestURL");
+			RequestDispatcher successView =request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		if("comStatusChangeajax".equals(action)) {
+			Integer comID = Integer.parseInt(request.getParameter("comID"));
+			Integer comStatus = Integer.parseInt(request.getParameter("comStatus"));
+			System.out.println(comStatus);
+			if (comStatus==0) {
+				comStatus=1;
+			}else{
+				comStatus=0;
+			}
+			ComService comSvc=new ComService();
+			comSvc.comStatusChange(comID, comStatus);
+			PrintWriter out = response.getWriter();
+			out.print(comStatus);
+			out.flush();
+			out.close();
+		}
 		
 		
 		

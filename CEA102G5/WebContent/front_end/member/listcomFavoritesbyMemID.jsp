@@ -62,7 +62,7 @@ pageContext.setAttribute("list",list);
 	
 
 
-<table style="border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;">
+<table style="border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;" class="table table-hover">
 	<tr>
 		<th>商品名稱</th>
 		<th>商品價格</th>

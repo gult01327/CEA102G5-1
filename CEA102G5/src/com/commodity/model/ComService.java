@@ -88,5 +88,7 @@ public class ComService {
 	public List<ComVO> getFavorite(int memID){
 		return dao.getFavorite(memID);
 	}
-	
+	public void comStatusChange(int comID,int comStatus) {
+		dao.comStatusChange(comID, comStatus);
+	}
 }

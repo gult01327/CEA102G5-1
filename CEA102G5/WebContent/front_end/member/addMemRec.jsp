@@ -199,8 +199,20 @@ var app = window.AddressSeleclList =
         //後面四個參數分別是兩個下拉選單的預設文字跟值
       
    }
-    
-   $("#mrAdd").change(function(){
+   $("#縣市1").change(function(){
+	   let add1 = document.getElementById("mrAdd").value;
+	   let add2 = AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1');
+	   let omrAdd = add2+add1;
+	   $("#add").attr("value",omrAdd);
+   });
+
+   $("#鄉鎮市區1").change(function(){
+	   let add1 = document.getElementById("mrAdd").value;
+	   let add2 = AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1');
+	   let omrAdd = add2+add1;
+	   $("#add").attr("value",omrAdd);
+   });
+   $("#mrAdd").blur(function(){
 	   let add1 = document.getElementById("mrAdd").value;
 	   let add2 = AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1');
 	   let omrAdd = add2+add1;
@@ -215,28 +227,6 @@ var app = window.AddressSeleclList =
 	   $("#add").attr("value",omrAdd);
 	   console.log(omrAdd);
     }
-   
-//    let add1 = document.getElementById("omrAdd").value;
-//    let add2 = AddressSeleclList.ReturnSelectAddress('縣市1', '鄉鎮市區1');
-//    let omrAdd = add2+add1;
-   
-//    let form1 = document.getElementById("buyForm")
-//    let form = new FormData(form1);
-//    form.append("omrAdd",omrAdd);
-//    form.append("action","sdasd");
-//    $("#send").click(function(){
-// 	   console.log("herhe")
-// 	  $.ajax({
-// 		  url:"om.do",
-// 		  type:"post",
-// 		  data:form,
-// 		  contentType: false,
-// 	      processData: false,
-// 	      cache: false
-// 	  });
-	   
-	   
-//    });
  </script>
 
 

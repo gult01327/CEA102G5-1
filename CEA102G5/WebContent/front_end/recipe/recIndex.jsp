@@ -27,11 +27,11 @@
 <c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="blog-list-item">
 			<div class="col-md-6">
+			<a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}"> 
 				<div class="post-thumbnail">
-						<a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}"> 
 							<img src="<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" alt="" /> 
-						</a>
 				</div>
+			</a>
 			</div>
 			<div class="col-md-6">
 				<div class="post-content">

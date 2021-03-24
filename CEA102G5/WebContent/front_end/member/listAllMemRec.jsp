@@ -12,6 +12,8 @@
 
 
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 <style>
   table#table-1 {
 	background-color:#E8FFE8;
@@ -31,7 +33,7 @@
 
 <style>
   table {
-	width: 950px;
+	width: 850px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -45,15 +47,15 @@
   }
 </style>
 
-	<a href="<%=request.getContextPath()%>/front_end/member/addMemRec.jsp">新增常用地址</a>
+	<a class="organik-btn small" href="<%=request.getContextPath()%>/front_end/member/addMemRec.jsp">新增常用地址</a>
 <table>
 	<tr>
 		<th>勾選常用地址</th>
 		<th>收貨人名稱</th>
 		<th>收貨人電話</th>
 		<th>收貨人地址</th>
-		<th></th>
-		<th></th>
+		<th>修改</th>
+		<th>刪除</th>
 	</tr>
 	
 	<c:forEach var="memrVO" items="${memrSvc.getAllByMemID(memVO.getMemID())}">
@@ -81,8 +83,8 @@
 			  
 	
 </table>
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/member_recipient/memr.do" style="margin-bottom: 0px;">
-			    <input id="test" type="submit" value="確認地址"> 
+<FORM METHOD="post" id='formID'ACTION="<%=request.getContextPath()%>/front_end/member_recipient/memr.do" style="margin-bottom: 0px;">
+			    <input id="checkBtn" type="submit" value="確認地址"> 
 				<input type="hidden" id="checked" name="checkedAdd" value="">
 			    <input type="hidden" name="action" value="confirmADD">
 			   </FORM>
@@ -110,6 +112,16 @@
 	        
 	        console.log(Selected);
 	    }
+	 
+	 $("#checkBtn").click(function(e){
+		 e.preventDefault();
+		 let check = $("#checked").val();
+		 if(check == ''){
+			 swal('錯誤！', '請選擇一項地址！', 'error');
+		 }else{
+			 document.getElementById("formID").submit();
+		 }
+	 });
 </script>
 
 </html>

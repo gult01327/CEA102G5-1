@@ -56,6 +56,14 @@
     <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
   </mapping>
+   <mapping path="/front_end/recipe/listRecbyMemID.jsp">
+    <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
+     <mapping path="/front_end/recipe/recMemFavorite.jsp">
+    <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
+    <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+  </mapping>
  
   
    <mapping path="/back_end/back_end_login.jsp" exclue="true"/>

@@ -56,17 +56,17 @@
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password"  name="memPassword" class="input" required='required' value="${(not empty memVOError)?memVOError.memPassword''}">
+					<input id="pass" type="password"  name="memPassword" class="input" required='required' value="${(not empty memVOError)?memVOError.memPassword:''}">
 					<div id='show'><font style='margin-top:5px; margin-left:120px; color:#FF0000;'>${errorMsgs2.memPassword2}</font></div>
 				</div>
 				<div class="group">
 					<label for="phone" class="label">Mem phone</label>
-					<input id="phone" type="text" name="memPhone" class="input" required='required' value="${(not empty memVOError)?memVOError.memPhone''}">
+					<input id="phone" type="text" name="memPhone" class="input" required='required' value="${(not empty memVOError)?memVOError.memPhone:''}">
 					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memPhone}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
-					<input id="pass" type="email" name="memEmail" class="input" required='required' value="${(not empty memVOError)?memVOError.memEmail''}">
+					<input id="pass" type="email" name="memEmail" class="input" required='required' value="${(not empty memVOError)?memVOError.memEmail:''}">
 					
 				</div>
 					<div class="group">

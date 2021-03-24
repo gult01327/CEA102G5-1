@@ -108,9 +108,8 @@ public class MemServlet extends HttpServlet {
 							return;
 						}
 						session.removeAttribute("location");
-						String url = "/front_end/commodity/comindex.jsp";
-						RequestDispatcher successView = request.getRequestDispatcher(url);
-						successView.forward(request, response);
+						String url = "/CEA102G5/front_end/commodity/comindex.jsp";
+						response.sendRedirect(url);
 					}else {
 						errorMsgs.put("memPassword","密碼有誤，請重新輸入");
 						RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");

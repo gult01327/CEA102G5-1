@@ -23,7 +23,7 @@
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
 					<div class="brand">
-						<img src="<%=request.getContextPath()%>/resource/images/logo.png" alt="logo">
+						<img src="<%=request.getContextPath()%>/resource/images/logo1.png">
 					</div>
 					
 					

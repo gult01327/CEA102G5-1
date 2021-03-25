@@ -71,7 +71,7 @@ public class LesService {
 	}
 	
 	public LesVO searchOne(Integer lesID) {
-		return dao.findOne(lesID);
+		return dao.findByIDnoByte(lesID);
 
 	}
 	

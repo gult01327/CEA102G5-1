@@ -117,15 +117,15 @@ tr{
 			<tr ${(lesrVO.lesID==param.lesID) ? 'bgcolor=#CCCCFF':''}>
 				<!--將修改的那一筆加入對比色-->                
 				<input type='hidden' id='lesID' value='${lesrVO.lesID}' />
-				<input type='hidden' id='lesName' value='${lesSvc.searchOneByID(lesrVO.lesID).lesName}'/>
-				<input type='hidden' id='lesAvailable' value='${lesSvc.searchOneByID(lesrVO.lesID).lesAvailable}'/>
-				<input type='hidden' id='lesAlready' value='${lesSvc.searchOneByID(lesrVO.lesID).lesAlready}'/>
+				<input type='hidden' id='lesName' value='${lesSvc.searchOne(lesrVO.lesID).lesName}'/>
+				<input type='hidden' id='lesAvailable' value='${lesSvc.searchOne(lesrVO.lesID).lesAvailable}'/>
+				<input type='hidden' id='lesAlready' value='${lesSvc.searchOne(lesrVO.lesID).lesAlready}'/>
 				<td>${lesrVO.memID}</td>
 				<td>${lesrVO.lesrComments}</td>
 				<td>${lesrVO.lesrAnswer}</td>
 				<td>${(lesrVO.lesrStatus=="true"?"正常":"預約取消")}</td>
 				<td>${lesrVO.lesrReason}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesDate}</td>
 				
 				<c:if test="${empty lesrVO.lesrAnswer}">
 				<c:if test="${empty lesrVO.lesrReason}">

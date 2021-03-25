@@ -116,13 +116,13 @@ tr{
 				<!--將修改的那一筆加入對比色-->
 
 				<td>${lesrVO.lesID}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesName}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesName}</td>
 				<input type='hidden' id='memID' value='${lesrVO.memID}' />
 				<td>${lesrVO.lesrComments}</td>
 				<td>${lesrVO.lesrAnswer}</td>
 				<td>${(lesrVO.lesrStatus=="true"?"正常":"已取消")}</td>
 				<td>${lesrVO.lesrReason}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesDate}</td>
 				<c:if test="${empty lesrVO.lesrAnswer}">
 				<c:if test="${empty lesrVO.lesrReason}">
 				<td>

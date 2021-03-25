@@ -9,7 +9,6 @@ public interface LesDAO_interface {
 	public void delete(Integer lesID);
 	public LesVO findByID(Integer lesID);
 	public LesVO findByIDnoByte(Integer lesID);
-	public LesVO findOne(Integer lesID);
 	public Set<LesVO>getAll();
 	public Set<LesVO>getAllTrue();
 	public Set<LesVO>getAllTrueToFront();

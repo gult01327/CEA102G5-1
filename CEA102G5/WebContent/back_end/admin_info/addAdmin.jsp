@@ -45,7 +45,11 @@
 	.abc{
 	margin-left:30px;
 	}
-	
+	.zxc{
+	margin-left:30px;
+	margin-bottom:20px;
+	font-size:17px;
+	}
 </style>
 
 		
@@ -66,8 +70,7 @@
 		<label  for=admPassword>密碼</label><span style="color:red">${errorMsgs.admPassword}</span><br>
 		<input type="text" id="inputHelpBlock" class="form-control" aria-describedby="helpBlock" id=admPassword type=text name=admPassword value="${requestScope.admiVO.admPassword}" required="required"><br>
 		</div>
-		<h6 class="abc">權限</h6>
-		<span >${errorMsgs.funIDs}</span><br>
+		<label class="zxc">權限</label><span style="color:red">${errorMsgs.funIDs}</span><br>
 		<div class="getfun">
 		<jsp:useBean id="funiSvc" class="com.function_info.model.FuniService"></jsp:useBean>
 		<c:forEach var="funiVO" items="${funiSvc.all}">

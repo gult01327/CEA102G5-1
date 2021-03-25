@@ -177,10 +177,11 @@ tr{
         <textarea id='msgText' cols="60" rows="10" placeholder="請輸入評價"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button id='submitbtn' type="button" class="btn btn-primary" style="background: #5fbd74;">送出回覆</button>
         <input type='hidden' id='lesIDforMsg' value=''>
         <input type='hidden' id='memIDforMsg' value=''>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+        
       </div>
     </div>
   </div>
@@ -194,13 +195,14 @@ tr{
         
       </div>
       <div class="modal-body">
-        <textarea id='msgText2' cols="60" rows="10" placeholder="請輸入原因"></textarea>
+        <textarea id='msgText2' cols="60" rows="10" placeholder="請輸入30字以內 " maxlength="30"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button id='submitbtn2' type="button" class="btn btn-primary" style="background: #5fbd74;">送出回覆</button>
         <input type='hidden' id='lesIDforMsg2' value=''>
         <input type='hidden' id='memIDforMsg2' value=''>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+       
       </div>
     </div>
   </div>

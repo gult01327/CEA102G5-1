@@ -50,16 +50,32 @@ th, td {
 #showID {
 	color: green;
 }
+
+
 </style>
 
 </head>
 <body bgcolor='white'>
+<style>
+table {
+	width: 800px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+th{
+    text-align: center;
+}
+tr{
+	line-height: 50px;
+}
 
-
+</style>
 	<table id="table-2">
 		<tr>
 			<td>
-				<h3>預約資料</h3>
+				<h3>報名資料</h3>
 			</td>
 		</tr>
 	</table>
@@ -73,11 +89,11 @@ th, td {
 			</c:forEach>
 		</ul>
 	</c:if>
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do">
-		<b>查詢會員編號 :</b> <input type="text" name="mem_ID" size="1"> <input
-			type="hidden" name="action" value="getByMember"> <input
-			type="submit" value="送出">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do">
+		<b>查詢會員編號 :</b> <br>
+		<input type="text" name="mem_ID" size="1" width="100" style="width:100px"><br>
+		<input type="hidden" name="action" value="getByMember">
+		<input type="submit" value="送出" >
 	</FORM>
 
 	<table border="1" width="750">
@@ -85,11 +101,11 @@ th, td {
 			<th>課程編號</th>
 			<th>課程名稱</th>
 			<th>課後評價</th>
-			<th>預約回覆</th>
-			<th>預約狀態</th>
+			<th>課後回覆</th>
+			<th>報名狀態</th>
 			<th>取消原因</th>
-			<th>預約時間</th>
-			<th>修改</th>
+			<th>上課日期</th>
+			<th>回覆</th>
 
 		</tr>
 
@@ -104,14 +120,16 @@ th, td {
 				<input type='hidden' id='memID' value='${lesrVO.memID}' />
 				<td>${lesrVO.lesrComments}</td>
 				<td>${lesrVO.lesrAnswer}</td>
-				<td>${(lesrVO.lesrStatus=="true"?"正常":"預約取消")}</td>
+				<td>${(lesrVO.lesrStatus=="true"?"正常":"已取消")}</td>
 				<td>${lesrVO.lesrReason}</td>
-				<td>${lesrVO.lesrTime}</td>
+				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				<c:if test="${empty lesrVO.lesrAnswer}">
+				<c:if test="${empty lesrVO.lesrReason}">
 				<td>
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> <input type="hidden"
+						<input type="submit" value="填寫"> <input type="hidden"
 							name="les_ID" value="${lesrVO.lesID}"> 
 							<input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
 							<input
@@ -119,7 +137,13 @@ th, td {
 							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-
+				</c:if>
+				<td></td>
+				
+               </c:if>
+               <c:if test="${not empty lesrVO.lesrAnswer}">
+               <td>已回覆</td>
+               </c:if>
 			</tr>
 		</c:forEach>
 	</table>
@@ -129,9 +153,9 @@ th, td {
 
 			var memID = $("#memID").val();
 			if (typeof (memID) == "undefined") {
-				var str = "此會員尚無預約課程";
+				var str = "此會員尚無報名課程";
 			} else {
-				var str = "以下為會員ID:" + memID + "的預約資料";
+				var str = "以下為會員ID:" + memID + "的報名資料";
 			}
 			$("#showID").text(str);
 

@@ -50,6 +50,9 @@ th, td {
 #showID {
 	color: green;
 }
+#picContainer{
+ 	 height: 120px; 
+}
 </style>
 
 </head>
@@ -79,8 +82,6 @@ table,th{
 			<th>教練姓名</th>
 			<th>刪除收藏</th>
 		</tr>
-
-
 		
 		<c:forEach var="lesfVO" items="${lesfVO}">
 			<tr ${(lesfVO.memID==param.memID) ? 'bgcolor=#CCCCFF':''}>
@@ -88,7 +89,7 @@ table,th{
 
 				
 				<td>${lesSvc.searchOneByID(lesfVO.lesID).lesName}</td>
-				<td>${coaSvc.getOneCoach(lesSvc.searchOneByID(lesfVO.lesID).coaID).coaName}</td>
+				<td><a href="<%=request.getContextPath()%>/front_end/lesson/listOneCoach.jsp?coaID=${lesVO.coaID}">${coaSvc.getOneCoach(lesSvc.searchOneByID(lesfVO.lesID).coaID).coaName}</a></td>
 				<input type='hidden' id='memID' value='${lesfVO.memID}' />
 				<input type='hidden' id='lesID' value='${lesfVO.lesID}' />
 				

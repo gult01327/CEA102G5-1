@@ -71,7 +71,7 @@
 			<td>${comcVO.comcName}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity_category/comc.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="н╫зя"   disabled="disabled"> 
+			    <input type="submit" value="н╫зя"> 
 			    <input type="hidden" name="comcID" value="${comcVO.comcID}">
 			    <input type="hidden" name="action" value="getOne_For_Update_Comc"></FORM>
 			</td>

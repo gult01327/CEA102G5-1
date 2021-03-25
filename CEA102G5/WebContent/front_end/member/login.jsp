@@ -46,27 +46,27 @@
 			<div class="sign-up-htm">
 				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text"  name="memName" class="input" required='required' value="${(not empty memVOError)?memVOError.memName:''}" >
-					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memName}</font></div>
+					<input id="memName" type="text"  name="memName" class="input" required='required' value="${(not empty memVOError)?memVOError.memName:''}" >
+					<div id='showName'></div>
 				</div>
 				<div class="group">
 					<label for="account" class="label">Account</label>
 					<input id="account" type="text" name="memAccount" class="input" required='required' value="${(not empty memVOError)?memVOError.memAccount:''}">
-					<div id='show2'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memAccount2}</font></div>
+					<div id='showAccount'></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password"  name="memPassword" class="input" required='required' value="${(not empty memVOError)?memVOError.memPassword:''}">
-					<div id='show'><font style='margin-top:5px; margin-left:120px; color:#FF0000;'>${errorMsgs2.memPassword2}</font></div>
+					<input id="memPass" type="password"  name="memPassword" class="input" required='required' value="${(not empty memVOError)?memVOError.memPassword:''}">
+					<div id='showPw'></div>
 				</div>
 				<div class="group">
 					<label for="phone" class="label">Mem phone</label>
 					<input id="phone" type="text" name="memPhone" class="input" required='required' value="${(not empty memVOError)?memVOError.memPhone:''}">
-					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memPhone}</font></div>
+					<div id='showPhone'></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
-					<input id="pass" type="email" name="memEmail" class="input" required='required' value="${(not empty memVOError)?memVOError.memEmail:''}">
+					<input id="memEmail" type="email" name="memEmail" class="input" required='required' value="${(not empty memVOError)?memVOError.memEmail:''}">
 					
 				</div>
 					<div class="group">
@@ -88,6 +88,51 @@
 	</div>
 </div>
 <script type="text/javascript">
+$("#memName").blur(function(){
+	let html = '';
+	let name = $(this).val();
+	if(!/^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$/.test(name)){
+		html += "<font style='margin-top:10px; margin-left:40px; color:#FF0000;'>長度必須在2~10之間且只能為英文或數字</font>";
+		$("#showName").html(html);
+		$(".button").attr("disabled",true);
+	}else{
+		html += "<font style='margin-top:10px; margin-left:175px; color:#00ff14;'>正確</font>";
+		$("#showName").html(html);
+		$(".button").attr("disabled",false);
+	}
+
+});
+
+$("#memPass").blur(function(){
+	let html = '';
+	let pass = $(this).val();
+	if(!/^[(a-zA-Z0-9_)]{2,10}$/.test(pass)){
+		html += "<font style='margin-top:10px; margin-left:40px; color:#FF0000;'>長度必須在2~10之間且只能為英文或數字</font>";
+		$("#showPw").html(html);
+		$(".button").attr("disabled",true);
+	}else{
+		html += "<font style='margin-top:10px; margin-left:170px; color:#00ff14;'>正確</font>";
+		$("#showPw").html(html);
+		$(".button").attr("disabled",false);
+	}
+});
+
+
+$("#phone").blur(function(){
+	let html = '';
+	let phone = $(this).val();
+	if(!/^(09)[0-9]{8}$/.test(phone)){
+		html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>請填入正確手機號碼</font>";
+		$("#showPhone").html(html);
+		$(".button").attr("disabled",true);
+	}else{
+		html += "<font style='margin-top:10px; margin-left:170px; color:#00ff14;'>正確</font>";
+		$("#showPhone").html(html);
+		$(".button").attr("disabled",false);
+	}
+	
+	
+});
 
 $(".login-wrap").on("blur","#account",function(){
 	let html = '';
@@ -108,28 +153,20 @@ $(".login-wrap").on("blur","#account",function(){
 		success:function(data){
 			if(data == "isAdded"){
 				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>帳號重複，請重新輸入</font>";
-				$("#show2").html(html);
+				$("#showAccount").html(html);
 				$(".button").attr("disabled",true);
 			}else if(data == "error"){
 				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>長度必須在2~10之間</font>";
-				$("#show2").html(html);
+				$("#showAccount").html(html);
 				$(".button").attr("disabled",true);
 			}else{
 				html += "<font style='margin-top:10px; margin-left:120px; color:#00ff14;'>此帳號可以使用!</font>";
-				$("#show2").html(html);
+				$("#showAccount").html(html);
 				$(".button").attr("disabled",false);
 			}
 		}
 	});
-	
-	
-	
-	console.log("OK");
-	
 });
-	
-
-
 
 $(".login-wrap").on("change","input[type='file']",function(e){
     let file = e.target.files[0];

@@ -154,8 +154,8 @@
   width: 16px;
   border-radius: 16px;
   color: #fff;
-  top: -50%;
-  right: -50%;
+  top: 36%;
+  right: 24%;
   background-color: #02F78E;
 }
 .contactMembermsg{
@@ -197,7 +197,9 @@ a.contactMember{
 	width:auto;
 }
 div.contactMemberList{
-	overflow:auto;
+	max-height: 290px;
+    overflow: auto;
+    width: 170px;
 }
 div.memberListMain{
 	width:200px;

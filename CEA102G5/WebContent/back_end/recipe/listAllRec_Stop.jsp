@@ -69,7 +69,7 @@
 			<td>${memSvc.getOneMem(recVO.memID).memName}</td>
 			<td>${recVO.recName}</td>
 			<td><img src="<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" height="100" width="100"></td>
-			<td class='status' value='${recVO.recStatus}'>已停權</td>
+			<td class='status' value='${recVO.recStatus}'>已下架</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/recipe/rec.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="查看食譜明細" style='padding: 5px 5px; font-size:12px;'>

@@ -14,41 +14,83 @@
 <body>
 
 <style>
-	.tittle{
-	background-color:#rgb(179, 217, 217) !important;
+	#tittle{
 	text-align:center;
 	margin-bottom:10px;
 	}
-
+	.form-control{
+	width:400px;
+	}
+	.upadmin{
+	height:70%;
+	margin-left:200px;
+	margin-right:200px;
+	padding:20px;
+	box-shadow:5px 5px 5px 3px rgba(0, 0, 0, 0.5);
+	border-radius:5px;
+	
+	}
+	.getfun{
+	margin-left:40px;
+	margin-top:-10px;
+	margin-bottom:10px;
+	display:flex;
+	}
+	.onefun{
+	margin-right:10px;
+	}
+	.upbtn{
+	margin-left:380px;
+	margin-bottom:10px;
+	}
+	.h5{
+	text-align:center;
+	margin-bottom:20px;
+	}
+	.abc{
+	margin-left:30px;
+	width:400px;
+	}
+	
 </style>
 
 
-		<h4 class="tittle">修改後台帳號</h4>
+		<h4 id="tittle" class="page-title text-center" style='color:black;'>Update Addministrator</h4>
 	<form METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/admin_info/admi.do">
 	
-		<fieldset>
-		
+		<fieldset class="upadmin">
+		<h5 class="h5">基本資訊</h5>
+		<div class="abc">
 		<label for=admName>姓名</label><span style="color:red">${errorMsgs.admName}</span><br>
 		<input id=admName type="text" class="form-control" placeholder="Text input" name=admName value="${admiVO.admName}" required="required"><br>
+		</div>
+		<div class="abc">
 		<label for=admAccount>帳號</label><span style="color:red">${errorMsgs.admAccount}</span><br>
 		<input id=admAccount type="text" class="form-control" placeholder="Text input" name=admAccount value="${admiVO.admAccount}" required="required"><br>
+		</div>
+		<div class="abc">
 		<label for=admPassword>密碼</label><span style="color:red">${errorMsgs.admPassword}</span><br>
 		<input id=admPassword type="text" class="form-control" placeholder="Text input" name=admPassword value="${admiVO.admPassword}" required="required"><br>
-		</fieldset>
-		<fieldset>
-		<legend>權限:</legend><span style="color:red">${errorMsgs.funIDs}</span><br>
+		</div>
+		<h6 class="abc">權限</h6>
+		<span style="color:red">${errorMsgs.funIDs}</span><br>
+		<div class="getfun">
 		<jsp:useBean id="funiSvc" class="com.function_info.model.FuniService"></jsp:useBean>
 		<jsp:useBean id="autSvc" class="com.authority.model.AutService"></jsp:useBean>
 		<c:forEach var="funiVO" items="${funiSvc.all}">
+		<div class="onefun">
 		<input name=funID id="${funiVO.funID}" type=checkbox value="${funiVO.funID}" ${autSvc.check(admiVO.admID,funiVO.funID) ? "checked":""} />
-
-		<label for=${funiVO.funID}>${funiVO.funName}</label><br>
+		<label for=${funiVO.funID}>${funiVO.funName}</label>
+		</div>
 		</c:forEach>
-		</fieldset>
-		<br>
+		</div>
+		<div class="upbtn">
 		<input type="hidden" name="action" value="update">
 		<input type="hidden" name="admID" value="<%=admiVO.getAdmID()%>">
-		<input type="submit" value="送出修改">
+		<input type="submit" value="修改">
+		</div>
+		</fieldset>
+		
 	</form>
 		
 <script type="text/javascript">

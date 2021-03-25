@@ -183,6 +183,7 @@
     <c:set var="mem" value="${pageContext.request.contextPath}/front_end/member/frontMemSelect.jsp" />
 	<c:set var="rec" value="${pageContext.request.contextPath}/front_end/recipe/recIndex.jsp" />
 
+<!-- 漢堡選單 -->
 <div id="menu-slideout" class="slideout-menu hidden-md-up">
 			<div class="mobile-menu">
 				<ul id="mobile-menu" class="menu">
@@ -204,14 +205,11 @@
                                     <li>
                                         <a href="${mem}">Member</a>
                                     </li>
-									<li>
-                                        <a href="#">Contact</a>
-                                    </li>  
 				</ul>
 			</div>
 		</div>
 	
-
+<!-- 導覽列 -->
     <div class="site">
         <header id="header" class="header header-desktop header-2">
             <div class="container">
@@ -240,9 +238,7 @@
                                      <li>
                                         <a href="${les}">Course</a>
                                     </li>
-<!--                                     <li> -->
-<%--                                         <a href="${mem}">Member</a> --%>
-<!--                                     </li> -->
+
 									<c:if test="${!empty memVO}">
 								          	<li class="contact-icon">
 								            	<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>

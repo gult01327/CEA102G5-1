@@ -261,7 +261,8 @@
     <c:set var="com" value="${pageContext.request.contextPath}/front_end/commodity/comindex.jsp" />
     <c:set var="mem" value="${pageContext.request.contextPath}/front_end/member/frontMemSelect.jsp" />
 	<c:set var="rec" value="${pageContext.request.contextPath}/front_end/recipe/recIndex.jsp" />
-
+	
+			<!-- 漢堡選單 -->
 					<div id="menu-slideout" class="slideout-menu hidden-md-up">
 						<div class="mobile-menu">
 								<ul id="mobile-menu" class="menu">
@@ -283,9 +284,6 @@
                                     <li>
                                         <a href="${mem}">Member</a>
                                     </li>
-									<li>
-                                        <a href="#">Contact</a>
-                                    </li>  
 								</ul>
 						</div>
 					</div>
@@ -577,33 +575,34 @@
     <div data-aos="fade-right">
       <div class="product-carousel p-0" data-auto-play="true" data-desktop="4" data-laptop="2" data-tablet="2" data-mobile="1" id="product-grid">
 
-		<c:forEach var="comVO" items="${comSvc.allForComindex}" begin="0" end="4">
-        		<div class="product-item text-center">
-                     <div class="product-thumb">
-                          <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
-                             <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
-                          </a>
-                          <div class="product-action">
-                              <span class="add-to-cart">
-                              	<a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-                              </span>
-                                <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
-                                <input type="hidden" id="comID" value="${comVO.comID}">
-                              <span class="wishlist">
-
-                              </span>
-                              <span class="compare">Sales:${comVO.comSales}</span>
-                         </div>
-                      </div>
-                      <div class="product-info">
-                          <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
-                             <h2 class="title">${comVO.comName}</h2>
-                              <span class="price">
-                                <ins>$${comVO.comPrice}</ins>
-                             </span>
-                         </a>
-                     </div>
-        		</div>
+<jsp:useBean id="comcSvc" scope="page" class="com.commodity_category.model.ComcService"></jsp:useBean>   
+<c:forEach var="comVO" items="${comcSvc.getComsByComcIDwithSales(comVO.comcID)}" end="4" >
+        	<div class="product-item text-center">
+              <div class="product-thumb">
+                   <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                      <div class="badges">
+                       	<span class="hot">Hot</span>
+                       </div>
+                       <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:250px;"/>
+                   </a>
+              	<div class="product-action">
+				  <span class="add-to-cart">
+				     <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+				  </span>
+				  <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+				  <input type="hidden" id="comID" value="${comVO.comID}">
+				  <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
+				  <span class="wishlist" style="cursor:pointer;"></span>
+				  <span class="compare">Sales:${comVO.comSales}</span>
+				</div>
+            </div>
+                 <div class="product-info">
+                     <a href="shop-detail.html">
+                        <h2 class="title">${comVO.comName}</h2>
+                      	<span class="price">$${comVO.comPrice}</span>
+                     </a>
+                 </div>
+         	</div>	
         </c:forEach>
         
       </div>
@@ -1589,30 +1588,187 @@
 		webSocket.close();
 	}
 </script>	
-<script type="text/javascript">	
-//	商品收藏
+<script>
+<c:if test="${!empty comVO}">
+	comID = ${comVO.comID};
+</c:if>
+</script>
+    	<script type="text/javascript">
+	
+	 $("#single-add-to-cart").click(function(){
+		let qty = $("#quantity").val();
+		let comID = $("#comID").val();
+		let memID = $("#memID").val();
+		let location = $("#location").val();
+
+		if(memID == ''){
+			window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
+			return;
+		}
+
+		$.ajax({
+			url:"<%=request.getContextPath()%>/cart/comCart.do",
+			type:"post",
+			data:{
+				action:"ADD",
+				comID:comID,
+				cardCount:qty
+			},
+			cache:false,
+			ifModified :true,
+			success : function(){
+				window.location.reload();
+			}
+		});
+		
+	 });
+	 //收藏讀取用
+	window.onload = function(){
+
+		let comID = $("#comID").val();
+		let memID = $("#memID").val();
+
+		if(memID == ''){
+			let html=""
+			html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";
+			html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
+			document.getElementById("favorite").innerHTML = html;
+		}else{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+				type:"post",
+				data:{
+					action:"firstload",
+					comID:comID,
+					memID:memID,
+				},
+				cache:false,
+				ifModified :true,
+				success : function(date){
+					if(date==="true"){
+						let html=""
+							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='50px' height='50px'>";	
+							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>";
+							document.getElementById("favorite").innerHTML = html;
+					}else{
+						let html=""
+						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";	
+						html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
+						document.getElementById("favorite").innerHTML = html;	
+					}
+				}
+			});
+		}
+	}
+	 
+	 //收藏按鈕用
+	 $("#favorite").click(function(){
+			let comID = $("#comID").val();
+			let memID = $("#memID").val();
+			let location = $("#location").val();
+
+			if(memID == ''){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
+				return;
+			}
+
+			$.ajax({
+				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+				type:"post",
+				data:{
+					action:"insertByRedis",
+					comID:comID,
+					memID:memID,
+				},
+				cache:false,
+				ifModified :true,
+				success : function(date){
+					if(date==="true"){
+						let html=""
+							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='50px' height='50px'>";	
+							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>";
+							document.getElementById("favorite").innerHTML = html;
+					}else{
+						let html=""
+						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";	
+						html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
+						document.getElementById("favorite").innerHTML = html;	
+					}
+				}
+			});
+			
+		 });
+		 
 	 $(document).ready(function(){
 			
-			
 	        $(".wishlist").each(function(){
-		console.log("123");
-//	        	var memID=${memVO.memID};
-//	        	let comID=$(this).prev().attr('value');
-//	            if (memID===null){
-	            $(this).prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
-//	            }
+				let wishlist=$(this);
+	        	let comID =wishlist.prev().prev().val();
+				let memID = wishlist.prev().prev().prev().val();
+				let location = wishlist.prev().val();
+				if(memID===null||memID===''){
+					wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+				}else{
+					$.ajax({
+						url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+						type:"post",
+						data:{
+							action:"firstload",
+							comID:comID,
+							memID:memID,
+						},
+						cache:false,
+						ifModified :true,
+						success : function(date){
+							if(date==="true"){
+							console.log("123");
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+								
+							}else{
+								wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+								
+							}
+						}
+					});
+				}
 	        });
-	
-	
 	    });
 	    
-// 加入購物車	    
-		$("#product-grid").on("click",".add-to-cart",function(){
-			let memID = $(this).next().val();
-			let comID = $(this).next().next().val();
-			console.log($(this));
-			console.log(memID);
-			console.log(comID);
+	    $(".wishlist").click(function(){
+	    	let wishlist=$(this);
+     	let comID =wishlist.prev().prev().val();
+			let memID = wishlist.prev().prev().prev().val();
+			let location = wishlist.prev().val();
+			if(memID == ''){
+				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
+				return;
+			}
+
+			$.ajax({
+				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
+				type:"post",
+				data:{
+					action:"insertByRedis",
+					comID:comID,
+					memID:memID,
+				},
+				cache:false,
+				ifModified :true,
+				success : function(date){
+					if(date==="true"){
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heart.png' alt='' />");
+					}else{
+						wishlist.empty();
+						wishlist.prepend("<img src='<%=request.getContextPath()%>/resource/images/heartempty.png' alt='' />");
+					}
+				}
+			});
+			
+		 });
+	    $(".add-to-cart").click(function(){
+	    	let comID = $("#comID").val();
+			let memID = $("#memID").val();
 			if(memID == ""){
 				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location=<%=request.getServletPath()%>&comID="+comID+"";
 				return;
@@ -1629,12 +1785,12 @@
 				ifModified :true,
 				success : function(){
 					window.location.reload();
-					console.log("ok");
 				}
 			});
 		});
-
-  </script>
+	</script>
+  
+  
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();

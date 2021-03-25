@@ -28,10 +28,19 @@
 	margin-bottom:20px;
 	
 	}
-	div.pagination{
-	margin:20 auto;
+	.pagination{
+	width:auto;
 }
+	.selectbar{
+	display:inline-block;
+	width:auto;
+	}
 	
+	#rowrow{
+	display:inline-flex;
+	
+	}
+
 </style>
 	
 		<h4 id="title" class="page-title text-center" style='color:black;'>Admin List</h4>

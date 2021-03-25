@@ -51,12 +51,27 @@ th, td {
 
 </head>
 <body bgcolor='white'>
+<style>
+table {
+	width: 800px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+th{
+    text-align: center;
+}
+tr{
+	line-height: 50px;
+}
 
+</style>
 
 	<table id="table-2">
 		<tr>
 			<td>
-				<h3>預約資料</h3>
+				<h3><span style="font-family:DFKai-sb;" >課堂報名資料</span></h3>
 			</td>
 		</tr>
 	</table>
@@ -71,14 +86,15 @@ th, td {
 		</ul>
 	</c:if>
 
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do">
-		<b>選擇課堂編號:</b> <select size="1" name="les_ID">
-			<c:forEach var="lesVO" items="${lesSvc.all}">
-				<option ${les_ID==lesVO.lesID?"selected":""} value="${lesVO.lesID}">${lesVO.lesID}
-			</c:forEach>
-		</select> <input type="hidden" name="action" value="getByLesson"> <input
-			type="submit" value="送出">
+	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do" >
+       <b>選擇課堂編號:</b>
+       <select size="1" name="les_ID" width="100" style="width:100px" >
+         <c:forEach var="lesVO" items="${lesSvc.all}" > 
+          <option value="${lesVO.lesID}">${lesVO.lesID}
+         </c:forEach>   
+       </select>
+       <input type="hidden" name="action" value="getByLesson">
+       <input type="submit" value="送出">
 	</FORM>
 
 	<table border="1" width="750">
@@ -86,17 +102,18 @@ th, td {
 
 			<th>會員ID</th>
 			<th>課後評價</th>
-			<th>預約回覆</th>
-			<th>預約狀態</th>
+			<th>課後回覆</th>
+			<th>報名狀態</th>
 			<th>取消原因</th>
-			<th>預約時間</th>
-			<th>修改</th>
+			<th>上課日期</th>
+			<th>回覆</th>
 
 		</tr>
 		
-		<h4 id='showID'></h4>
-		<h4 id='showID2'></h4>
+		<span style="font-family:DFKai-sb;" ><h4 id='showID'></h4></span>
+		<span style="font-family:DFKai-sb;" ><h4 id='showID2'></h4></span>
 		<c:forEach var="lesrVO" items="${listByLesson}">
+		
 			<tr ${(lesrVO.lesID==param.lesID) ? 'bgcolor=#CCCCFF':''}>
 				<!--將修改的那一筆加入對比色-->                
 				<input type='hidden' id='lesID' value='${lesrVO.lesID}' />
@@ -108,17 +125,27 @@ th, td {
 				<td>${lesrVO.lesrAnswer}</td>
 				<td>${(lesrVO.lesrStatus=="true"?"正常":"預約取消")}</td>
 				<td>${lesrVO.lesrReason}</td>
-				<td>${lesrVO.lesrTime}</td>
+				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				
+				<c:if test="${empty lesrVO.lesrAnswer}">
+				<c:if test="${empty lesrVO.lesrReason}">
 				<td>
 					<FORM METHOD="post"	ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do" style="margin-bottom: 0px;">
-						<input type="submit" value="修改"> 
+						<input type="submit" value="回覆"> 
 						<input type="hidden" name="les_ID" value="${lesrVO.lesID}">  
 						<input type="hidden" name="mem_ID" value="${lesrVO.memID}"> 
 					    <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>">
 						<input type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				</td>
-
+				</c:if>
+				<c:if test="${not empty lesrVO.lesrReason}">
+				<td>已取消</td>
+                </c:if>
+                </c:if>
+                <c:if test="${not empty lesrVO.lesrAnswer}">
+               <td>已回覆</td>
+                </c:if>
 			</tr>
 		</c:forEach>
 	</table>
@@ -131,10 +158,10 @@ th, td {
 			var lesAvailable = $("#lesAvailable").val();		
 			var lesAlready=$("#lesAlready").val();
 			if (typeof (lesID) == "undefined") {
-				var str = "此課堂尚無人預約";
+				var str = "此課堂尚無人報名";
 			} else {
-				var str = "以下為課程ID" + lesID + "\n" + lesName+ "的預約資料";
-				var str1 = "課堂人數上限為" + lesAvailable + "人，目前已預約"+ lesAlready+ "人";		
+				var str = "以下為課程ID" + lesID + "\n" +","+ lesName+ "的報名資料";
+				var str1 = "課堂人數上限為" + lesAvailable + "人，目前已報名"+ lesAlready+ "人";		
 				$("#showID2").text(str);
 				
 			}

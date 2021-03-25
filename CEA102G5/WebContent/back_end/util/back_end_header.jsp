@@ -468,12 +468,11 @@ div.memberListMain{
                                         <li><a href=${talResult} class=disabled>查詢結果</a></li>
                                         <li><a href=${listAllTal}>專長列表</a></li>
                                     </div>
-                                    <div id=Reservation>
-                                        <li><a href=${addRes}>新增預約</a></li>
+                                    <div id=Reservation>                                      
                                         <li><a href=${searchRes}>搜尋預約</a></li> 
                                         <li><a href=${updateRes}>編輯預約</a></li> 
-                                        <li><a href=${searchResByMem} class=disabled>會員預約</a></li>
-                                        <li><a href=${searchResByLes} class=disabled>課堂預約</a></li>                                    
+                                        <li><a href=${searchResByMem} class=disabled>查看會員預約</a></li>
+                                        <li><a href=${searchResByLes} class=disabled>查看課堂預約</a></li>                                    
                                     </div>
                                     <div id=Category>
                                     	<li><a href=${addComc}>新增類別</a></li>

@@ -21,6 +21,8 @@ public class LesDAO implements LesDAO_interface {
 	private static final String INSERT = "INSERT INTO LESSON (COA_ID,TAL_ID,LES_NAME,LES_DATE,LES_TIME,LES_PICTURE"
 			+ ",LES_VIDEO,LES_BEGIN,LES_END,LES_AVAILABLE,LES_PRICE)" + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String ALL = "SELECT * FROM LESSON";
+	private static final String LESBYMEM = "SELECT "+ selCol+" FROM LESSON";
+	private static final String FINDONE = "SELECT les_ID,coa_ID,les_name FROM LESSON";
 	private static final String BYCOACH = "SELECT "+selCol+" FROM LESSON where COA_ID=? and les_status=true order by LES_DATE";
 	private static final String ONE = "SELECT * FROM LESSON where LES_ID=?";
 	private static final String UPDATE = "UPDATE LESSON set LES_NAME=?,LES_PRICE=?,LES_PICTURE=?,LES_VIDEO=? WHERE LES_ID=?";
@@ -154,7 +156,7 @@ public class LesDAO implements LesDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(ALL);
+			pstmt = con.prepareStatement(LESBYMEM);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				lesVO = new LesVO();
@@ -171,6 +173,7 @@ public class LesDAO implements LesDAO_interface {
 				lesVO.setLesBegin(rs.getDate("LES_BEGIN"));
 				lesVO.setLesEnd(rs.getDate("LES_END"));
 				set.add(lesVO);
+				
 			}
 
 		} catch (SQLException se) {
@@ -472,7 +475,51 @@ public class LesDAO implements LesDAO_interface {
 		}
 		return lesVO;
 	}
+    
+	public LesVO findOne(Integer lesID) {
+		LesVO lesVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FINDONE);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				lesVO = new LesVO();
+				lesVO.setLesID(rs.getInt("LES_ID"));
+				lesVO.setCoaID(rs.getInt("COA_ID"));
+				lesVO.setLesName(rs.getString("LES_NAME"));
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return lesVO;
+	}
 
+	
 	@Override
 	public Set<LesVO> getAllTrue() {
 		Set<LesVO> set = new LinkedHashSet<LesVO>();

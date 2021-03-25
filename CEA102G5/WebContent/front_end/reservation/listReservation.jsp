@@ -118,10 +118,10 @@ tr{
 			<tr ${(lesrVO.memID==param.memID) ? 'bgcolor=#CCCCFF':''}>
 				<!--將修改的那一筆加入對比色-->
 				<td class ="lesID">${lesrVO.lesID}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesName}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesName}</td>
 				<input type='hidden' id='memID' value='${lesrVO.memID}' />
 				<td>${(lesrVO.lesrStatus=="true"?"成功":"已取消")}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesDate}</td>
 				<td>${lesrVO.lesrComments}</td>
 				<td>${lesrVO.lesrAnswer}</td>
 				

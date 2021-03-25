@@ -69,6 +69,12 @@ public class LesService {
 		return dao.findByIDnoByte(lesID);
 
 	}
+	
+	public LesVO searchOne(Integer lesID) {
+		return dao.findOne(lesID);
+
+	}
+	
 	public Set<LesVO> getByCoach(Integer coaID){
 		return dao.getByCoach(coaID);
 	}

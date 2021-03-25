@@ -15,6 +15,11 @@
      <decorator>/front_end/decorators/front_end_header.jsp</decorator>
    </mapping>
    
+    <mapping path="/front_end/les_favorites/*">
+     <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
+     <decorator>/front_end/decorators/front_end_header.jsp</decorator>
+   </mapping>
+   
    <mapping path="/front_end/lesson.reservation/*">
      <decorator>/front_end/decorators/memberSlidebar.jsp</decorator>
      <decorator>/front_end/decorators/front_end_header.jsp</decorator>

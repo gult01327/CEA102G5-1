@@ -66,7 +66,7 @@
 			<td>$ ${omVO.omPrice}</td>
 			<td>${omVO.omPay==1?"已付款":"已取消"}</td>
 			<td>${omVO.omShip==1?"已出貨":"未出貨"}</td>
-			<td>${omVO.omDiscount==1?"未使用":"已使用"}</td>
+			<td>${omVO.omDiscount==0?"未使用":"已使用"}</td>
 			<td>${omVO.omTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/ordermaster/om.do" style="margin-bottom: 0px;">

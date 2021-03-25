@@ -13,11 +13,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 <h2 class="page-title text-center" style='color:black;'>Check Out</h2>
-				<div class="section pt-7 pb-7" width='1000px'>
+				<div class="section pt-7 pb-7" width='850px'>
 					<div class="container">
 						<div class="row">
-							<div class="col-md-12" style="width:1000px;">
+							<div class="col-md-12" style="width:850px;">
 								<div class="wishlist-wrap">
 									<table class="table shop-cart">
 										<thead>
@@ -30,7 +32,7 @@
 											</tr>
 										</thead>
 										<tbody>
-<form name="checkoutForm" action="<%=request.getContextPath()%>/front_end/ordermaster/om.do" method="POST">
+<form id="checkoutForm" name="checkoutForm" action="<%=request.getContextPath()%>/front_end/ordermaster/om.do" method="POST">
 										 <c:forEach var="cartVO" items="${checkOutList}">
 											<tr class="cart_item">
 												<td class="product-thumbnail">
@@ -70,10 +72,10 @@
 								<font size='5'>收貨人電話: ${memrVO.memrPhone}</font><br><br>
 								<font size='5'>收貨人地址: ${memrVO.memrAddress}</font><br><br>
 								</c:if>
-								<input type='submit' value='付款結帳'>
+								<input id='submitBtn' type='submit' value='付款結帳'>
 								<input type="hidden" name="action"  value="BUY">
 								<input type="hidden" name="memID"  value="${memVO.memID}">
-								<input type="hidden" name="memrID"  value="${memrVO.memrID}">
+								<input type="hidden" id="memrID" name="memrID"  value="${memrVO.memrID}">
 								<input type="hidden" id='totalAmount' name="totalAmount"  value="${amount}">
 </form>
 					</div>
@@ -119,6 +121,18 @@
 		}
 		
 	});
+	
+	$("#submitBtn").click(function(e){
+		e.preventDefault();
+		let memrID = $("#memrID").val();
+		if(memrID == ''){
+			swal('錯誤！', '請選擇地址！', 'error');
+		}else{
+			document.getElementById("checkoutForm").submit();
+		}
+		
+	});
+	
 </script>
 
 </body>

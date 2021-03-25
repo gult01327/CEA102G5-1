@@ -64,7 +64,7 @@
 	</tr>
 	<%@ include file="page1.file" %>  
 	<c:forEach var="omVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		<tr}>
+		<tr>
 			<td>${omVO.omID}</td>
 			<td>$ ${omVO.omPrice}</td>
 			<td>${omVO.omPay==1?"已付款":"已取消"}</td>

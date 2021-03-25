@@ -81,7 +81,7 @@
 						</div>
 					</div>
 					<div class="footer">
-						Copyright &copy; 2021 &mdash; EATTING
+						Copyright &copy; 2021 &mdash; EATTING 
 					</div>
 				</div>
 			</div>

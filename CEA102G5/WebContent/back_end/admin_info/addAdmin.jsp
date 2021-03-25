@@ -91,7 +91,8 @@
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 </script>
-
+<script type="text/javascript">
+</script>
 
 
 </body>

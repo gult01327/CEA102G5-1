@@ -576,7 +576,7 @@
       <div class="product-carousel p-0" data-auto-play="true" data-desktop="4" data-laptop="2" data-tablet="2" data-mobile="1" id="product-grid">
 
 <jsp:useBean id="comcSvc" scope="page" class="com.commodity_category.model.ComcService"></jsp:useBean>   
-<c:forEach var="comVO" items="${comcSvc.getComsByComcIDwithSales(comVO.comcID)}" end="4" >
+<c:forEach var="comVO" items="${comSvc.allForComindex}" end="4" >
         	<div class="product-item text-center">
               <div class="product-thumb">
                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">

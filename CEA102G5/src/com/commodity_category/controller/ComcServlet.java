@@ -53,6 +53,12 @@ public class ComcServlet extends HttpServlet {
 		if("insert".equals(action)) {
 			try {
 				String comcName = request.getParameter("comcName");
+				if(comcName==null||comcName.length()==0) {
+					session.setAttribute("error", "請輸入類別名稱");
+					String url = "/back_end/commodity/addComc.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+				}
 				ComcVO comcVO = new ComcVO();
 				comcVO.setComcName(comcName);
 				ComcService comcSvc = new ComcService();

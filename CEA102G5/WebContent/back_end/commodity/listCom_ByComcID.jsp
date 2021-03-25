@@ -64,7 +64,7 @@
 </style>
 
 
-<table>
+<table class="table table-striped" style="border:0px #FFD382 solid;">
 	<tr>
 		<th>商品編號</th>
 		<th>商品名稱</th>
@@ -80,8 +80,8 @@
 		<th>商品脂肪(g)</th>
 		<th>商品特性</th>
 		<th>商品創建時間</th>
-		<th></th>
-		<th></th>
+
+
 	</tr>
 	
 	
@@ -101,9 +101,9 @@
 		<%}%>  
 	<%}%>
 	</td>
-	<td><img src="<%=request.getContextPath()%>/ComPicReader<%=comVO.getComPicSrc()%>&pic=1" style="max-width: 150px;
+	<td><img src="<%=request.getContextPath()%>/ComPicReader<%=comVO.getComPicSrc()%>&pic=1" style="max-width: 120px;
 
-width:expression(this.width > 150 ? "150px" : this.width);
+width:expression(this.width > 120 ? "120px" : this.width);
 
 overflow:hidden;"></td>
 	<td style="text-align:left;"><%=comVO.getComContent()%></td>
@@ -127,7 +127,7 @@ overflow:hidden;"></td>
 	<td><%=comVO.getComTime() %></td>
 
 
-			<td>
+			<td align="center" style="border-top:0px #FFD382 solid;border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;">
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity/com.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="修改"> 
 			    <input type="hidden" name="comID"      value="<%=comVO.getComID()%>">
@@ -173,7 +173,9 @@ $(".status").click(function(){
 	
  });
 </script>
-
+<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+ 
+<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 </body>
 
 </html>

@@ -7,18 +7,23 @@
 <meta charset="BIG5">
 <title>後台會員管理</title>
 </head>
+
 <body bgcolor=#E8FFE8 onload="load()">
-<img src="<%=request.getContextPath()%>/resource/images/food.jpg" height="100" width="100"><font size="+3">後台會員管理</font>
-<hr><p>
+<div style="text-align:center;">
+<img src="<%=request.getContextPath()%>/resource/images/logo1.png" height="100" width="100">
+<h1 id="title" class="page-title text-center" style='color:black;'>Backstage Member Management</h1><br>
+</div>
 <!-- <h3>This is the Home page for Member: Home</h3> -->
-<h4><a href="<%=request.getContextPath() %>/back_end/commodity/comSelectPage.jsp">回後台商品管理</a></h4>
+<div style="text-align:left;">
+<h3><a href="<%=request.getContextPath() %>/back_end/commodity/comSelectPage.jsp">回後台商品管理</a></h3>
 <br>
-<h4><a href='<%=request.getContextPath()%>/front_end/member/addMem.jsp'>新增會員</a></h4>
+<h3><a href='<%=request.getContextPath()%>/front_end/member/addMem.jsp'>新增會員</a></h3>
 <br>
-<h4><a href='<%=request.getContextPath()%>/back_end/member/listAllMem.jsp'>所有會員列表</a></h4>   
+<h3><a href='<%=request.getContextPath()%>/back_end/member/listAllMem.jsp'>所有會員列表</a></h3>   
 <br>
-<h4><a href='<%=request.getContextPath()%>/front_end/member/login.jsp'>會員登入</a></h4>   
-  
+<h3><a href='<%=request.getContextPath()%>/front_end/member/login.jsp'>會員登入</a></h3>   
+<br>
+<h4>會員查詢</h4> 
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" >
         <b>輸入會員編號 (如1):</b>
@@ -89,6 +94,7 @@
         <input type="hidden" name="action" value="listmem_ByCompositeQuery">
      </FORM> 
 </li>
+</div>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>

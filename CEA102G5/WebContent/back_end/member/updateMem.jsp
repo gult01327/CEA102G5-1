@@ -38,10 +38,7 @@
 	width: auto;
 	background-color: white;
 	margin-top: 1px;
-	margin-bottom: 1px;	
-/* 	align:"center"; */
-/* 	valign:"center"; */
-	
+	margin-bottom: 1px;		
   }
   table, th, td {
     border: 0px solid #CCCCFF;
@@ -50,15 +47,12 @@
     padding: 5px;
   }
 </style>
-
-<table id="table-1"; align="center";>
+<center>
+<table id="table-1">
 	<tr><td>		
 		 <h4><a href="<%=request.getContextPath()%>/back_end/member/listAllMem.jsp"><img src="<%=request.getContextPath()%>/resource/images/logo1.png" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
-
-
-
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -70,7 +64,7 @@
 </c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" name="form1" enctype="multipart/form-data">
-<table align="center">
+<table>
 	<tr>
 		<td>會員編號:<font color=red><b>*</b></font></td>
 		<td><%=memVO.getMemID()%></td>
@@ -111,6 +105,8 @@
 <input type="hidden" name="action" value="updateMemStatus">
 <input type="hidden" name="memID"  value="<%=memVO.getMemID()%>">
 <input type="submit" value="送出修改"></FORM>
+
+</center>
 
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";

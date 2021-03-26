@@ -178,11 +178,11 @@ public class MemDAO implements MemDAO_Interface {
 				pstmt.setInt(7, memVO.getMemID());
 
 				
-				System.out.println(memVO.getMemStatusR());				
+//System.out.println(memVO.getMemStatusR());				
 				
 				pstmt.executeUpdate();
 			
-				System.out.println(memVO.getMemStatusR());				
+//System.out.println(memVO.getMemStatusR());				
 				
 				
 		} catch (SQLException se) {

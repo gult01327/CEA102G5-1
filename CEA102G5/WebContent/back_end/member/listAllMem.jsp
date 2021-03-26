@@ -14,45 +14,45 @@
 
 <head>
 <title>會員資料</title>
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resource/bootstrap/css/bootstrap.min.css">
 
 
 </head>
 <body>
-
+<h2 id="title" class="page-title text-center" style='color:black;'>Member List</h2><br>
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+/*   table#table-1 { */
+/* 	background-color: #CCCCFF; */
+/*     border: 2px solid black; */
+/*     text-align: center; */
+/*   } */
+/*   table#table-1 h4 { */
+/*     color: red; */
+/*     display: block; */
+/*     margin-bottom: 1px; */
+/*   } */
+/*   h4 { */
+/*     color: blue; */
+/*     display: inline; */
+/*   } */
 </style>
 
 <style>
   table {
-	width: 1000px;
+	width: 1050px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
   }
   table, th, td {
-    border: 1px solid #CCCCFF;
+     border: 0px solid #CCCCFF; 
   }
   th, td {
     padding: 5px;
     text-align: center;
   }
 </style>
-<h2 id="title" class="page-title text-center" style='color:black;'>Member List</h2><br>
+
 
 <table>
 	<tr>
@@ -130,6 +130,9 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
+	<script src="<%=request.getContextPath()%>/resource/jquery/jquery-3.5.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resource/popper/popper.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resource/bootstrap/js/bootstrap.min.js"></script>  
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 </script>

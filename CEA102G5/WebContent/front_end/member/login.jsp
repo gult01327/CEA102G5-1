@@ -24,18 +24,18 @@
 				<div class="group">
 					<label for="user" class="label">Username</label>
 					<input id="user" type="text" name="memAccount1" value="${param.memAccount1}" class="input" required='required' autocomplete="off">
-					<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.memAccount}</font>
+					<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>${errorMsgs.memAccount}</font>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
 					<input id="pass" type="password"  name="memPassword1" class="input" data-type="password" required='required'>
-					<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.memPassword}</font>
+					<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>${errorMsgs.memPassword}</font>
 				</div>
 				<div class="group">
 					<input type="submit" class="button" value="Sign In">
 					<input type="hidden" name="action" value="login">
 				</div>
-				<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>${errorMsgs.Exception }</font>
+				<font style='margin-top:10px; margin-left:70px; color:#ffd700;'>${errorMsgs.Exception}</font>
 </form>
 				<div class="hr"></div>
 				<div class="foot-lnk">
@@ -47,27 +47,27 @@
 				<div class="group">
 					<label for="user" class="label">Username</label>
 					<input id="user" type="text"  name="memName" class="input" required='required' value="${(not empty memVOError)?memVOError.memName:''}" >
-					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memName}</font></div>
+					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memName}</font></div>
 				</div>
 				<div class="group">
 					<label for="account" class="label">Account</label>
 					<input id="account" type="text" name="memAccount" class="input" required='required' value="${(not empty memVOError)?memVOError.memAccount:''}">
-					<div id='show2'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memAccount2}</font></div>
+					<div id='show2'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memAccount2}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
 					<input id="pass" type="password"  name="memPassword" class="input" required='required' value="${(not empty memVOError)?memVOError.memPassword:''}">
-					<div id='show'><font style='margin-top:5px; margin-left:120px; color:#FF0000;'>${errorMsgs2.memPassword2}</font></div>
+					<div id='show'><font style='margin-top:5px; margin-left:120px; color:#ffd700;'>${errorMsgs2.memPassword2}</font></div>
 				</div>
 				<div class="group">
 					<label for="phone" class="label">Mem phone</label>
 					<input id="phone" type="text" name="memPhone" class="input" required='required' value="${(not empty memVOError)?memVOError.memPhone:''}">
-					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#FF0000;'>${errorMsgs2.memPhone}</font></div>
+					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memPhone}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
 					<input id="pass" type="email" name="memEmail" class="input" required='required' value="${(not empty memVOError)?memVOError.memEmail:''}">
-					
+					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memEmail}</font></div>
 				</div>
 					<div class="group">
 					<label for="pass" class="label">Mem picture</label>
@@ -107,11 +107,11 @@ $(".login-wrap").on("blur","#account",function(){
 		ifModified:true,
 		success:function(data){
 			if(data == "isAdded"){
-				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>帳號重複，請重新輸入</font>";
+				html += "<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>帳號重複，請重新輸入</font>";
 				$("#show2").html(html);
 				$(".button").attr("disabled",true);
 			}else if(data == "error"){
-				html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>長度必須在2~10之間</font>";
+				html += "<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>長度必須在2~10之間</font>";
 				$("#show2").html(html);
 				$(".button").attr("disabled",true);
 			}else{

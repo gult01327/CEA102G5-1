@@ -67,6 +67,7 @@
 		<th>會員EMAIL</th>
 		<th>會員積分</th>
 		<th>會員狀態</th>
+		<th>停權理由</th>
 		<th>會員創建日期</th>
 	</tr>
 	<tr>
@@ -79,6 +80,7 @@
 			<td>${memVO.memEmail}</td>
 			<td>${memVO.memBonus}</td>
 			<td>${memVO.memStatus == 1 ? "已啟動" : (memVO.memStatus == 2 ? "已停權" : "未啟動")}</td>
+			<td>${memVO.memStatusR}</td>
 			<td>${memVO.memTime}</td>
 	</tr>
 </table>

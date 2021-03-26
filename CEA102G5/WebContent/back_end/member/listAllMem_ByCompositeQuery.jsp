@@ -15,7 +15,7 @@
 
 </head>
 <body bgcolor=#E8FFE8>
-<!-- <!-- <style> --> 
+<style> 
 <!-- /*   table#table-1 { */ -->
 <!-- /* 	background-color: #CCCCFF; */ -->
 <!-- /*     border: 2px solid black; */ -->
@@ -30,7 +30,7 @@
 <!-- /*     color: blue; */ -->
 <!-- /*     display: inline; */ -->
 <!-- /*   } */ -->
-<!-- <!-- </style> -->
+</style> 
 
 <style>
   table {
@@ -66,6 +66,7 @@
 		<th>會員EMAIL</th>
 		<th>會員積分</th>
 		<th>會員狀態</th>
+		<th>停權理由</th>
 		<th>會員創建日期</th>
 		<th>修改</th>
 		<th>狀態更改</th>
@@ -83,6 +84,7 @@
 			<td>${memVO.memEmail}</td>
 			<td>${memVO.memBonus}</td>
 			<td>${memVO.memStatus == 1 ? "已啟動" : (memVO.memStatus == 2 ? "已停權" : "未啟動")}</td>
+			<td>${memVO.memStatusR}</td>
 			<td>${memVO.memTime}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">

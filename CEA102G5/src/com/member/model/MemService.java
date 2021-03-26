@@ -73,6 +73,21 @@ public class MemService {
 		
 		return dao.newgetAll(map);
 	}
+
+	public void updateMemStatus(Integer memID, String memName, String memPassword, String memPhone, String memEmail,
+			byte[] memPicture, String memStatusR) {
+		MemVO memVO = new MemVO();
+		memVO.setMemID(memID);
+		memVO.setMemName(memName);
+		memVO.setMemPassword(memPassword);
+		memVO.setMemPhone(memPhone);
+		memVO.setMemEmail(memEmail);
+		memVO.setMemPicture(memPicture);
+		memVO.setMemStatusR(memStatusR);
+		
+		dao.update2(memVO);
+		
+	}
 	
 	
 	

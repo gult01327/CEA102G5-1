@@ -17,6 +17,7 @@ public interface MemDAO_Interface {
     public MemVO getMemBonus(Integer memID);
 	public void updateStatus(MemVO memVO);
 	public List<MemVO> newgetAll(Map<String, String[]> map);//萬用複合查詢
+	public void update2(MemVO memVO);
 	 
 
 }

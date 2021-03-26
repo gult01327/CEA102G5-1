@@ -40,6 +40,8 @@ public class MemDAO implements MemDAO_Interface {
 			+ "MEM_PHONE=?,MEM_EMAIL=?,MEM_PICTURE=? WHERE MEM_ID=?";
 	private static final String UPDATE_STMT2 = "UPDATE MEMBER_INFO SET MEM_NAME=?,MEM_PASSWORD=?,"
 			+ "MEM_PHONE=?,MEM_EMAIL=? WHERE MEM_ID=?";
+	private static final String UPDATE_STMT3 = "UPDATE MEMBER_INFO SET MEM_NAME=?,MEM_PASSWORD=?,"
+			+ "MEM_PHONE=?,MEM_EMAIL=?,MEM_PICTURE=?,MEM_STATUSR=? WHERE MEM_ID=?";
 	private static final String FIND_BY_ACCOUNT = "SELECT * FROM MEMBER_INFO WHERE MEM_ACCOUNT=?";
 	
 	private static final String UPDATE_PASSWORD_STMT = "UPDATE MEMBER_INFO SET MEM_PASSWORD=? WHERE MEM_ID=?";
@@ -155,6 +157,59 @@ public class MemDAO implements MemDAO_Interface {
 		}
 		
 	}
+	
+	@Override
+	public void update2(MemVO memVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			
+			
+				pstmt = con.prepareStatement(UPDATE_STMT3);
+				
+				pstmt.setString(1, memVO.getMemName());			
+				pstmt.setString(2, memVO.getMemPassword());
+				pstmt.setString(3, memVO.getMemPhone());
+				pstmt.setString(4, memVO.getMemEmail());
+				pstmt.setBytes(5, memVO.getMemPicture());			
+				pstmt.setString(6,memVO.getMemStatusR());
+				pstmt.setInt(7, memVO.getMemID());
+
+				
+				System.out.println(memVO.getMemStatusR());				
+				
+				pstmt.executeUpdate();
+			
+				System.out.println(memVO.getMemStatusR());				
+				
+				
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured."+se.getMessage());
+		} finally {
+			if(pstmt!=null) {
+				
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con!=null) {
+				
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
 
 	@Override
 	public void delete(Integer memID) {
@@ -188,6 +243,8 @@ public class MemDAO implements MemDAO_Interface {
 				memVO.setMemBonus(rs.getInt("MEM_BONUS"));
 				memVO.setMemStatus(rs.getInt("MEM_STATUS"));
 				memVO.setMemTime(rs.getDate("MEM_TIME"));
+				memVO.setMemStatusR(rs.getString("MEM_STATUSR"));
+				memVO.setMemPicture(rs.getBytes("MEM_PICTURE"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured."+se.getMessage());
@@ -249,6 +306,8 @@ public class MemDAO implements MemDAO_Interface {
 				memVO.setMemBonus(rs.getInt("MEM_BONUS"));
 				memVO.setMemStatus(rs.getInt("MEM_STATUS"));
 				memVO.setMemTime(rs.getDate("MEM_TIME"));
+				memVO.setMemStatusR(rs.getString("MEM_STATUSR"));
+				memVO.setMemPicture(rs.getBytes("MEM_PICTURE"));
 				
 				list.add(memVO);
 			}
@@ -315,6 +374,8 @@ public class MemDAO implements MemDAO_Interface {
 				memVO.setMemBonus(rs.getInt("MEM_BONUS"));
 				memVO.setMemStatus(rs.getInt("MEM_STATUS"));
 				memVO.setMemTime(rs.getDate("MEM_TIME"));
+				memVO.setMemStatusR(rs.getString("MEM_STATUSR"));
+				memVO.setMemPicture(rs.getBytes("MEM_PICTURE"));
 			}
 			
 			
@@ -510,6 +571,9 @@ public class MemDAO implements MemDAO_Interface {
 				memVO.setMemBonus(rs.getInt("MEM_BONUS"));
 				memVO.setMemStatus(rs.getInt("MEM_STATUS"));
 				memVO.setMemTime(rs.getDate("MEM_TIME"));
+				memVO.setMemStatusR(rs.getString("MEM_STATUSR"));
+				memVO.setMemPicture(rs.getBytes("MEM_PICTURE"));
+				
 				list.add(memVO); // Store the row in the List
 			}
 	

@@ -18,7 +18,7 @@
       </div> <!-- end of personal-information -->
            
           <input id="column-left" type="text" name="first-name" required="required" placeholder="First Name"/>
-          <input id="column-right" type="text" name="last-name" required="required" placeholder="Surname"/>
+          <input id="column-right" type="text" name="last-name" required="required" placeholder="Last name"/>
           <input id="input-field" type="text" name="number" required="required" placeholder="Card Number"/>
           <input id="column-left" type="text" name="expiry" required="required" placeholder="MM / YY"/>
           <input id="column-right" type="text" name="cvc" required="required" placeholder="CCV"/>

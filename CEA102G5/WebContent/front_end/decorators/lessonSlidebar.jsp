@@ -94,7 +94,10 @@ height:auto;
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/script2.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/popper.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/price-slider.js"></script>
-
+	<link rel="stylesheet" href="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.min.css">
+	<script src="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="<%= request.getContextPath()%>/resource/lesson/css/coachFront.css">
+	
 <script type="text/javascript">
 $("#inToRight2").click(
 		function(e){

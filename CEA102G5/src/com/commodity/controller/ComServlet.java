@@ -270,13 +270,26 @@ public class ComServlet extends HttpServlet {
 			try {
 				int comcID = Integer.parseInt(request.getParameter("comcID"));
 				String comName = request.getParameter("comName");
+				String comNameReg = "^[A-z\\W]{2,30}$";
 				if(comName == null || comName.trim().length()==0) {
 					errorMsgs.put("comName","商品名稱請勿空白");
+				} else if (!comName.matches(comNameReg)) {
+					errorMsgs.put("comName","長度需在2到30間(只能英文或中文)");
 				}
-				
+				ComService confirm = new ComService();
+				List<ComVO> list = confirm.getAll();
+				for(ComVO comVO:list) {
+					if (comName.equals(comVO.getComName())) {
+						errorMsgs.put("comName","商品名稱重複");
+					}
+				}
 				int comPrice = 0;
 				try {
 					comPrice = Integer.parseInt(request.getParameter("comPrice"));
+					if (comPrice < 0) {
+						comPrice = 0;
+						errorMsgs.put("comPrice","價格請勿小於0");
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.put("comPrice","價格請填數字");
 				}
@@ -305,33 +318,54 @@ public class ComServlet extends HttpServlet {
 				
 				int comWeight = 0;
 				try {
-					comWeight = Integer.parseInt(request.getParameter("comWeight"));					
+					comWeight = Integer.parseInt(request.getParameter("comWeight"));
+					if (comWeight < 0) {
+						comWeight = 0;
+						errorMsgs.put("comWeight","重量請勿小於0");
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.put("comWeight","重量請填數字");
 				}
+				
 				String comUnit = request.getParameter("comUnit");
 				float comCal = 0;
 				try {
-					Float.parseFloat(request.getParameter("comCal"));					
+					comCal = Float.parseFloat(request.getParameter("comCal"));
+					if (comCal < 0) {
+						comCal = 0;
+						errorMsgs.put("comCal","熱量請勿小於0");
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.put("comCal","熱量請填數字");
 				}
 				float comCarb = 0;
 				try {
-					Float.parseFloat(request.getParameter("comCarb"));									
+					comCarb =Float.parseFloat(request.getParameter("comCarb"));
+					if (comCarb < 0) {
+						comCarb = 0;
+						errorMsgs.put("comCarb","請勿小於0");
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.put("comCarb","碳水請填數字");
 				}
 				float comPro = 0;
 				try {
-					Float.parseFloat(request.getParameter("comPro"));									
+					comPro =Float.parseFloat(request.getParameter("comPro"));
+					if (comPro < 0) {
+						comPro = 0;
+						errorMsgs.put("comPro","蛋白質請勿小於0");
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.put("comPro","蛋白質請填數字");
 				}
 				
 				float comFat = 0;
 				try {
-					Float.parseFloat(request.getParameter("comFat"));									
+					comFat =Float.parseFloat(request.getParameter("comFat"));
+					if (comFat < 0) {
+						comFat = 0;
+						errorMsgs.put("comFat","脂肪請勿小於0");
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.put("comFat","脂肪請填數字");
 				}
@@ -463,6 +497,7 @@ public class ComServlet extends HttpServlet {
 				LinkedHashMap<String, String[]> map1 = new LinkedHashMap<String, String[]>(request.getParameterMap());
 				session.setAttribute("map", map1);
 				map = map1;
+				System.out.println(map);
 				ComService comSvc = new ComService();
 				List<ComVO> list = comSvc.getAll(map);
 				//查詢完成 準備轉交

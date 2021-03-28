@@ -57,6 +57,14 @@ public class OmServlet extends HttpServlet {
 				Integer memID = new Integer(request.getParameter("memID"));
 				Integer memrID = new Integer(request.getParameter("memrID"));
 				Integer omPrice = new Integer(request.getParameter("totalAmount"));
+				String omDiscount = request.getParameter("omDiscount");
+				Integer omDint;
+				if (omDiscount==null||omDiscount.length()==0) {
+					omDint=0;
+				}else {
+					omDint=1;
+				}
+				System.out.println("omDint="+omDint);
 				MemrService memrSvc = new MemrService();
 				MemrVO memrVO = memrSvc.getByMemrID(memrID);
 				List<CartVO> checkOutList = (List<CartVO>)session.getAttribute("checkOutList");
@@ -64,7 +72,7 @@ public class OmServlet extends HttpServlet {
 				session.removeAttribute("checkOutList");
 				
 				OdService odSvc = new OdService();
-				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, memrVO.getMemrName(),memrVO.getMemrPhone(),memrVO.getMemrAddress());
+				OmVO omVO = odSvc.addOd(checkOutList,memID, memrID, omPrice, memrVO.getMemrName(),memrVO.getMemrPhone(),memrVO.getMemrAddress(),omDint);
 				
 				request.setAttribute("omVO", omVO);//¨S¥Î¨ì
 				String url = "/CEA102G5/front_end/credit/credit.jsp";

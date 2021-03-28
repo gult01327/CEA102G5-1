@@ -20,18 +20,18 @@
 <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
 <jsp:useBean id="memSvc" scope='page' class="com.member.model.MemService"/>
 <jsp:useBean id="jedis" scope='page' class="jedis.util.favorite.JedisHandleFavorite"/>
-<h2 class="page-title text-center" style='color:black;'>Recipe List</h2>
+<h2 class="page-title text-center" style='color:black;font-size:50px;margin-bottom:20px;'>Recipe List</h2>
 <div class="blog-list">
 
 <%@ include file="page1.file" %> 
 <c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		<div class="blog-list-item">
 			<div class="col-md-6">
+			<a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}"> 
 				<div class="post-thumbnail">
-						<a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}"> 
 							<img src="<%=request.getContextPath()%>/ComPicReader${recVO.recPicSrc}&pic=1" alt="" /> 
-						</a>
 				</div>
+			</a>
 			</div>
 			<div class="col-md-6">
 				<div class="post-content">
@@ -68,8 +68,9 @@
 		</div>
 </c:forEach>
 </div>
+<div style="margin-bottom:50px;">
 <%@ include file="page2.file" %>
-        
+</div>       
         
 <script type="text/javascript">
 </script>

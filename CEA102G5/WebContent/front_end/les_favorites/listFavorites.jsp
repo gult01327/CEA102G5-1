@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <jsp:useBean id="lesSvc" scope="page"	class="com.lesson.model.LesService" />
 <jsp:useBean id="coaSvc" scope="page"	class="com.coach.model.CoaService" />
+<jsp:useBean id="lesfSvc" scope="page"	class="com.lesson_favorites.model.LesfService" />
 
 
 <html>
@@ -50,6 +51,9 @@ th, td {
 #showID {
 	color: green;
 }
+#picContainer{
+ 	 height: 120px; 
+}
 </style>
 
 </head>
@@ -79,16 +83,14 @@ table,th{
 			<th>教練姓名</th>
 			<th>刪除收藏</th>
 		</tr>
-
-
 		
-		<c:forEach var="lesfVO" items="${lesfVO}">
+		<c:forEach var="lesfVO" items="${lesfSvc.getOneLesf(sessionScope.memVO.memID)}">
 			<tr ${(lesfVO.memID==param.memID) ? 'bgcolor=#CCCCFF':''}>
 				<!--將修改的那一筆加入對比色-->
 
 				
-				<td>${lesSvc.searchOneByID(lesfVO.lesID).lesName}</td>
-				<td>${coaSvc.getOneCoach(lesSvc.searchOneByID(lesfVO.lesID).coaID).coaName}</td>
+				<td>${lesSvc.searchOne(lesfVO.lesID).lesName}</td>
+				<td>${coaSvc.getOneCoach(lesSvc.searchOne(lesfVO.lesID).coaID).coaName}</td>
 				<input type='hidden' id='memID' value='${lesfVO.memID}' />
 				<input type='hidden' id='lesID' value='${lesfVO.lesID}' />
 				

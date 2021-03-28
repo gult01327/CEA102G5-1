@@ -3,7 +3,7 @@
 
 <html>
 <head>
-
+<style type="text/css">
 <style>
 table#table-1 {
 	width: 450px;
@@ -40,15 +40,16 @@ h4 {
 	</c:if>
 
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do">
-		<b>查詢會員編號 :</b> <input type="text" name="mem_ID" size="1"> 
-		<input type="hidden" name="action" value="getByMember"> 
+		<b>查詢會員編號 :</b> <br>
+		<input type="text" name="mem_ID" size="1" width="100" style="width:100px"><br>
+		<input type="hidden" name="action" value="getByMember">
 		<input type="submit" value="送出" >
 	</FORM>
 	
     <jsp:useBean id="lesSvc" scope="page" class="com.lesson.model.LesService" /> 
        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/lesson.reservation/lesr.do" >
        <b>選擇課堂編號:</b>
-       <select size="1" name="les_ID" >
+       <select size="1" name="les_ID" width="100" style="width:100px" >
          <c:forEach var="lesVO" items="${lesSvc.all}" > 
           <option value="${lesVO.lesID}">${lesVO.lesID}
          </c:forEach>   

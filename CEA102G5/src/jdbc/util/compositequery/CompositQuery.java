@@ -8,7 +8,7 @@ public class CompositQuery {
 	public static String get_aCondition(String columnName,String value) {
 		
 		String aCondition = null;
-		
+
 		if("COM_ID".equals(columnName) || ("COMC_ID".equals(columnName))) {
 			aCondition = columnName + "=" + value;
 		}else if("COM_NAME".equals(columnName) || "COMC_NAME".equals(columnName)|| 
@@ -39,12 +39,15 @@ public class CompositQuery {
 			if(value != null && value.trim().length() != 0 && !"action".equals(key)) {
 				count++;
 				String aCondition = get_aCondition(key, value.trim());
-				
-				if(count == 1) {
-					whereCondition.append("WHERE " + aCondition);
-				}else {
-					whereCondition.append("AND " + aCondition);
+				System.out.println(aCondition);
+				if(aCondition!=null&&aCondition.trim().length()!=0&&"null".equals(aCondition)) {
+					if(count == 1) {
+						whereCondition.append("WHERE " + aCondition);
+					}else {
+						whereCondition.append("AND " + aCondition);
+					}
 				}
+					
 				
 				System.out.println("用了" + count +"個欄位數做了查詢");
 			}		

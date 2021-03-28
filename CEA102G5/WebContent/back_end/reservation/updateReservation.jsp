@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.lesson_reservation.model.*"%>
+<jsp:useBean id="lesSvc" scope="page"	class="com.lesson.model.LesService" />
 
 <%
 	LesrVO lesrVO = (LesrVO) request.getAttribute("lesrVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
@@ -54,7 +55,7 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h3>資料修改:</h3>
+	<h3>課後回覆填寫:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -80,34 +81,33 @@ th, td {
 			</tr>
 			<tr>
 				<td>課程評論:</td>
-				<td><input type="TEXT" name="lesr_comments" size="45"
-					value="<%=lesrVO.getLesrComments()%>" /></td>
+				<td><%=lesrVO.getLesrComments()%></td>
 			</tr>
 
 			<tr>
-				<td>預約回覆:</td>
+				<td>課後回覆:</td>
 				<td><input type="TEXT" name="lesr_answer" size="45"
 					value="<%=lesrVO.getLesrAnswer()%>" /></td>
 			</tr>
-			<tr>
+<!-- 			<tr> -->
 
-				<td>預約狀態:</td>
-				<td><select name="lesr_status"
-					value="<%=lesrVO.getLesrStatus()%>">
-						<option value="true">預約</option>
-						<option value="false">取消</option>
-				</select></td>
+<!-- 				<td>預約狀態:</td> -->
+<!-- 				<td><select name="lesr_status" -->
+<%-- 					value="<%=lesrVO.getLesrStatus()%>"> --%>
+<!-- 						<option value="true">預約</option> -->
+<!-- 						<option value="false">取消</option> -->
+<!-- 				</select></td> -->
 
-			</tr>
-			<tr>
-				<td>取消原因:</td>
-				<td><input type="TEXT" name="lesr_reason" size="45"
-					value="<%=lesrVO.getLesrReason()%>" /></td>
-			</tr>
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td>取消原因:</td> -->
+<!-- 				<td><input type="TEXT" name="lesr_reason" size="45" -->
+<%-- 					value="<%=lesrVO.getLesrReason()%>" /></td> --%>
+<!-- 			</tr> -->
 
 			<tr>
-				<td>預約時間:</td>
-				<td><%=lesrVO.getLesrTime()%></td>
+				<td>上課日期:</td>
+				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
 			</tr>
 
 
@@ -115,7 +115,10 @@ th, td {
 		<br> <input type="hidden" name="action" value="update"> 
 		<input	type="hidden" name="les_ID" value="<%=lesrVO.getLesID()%>">  
 		<input	type="hidden" name="mem_ID" value="<%=lesrVO.getMemID()%>"> 
-		<input	type="hidden" name="lesr_time" value="<%=lesrVO.getLesrTime()%>">
+		<input	type="hidden" name="lesr_time" value="${lesSvc.searchOneByID(lesrVO.lesID).lesDate}">
+		<input	type="hidden" name="lesr_reason" value="<%=lesrVO.getLesrReason()%>">
+		<input	type="hidden" name="lesr_status" value="<%=lesrVO.getLesrStatus()%>">
+		<input	type="hidden" name="lesr_comments" value="<%=lesrVO.getLesrComments()%>">
 		<input  type="hidden" name="requestURL"	value="<%=request.getParameter("requestURL")%>">
 		<!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
 		<input type="submit" value="送出修改">

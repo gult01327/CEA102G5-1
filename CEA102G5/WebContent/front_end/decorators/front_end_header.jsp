@@ -241,7 +241,7 @@
 
 									<c:if test="${!empty memVO}">
 								          	<li class="contact-icon">
-								            	<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>
+								            	<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact3.png" width=50px></a>
 								            </li>
 								   </c:if>
 								   <li>
@@ -348,8 +348,8 @@
                 </div>
             </div>
         </header>
-        <div class="section pt-7 pb-7">
-            <div class="container" style="position:relative;">
+        <div class="section pt-1 pb-7">
+            <div class="container" style="position:relative;margin-top: 40px;">
             <sitemesh:write property='body' />
             
 	<div class="dialogue">

@@ -24,11 +24,11 @@
 
   <%if (pageNumber>1) {%>
     <FORM METHOD="post" ACTION="<%=request.getRequestURI()%>">   
-       <select size="1" name="whichPage">
+       <select class="form-control" size="1" name="whichPage" style="position:absolute;width:600px;left:150px;">
          <%for (int i=1; i<=pageNumber; i++){%>
             <option value="<%=i%>">跳至第<%=i%>頁
          <%}%> 
        </select>
-       <input type="submit" value="確定" >  
+       <input type="submit" value="確定" style="position:absolute;left:760px;margin-bottom:30px;padding:8px 15px;">  
     </FORM>
   <%}%>

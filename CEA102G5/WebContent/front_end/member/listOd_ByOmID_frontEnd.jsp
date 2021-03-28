@@ -65,6 +65,7 @@
 		<th>訂購數量</th>
 		<th>商品單價</th>
 		<th>會員留言</th>
+		<th>會員評分</th>
 		<th>管理員回覆</th>
 		<th>寫評價</th>
 	</tr>
@@ -77,6 +78,50 @@
 			<td>${odVO.odCount}</td>
 			<td>$ ${odVO.odPrice}</td>
 			<td id='showMsg'>${odVO.odMessage}</td>
+			<td>
+			<jsp:useBean id="comSvc" scope="page" class="com.commodity.model.ComService"></jsp:useBean>
+				<c:forEach var="comComtVO" items="${comSvc.getAllComComment(odVO.comID)}" >
+					<c:if test="${comComtVO.ordmID==odVO.omID}">
+					<div class="comment-author-info">
+                    	<c:if test="${comComtVO.odPoint == 1}">
+                        	<img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                        </c:if>
+                        <c:if test="${comComtVO.odPoint == 2}">
+                        	<img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                      	</c:if>
+                        <c:if test="${comComtVO.odPoint == 3}">
+                        	<img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                        </c:if>
+                        <c:if test="${comComtVO.odPoint == 4}">
+                        	<img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                        	<img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/starempty.png' width='20px'>
+                        </c:if>
+                        <c:if test="${comComtVO.odPoint == 5}">
+                        	<img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                            <img src='<%=request.getContextPath()%>/resource/images/star.png' width='20px'>
+                        </c:if>                                      
+					</div>
+					</c:if>
+            	</c:forEach>
+            </td>
 			<td>${odVO.odResponse}</td>
 			<td><input class = 'msg' type='button' value='寫評價' ${odVO.odMessage==null? "" : "disabled='disabled'"} />
 				<input type='hidden' value='${odVO.comID}'>

@@ -7,6 +7,11 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 import com.lesson_reservation.model.*;
+import com.member_recipient.model.MemrService;
+import com.member_recipient.model.MemrVO;
+import com.orderdetail.model.OdService;
+import com.ordermaster.model.OmVO;
+import com.cart.model.CartVO;
 import com.lesson.model.*;
 import com.lesson_favorites.model.LesfService;
 
@@ -20,6 +25,7 @@ public class LesrServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		HttpSession session = req.getSession();
 
 		if ("getByMember".equals(action)) { // 來自select_page.jsp的請求
 
@@ -285,6 +291,8 @@ public class LesrServlet extends HttpServlet {
 		}
 
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+			
+			
 
 			Integer memID = new Integer(req.getParameter("mem_ID"));
 			Integer lesID = new Integer(req.getParameter("les_ID"));
@@ -316,8 +324,12 @@ public class LesrServlet extends HttpServlet {
 			lesVO = lesrSvc.updateLes(new Integer(lesID), new Integer(lesAlready));
 
 			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-			String url = req.getContextPath() + "/front_end/reservation/listReservation.jsp";
+			String url = "/CEA102G5/front_end/credit/credit2.jsp";
 			res.sendRedirect(url);
+		}
+		
+		if("credit".equals(action)) {
+			res.sendRedirect("/CEA102G5/front_end/credit/success2.jsp");
 		}
 
 		if ("delete".equals(action)) { // 來自listAllEmp.jsp

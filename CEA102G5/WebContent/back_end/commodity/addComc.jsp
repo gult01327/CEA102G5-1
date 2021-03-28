@@ -54,6 +54,7 @@
 
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity_category/comc.do" name="form1">
+
 <table>
 
 
@@ -65,7 +66,15 @@
 	
 
 </table>
-<br>
+<%
+String errorMsg=(String)session.getAttribute("error");
+if (errorMsg!=null&&errorMsg.length()!=0){%>
+	<p style="color:red"><%=errorMsg%></p>
+	<%session.removeAttribute("error");
+}else{%>
+	<br>
+<%}%>
+
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="°e¥X·s¼W"></FORM>
 

@@ -118,10 +118,10 @@ tr{
 			<tr ${(lesrVO.memID==param.memID) ? 'bgcolor=#CCCCFF':''}>
 				<!--將修改的那一筆加入對比色-->
 				<td class ="lesID">${lesrVO.lesID}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesName}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesName}</td>
 				<input type='hidden' id='memID' value='${lesrVO.memID}' />
 				<td>${(lesrVO.lesrStatus=="true"?"成功":"已取消")}</td>
-				<td>${lesSvc.searchOneByID(lesrVO.lesID).lesDate}</td>
+				<td>${lesSvc.searchOne(lesrVO.lesID).lesDate}</td>
 				<td>${lesrVO.lesrComments}</td>
 				<td>${lesrVO.lesrAnswer}</td>
 				
@@ -177,10 +177,11 @@ tr{
         <textarea id='msgText' cols="60" rows="10" placeholder="請輸入評價"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button id='submitbtn' type="button" class="btn btn-primary" style="background: #5fbd74;">送出回覆</button>
         <input type='hidden' id='lesIDforMsg' value=''>
         <input type='hidden' id='memIDforMsg' value=''>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+        
       </div>
     </div>
   </div>
@@ -194,13 +195,14 @@ tr{
         
       </div>
       <div class="modal-body">
-        <textarea id='msgText2' cols="60" rows="10" placeholder="請輸入原因"></textarea>
+        <textarea id='msgText2' cols="60" rows="10" placeholder="請輸入30字以內 " maxlength="30"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button id='submitbtn2' type="button" class="btn btn-primary" style="background: #5fbd74;">送出回覆</button>
         <input type='hidden' id='lesIDforMsg2' value=''>
         <input type='hidden' id='memIDforMsg2' value=''>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+       
       </div>
     </div>
   </div>

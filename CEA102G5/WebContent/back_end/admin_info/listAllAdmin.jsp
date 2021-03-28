@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.admin_info.model.*"%>
 
@@ -23,14 +24,17 @@
 <body>
 <style>
 	
-	.title{
+	#title{
 	text-align:center;
-	margin-bottom:20px;
-	
+	background-color:#a1bd93;
+	margin-left:100px;
+	margin-bottom:-0.5px;
+	width:720px;
+	padding:5px;
+	border-radius:5px 5px 0 0;
 	}
 	.pagination{
-	width:auto;
-}
+	margin-bottom:50px;
 	.selectbar{
 	display:inline-block;
 	width:auto;
@@ -41,12 +45,13 @@
 	
 	}
 
+	
 </style>
 	
-		<h4 id="title" class="page-title text-center" style='color:black;'>Admin List</h4>
+		<h4 id="title" class="page-title text-center" style='color:#fff;'>Admin List</h4>
 <jsp:useBean id="admiSvc" class="com.admin_info.model.AdmiService"/>
 			
-	<table class="table">
+	<table class="table" style="width:720px;margin-left:100px;box-shadow:5px 5px 5px 3px rgba(0, 0, 0, 0.5);border-radius: 0px 0px 5px 5px;">
 	
 	<tr>
 		<th>編號</th>
@@ -58,8 +63,8 @@
 		<th colspan=2>編輯</th>
 	</tr>
 						
-	<%@ include file="page1.file" %> 
-<c:forEach var="admiVO" items="${admiSvc.all}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+<%@ include file="page1.file" %> 
+<c:forEach var="admiVO" items="${admiSvc.all}"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	
 	<tr class="admin">
 		<td class="admID" style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}" >${admiVO.admID}</td>
@@ -67,7 +72,7 @@
 		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"}">${admiVO.admAccount}</td>
 		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"}">${admiVO.admPassword}</td>
 		<td class="status" style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admStatus ==true?"在職":"離職"}</td>
-		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">${admiVO.admTime}</td>
+		<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}"><fmt:formatDate value="${admiVO.admTime}" pattern="yyyy-MM-dd"/></td>
 		
      	<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"}">
     		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/admin_info/admi.do">
@@ -77,7 +82,7 @@
     		</FORM>
     	</td>
     	<td style="background-color:${admiVO.admStatus ==true?"white":"#9D9D9D"};color:${admiVO.admStatus ==true?"black":"white"}">
-			<button type="button" class="change" style="background-color:${admiVO.admStatus ==true?"#AE0000":"#9D9D9D"};color:${admiVO.admStatus ==true?"":"white"};border-color:${admiVO.admStatus ==true?"#AE0000":"#9D9D9D"}">${admiVO.admStatus ==true?"刪除":"離職"}</button>
+			<button type="button" class="change" style="background-color:${admiVO.admStatus ==true?"#AE0000":"#9D9D9D"};color:${admiVO.admStatus ==true?"":"white"};border-color:${admiVO.admStatus ==true?"#AE0000":"#9D9D9D"}">${admiVO.admStatus ==true?"離職":"離職"}</button>
     		<input id='hID' type="hidden"  value="">
     	</td>
    	</tr>

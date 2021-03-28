@@ -10,7 +10,7 @@
 
 <%
 	List<ComVO> list = (List<ComVO>)session.getAttribute("category_list");
- 	pageContext.setAttribute("list",list);//¬°¤F¤À­¶	
+ 	pageContext.setAttribute("list",list);//Â¬Â°Â¤FÂ¤Ã€Â­Â¶	
  	ComcService comcSvc = new ComcService();
  	List<ComcVO> countList = comcSvc.getComCountByComc();
 %>
@@ -23,7 +23,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
-<title>©Ò¦³°Ó«~¸ê®Æ </title>
+<title>Â©Ã’Â¦Â³Â°Ã“Â«~Â¸ÃªÂ®Ã† </title>
 <style>
 		#cf{
 			text-align: center;
@@ -44,7 +44,7 @@
 			color:#999;
 			text-align: center;
 		}
-
+		
 </style>
  
 </head>
@@ -108,7 +108,7 @@
                             </div>
                         </div>
 <div class="product-grid">
-
+<%@ include file="pagen1.file" %>
 <c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
@@ -145,8 +145,10 @@
 
 </div>
  
-<div>
+
+<div style="margin-bottom:50px;">
 <%@ include file="page2_category.file" %>
+
 </div>
 
 

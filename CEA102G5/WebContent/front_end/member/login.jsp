@@ -77,6 +77,7 @@
 					<input id="pass" type="email" name="memEmail" class="input" required='required' 
 					value="${(not empty memVOError)?memVOError.memEmail:''}" placeholder="請輸入電子信箱，信箱網址必需要有@" autofocus="autofocus">
 					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memEmail}</font></div>
+
 				</div>
 					<div class="group">
 					<label for="pass" class="label">Mem picture</label>
@@ -100,6 +101,51 @@
 	<script src="<%=request.getContextPath()%>/resource/bootstrap/js/bootstrap.min.js"></script>  
 	<script src="<%=request.getContextPath()%>/resource/js/my-login.js"></script> 
 <script type="text/javascript">
+$("#memName").blur(function(){
+	let html = '';
+	let name = $(this).val();
+	if(!/^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$/.test(name)){
+		html += "<font style='margin-top:10px; margin-left:40px; color:#FF0000;'>長度必須在2~10之間且只能為英文或數字</font>";
+		$("#showName").html(html);
+		$(".button").attr("disabled",true);
+	}else{
+		html += "<font style='margin-top:10px; margin-left:175px; color:#00ff14;'>正確</font>";
+		$("#showName").html(html);
+		$(".button").attr("disabled",false);
+	}
+
+});
+
+$("#memPass").blur(function(){
+	let html = '';
+	let pass = $(this).val();
+	if(!/^[(a-zA-Z0-9_)]{2,10}$/.test(pass)){
+		html += "<font style='margin-top:10px; margin-left:40px; color:#FF0000;'>長度必須在2~10之間且只能為英文或數字</font>";
+		$("#showPw").html(html);
+		$(".button").attr("disabled",true);
+	}else{
+		html += "<font style='margin-top:10px; margin-left:170px; color:#00ff14;'>正確</font>";
+		$("#showPw").html(html);
+		$(".button").attr("disabled",false);
+	}
+});
+
+
+$("#phone").blur(function(){
+	let html = '';
+	let phone = $(this).val();
+	if(!/^(09)[0-9]{8}$/.test(phone)){
+		html += "<font style='margin-top:10px; margin-left:120px; color:#FF0000;'>請填入正確手機號碼</font>";
+		$("#showPhone").html(html);
+		$(".button").attr("disabled",true);
+	}else{
+		html += "<font style='margin-top:10px; margin-left:170px; color:#00ff14;'>正確</font>";
+		$("#showPhone").html(html);
+		$(".button").attr("disabled",false);
+	}
+	
+	
+});
 
 $(".login-wrap").on("blur","#account",function(){
 	let html = '';
@@ -125,23 +171,16 @@ $(".login-wrap").on("blur","#account",function(){
 			}else if(data == "error"){
 				html += "<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>長度必須在2~10個字之間</font>";
 				$("#show2").html(html);
+
 				$(".button").attr("disabled",true);
 			}else{
 				html += "<font style='margin-top:10px; margin-left:120px; color:#00ff14;'>此帳號可以使用!</font>";
-				$("#show2").html(html);
+				$("#showAccount").html(html);
 				$(".button").attr("disabled",false);
 			}
 		}
 	});
-	
-	
-	
-	console.log("OK");
-	
 });
-	
-
-
 
 $(".login-wrap").on("change","input[type='file']",function(e){
     let file = e.target.files[0];

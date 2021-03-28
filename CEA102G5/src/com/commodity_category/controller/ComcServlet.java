@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 
+import com.commodity.model.ComService;
 import com.commodity.model.ComVO;
 import com.commodity_category.model.ComcService;
 import com.commodity_category.model.ComcVO;
@@ -53,6 +54,24 @@ public class ComcServlet extends HttpServlet {
 		if("insert".equals(action)) {
 			try {
 				String comcName = request.getParameter("comcName");
+				if(comcName==null||comcName.length()==0) {
+					session.setAttribute("error", "請輸入類別名稱");
+					String url = "/back_end/commodity/addComc.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);
+					return;
+				}
+				ComcService confirm = new ComcService();
+				List<ComcVO> list = confirm.getAll();
+				for(ComcVO comcVO:list) {
+					if (comcName.equals(comcVO.getComcName())) {
+						session.setAttribute("error", "類別名稱重複");
+						String url = "/back_end/commodity/addComc.jsp";
+						RequestDispatcher successView = request.getRequestDispatcher(url);
+						successView.forward(request, response);
+						return;
+					}
+				}
 				ComcVO comcVO = new ComcVO();
 				comcVO.setComcName(comcName);
 				ComcService comcSvc = new ComcService();

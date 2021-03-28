@@ -96,7 +96,6 @@ pageContext.setAttribute("list",list);
 
 $(document).on('click','#dele',function(){
 	let del=$(this);
-	console.log("123");
 	let comID =del.next().next().val();
 	let memID =del.next().val();
 	let location = del.next().next().next().val();

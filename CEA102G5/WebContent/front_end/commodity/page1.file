@@ -33,6 +33,6 @@
 %>
 
 <%if (pageNumber>0){%>
-  <b><font color=red>²Ä<%=whichPage%>/<%=pageNumber%>­¶</font></b>
+  
 <%}%>
 

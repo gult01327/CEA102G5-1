@@ -8,14 +8,14 @@
 <%
 	ComService comSvc = new ComService();
 	List<ComVO> list = comSvc.getAll();
-	pageContext.setAttribute("list",list);//±N©Ò¦³ª«¥ó©ñ¦bpageContext¤¤
+	pageContext.setAttribute("list",list);//å°‡æ‰€æœ‰ç‰©ä»¶æ”¾åœ¨pageContextä¸­
 %>
 <!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 
-<title>©Ò¦³°Ó«~¸ê®Æ </title>
+<title>æ‰€æœ‰å•†å“è³‡æ–™ </title>
 </head>
 <body bgcolor=#E8FFE8>
 <style>
@@ -57,21 +57,21 @@
 <table id="table_id" class="display" style="border:0px #FFD382 solid;">
 	<thead>
 		<tr>
-			<td style="width:70px;">°Ó«~½s¸¹</td>
-			<td style="width:70px;">°Ó«~¦WºÙ</td>
-			<td style="width:70px;">°Ó«~»ù®æ</td>
-			<td style="width:100px;">°Ó«~¹Ï¤ù</td>
-			<td style="width:300px;">°Ó«~Â²¤¶</td>
-			<td style="width:70px;">°Ó«~ª¬ºA</td>
-			<td style="width:70px;">°Ó«~­«¶q</td>
-			<td style="width:70px;">°Ó«~³æ¦ì</td>
-			<td style="width:100px;">°Ó«~¼ö¶q(cal)</td>
-			<td style="width:100px;">°Ó«~ºÒ¤ô(g)</td>
-			<td style="width:100px;">°Ó«~³J¥Õ½è(g)</td>
-			<td style="width:100px;">°Ó«~¯×ªÕ(g)</td>
-			<td style="width:70px;">°Ó«~¯S©Ê</td>
+			<td style="width:70px;">å•†å“ç·¨è™Ÿ</td>
+			<td style="width:70px;">å•†å“åç¨±</td>
+			<td style="width:70px;">å•†å“åƒ¹æ ¼</td>
+			<td style="width:100px;">å•†å“åœ–ç‰‡</td>
+			<td style="width:300px;">å•†å“ç°¡ä»‹</td>
+			<td style="width:70px;">å•†å“ç‹€æ…‹</td>
+			<td style="width:70px;">å•†å“é‡é‡</td>
+			<td style="width:70px;">å•†å“å–®ä½</td>
+			<td style="width:100px;">å•†å“ç†±é‡(cal)</td>
+			<td style="width:100px;">å•†å“ç¢³æ°´(g)</td>
+			<td style="width:100px;">å•†å“è›‹ç™½è³ª(g)</td>
+			<td style="width:100px;">å•†å“è„‚è‚ª(g)</td>
+			<td style="width:70px;">å•†å“ç‰¹æ€§</td>
 			
-			<td style="width:100px;">°Ó«~³Ğ«Ø®É¶¡</td>
+			<td style="width:100px;">å•†å“å‰µå»ºæ™‚é–“</td>
 			<td style="width:50px;border-top:0px #FFD382 solid;border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;"></td>
 			
 			
@@ -90,10 +90,10 @@
 
 			<td class="status" style="color:biue;cursor: pointer;">
 			<c:if test="${comVO.comStatus==0}">
-				<font color='blue'>¤U¬[</font>
+				<font color='blue'>ä¸‹æ¶</font>
 			</c:if>
 			<c:if test="${comVO.comStatus==1}">
-				<font color='blue'>¤W¬[</font>
+				<font color='blue'>ä¸Šæ¶</font>
 			</c:if>
 	</td>
 	<input type="hidden" name="comID" value="${comVO.comID}">
@@ -109,7 +109,7 @@
 			<td>${comVO.comTime}</td>
 			<td style="border-top:0px #FFD382 solid;border-right:0px #FFD382 solid;border-bottom:0px #FFD382 solid;">
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity/com.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="­×§ï">
+			     <input type="submit" value="ä¿®æ”¹">
 			     <input type="hidden" name="comID"  value="${comVO.comID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
@@ -135,28 +135,28 @@ $(document).ready( function () {
     	"scrollX": true,
     	"order": [0, 'desc'],
         "language": {
-            "lengthMenu": "Åã¥Ü _MENU_ µ§¸ê®Æ",
-            "sProcessing": "³B²z¤¤...",
-            "sZeroRecords": "?¦³¤Ç°t?ªG",
-            "sInfo": "¥Ø«e¦³ _MAX_ µ§¸ê®Æ",
-            "sInfoEmpty": "¥Ø«e¦@¦³ 0 µ§¬ö¿ı",
+            "lengthMenu": "é¡¯ç¤º _MENU_ ç­†è³‡æ–™",
+            "sProcessing": "è™•ç†ä¸­...",
+            "sZeroRecords": "?æœ‰åŒ¹é…?æœ",
+            "sInfo": "ç›®å‰æœ‰ _MAX_ ç­†è³‡æ–™",
+            "sInfoEmpty": "ç›®å‰å…±æœ‰ 0 ç­†ç´€éŒ„",
             "sInfoFiltered": " ",
             "sInfoPostFix": "",
-            "sSearch": "´M§ä:",
+            "sSearch": "å°‹æ‰¾:",
             "sUrl": "",
-            "sEmptyTable": "©|¥¼¦³¸ê®Æ¬ö¿ı¦s¦b",
-            "sLoadingRecords": "¸ü¤J¸ê®Æ¤¤...",
+            "sEmptyTable": "å°šæœªæœ‰è³‡æ–™ç´€éŒ„å­˜åœ¨",
+            "sLoadingRecords": "è¼‰å…¥è³‡æ–™ä¸­...",
             "sInfoThousands": ",",
             "oPaginate": {
-                "sFirst": "­º­¶",
-                "sPrevious": "¤W¤@­¶",
-                "sNext": "¤U¤@­¶",
-                "sLast": "¥½­¶"
+                "sFirst": "é¦–é ",
+                "sPrevious": "ä¸Šä¸€é ",
+                "sNext": "ä¸‹ä¸€é ",
+                "sLast": "æœ«é "
              },
              "order": [[0, "desc"]],
              "oAria": {
-                 "sSortAscending": ": ¥H¤É§Ç±Æ¦C¦¹¦C",
-                 "sSortDescending": ": ¥H­°§Ç±Æ¦C¦¹¦C"
+                 "sSortAscending": ": ä»¥å‡åºæ’åˆ—æ­¤åˆ—",
+                 "sSortDescending": ": ä»¥é™åºæ’åˆ—æ­¤åˆ—"
              }
             }
     });
@@ -181,10 +181,10 @@ $(".status").click(function(){
 		success : function(date){
 			console.log(date);
 			if(date==="1"){
-				status.children().text("¤W¬[");
+				status.children().text("ä¸Šæ¶");
 				status.next().next().val("1");
 			}else{
-				status.children().text("¤U¬[");
+				status.children().text("ä¸‹æ¶");
 				status.next().next().val("0");
 			}
 		}

@@ -20,7 +20,7 @@
 <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
 <jsp:useBean id="memSvc" scope='page' class="com.member.model.MemService"/>
 <jsp:useBean id="jedis" scope='page' class="jedis.util.favorite.JedisHandleFavorite"/>
-<h2 class="page-title text-center" style='color:black;'>Recipe List</h2>
+<h2 class="page-title text-center" style='color:black;font-size:50px;margin-bottom:20px;'>Recipe List</h2>
 <div class="blog-list">
 
 <%@ include file="page1.file" %> 
@@ -68,8 +68,9 @@
 		</div>
 </c:forEach>
 </div>
+<div style="margin-bottom:50px;">
 <%@ include file="page2.file" %>
-        
+</div>       
         
 <script type="text/javascript">
 </script>

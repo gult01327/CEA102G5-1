@@ -10,145 +10,122 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>°Ó«~¸ê®Æ·s¼W</title>
+<title>å•†å“è³‡æ–™æ–°å¢</title>
 </head>
 <body>
 
-
-<h3>°Ó«~¸ê®Æ·s¼W:</h3>
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
+  
   input[type='text']{
-  	width:70%;
+  	width:400px;
   }
-
+  .abc{
+  margin-left:30px;
+  }
+  .addcom{
+  	height:70%;
+	margin-left:200px;
+	margin-right:200px;
+	padding:20px;
+	box-shadow:5px 5px 5px 3px rgba(0, 0, 0, 0.5);
+	border-radius:0px 0px 5px 5px;
+  }
+  #tittle{
+	text-align:center;
+	margin-bottom:-1px;
+	background-color:#a1bd93;
+	width:515px;
+	margin-left:200px;
+	padding:10px;
+	border-radius:5px 5px 0 0;
+	}
+	.addbtn{
+	margin-left:380px;
+	margin-bottom:10px;
+	}
 </style>
 
-
+	<h5 id="tittle" class="page-title text-center" style='color:#fff;font-size:50px;'>Add Comodity</h5>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity/com.do" name="form1" enctype="multipart/form-data">
-<table>
+<fieldset class="addcom">
 
 <jsp:useBean id="comcSvc" scope="page" class="com.commodity_category.model.ComcService" />
-	<tr>
-		<td>¤ÀÃş¦WºÙ<font color=red><b></b></font></td>
-		<td><select size="1" name="comcID" style="width:70%;">
+
+	<div class="abc">
+		<label>åˆ†é¡åç¨±:<font color=red><b>*</b></font></label>
+		<select  class="form-control" size="1" name="comcID" style="width:auto;">
 			<c:forEach var="comcVO" items="${comcSvc.all}">
 				<option value="${comcVO.comcID}" ${(comVO.comcID==comcVO.comcID)? 'selected':'' } >${comcVO.comcName}
 			</c:forEach>
-		</select></td>
-	</tr>
-	<tr>
-		<td>°Ó«~¦WºÙ</td>
-		<td><input type="TEXT" name="comName" size="45" 
-			 value="<%= (comVO==null)? "" : comVO.getComName() %>" required="required" />
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comName}</font>
-		</td>
-	</tr>
-	<tr>
-		<td>°Ó«~»ù®æ</td>
-		<td><input type="TEXT" name="comPrice" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComPrice()%>" required="required"/>
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPrice}</font>
-		</td>
-	</tr>
-	<tr>
-		<td>°Ó«~¹Ï¤ù</td>
-		<td><input type="file" name="upfile1" id="myFile" required="required">
-		<font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPicture}</font>
-		<div id="preview"></div>
-		</td>
-	</tr>
-	<tr>
-		<td>°Ó«~Â²¤¶</td>
-		<td><input type="TEXT" name="comContent" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComContent()%>" required="required" />
-
-			 </td>
-	</tr>
-	<tr>
-		<td>°Ó«~ª¬ºA</td>
-		<td >
+		</select><br>
+	</div>
+	<div class="abc">
+		<label>å•†å“åç¨±:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comName}</span><br>
+		<input  class="form-control" type="TEXT" name="comName" size="45" 
+				value="<%= (comVO==null)? "" : comVO.getComName() %>" required="required" /><br>
+	</div>
+	<div class="abc">
+		<label>å•†å“åƒ¹æ ¼:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPrice}</span><br>
+		<input  class="form-control" type="TEXT" name="comPrice" size="45"
+			 value="<%= (comVO==null)? "" : comVO.getComPrice()%>" required="required"/><br>
+	</div>
+	<div class="abc">
+		<label>å•†å“åœ–ç‰‡:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPicture}</span><br>
+		<input  type="file" name="upfile1" id="myFile" required="required"><br>
+	</div>
+	<div class="abc">
+		<label>å•†å“ç°¡ä»‹:</label>
+		<input  class="form-control" type="TEXT" name="comContent" size="45"
+			 value="<%= (comVO==null)? "" : comVO.getComContent()%>" required="required" /><br>
+	</div>
+	<div class="abc">
+		<label>å•†å“ç‹€æ…‹:</label> <span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comStatus}</span><br>
 		<select size="1" name="comStatus" style="width:70%;">
-   			<option value="0" selected>¤W¬[</option>
-    		<option value="1">¤U¬[</option>
+   			<option value="0" selected>ä¸Šæ¶</option>
+    		<option value="1">ä¸‹æ¶</option>
 		</select>
-		</td>
-	</tr>
-	<tr>
-		<td>°Ó«~­«¶q</td>
-		<td><input type="TEXT" name="comWeight" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComWeight() %>" required="required"/>
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comWeight}</font>
-			 </td>
-	</tr>
-	<tr>
-		<td>°Ó«~³æ¦ì</td>
-		<td><input type="TEXT" name="comUnit" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComUnit()%>" required="required" />
-			 </td>
-	</tr>
-	<tr>
-		<td>°Ó«~¼ö¶q</td>
-		<td><input type="TEXT" name="comCal" size="45"
-			 value="<%= (comVO==null)? "" :comVO.getComCal() %>" required="required" />
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comCal}</font>
-			 </td>
-	</tr>
-	<tr>
-		<td>ºÒ¤ô¤Æ¦Xª«</td>
-		<td><input type="TEXT" name="comCarb" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComCarb() %>"  required="required"/>
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comCarb}</font>
-			 </td>
-	</tr>
-	<tr>
-		<td>³J¥Õ½è</td>
-		<td><input type="TEXT" name="comPro" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComPro() %>" required="required" />
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPro}</font>
-			 </td>
-	</tr>
-	<tr>
-		<td>¯×½è</td>
-		<td><input type="TEXT" name="comFat" size="45"
-			 value="<%= (comVO==null)? "" : comVO.getComFat() %>" required="required" />
-			 <font style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comFat}</font>
-			 </td>
-	</tr>
+		
+	</div>
+	<div class="abc">
+		<label>å•†å“é‡é‡:</label> <span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comWeight}</span><br>
+		<input  class="form-control" type="TEXT" name="comWeight" size="45"
+			 value="<%= (comVO==null)? "" : comVO.getComWeight() %>" required="required"/><br>
+	</div>
+	<div class="abc">
+		<label>å•†å“å–®ä½:</label>
+		<input  class="form-control" type="TEXT" name="comUnit" size="45"
+			 value="<%= (comVO==null)? "" : comVO.getComUnit()%>" required="required" /><br>
+			
+	</div>
+	<div class="abc">
+		<label>å•†å“ç†±é‡:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comCal}</span><br>
+		<input  class="form-control" type="TEXT" name="comCal" size="45"
+			 value="<%= (comVO==null)? "" :comVO.getComCal() %>" required="required" /><br>
+	</div>
+	<div class="abc">
+		<label>ç¢³æ°´åŒ–åˆç‰©:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comCarb}</span><br>
+		<input  class="form-control" type="TEXT" name="comCarb" size="45"
+			 value="<%= (comVO==null)? "" : comVO.getComCarb() %>"  required="required"/><br>
+	</div>
+		<div class="abc">
+		<label>è›‹ç™½è³ª:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPro}</span><br>
+		<input class="form-control" type="TEXT" name="comPro" size="45"
+			value="<%= (comVO==null)? "" : comVO.getComPro() %>" required="required" /><br>
+		</div> 
+		
+		<div class="abc">
+		<label>è„‚è³ª:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comFat}</span><br>
+		<input  class="form-control" type="TEXT" name="comFat" size="45"
+			 value="<%= (comVO==null)? "" : comVO.getComFat() %>" required="required"><br>
+		</div> 
+	<div class="addbtn">
+	<input type="hidden" name="action" value="insert">
+	<input type="submit" value="æ–°å¢">
+	</div>
+</fieldset>	
 
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="°e¥X·s¼W">
 </FORM>
+
 
 
 
@@ -158,51 +135,51 @@
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 
-// ÃD¥Ø¡G ½Ğ»s§@¥i¥H¤W¶Ç¹Ï¤ù¨ì«eºİ¹wÄıªº¥\¯à
-// ¾Ç²ß­«ÂI¡G
-// 1. File API ¡V Read as Data URL
+// é¡Œç›®ï¼š è«‹è£½ä½œå¯ä»¥ä¸Šå‚³åœ–ç‰‡åˆ°å‰ç«¯é è¦½çš„åŠŸèƒ½
+// å­¸ç¿’é‡é»ï¼š
+// 1. File API â€“ Read as Data URL
 
 function init() {
 
-    // 1. §ì¨úDOM¤¸¯À
+    // 1. æŠ“å–DOMå…ƒç´ 
     let myFile = document.getElementById("myFile");
     let preview = document.getElementById('preview');
 
-    // 2. ¹ïmyFileª«¥óµù¥Uchange¨Æ¥ó - §ïÅÜ¿ï¾ÜªºÀÉ®×®ÉÄ²µo
+    // 2. å°myFileç‰©ä»¶è¨»å†Šchangeäº‹ä»¶ - æ”¹è®Šé¸æ“‡çš„æª”æ¡ˆæ™‚è§¸ç™¼
     myFile.addEventListener('change', function(e) {
-        // ¨ú±oÀÉ®×ª«¥óªº¨âºØ¤è¦¡
-        // 1. ª½±µ±qmyFileª«¥ó¤W¨ú±oÀÉ®×ª«¥ó (¦]¬°«D¦P¨B¡A¤@¼Ë¡A¦h­Óclassnameµù¥U®É·|¦³°İÃD)
-        // 2. ±qeventª«¥ó¤¤¨ú±o¥Lªºsoure target¡A¤]´N¬OmyFileª«¥ó¡A¦A¨ú±oÀÉ®×ª«¥ó 
-        // ÀÉ®×ªº°ò¥»¸ê°T¡A¥]¬A¡GÀÉ®×ªº¦WºÙ¡B¤j¤p»P¤å¥ó«¬ºA
+        // å–å¾—æª”æ¡ˆç‰©ä»¶çš„å…©ç¨®æ–¹å¼
+        // 1. ç›´æ¥å¾myFileç‰©ä»¶ä¸Šå–å¾—æª”æ¡ˆç‰©ä»¶ (å› ç‚ºéåŒæ­¥ï¼Œä¸€æ¨£ï¼Œå¤šå€‹classnameè¨»å†Šæ™‚æœƒæœ‰å•é¡Œ)
+        // 2. å¾eventç‰©ä»¶ä¸­å–å¾—ä»–çš„soure targetï¼Œä¹Ÿå°±æ˜¯myFileç‰©ä»¶ï¼Œå†å–å¾—æª”æ¡ˆç‰©ä»¶ 
+        // æª”æ¡ˆçš„åŸºæœ¬è³‡è¨Šï¼ŒåŒ…æ‹¬ï¼šæª”æ¡ˆçš„åç¨±ã€å¤§å°èˆ‡æ–‡ä»¶å‹æ…‹
         let files = e.target.files;
-        // §PÂ_filesª«¥ó¬O§_¦s¦b
+        // åˆ¤æ–·filesç‰©ä»¶æ˜¯å¦å­˜åœ¨
         if (files) {
-            // ¨ú¥Xfilesª«¥óªº²Ä¤@­Ó
+            // å–å‡ºfilesç‰©ä»¶çš„ç¬¬ä¸€å€‹
             let file = files[0];
-            // §PÂ_file.typeªº«¬§O¬O§_¥]§t'image'
+            // åˆ¤æ–·file.typeçš„å‹åˆ¥æ˜¯å¦åŒ…å«'image'
             if (file.type.indexOf('image') > -1) {
                 // new a FileReader
                 let reader = new FileReader();
-                // ¦bFileReaderª«¥ó¤Wµù¥Uload¨Æ¥ó - ¸ü¤JÀÉ®×ªº·N«ä
+                // åœ¨FileReaderç‰©ä»¶ä¸Šè¨»å†Šloadäº‹ä»¶ - è¼‰å…¥æª”æ¡ˆçš„æ„æ€
                 reader.addEventListener('load', function(e) {
-                    // ¨ú±oµ²ªG ´£¥Ü¡G±qe.target.result¨ú±oÅª¨ú¨ìµ²ªG
+                    // å–å¾—çµæœ æç¤ºï¼šå¾e.target.resultå–å¾—è®€å–åˆ°çµæœ
                     let result = e.target.result;
-                    //­Y¤w¸g¦³¹Ï¤ù«h§R°£
+                    //è‹¥å·²ç¶“æœ‰åœ–ç‰‡å‰‡åˆªé™¤
                     preview.innerHTML='';
-                    // ·s¼Wimg¤¸¯À
+                    // æ–°å¢imgå…ƒç´ 
                     let img = document.createElement('img');
-                    // ½á¤©srcÄİ©Ê
+                    // è³¦äºˆsrcå±¬æ€§
                     img.setAttribute('src', result);
-                    //­­¨î¹Ï¤ù¤j¤p
+                    //é™åˆ¶åœ–ç‰‡å¤§å°
                     img.setAttribute('style', 'max-width:300px;max-hight:200px;');
-                    // ©ñ¨ìdiv¸Ì­±
+                    // æ”¾åˆ°divè£¡é¢
                     preview.append(img);
                 });
-                // ¨Ï¥ÎFileReaderª«¥ó¤Wªº readAsDataURL(file) ªº¤èªk¡A¶Ç¤J­nÅª¨úªºÀÉ®×¡A¨Ã¶}©l¶i¦æÅª¨ú
+                // ä½¿ç”¨FileReaderç‰©ä»¶ä¸Šçš„ readAsDataURL(file) çš„æ–¹æ³•ï¼Œå‚³å…¥è¦è®€å–çš„æª”æ¡ˆï¼Œä¸¦é–‹å§‹é€²è¡Œè®€å–
                 reader.readAsDataURL(file); // *** trigger read file content
             } else {
-                // ¼u¥XÄµ§iµøµ¡ 
-                alert('½Ğ¤W¶Ç¹Ï¤ù¡I');
+                // å½ˆå‡ºè­¦å‘Šè¦–çª— 
+                alert('è«‹ä¸Šå‚³åœ–ç‰‡ï¼');
             }
         }
     });

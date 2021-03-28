@@ -48,6 +48,10 @@
 			color:#999;
 			text-align: center;
 		}
+	.pagination{
+	margin-bottom:70px;
+	margin-top:30px;
+	}
 
 </style>
  
@@ -111,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-<div style='margin-bottom: 40px;'>
+<div id="pagejump">
 <%@ include file="pagen1.file" %>
 </div>
 

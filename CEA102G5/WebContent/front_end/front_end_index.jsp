@@ -246,10 +246,12 @@
 	#changepic_text{
 	margin-bottom:20px;
 	}
+	
   </style>
 </head>
 
 <body>
+
 <script>
 	var memID = -1;
 	var lesID = "-1";
@@ -301,7 +303,7 @@
           <div class="header-right">
             <nav class="menu">
               <ul class="main-menu">
-                <li class="mega-menu">
+                <li class="mega-menu active">
                   <a href="${home}">Home</a>
                 </li>
                 <li>
@@ -316,7 +318,7 @@
 
                   <c:if test="${!empty memVO}">
 					<li class="contact-icon">
-						<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>
+						<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact3.png" width=50px></a>
 					</li>
 				</c:if>
 					<li>
@@ -433,14 +435,14 @@
           <div class="col-sm-12 p-0">
             <div id="rev_slider" class="rev_slider fullscreenbanner">
               <ul>
-                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-delay="6000" data-rotate="0" data-saveperformance="off" data-title="Slide">
                   <div>
                     <video autoplay muted loop id="myVideo">
-                      <source src="<%=request.getContextPath()%>/resource/vedio/strawberry2.mp4" type="video/mp4">
+                      <source src="<%=request.getContextPath()%>/resource/vedio/strawberry2-2.mp4" type="video/mp4" style="width:100%"> 
                     </video>
                   </div>
                 </li>
-                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="3000"  data-delay="5000" data-rotate="0" data-saveperformance="off" data-title="Slide">
                   <img src="<%=request.getContextPath()%>/resource/images/slider/slide_bg_4.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" />
                   <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-hoffset="" data-y="center" data-voffset="-80" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-type="image" data-responsive_offset="on" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]">
                     <img src="<%=request.getContextPath()%>/resource/images/slider/slide_6.png" alt="" style="margin-top: 100px;" />
@@ -451,7 +453,7 @@
                   <a class="tp-caption btn-2 hidden-xs" href="${com}" data-x="['center','center','center','center']" data-y="['center','center','center','center']" data-voffset="['260','260','260','260']" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power0.easeIn","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(95,189,116);bg:rgba(51, 51, 51, 0);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[16,16,16,16]" data-paddingright="[30,30,30,30]" data-paddingbottom="[16,16,16,16]" data-paddingleft="[30,30,30,30]">Shop Now
                   </a>
                 </li>
-                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="2000" data-delay="6000" data-rotate="0" data-saveperformance="off" data-title="Slide">
                   <img src="<%=request.getContextPath()%>/resource/images/gym/gym21.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" />
                   <div class="tp-caption rs-parallaxlevel-1" data-x="right" data-hoffset="" data-y="right" data-voffset="-120" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-type="image" data-responsive_offset="on" data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]">
                     <img src="<%=request.getContextPath()%>/resource/images/gym/gymp2.png" style=" margin-right:-50px;margin-top:-30px" alt="" />
@@ -522,7 +524,7 @@
           <div class="col-sm-12">
             <div data-aos="zoom-out">
               <div class="text-center mb-1 section-pretitle" id="khealthy">Keep Healthy</div>
-              <h2 class="text-center section-title mtn-2" style="color: white">IN Course</h2>
+              <h2 class="text-center section-title mtn-2" style="color: white">New Course</h2>
             </div>
             <div class="EATIN-seperator center mb-6">
               <span class="sep-holder"><span class="sep-line"></span></span>
@@ -567,8 +569,8 @@
 <!-- 商品     -->   
     <div data-aos="zoom-out">
       <div class="related-title">
-        <div class="text-center mb-1 section-pretitle" id="fdelicious">Find Delicious</div>
-        <h2 class="text-center section-title mtn-2">IN Products</h2>
+        <div class="text-center mb-1 section-pretitle" id="fdelicious">Best Sales</div>
+        <h2 class="text-center section-title mtn-2">HOT Products</h2>
       </div>
     </div>
 
@@ -579,29 +581,32 @@
 <c:forEach var="comVO" items="${comSvc.allForComindex}" end="4" >
         	<div class="product-item text-center">
               <div class="product-thumb">
-                   <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
-                      <div class="badges">
-                       	<span class="hot">Hot</span>
-                       </div>
-                       <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:250px;"/>
-                   </a>
-              	<div class="product-action">
-				  <span class="add-to-cart">
-				     <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
-				  </span>
-				  <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
-				  <input type="hidden" id="comID" value="${comVO.comID}">
-				  <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
-				  <span class="wishlist" style="cursor:pointer;"></span>
-				  <span class="compare">Sales:${comVO.comSales}</span>
-				</div>
-            </div>
-                 <div class="product-info">
-                     <a href="shop-detail.html">
-                        <h2 class="title">${comVO.comName}</h2>
-                      	<span class="price">$${comVO.comPrice}</span>
-                     </a>
-                 </div>
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:200px" />
+                                    </a>
+                                    <div class="product-action">
+                                        <span class="add-to-cart">
+                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+                                        </span>
+                                        <input type="hidden" id="memID" value="${sessionScope.memVO.memID}">
+                                        <input type="hidden" id="comID" value="${comVO.comID}">
+                                        <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
+                                        <span class="wishlist" style="cursor:pointer;">
+
+                                        </span>
+                                        <span class="compare">
+                                            Sales:${comVO.comSales}
+                                        </span>
+                                    </div>
+                                </div>
+                 				<div class="product-info">
+                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
+                                        <h2 class="title">${comVO.comName}</h2>
+                                        <span class="price">
+                                            <ins>$${comVO.comPrice}</ins>
+                                        </span>
+                                    </a>
+                                </div>
          	</div>	
         </c:forEach>
         
@@ -614,7 +619,7 @@
           <div class="col-sm-12">
             <div data-aos="zoom-out">
               <div class="text-center mb-1 section-pretitle">Select Wealthy</div>
-              <h2 class="text-center section-title mtn-2">IN Recipe</h2>
+              <h2 class="text-center section-title mtn-2">Latest Recipe</h2>
             </div>
             <div class="EATIN-seperator center mb-6">
               <span class="sep-holder"><span class="sep-line"></span></span>
@@ -628,7 +633,7 @@
         <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
         <c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}" begin="0" end="2">
           <div class="col-md-4">
-           <div data-aos="flip-left">
+           <div data-aos="flip-down">
               <div class="blog-grid-item">
                 <div class="post-thumbnail">
                   <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">
@@ -649,10 +654,11 @@
                   </div>
                   <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">
                     <h1 class="entry-title">${recVO.recName}</h1>
-                  </a>
+                 
                   <div class="entry-content">
                     ${recVO.recContent}
                   </div>
+                   </a>
                   <div class="entry-more">
                     <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">Read more</a>
                   </div>
@@ -1590,117 +1596,13 @@
 </script>	
 <script>
 <c:if test="${!empty comVO}">
-	comID = ${comVO.comID};
+comID = ${comVO.comID};
 </c:if>
 </script>
-    	<script type="text/javascript">
+<script type="text/javascript">
+
+	    $(document).ready(function(){
 	
-	 $("#single-add-to-cart").click(function(){
-		let qty = $("#quantity").val();
-		let comID = $("#comID").val();
-		let memID = $("#memID").val();
-		let location = $("#location").val();
-
-		if(memID == ''){
-			window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
-			return;
-		}
-
-		$.ajax({
-			url:"<%=request.getContextPath()%>/cart/comCart.do",
-			type:"post",
-			data:{
-				action:"ADD",
-				comID:comID,
-				cardCount:qty
-			},
-			cache:false,
-			ifModified :true,
-			success : function(){
-				window.location.reload();
-			}
-		});
-		
-	 });
-	 //收藏讀取用
-	window.onload = function(){
-
-		let comID = $("#comID").val();
-		let memID = $("#memID").val();
-
-		if(memID == ''){
-			let html=""
-			html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";
-			html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
-			document.getElementById("favorite").innerHTML = html;
-		}else{
-			$.ajax({
-				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
-				type:"post",
-				data:{
-					action:"firstload",
-					comID:comID,
-					memID:memID,
-				},
-				cache:false,
-				ifModified :true,
-				success : function(date){
-					if(date==="true"){
-						let html=""
-							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='50px' height='50px'>";	
-							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>";
-							document.getElementById("favorite").innerHTML = html;
-					}else{
-						let html=""
-						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";	
-						html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
-						document.getElementById("favorite").innerHTML = html;	
-					}
-				}
-			});
-		}
-	}
-	 
-	 //收藏按鈕用
-	 $("#favorite").click(function(){
-			let comID = $("#comID").val();
-			let memID = $("#memID").val();
-			let location = $("#location").val();
-
-			if(memID == ''){
-				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
-				return;
-			}
-
-			$.ajax({
-				url:"<%=request.getContextPath()%>/front_end/commodity/comf.do",
-				type:"post",
-				data:{
-					action:"insertByRedis",
-					comID:comID,
-					memID:memID,
-				},
-				cache:false,
-				ifModified :true,
-				success : function(date){
-					if(date==="true"){
-						let html=""
-							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='50px' height='50px'>";	
-							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>";
-							document.getElementById("favorite").innerHTML = html;
-					}else{
-						let html=""
-						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";	
-						html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
-						document.getElementById("favorite").innerHTML = html;	
-					}
-				}
-			});
-			
-		 });
-		 
-	 $(document).ready(function(){
-			
 	        $(".wishlist").each(function(){
 				let wishlist=$(this);
 	        	let comID =wishlist.prev().prev().val();
@@ -1736,7 +1638,7 @@
 	    
 	    $(".wishlist").click(function(){
 	    	let wishlist=$(this);
-     	let comID =wishlist.prev().prev().val();
+        	let comID =wishlist.prev().prev().val();
 			let memID = wishlist.prev().prev().prev().val();
 			let location = wishlist.prev().val();
 			if(memID == ''){
@@ -1766,9 +1668,12 @@
 			});
 			
 		 });
-	    $(".add-to-cart").click(function(){
-	    	let comID = $("#comID").val();
-			let memID = $("#memID").val();
+		$("#product-grid").on("click",".add-to-cart",function(){
+			let memID = $(this).next().val();
+			let comID = $(this).next().next().val();
+			console.log($(this));
+			console.log(memID);
+			console.log(comID);
 			if(memID == ""){
 				window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location=<%=request.getServletPath()%>&comID="+comID+"";
 				return;
@@ -1788,8 +1693,8 @@
 				}
 			});
 		});
-
-  </script>
+		
+    </script>    	
 
   
   

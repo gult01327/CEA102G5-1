@@ -55,7 +55,7 @@
                     <h3 class="modal-title" id="myModalLabel">新增課程</h3>
                 </div>
                 <div class="modal-body">   
-<div id=modalView>
+<div id=modalViewForAddPage>
 	<jsp:include page="addLessonForModal.jsp" />
 </div>
                 </div>

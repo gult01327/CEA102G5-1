@@ -15,6 +15,7 @@ public class MemVO implements Serializable {
 	private Integer memStatus;
 	private Date memTime;
 	private byte[] memPicture;
+	private String memStatusR;
 	
 	public MemVO() {
 		super();
@@ -111,6 +112,14 @@ public class MemVO implements Serializable {
 
 	public void setMemAccount2(String memAccount2) {
 		this.memAccount2 = memAccount2;
+	}	
+
+	public String getMemStatusR() {
+		return memStatusR;
+	}
+
+	public void setMemStatusR(String memStatusR) {
+		this.memStatusR = memStatusR;
 	}
 
 	@Override

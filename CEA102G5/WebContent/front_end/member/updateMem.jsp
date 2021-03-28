@@ -17,21 +17,23 @@
 <title>會員資料修改</title>
 </head>
 <body>
+<h1 id="title" class="page-title text-center" style='color:black;'>Update Your Member List</h1><br>
+
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+/*   table#table-1 { */
+/* 	background-color: #CCCCFF; */
+/*     border: 2px solid black; */
+/*     text-align: center; */
+/*   } */
+/*   table#table-1 h4 { */
+/*     color: red; */
+/*     display: block; */
+/*     margin-bottom: 1px; */
+/*   } */
+/*   h4 { */
+/*     color: blue; */
+/*     display: inline; */
+/*   } */
 </style>
 
 <style>
@@ -45,7 +47,7 @@
     border: 0px solid #CCCCFF;
   }
   th, td {
-    padding: 1px;
+    padding: 5px;
   }
 </style>
 
@@ -61,7 +63,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<center>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/member/mem.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
@@ -92,16 +94,13 @@
 		<td>會員Email</td>
 		<td><input type="TEXT" name="memEmail" size="45" value="<%=memVO.getMemEmail()%>" /></td>
 	</tr>
-
-	
-
 </table>
 <br>
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="memID"  value="<%=memVO.getMemID()%>">
 <input type="hidden" name="where" value="front">
 <input type="submit" value="送出修改"></FORM>
-
+</center>
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 

@@ -20,9 +20,10 @@
 <body>
 <h2 class="page-title text-center" style='color:black;'>Member Page</h2>
 <hr><p>
+<div style="text-align:center;">
 <img src="<%=request.getContextPath()%>/commodity/comPic.do${memVO.memPicSrc}&pic=1" height="100" width="100">
 <h3>${memVO.memName} 您好! 歡迎回來</h3>
-
+</div>
 
 </body>
 

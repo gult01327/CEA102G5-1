@@ -84,7 +84,7 @@ public class MemServlet extends HttpServlet {
 						if (memVO.getMemStatus() == 0) {
 							errorMsgs.put("Exception","您的會員尚未啟動");
 						} else if (memVO.getMemStatus() == 2) {
-							errorMsgs.put("Exception","您的會員已停權");
+							errorMsgs.put("Exception","您的會員已停權,停權原因:"+ memVO.getMemStatusR());
 						} 
 						if(!errorMsgs.isEmpty()) {
 							request.setAttribute("memVO", memVO);
@@ -186,7 +186,7 @@ public class MemServlet extends HttpServlet {
 			Map<String,String> errorMsgs = new LinkedHashMap<String, String>();
 			request.setAttribute("errorMsgs2", errorMsgs);
 			
-//			try {
+			try {
 				String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				String memAccountReg = "^[(a-zA-Z0-9_)]{2,10}$";
 				
@@ -276,11 +276,11 @@ public class MemServlet extends HttpServlet {
 				
 				
 				
-//			} catch (Exception e) {
-//				
-//				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
-//				failView.forward(request, response);
-//			}
+			} catch (Exception e) {
+				
+				RequestDispatcher failView = request.getRequestDispatcher("/front_end/member/login.jsp");
+				failView.forward(request, response);
+			}
 			
 			
 		}
@@ -379,6 +379,103 @@ public class MemServlet extends HttpServlet {
 			}
 			
 		}
+		
+		if("updateMemStatus".equals(action)) {
+			Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+			request.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				String memNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				String memAccountReg = "^[(a-zA-Z0-9_)]{2,10}$";
+				String memName = request.getParameter("memName");
+				if (memName == null || memName.trim().length() == 0) {
+					errorMsgs.put("memName","會員名稱請勿空白");
+				} else if (!memName.trim().matches(memNameReg)) {
+					errorMsgs.put("memName","會員名稱只能是中英文字母數字和_，且長度必須在2~10之間");
+				}
+
+				String memPassword = request.getParameter("memPassword");
+				if (memPassword == null || memPassword.trim().length() == 0) {
+					errorMsgs.put("memPassword","會員密碼請勿空白");
+				} else if (!memPassword.trim().matches(memAccountReg)) {
+					errorMsgs.put("memPassword","會員密碼只能是英文字母數字和_，且長度必須在2~10之間");
+				}
+				String memPhoneReg = "^[(0-9)]{2,11}$";
+				String memPhone = request.getParameter("memPhone");
+				if (memPhone == null || memPhone.trim().length() == 0) {
+					errorMsgs.put("memPhone","會員電話請勿空白");
+				} else if (!memPhone.trim().matches(memPhoneReg)) {
+					errorMsgs.put("memPhone","會員電話只能是數字和，且長度必須在2~11之間");
+				}
+				String memEmail = request.getParameter("memEmail");
+				if (memEmail == null || memEmail.trim().length() == 0) {
+					errorMsgs.put("memEmail","會員Email請勿空白");
+				}
+				
+				Integer memID = new Integer(request.getParameter("memID"));
+				
+				String memStatusR = new String(request.getParameter("memStatusR"));
+				
+				byte[] memPicture = null;
+				MemService memSvc = new MemService();
+				try {
+					Part part = request.getPart("memUpfile");
+					if (part.getSize() != 0) {
+						InputStream is = part.getInputStream();
+						memPicture = new byte[is.available()];
+						is.read(memPicture);
+						is.close();
+					} else {
+						MemVO memVO = memSvc.getOneMem(memID);
+						memPicture = memVO.getMemPicture();
+						memVO.setMemPicture(memPicture);
+					}
+				} catch (Exception e) {
+					errorMsgs.put("memPicture","圖片出問題");
+				}
+				
+				
+				
+//System.out.println(memStatusR);						
+
+				MemVO memVO = new MemVO();
+				memVO.setMemName(memName);
+				memVO.setMemPassword(memPassword);
+				memVO.setMemPhone(memPhone);
+				memVO.setMemEmail(memEmail);
+				memVO.setMemStatusR(memStatusR);
+				
+//System.out.println(memStatusR);				
+				
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("memVO", memVO);
+					RequestDispatcher failView = request.getRequestDispatcher("/back_end/member/updateMem.jsp");
+					failView.forward(request, response);
+				}
+				
+				
+				memSvc.updateMemStatus(memID, memName, memPassword, memPhone, memEmail, memPicture, memStatusR);
+				
+				
+				if (!errorMsgs.isEmpty()) {
+					request.setAttribute("memVO", memVO);
+					RequestDispatcher failView = request.getRequestDispatcher("/back_end/member/updateMem.jsp");
+					failView.forward(request, response);
+				}
+
+					request.setAttribute("memVO", memVO);
+					String url = "/back_end/member/listAllMem.jsp";
+					RequestDispatcher successView = request.getRequestDispatcher(url);
+					successView.forward(request, response);				
+				
+			} catch (Exception e) {
+				errorMsgs.put("Exception",e.getMessage());
+				RequestDispatcher failView = request.getRequestDispatcher("/back_end/member/updateMem.jsp");
+				failView.forward(request, response);
+			}
+			
+		}
+		
 		
 		if("forget".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();

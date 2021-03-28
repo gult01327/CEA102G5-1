@@ -1,5 +1,5 @@
 
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.commodity.model.*"%>
 
@@ -80,9 +80,9 @@
 	</div>
 	<div class="abc">
 		<label>商品狀態:</label> <span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comStatus}</span><br>
-		<select size="1" name="comStatus" style="width:70%;">
-   			<option value="0" selected>上架</option>
-    		<option value="1">下架</option>
+		<select  class="form-control" size="1" name="comStatus" style="width:70%;">
+   			<option value="0" selected>下架</option>
+    		<option value="1">上架</option>
 		</select>
 		
 	</div>
@@ -135,51 +135,51 @@
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 
-// 題目： 請製作可以上傳圖片到前端預覽的功能
-// 學習重點：
-// 1. File API – Read as Data URL
+// 憿��殷� 隢�鋆賭��臭誑銝��喳�����啣��蝡舫��閬賜������
+// 摮貊���暺�嚗�
+// 1. File API �� Read as Data URL
 
 function init() {
 
-    // 1. 抓取DOM元素
+    // 1. ����DOM��蝝�
     let myFile = document.getElementById("myFile");
     let preview = document.getElementById('preview');
 
-    // 2. 對myFile物件註冊change事件 - 改變選擇的檔案時觸發
+    // 2. 撠�myFile�拐辣閮餃��change鈭�隞� - �寡��豢����瑼�獢���閫貊��
     myFile.addEventListener('change', function(e) {
-        // 取得檔案物件的兩種方式
-        // 1. 直接從myFile物件上取得檔案物件 (因為非同步，一樣，多個classname註冊時會有問題)
-        // 2. 從event物件中取得他的soure target，也就是myFile物件，再取得檔案物件 
-        // 檔案的基本資訊，包括：檔案的名稱、大小與文件型態
+        // ��敺�瑼�獢��拐辣���拍車�孵�
+        // 1. �湔�亙�myFile�拐辣銝���敺�瑼�獢��拐辣 (���粹����甇伐�銝�璅�嚗�憭���classname閮餃����������憿�)
+        // 2. 敺�event�拐辣銝剖��敺�隞���soure target嚗�銋�撠望�痂yFile�拐辣嚗�����敺�瑼�獢��拐辣 
+        // 瑼�獢����箸�祈�閮�嚗����穿�瑼�獢�����蝔晞��憭批�����隞嗅����
         let files = e.target.files;
-        // 判斷files物件是否存在
+        // �斗�搭iles�拐辣�臬�血���
         if (files) {
-            // 取出files物件的第一個
+            // ���榻iles�拐辣��蝚砌���
             let file = files[0];
-            // 判斷file.type的型別是否包含'image'
+            // �斗�搭ile.type�����交�臬�血����'image'
             if (file.type.indexOf('image') > -1) {
                 // new a FileReader
                 let reader = new FileReader();
-                // 在FileReader物件上註冊load事件 - 載入檔案的意思
+                // �沙ileReader�拐辣銝�閮餃��load鈭�隞� - 頛��交�獢�������
                 reader.addEventListener('load', function(e) {
-                    // 取得結果 提示：從e.target.result取得讀取到結果
+                    // ��敺�蝯��� ��蝷綽�敺�e.target.result��敺�霈����啁���
                     let result = e.target.result;
-                    //若已經有圖片則刪除
+                    //�亙歇蝬����������芷��
                     preview.innerHTML='';
-                    // 新增img元素
+                    // �啣�img��蝝�
                     let img = document.createElement('img');
-                    // 賦予src屬性
+                    // 鞈虫�src撅祆��
                     img.setAttribute('src', result);
-                    //限制圖片大小
+                    //���嗅����憭批�
                     img.setAttribute('style', 'max-width:300px;max-hight:200px;');
-                    // 放到div裡面
+                    // �曉�辱iv鋆⊿��
                     preview.append(img);
                 });
-                // 使用FileReader物件上的 readAsDataURL(file) 的方法，傳入要讀取的檔案，並開始進行讀取
+                // 雿輻�沙ileReader�拐辣銝��� readAsDataURL(file) ���寞�嚗��喳�亥�霈�����瑼�獢�嚗�銝阡��憪��脰�霈���
                 reader.readAsDataURL(file); // *** trigger read file content
             } else {
-                // 彈出警告視窗 
-                alert('請上傳圖片！');
+                // 敶��箄郎��閬�蝒� 
+                alert('隢�銝��喳����嚗�');
             }
         }
     });

@@ -8,9 +8,6 @@
 <title>Coach Info</title>
 </head>
 <body>
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.min.css">
-<script src="<%= request.getContextPath()%>/resource/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resource/lesson/css/coachFront.css">
 <div style='display:none;'>
 
 <form id=lessonQueryFront METHOD="post" ACTION="<%=request.getContextPath()%>/front_end/lesson/les.do">
@@ -71,13 +68,13 @@
 </form>
 
 </div>
-
+<jsp:useBean id="memSvc" class="com.member.model.MemService"/>
 <jsp:useBean id="coaSvc" class="com.coach.model.CoaService"/>
 <jsp:useBean id="coatSvc" class="com.coach_talent.model.CoatService"/>
 <jsp:useBean id="talSvc" class="com.talent.model.TalService"/>
 <jsp:useBean id="expSvc" class="com.exp.model.ExpService"/>
 <jsp:useBean id="lesSvc" class="com.lesson.model.LesService"/>
-
+<jsp:useBean id="lesrSvc" class="com.lesson_reservation.model.LesrService"/>
 <!--${coaVO=coaSvc.getOneCoach(param.coaID)}-->
 <div class=row>
 	<div class="col-md-6">
@@ -116,7 +113,11 @@
   </c:forEach>
   </div>
   <div id="tabs-5">
-    <p></p>
+  <c:forEach var="lesVO" items="${lesSvc.getByCoach(coaVO.coaID)}">
+ 	 <c:forEach var="lesrVO" items="${lesrSvc.getMemByLes(lesVO.lesID)}">
+    	<p>${memSvc.getOneMem(lesrVO.memID).memName}:${lesrVO.lesrComments}</p>
+	  </c:forEach>
+	</c:forEach>
   </div>
 </div>
 

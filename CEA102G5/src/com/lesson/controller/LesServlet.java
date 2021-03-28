@@ -471,7 +471,7 @@ public class LesServlet extends HttpServlet {
 					String date = sf.format(new Date());
 					sql = "SELECT "+
 					"LES_ID,COA_ID,LES_DATE,LES_TIME,LES_BEGIN,LES_END,LES_AVAILABLE,LES_ALREADY,LES_PRICE,LES_STATUS,TAL_ID,LES_NAME"
-					+" FROM LESSON where LES_STATUS=TRUE AND LES_END >= "+date;
+					+" FROM LESSON where LES_STATUS=TRUE AND LES_END >= '"+date+"' ";
 				}
 				if (sql != null) {
 					

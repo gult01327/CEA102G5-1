@@ -660,7 +660,7 @@ public class LesDAO implements LesDAO_interface {
 			con = ds.getConnection();
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 			String date = sf.format(new Date());
-			pstmt = con.prepareStatement("SELECT COUNT(1) FROM LESSON where LES_STATUS=TRUE AND LES_END >= "+date);
+			pstmt = con.prepareStatement("SELECT COUNT(1) FROM LESSON where LES_STATUS=TRUE AND LES_END >= '"+date+"' ");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				total = rs.getString(1);

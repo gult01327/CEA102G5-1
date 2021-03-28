@@ -44,7 +44,7 @@
 			color:#999;
 			text-align: center;
 		}
-
+		
 </style>
  
 </head>
@@ -145,7 +145,7 @@
 
 </div>
  
-<div>
+<div style="margin-bottom:50px;">
 <%@ include file="page2_category.file" %>
 </div>
 

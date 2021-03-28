@@ -246,10 +246,12 @@
 	#changepic_text{
 	margin-bottom:20px;
 	}
+	
   </style>
 </head>
 
 <body>
+
 <script>
 	var memID = -1;
 	var lesID = "-1";
@@ -301,7 +303,7 @@
           <div class="header-right">
             <nav class="menu">
               <ul class="main-menu">
-                <li class="mega-menu">
+                <li class="mega-menu active">
                   <a href="${home}">Home</a>
                 </li>
                 <li>
@@ -316,7 +318,7 @@
 
                   <c:if test="${!empty memVO}">
 					<li class="contact-icon">
-						<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact.jpg" width=50px></a>
+						<a href="#" style="margin-right:-30px;"><img src="<%=request.getContextPath()%>/resource/images/contact3.png" width=50px></a>
 					</li>
 				</c:if>
 					<li>
@@ -433,14 +435,14 @@
           <div class="col-sm-12 p-0">
             <div id="rev_slider" class="rev_slider fullscreenbanner">
               <ul>
-                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-delay="6000" data-rotate="0" data-saveperformance="off" data-title="Slide">
                   <div>
                     <video autoplay muted loop id="myVideo">
-                      <source src="<%=request.getContextPath()%>/resource/vedio/strawberry2.mp4" type="video/mp4">
+                      <source src="<%=request.getContextPath()%>/resource/vedio/strawberry2-2.mp4" type="video/mp4" style="width:100%"> 
                     </video>
                   </div>
                 </li>
-                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="3000"  data-delay="5000" data-rotate="0" data-saveperformance="off" data-title="Slide">
                   <img src="<%=request.getContextPath()%>/resource/images/slider/slide_bg_4.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" />
                   <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-hoffset="" data-y="center" data-voffset="-80" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-type="image" data-responsive_offset="on" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]">
                     <img src="<%=request.getContextPath()%>/resource/images/slider/slide_6.png" alt="" style="margin-top: 100px;" />
@@ -451,7 +453,7 @@
                   <a class="tp-caption btn-2 hidden-xs" href="${com}" data-x="['center','center','center','center']" data-y="['center','center','center','center']" data-voffset="['260','260','260','260']" data-width="['auto']" data-height="['auto']" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":0,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"300","ease":"Power0.easeIn","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(95,189,116);bg:rgba(51, 51, 51, 0);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[16,16,16,16]" data-paddingright="[30,30,30,30]" data-paddingbottom="[16,16,16,16]" data-paddingleft="[30,30,30,30]">Shop Now
                   </a>
                 </li>
-                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide">
+                <li data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="2000" data-delay="6000" data-rotate="0" data-saveperformance="off" data-title="Slide">
                   <img src="<%=request.getContextPath()%>/resource/images/gym/gym21.jpg" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" />
                   <div class="tp-caption rs-parallaxlevel-1" data-x="right" data-hoffset="" data-y="right" data-voffset="-120" data-width="['none','none','none','none']" data-height="['none','none','none','none']" data-type="image" data-responsive_offset="on" data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]">
                     <img src="<%=request.getContextPath()%>/resource/images/gym/gymp2.png" style=" margin-right:-50px;margin-top:-30px" alt="" />
@@ -631,7 +633,7 @@
         <jsp:useBean id="recSvc" scope='page' class="com.recipe.model.RecService"/>
         <c:forEach var="recVO" items="${recSvc.getRecByStatus(2)}" begin="0" end="2">
           <div class="col-md-4">
-           <div data-aos="flip-left">
+           <div data-aos="flip-down">
               <div class="blog-grid-item">
                 <div class="post-thumbnail">
                   <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">
@@ -652,10 +654,11 @@
                   </div>
                   <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">
                     <h1 class="entry-title">${recVO.recName}</h1>
-                  </a>
+                 
                   <div class="entry-content">
                     ${recVO.recContent}
                   </div>
+                   </a>
                   <div class="entry-more">
                     <a href="<%=request.getContextPath()%>/front_end/recipe/rec.do?action=GetRecDetail_ByrecID&recID=${recVO.recID}">Read more</a>
                   </div>

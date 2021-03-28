@@ -37,41 +37,63 @@
 
 <style>
   table {
-	width: 1000px;
+	width: 100%;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
+ .scrolltable{
+ 	display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width:900px;
+    box-shadow:5px 5px 5px 3px rgba(0, 0, 0, 0.5);
+	border-radius:0px 0px 5px 5px;
+	margin-left:40px;
+	padding:20px;
+	}
+ 	td,th{
+ 	max-width:150px;
+ 	font-size:18px;
+ 	height:80px;
+ 	overflow: hidden;
+ 	
+ 	}
+  hr{
+  border-top:0px solid;
   }
-  th, td {
-    padding: 5px;
-    text-align: center;
+  #tittle{
+  margin-left:40px;
+  background-color:#a1bd93;
+  width:900px;
+  margin-bottom:-43px;
+  padding:15px;
+  border-radius:5px 5px 0 0;
   }
 </style>
-<h2 class="page-title text-center" style='color:black;'>All Commodity</h2>
+<h5 class="page-title text-center" id="tittle" style='color:#fff;font-size:50px;'>All Commodity</h5>
 <hr><p>
-
-<table>
+<div class="scrolltable">
+<table class="table table-hover">
 	<tr>
-		<th>商品編號</th>
-		<th>商品名稱</th>
-		<th>商品價格</th>
-		<th>商品圖片</th>
-		<th>商品簡介</th>
-		<th>商品狀態</th>
-		<th>商品重量</th>
-		<th>商品單位</th>
-		<th>商品熱量(cal)</th>
-		<th>商品碳水(g)</th>
-		<th>商品蛋白質(g)</th>
-		<th>商品脂肪(g)</th>
-		<th>商品特性</th>
+		<th>編號</th>
+		<th>名稱</th>
+		<th>價格</th>
+		<th>圖片</th>
+		<th>簡介</th>
+		<th>狀態</th>
+		<th>重量</th>
+		<th>單位</th>
+		<th>熱量(cal)</th>
+		<th>碳水(g)</th>
+		<th>蛋白質(g)</th>
+		<th>脂肪(g)</th>
+		<th>特性</th>
 		
-		<th>商品創建時間</th>
-		
-		
+		<th>創建時間</th>
+		<th>編輯</th>
+		<th></th>
 	</tr>
 	<%@ include file="page1.file" %>  
 	<c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
@@ -80,7 +102,7 @@
 			<td>${comVO.comID}</td>
 			<td>${comVO.comName}</td>
 			<td>$ ${comVO.comPrice}</td>
-			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" height="100" width="100"></td>
+			<td><img src = "<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1"style="height:80%;width:100%"></td>
 			<td>${comVO.comContent}</td>
 			<td>${comVO.comStatus}</td>
 			<td>${comVO.comWeight}</td>
@@ -107,8 +129,10 @@
 		</tr>
 	</c:forEach>
 </table>
+</div>
+<div style="margin-bottom:50px;">
 <%@ include file="page2.file" %>
-
+</div>
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 </script>

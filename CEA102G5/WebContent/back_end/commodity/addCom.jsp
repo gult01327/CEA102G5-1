@@ -71,16 +71,16 @@
 	</div>
 	<div class="abc">
 		<label>商品圖片:</label><span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comPicture}</span><br>
-		<input  type="file" name="upfile1" id="myFile" required="required"><br>
+		<input  type="file" name="upfile1" id="myFile" required="required"><div id="preview"></div><br>
 	</div>
 	<div class="abc">
 		<label>商品簡介:</label>
 		<input  class="form-control" type="TEXT" name="comContent" size="45"
 			 value="<%= (comVO==null)? "" : comVO.getComContent()%>" required="required" /><br>
 	</div>
-	<div class="abc">
+	<div class="abc" style="margin-bottom:20px;">
 		<label>商品狀態:</label> <span style='margin-top:10px; margin-left:10px; color:#FF0000;'>${errorMsgs.comStatus}</span><br>
-		<select  class="form-control" size="1" name="comStatus" style="width:70%;">
+		<select  class="form-control" size="1" name="comStatus" style="width:auto;">
    			<option value="0" selected>下架</option>
     		<option value="1">上架</option>
 		</select>

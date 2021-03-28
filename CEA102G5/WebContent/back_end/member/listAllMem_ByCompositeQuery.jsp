@@ -111,19 +111,28 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改" style="padding:5px 5px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Update">
+			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
+				<input type="hidden" name="whichPage"  value="<%=whichPage%>">
+			     </FORM>
 			</td>
 			<td style="background-color:${memVO.memStatus == 2 ?"#990000": (memVO.memStatus == 1 ? "#fafad2" : "white" )};
 			color:${memVO.memStatus == 2 ? "white" : (memVO.memStatus == 1 ? "#556b2f" : "black" )}" >	
 				 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="啟動" style="padding:5px 5px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
-			     <input type="hidden" name="action"	value="updateStatus1"></FORM>
+			     <input type="hidden" name="action"	value="updateStatus1">
+			     <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
+				<input type="hidden" name="whichPage"  value="<%=whichPage%>">
+			     </FORM>
 			     <br>
 			     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/member/mem.do" style="margin-bottom: 0px;">
 			      <input type="submit" value="停權" style="padding:5px 5px;">
 			     <input type="hidden" name="memID"  value="${memVO.memID}">
-			     <input type="hidden" name="action"	value="stopStatus"></FORM>					
+			     <input type="hidden" name="action"	value="stopStatus">
+			     <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
+				<input type="hidden" name="whichPage"  value="<%=whichPage%>">
+			     </FORM>					
 			</td>	
 		
 	</tr>

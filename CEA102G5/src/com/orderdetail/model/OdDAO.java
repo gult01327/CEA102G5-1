@@ -33,7 +33,7 @@ public class OdDAO implements OdDAO_interface {
 	
 	//SQL«ü¥O
 	private static final String OMINSERT_STMT = 
-			"INSERT INTO ORDER_MASTER(MEM_ID,MEMR_ID,ORDM_PRICE,OMR_NAME,OMR_PHONE,OMR_ADDRESS) VALUES(?,?,?,?,?,?)";
+			"INSERT INTO ORDER_MASTER(MEM_ID,MEMR_ID,ORDM_PRICE,OMR_NAME,OMR_PHONE,OMR_ADDRESS,ORDM_DISCOUNT) VALUES(?,?,?,?,?,?,?)";
 	private static final String ODINSERT_STMT = 
 			"INSERT INTO ORDER_DETAIL(ORDM_ID,COM_ID,ORDD_COUNT,ORDD_PRICE) VALUES(?,?,?,?)";
 	private static final String GETALLBYOMID_STMT = 
@@ -67,6 +67,7 @@ public class OdDAO implements OdDAO_interface {
 			pstmt.setString(4, omVO.getOmrName());
 			pstmt.setString(5, omVO.getOmrPhone());
 			pstmt.setString(6, omVO.getOmrAddress());
+			pstmt.setInt(7, omVO.getOmDiscount());
 			
 			pstmt.executeUpdate();
 			

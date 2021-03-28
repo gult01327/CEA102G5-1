@@ -54,7 +54,7 @@ public class ComDAO implements ComDAO_interface {
 	"DELETE FROM COMMODITY WHERE COM_ID=?";
 	
 	private static final String GET_ALL_COM_COMMENT = 
-			"SELECT M.MEM_ID,MEM_NAME,COM_ID,ORDD_MESSAGE,ORDD_POINT,ORDD_RESPONSE \r\n" + 
+			"SELECT M.MEM_ID,MEM_NAME,COM_ID,ORDD_MESSAGE,ORDD_POINT,ORDD_RESPONSE,M.ORDM_ID \r\n" + 
 			"FROM ORDER_DETAIL D LEFT JOIN order_master M ON D.ORDM_ID = M.ORDM_ID\r\n" + 
 			"LEFT JOIN MEMBER_INFO I ON M.MEM_ID = I.MEM_ID\r\n" + 
 			"WHERE COM_ID=? AND ORDD_MESSAGE IS NOT NULL";
@@ -491,6 +491,7 @@ public class ComDAO implements ComDAO_interface {
 				comComtVO.setOdMessage(rs.getString("ORDD_MESSAGE"));
 				comComtVO.setOdPoint(rs.getInt("ORDD_POINT"));
 				comComtVO.setOdResponse(rs.getString("ORDD_RESPONSE"));
+				comComtVO.setOrdmID(rs.getInt("ORDM_ID"));
 				
 				list.add(comComtVO);
 			}

@@ -155,7 +155,6 @@
 		 let checkArr =new Array();
 		 console.log($(".checkComID").prop("checked"));
 		 $(".checkComID").each(function(){
-		 console.log($(this).prop("checked"));
 			 if($(this).prop("checked")){
 			 checkArr.push('123');
 			 }

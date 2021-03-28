@@ -83,7 +83,7 @@
 
 
 
-<h2 class="page-title text-center" style='color:black;'>Order Master</h2>
+<h2 class="page-title text-center" style='color:black;'>Order Response</h2>
 <%String allBlank = (String)session.getAttribute("allBlank");
   if (allBlank!=null&&allBlank!=""){%>
     <h2 style='color:red;'><%=allBlank %></h2>	

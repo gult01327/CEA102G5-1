@@ -109,16 +109,17 @@
 						</div>
 							<div>
 								<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemService"></jsp:useBean>
-								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox'><font class="fontscore">¨Ï¥Î¿n¤À:${memSvc.getMemBonus(memVO.memID).memBonus}¤À¥i¥Î</font><br><br>
+
+								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox'><font class="fontscore">ä½¿ç”¨ç©åˆ†:${memSvc.getMemBonus(memVO.memID).memBonus}åˆ†å¯ç”¨</font><br><br>
 								<img src='<%=request.getContextPath()%>/resource/images/recipient.png' width='30px' height='30px' style="position:absolute;margin-top:-70px;margin-left:15px;">
-								<input id='openModal' type='button' value='¿ï¾Ü¦¬³f¤H¦a§}¸ê°T' >
+								<input id='openModal' type='button' value='é¸æ“‡æ”¶è²¨äººåœ°å€è³‡è¨Š' >
 								<br><br><br>
 								<c:if test="${not empty memrVO}">
-								<font class="fontstyle">¦¬³f¤H©m¦W: ${memrVO.memrName}</font><br><br>
-								<font class="fontstyle">¦¬³f¤H¹q¸Ü: ${memrVO.memrPhone}</font><br><br>
-								<font class="fontstyle">¦¬³f¤H¦a§}: ${memrVO.memrAddress}</font><br><br>
+								<font class="fontstyle">æ”¶è²¨äººå§“å: ${memrVO.memrName}</font><br><br>
+								<font class="fontstyle">æ”¶è²¨äººé›»è©±: ${memrVO.memrPhone}</font><br><br>
+								<font class="fontstyle">æ”¶è²¨äººåœ°å€: ${memrVO.memrAddress}</font><br><br>
 								</c:if>
-								<input id='submitBtn' type='submit' value='¥I´Úµ²±b'>
+								<input id='submitBtn' type='submit' value='ä»˜æ¬¾çµå¸³'>
 								<input type="hidden" name="action"  value="BUY">
 								<input type="hidden" name="memID"  value="${memVO.memID}">
 								<input type="hidden" id="memrID" name="memrID"  value="${memrVO.memrID}">
@@ -133,7 +134,7 @@
     <div class="modal-dialog" role="document" style="width:1000px">
       <div class="modal-content" background-color="red">
         <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel" style="font-size:20px;">½Ğ¿ï¾Ü±`¥Î¦¬³f¤H¸ê°T</h2>
+          <h2 class="modal-title" id="exampleModalLabel" style="font-size:20px;">è«‹é¸æ“‡å¸¸ç”¨æ”¶è²¨äººè³‡è¨Š</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -155,7 +156,7 @@
 	$("#checkBonus").change(function(){
 		var bonus = $(this).val();
 		var totalAmount = ${amount};
-		//checkbox¥Îprop
+		//checkboxç”¨prop
 		if($(this).is(':checked')){
 			
 			var newAmount = totalAmount - bonus;
@@ -173,7 +174,7 @@
 		e.preventDefault();
 		let memrID = $("#memrID").val();
 		if(memrID == ''){
-			swal('¿ù»~¡I', '½Ğ¿ï¾Ü¦a§}¡I', 'error');
+			swal('éŒ¯èª¤ï¼', 'è«‹é¸æ“‡åœ°å€ï¼', 'error');
 		}else{
 			document.getElementById("checkoutForm").submit();
 		}

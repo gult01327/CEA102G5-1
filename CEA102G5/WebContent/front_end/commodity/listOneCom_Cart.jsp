@@ -18,6 +18,8 @@
 
 </head>
 <body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 
 <style>
 
@@ -207,7 +209,7 @@
 				                                    </div>
                                                 </div>
                                                 <div class="product-info">
-                                                    <a href="shop-detail.html">
+                                                    <a href="<%=request.getContextPath()%>/front_end/cart/comCart.do?action=getOne_For_Cart&comID=${comVO.comID}">
                                                         <h2 class="title">${comVO.comName}</h2>
                                                         <span class="price">$${comVO.comPrice}</span>
                                                     </a>
@@ -242,7 +244,10 @@
 			window.location.href = "<%=request.getContextPath()%>/cart/comCart.do?action=ADD&location="+location+"&comID="+comID+"";
 			return;
 		}
-
+		if(qty==''||parseInt(qty, 10)<1||qty==null){
+			swal('錯誤！', '請輸入正確數量！', 'error');
+			return
+		}
 		$.ajax({
 			url:"<%=request.getContextPath()%>/cart/comCart.do",
 			type:"post",

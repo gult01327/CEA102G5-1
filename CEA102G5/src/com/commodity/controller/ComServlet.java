@@ -276,7 +276,13 @@ public class ComServlet extends HttpServlet {
 				} else if (!comName.matches(comNameReg)) {
 					errorMsgs.put("comName","長度需在2到30間(只能英文或中文)");
 				}
-				
+				ComService confirm = new ComService();
+				List<ComVO> list = confirm.getAll();
+				for(ComVO comVO:list) {
+					if (comName.equals(comVO.getComName())) {
+						errorMsgs.put("comName","商品名稱重複");
+					}
+				}
 				int comPrice = 0;
 				try {
 					comPrice = Integer.parseInt(request.getParameter("comPrice"));
@@ -491,6 +497,7 @@ public class ComServlet extends HttpServlet {
 				LinkedHashMap<String, String[]> map1 = new LinkedHashMap<String, String[]>(request.getParameterMap());
 				session.setAttribute("map", map1);
 				map = map1;
+				System.out.println(map);
 				ComService comSvc = new ComService();
 				List<ComVO> list = comSvc.getAll(map);
 				//查詢完成 準備轉交

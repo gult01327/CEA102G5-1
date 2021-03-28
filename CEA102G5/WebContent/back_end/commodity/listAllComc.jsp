@@ -57,24 +57,15 @@
 	</ul>
 </c:if>
 
-<table>
+<table class="table table-striped">
 	<tr>
-		<th>食材分類ID</th>
 		<th>食材分類名稱</th>
-		<th>修改</th>
 		<th>查詢分類下的所有食材</th>
 	</tr>
 	
 	<c:forEach var="comcVO" items="${comcSvc.all}">
 		<tr>
-			<td>${comcVO.comcID}</td>
 			<td>${comcVO.comcName}</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity_category/comc.do" style="margin-bottom: 0px;">
-			    <input type="submit" value="修改"   disabled="disabled"> 
-			    <input type="hidden" name="comcID" value="${comcVO.comcID}">
-			    <input type="hidden" name="action" value="getOne_For_Update_Comc"></FORM>
-			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back_end/commodity_category/comc.do" style="margin-bottom: 0px;">
 			    <input type="submit" value="送出查詢"> 

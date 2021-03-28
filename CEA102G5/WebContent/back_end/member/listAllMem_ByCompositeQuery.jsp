@@ -14,7 +14,7 @@
 
 </head>
 <body bgcolor=#E8FFE8>
-<h2 id="title" class="page-title text-center" style='color:black;'>Member Serch</h2><br>
+<h1 id="title" class="page-title text-center" style='color:black;'>Member Serch</h1><br>
 
 <div style="text-align:center;"><h4><a href="<%=request.getContextPath()%>/back_end/member/memSelect.jsp">
 <img src="<%=request.getContextPath()%>/resource/images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4></div>

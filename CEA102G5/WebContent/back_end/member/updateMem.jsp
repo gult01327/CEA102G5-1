@@ -15,7 +15,7 @@
 
 </head>
 <body bgcolor='white'>
-<h2 id="title" class="page-title text-center" style='color:black;'>Update Member</h2><br>
+<h1 id="title" class="page-title text-center" style='color:black;'>Update Member</h1><br>
 <style>
 /*   table#table-1 { */
 /* 	background-color: #CCCCFF; */

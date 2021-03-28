@@ -11,13 +11,15 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>會員資料新增</title>
-
-
-
 </head>
 <body bgcolor=#E8FFE8>
-
-<!-- <!-- <style> --> 
+<div style="text-align:center;">
+<h1 id="title" class="page-title text-center" style='color:black;'>Add Member</h1><br>
+ <h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp">
+ <img src="<%=request.getContextPath() %>/resource/images/logo1.png" width="100" height="100" border="0">回首頁</a></h4>
+ </div>
+ <br>
+ <style> 
 <!-- /*   table#table-1 { */ -->
 <!-- /* 	background-color: #CCCCFF; */ -->
 <!-- /*     border: 2px solid black; */ -->
@@ -32,11 +34,11 @@
 <!-- /*     color: blue; */ -->
 <!-- /*     display: inline; */ -->
 <!-- /*   } */ -->
-<!-- <!-- </style> --> 
+ </style> 
 
 <style>
   table {
-	width: 800px;
+	width: auto;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -45,16 +47,11 @@
     border: 0px solid #CCCCFF;
   }
   th, td {
-    padding: 1px;
+    padding: 5px;
   }
 </style>
 
-<table id="table-1">
-	<tr><td>
-		 <h4 id="title" class="page-title text-center" style='color:black;'>Add Member</h4><br>
-		 <h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp"><img src="<%=request.getContextPath() %>/resource/images/logo.png" width="50" height="50" border="0">回首頁</a></h4>
-	</td></tr>
-</table><br>
+
 
 <!-- <h3>資料新增:</h3> -->
 
@@ -67,7 +64,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<center>
 <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/front_end/member/mem.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
@@ -109,6 +106,7 @@
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
 
+</center>
 <script type="text/javascript">
 var servletPathName ="${pageContext.request.requestURI}";
 

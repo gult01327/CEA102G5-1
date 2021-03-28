@@ -10,14 +10,11 @@
 
 <head>
 <title>會員資料</title>
-
-
-
 </head>
 <body bgcolor=#E8FFE8>
-<h2 id="title" class="page-title text-center" style='color:black;'>One Member List</h2><br>
-<div style="text-align:center;"><h3><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp" >
-<img src="<%=request.getContextPath() %>/resource/images/back1.gif" width="100" height="32" border="0" >回首頁</a></h3></div>
+<h1 id="title" class="page-title text-center" style='color:black;'>One Member List</h1><br>
+<div style="text-align:center;"><h4><a href="<%=request.getContextPath() %>/back_end/member/memSelect.jsp" >
+<img src="<%=request.getContextPath() %>/resource/images/back1.gif" width="100" height="32" border="0" >回首頁</a></h4></div>
 
 <style> 
 <!-- /*   table#table-1 { */ -->

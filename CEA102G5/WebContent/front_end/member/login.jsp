@@ -57,25 +57,25 @@
 				<div class="group">
 					<label for="account" class="label">Account</label>
 					<input id="account" type="text" name="memAccount" class="input" required='required' 
-					value="${(not empty memVOError)?memVOError.memAccount:''}"placeholder="請輸入帳號" autofocus="autofocus">
+					value="${(not empty memVOError)?memVOError.memAccount:''}"placeholder="帳號只能是英文字母數字和_，長度必須在2~10個字之間" autofocus="autofocus">
 					<div id='show2'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memAccount2}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Password</label>
 					<input id="pass" type="password"  name="memPassword" class="input" required='required' 
-					value="${(not empty memVOError)?memVOError.memPassword:''}" placeholder="請輸入密碼" autofocus="autofocus" data-eye>
+					value="${(not empty memVOError)?memVOError.memPassword:''}" placeholder="密碼只能是英文字母數字和_，長度必須在2~10個字之間" autofocus="autofocus" data-eye>
 					<div id='show'><font style='margin-top:5px; margin-left:120px; color:#ffd700;'>${errorMsgs2.memPassword2}</font></div>
 				</div>
 				<div class="group">
 					<label for="phone" class="label">Mem phone</label>
 					<input id="phone" type="text" name="memPhone" class="input" required='required' 
-					value="${(not empty memVOError)?memVOError.memPhone:''}" placeholder="請輸入電話" autofocus="autofocus">
+					value="${(not empty memVOError)?memVOError.memPhone:''}" placeholder="電話只能是數字，長度必須在2~11個字之間" autofocus="autofocus">
 					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memPhone}</font></div>
 				</div>
 				<div class="group">
 					<label for="pass" class="label">Email Address</label>
 					<input id="pass" type="email" name="memEmail" class="input" required='required' 
-					value="${(not empty memVOError)?memVOError.memEmail:''}" placeholder="請輸入電子信箱" autofocus="autofocus">
+					value="${(not empty memVOError)?memVOError.memEmail:''}" placeholder="請輸入電子信箱，信箱網址必需要有@" autofocus="autofocus">
 					<div id='show'><font style='margin-top:10px; margin-left:50px; color:#ffd700;'>${errorMsgs2.memEmail}</font></div>
 				</div>
 					<div class="group">
@@ -123,7 +123,7 @@ $(".login-wrap").on("blur","#account",function(){
 				$("#show2").html(html);
 				$(".button").attr("disabled",true);
 			}else if(data == "error"){
-				html += "<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>長度必須在2~10之間</font>";
+				html += "<font style='margin-top:10px; margin-left:120px; color:#ffd700;'>長度必須在2~10個字之間</font>";
 				$("#show2").html(html);
 				$(".button").attr("disabled",true);
 			}else{

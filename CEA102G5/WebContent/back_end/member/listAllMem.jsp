@@ -15,11 +15,9 @@
 <head>
 <title>會員資料</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resource/bootstrap/css/bootstrap.min.css">
-
-
 </head>
 <body>
-<h2 id="title" class="page-title text-center" style='color:black;'>Member List</h2><br>
+<h1 id="title" class="page-title text-center" style='color:black;'>Member List</h1><br>
 <style>
 /*   table#table-1 { */
 /* 	background-color: #CCCCFF; */

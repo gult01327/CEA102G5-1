@@ -17,7 +17,7 @@
 <title>會員資料修改</title>
 </head>
 <body>
-<h2 id="title" class="page-title text-center" style='color:black;'>Update Your Member List</h2><br>
+<h1 id="title" class="page-title text-center" style='color:black;'>Update Your Member List</h1><br>
 
 <style>
 /*   table#table-1 { */
@@ -47,7 +47,7 @@
     border: 0px solid #CCCCFF;
   }
   th, td {
-    padding: 3px;
+    padding: 5px;
   }
 </style>
 

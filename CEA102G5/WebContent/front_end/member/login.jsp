@@ -106,7 +106,7 @@ $(".login-wrap").on("blur","#account",function(){
 	let account = $("#account").val();
 	if(account == ''){
 		$("#show").html(html);
-		return;
+		return; 
 	}
 	$.ajax({
 		url:"<%=request.getContextPath() %>/member/mem.do",

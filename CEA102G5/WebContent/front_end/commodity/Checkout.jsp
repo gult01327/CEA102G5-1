@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.commodity_category.model.*"%>
@@ -109,8 +109,7 @@
 						</div>
 							<div>
 								<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemService"></jsp:useBean>
-
-								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox'><font class="fontscore">使用積分:${memSvc.getMemBonus(memVO.memID).memBonus}分可用</font><br><br>
+								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox'><font class="fontscore">使用積分:${memSvc.getMemBonus(memVO.memID).memBonus}可用積分</font><br><br>
 								<img src='<%=request.getContextPath()%>/resource/images/recipient.png' width='30px' height='30px' style="position:absolute;margin-top:-70px;margin-left:15px;">
 								<input id='openModal' type='button' value='選擇收貨人地址資訊' >
 								<br><br><br>

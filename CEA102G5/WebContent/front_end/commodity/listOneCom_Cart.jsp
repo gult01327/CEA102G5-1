@@ -21,10 +21,24 @@
 
 <style>
 
-.product-carousel .owl-buttons{
+	.product-carousel .owl-buttons{
 	height:0px;
-}
-
+	}
+	.single-comments-list{
+	overflow-y:auto;
+	display:block;
+	height:250px;
+	}
+	.tab-content{
+	height:250px;
+	overflow-y:auto;
+/* 	display:block; */
+	
+	}
+	#commerce-tabs{
+	padding-bottom:20px;
+	padding-top:40px;
+	}
 </style>
 <div id="main">
                             <div class="single-product">
@@ -66,13 +80,13 @@
                                             <input type='hidden' id='location' value='<%=request.getServletPath()%>'>
                                         </form>
                                         <div class="product-tool" style='cursor:pointer' id='favorite'>
-                                             <img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>
+                                             <img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='30px' height='30px'>
                                              <font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>
                                         </div>
                                     </div>
                                 </div>
-                                                                <div class="col-md-12">
-                                    <div class="commerce-tabs tabs classic">
+                                <div class="col-md-12" style="margin-top:-20px;">
+                                    <div class="commerce-tabs tabs classic" id="commerce-tabs">
                                         <ul class="nav nav-tabs tabs">
                                             <li class="active">
                                                 <a data-toggle="tab" href="#tab-description" aria-expanded="true">Description</a>
@@ -83,9 +97,7 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane fade active in" id="tab-description">
-                                                <p>
-                                                    ${comVO.comContent}<br>
-                                                    <br>
+                                               		
                                                     <br>
                                                     <h4>商品基本營養成分</h4>
                                                                                                                 商品熱量:${comVO.comCal}g<br>
@@ -164,9 +176,9 @@
                                         </div>
                                     </div>
                                     <div class="related">
-                                        <div class="related-title">
+                                        <div class="related-title" style="margin-top:-30px;">
                                             <div class="text-center mb-1 section-pretitle fz-34">Related</div>
-                                            <h2 class="text-center section-title mtn-2 fz-24">Ingredients</h2>
+                                            <h2 class="text-center section-title mtn-2 fz-24" style="margin-bottom:-30px;">Ingredients</h2>
                                         </div>
                                         <div class="product-carousel p-0" data-auto-play="true" data-desktop="3" data-laptop="2" data-tablet="2" data-mobile="1">
 <jsp:useBean id="comcSvc" scope="page" class="com.commodity_category.model.ComcService"></jsp:useBean>   
@@ -177,7 +189,7 @@
                                                         <div class="badges">
                                                             <span class="hot">Hot</span>
                                                         </div>
-                                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:250px;"/>
+                                                        <img src="<%=request.getContextPath()%>/ComPicReader${comVO.comPicSrc}&pic=1" alt="" style="height:220px;width:250px"/>
                                                     </a>
                                                     <div class="product-action">
 				                                        <span class="add-to-cart">
@@ -255,7 +267,7 @@
 
 		if(memID == ''){
 			let html=""
-			html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";
+			html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='30px' height='30px'>";
 			html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
 			document.getElementById("favorite").innerHTML = html;
 		}else{
@@ -272,12 +284,12 @@
 				success : function(date){
 					if(date==="true"){
 						let html=""
-							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='50px' height='50px'>";	
+							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='30px' height='30px'>";	
 							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>";
 							document.getElementById("favorite").innerHTML = html;
 					}else{
 						let html=""
-						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";	
+						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='30px' height='30px'>";	
 						html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
 						document.getElementById("favorite").innerHTML = html;	
 					}
@@ -310,12 +322,12 @@
 				success : function(date){
 					if(date==="true"){
 						let html=""
-							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='50px' height='50px'>";	
-							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>";
+							html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heart.png' width='30px' height='30px'>";	
+							html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>取消收藏</font>"
 							document.getElementById("favorite").innerHTML = html;
 					}else{
 						let html=""
-						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='50px' height='50px'>";	
+						html="<img id='addFav'  src='<%=request.getContextPath()%>/resource/images/heartempty.png' width='30px' height='30px'>";	
 						html+="<font size='+2' style='margin-left:20px; vertical-align:bottom;'>加入收藏</font>";
 						document.getElementById("favorite").innerHTML = html;	
 					}

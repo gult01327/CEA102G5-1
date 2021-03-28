@@ -16,7 +16,17 @@ div.widget-products .product-list-widget li a img{
 width:80px;
 height:auto;
 }
-
+	#inToRight2{
+	position:absolute;
+	margin-left:180px;
+	margin-top:20px;
+	}
+	
+	.price_label{
+	font-size:17px;
+	margin-right:95px;
+	margin-top:-35px;
+	}
 </style>
 
 <div class="row">
@@ -29,9 +39,9 @@ height:auto;
                         	<form action="<%=request.getContextPath()%>/front_end/commodity/com.do" method="post">
 	                            <div class="widget widget-product-search">
 	                                
-	                                    <input type="text" autocomplete="off" class="search-field" placeholder="Search Commodity…" value="<%= (comName==null)? "" : comName%>" name="COM_NAME" />
+	                                    <input type="text" autocomplete="off" class="form-control" placeholder="Search Commodity…" value="<%= (comName==null)? "" : comName%>" name="COM_NAME" />
 	                                    <input type="hidden" name="action" value="listCom_ByCompositeQueryFS">
-	                                    <input type="submit" value="Search" id="inToRight1" />
+	                                    <input type="submit" value="Search" id="inToRight2" />
 	                                
 	                            </div>
 
@@ -48,7 +58,7 @@ height:auto;
 								</div>
 
 	                            <div class="widget widget_price_filter">
-	                                <h3 class="widget-title">Filter by price</h3>
+	                                <h3 class="widget-title" style="margin-top:70px;margin-left:50px;margin-bottom:-25px;">Filter by price</h3>
 	                                <div class="price_slider_wrapper">
 	                                    <div class="price_slider" style="display:none;"></div>
 	                                    <div class="price_slider_amount">
@@ -71,7 +81,7 @@ height:auto;
                             
 					<!-- 左邊商品列 -->
                             <div class="widget widget-products">
-                                <h3 class="widget-title">HOT SALES Commodity</h3>
+                                <h3 class="widget-title" style="margin-left:40px;margin-bottom:10px;margin-top:20px">HOT SALES</h3>
                                 <ul class="product-list-widget">
                                 
 <!--                                 蝶帶出銷量前幾的商品 -->

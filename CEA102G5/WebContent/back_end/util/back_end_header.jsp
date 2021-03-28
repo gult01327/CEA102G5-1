@@ -184,7 +184,7 @@ width:100px;
     flex: 1 0 100%;
 }
 .memberMsgLatest{
-	color:#969696;
+	color:#aaa;
 	text-align:left;
 	text-overflow: ellipsis;
 }
@@ -227,7 +227,20 @@ div.memberListMain{
     margin-right:0px;
     margin-left:-30px;
     }
-
+    .header{
+    background-color:#333;
+    height:120px;
+    }
+	.header.scrolling-menu{
+	background-color:#333;
+	height:95px;
+	}
+	.logo-image{
+	width:65%;
+	}
+	.headfont{
+	color:#aaa;
+	}
  	</style>
    
 </head>
@@ -298,7 +311,7 @@ div.memberListMain{
                 <div class="row">
                     <div class="col-md-3">
                         <a href="#" id="logo">
-                            <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo1.png" alt="Organik Logo" />
+                            <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo4_white.png" alt="Organik Logo" />
                         </a>
                     </div>
                     <div class="col-md-9">
@@ -306,11 +319,11 @@ div.memberListMain{
                             <nav class="menu">
                                 <ul class="main-menu" style="margin-right:-10px;">
                                     <li>
-                                        <a href="<%=request.getContextPath()%>/back_end/back_end_index.jsp">Home</a>
+                                        <a href="<%=request.getContextPath()%>/back_end/back_end_index.jsp" class="headfont">Home</a>
                                     </li>
                                    	<c:if test='${funList.contains("課程")}'>
                                     <li class="dropdown">
-                                        <a href="#">Course</a>
+                                        <a href="#" class="headfont">Course</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Course</a></li>
                                             <li><a href="#">Coach</a></li>
@@ -321,7 +334,7 @@ div.memberListMain{
                                     </c:if>
                                     <c:if test='${funList.contains("商城")}'>
                                     <li class="dropdown">
-                                        <a href="#">Shop</a>
+                                        <a href="#" class="headfont">Shop</a>
                                         <ul class="sub-menu">
                                         	<li><a href="#">Commodity</a></li>
                                             <li><a href="#">Category</a></li>
@@ -331,7 +344,7 @@ div.memberListMain{
                                     </c:if>
                                     <c:if test='${funList.contains("食譜") }'>
                                     <li class="dropdown">
-                                        <a href="#">Recipe</a>
+                                        <a href="#" class="headfont">Recipe</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Recipe</a></li>
                                         </ul>
@@ -339,7 +352,7 @@ div.memberListMain{
                                     </c:if>
                                     <c:if test='${funList.contains("會員") }'>
                                     <li class="dropdown">
-                                        <a href="#">Member</a>
+                                        <a href="#" class="headfont">Member</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Member</a></li>
                                         </ul>
@@ -347,7 +360,7 @@ div.memberListMain{
                                     </c:if>
                                     <c:if test='${funList.contains("管理員") }'>
                                     <li class="dropdown">
-                                        <a href="#">Admin</a>
+                                        <a href="#" class="headfont">Admin</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Admin</a></li>
                                         </ul>
@@ -356,11 +369,11 @@ div.memberListMain{
 
                             		<c:if test="${empty sessionScope.coaVO}">
 								          	<li class="contact-icon">
-								            	<a href="#" style="margin-right:-20px;"><img class="mic123" src="<%=request.getContextPath()%>/resource/images/backContact.jpg" width=50px></a>
+								            	<a href="#" style="margin-right:-20px;"><img class="mic123" src="<%=request.getContextPath()%>/resource/images/backContact2.png" width=50px></a>
 								            </li>
                                 	</c:if>
 
-                             <li class="dropdown"><a href="#"}>${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</a>
+                             <li class="dropdown"><a href="#" class="headfont">${(empty sessionScope.coaVO)? sessionScope.admiVO.admName:sessionScope.coaVO.coaName}</a>
                             	 <ul class="sub-menu" id="logoutmenu">
                     			  <li>
                     			  <div>
@@ -387,7 +400,7 @@ div.memberListMain{
                     <div class="col-xs-8">
                         <div class="header-center">
                             <a href="html-organik.html" id="logo-2">
-                                <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo1.png" alt="Organik Logo" />
+                                <img class="logo-image" src="<%=request.getContextPath()%>/resource/images/logo4_white.png" alt="Organik Logo" style="width:35%;margin-top:-15px;"/>
                             </a>
                         </div>
                     </div>
@@ -562,7 +575,8 @@ div.memberListMain{
     		let link = $("a[href='"+str+"']");
         	if(link){
         		link.parent().addClass("active");
-            	link.css("background-color","#B3D9D9");
+        		link.css("color","#fff");
+            	link.css("background-color","#8fbc8f");
             	link.parent().show();
             	link.parent().parent().show();
             	$("ul.product-categories").parent().show();

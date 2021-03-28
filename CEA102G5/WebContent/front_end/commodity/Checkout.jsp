@@ -11,24 +11,70 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
-<h2 class="page-title text-center" style='color:black;'>Check Out</h2>
-				<div class="section pt-7 pb-7" width='850px'>
+
+</head>
+<body>
+<style>
+	.wishlist-wrap{
+	overflow-y:auto;
+	max-height:600px;
+	padding:10px;
+	margin-left:20px;
+	}
+	#showAmount{
+		font-size:25px;
+		margin-top:20px;
+		display:flex;
+	}
+	.fontstyle{
+	position:absolute;
+	font-size:15px;
+	margin-top:-100px;
+	margin-left:20px;
+	}
+	#openModal{
+	margin-top:-80px;
+	margin-left:60px;
+	position:absolute;
+	}
+	#checkBonus{
+	width:15px;
+	height:15px;
+	position:absolute;
+	right:170px;
+	margin-top:-25px;
+	}
+	.fontscore{
+	font-size:15px;
+	position:absolute;
+	margin-left:670px;
+	margin-top:-30px;
+	}
+	#submitBtn{
+	position:absolute;
+	padding:15px 5px;
+	margin-top:-100px;
+	margin-left:20px;
+	
+	}
+</style>
+
+<h2 class="page-title text-center" style='color:black;font-size:50px;margin-bottom:20px;'>Check Out</h2>
+				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-12" style="width:850px;">
+							<div class="col-md-9">
 								<div class="wishlist-wrap">
 									<table class="table shop-cart">
 										<thead>
 											<tr class="cart_item">												
 												<td class="product-thumbnail">&nbsp;</td>
-												<td class="product-info">Product Name</td>
+												<td class="product-info">Product</td>
 												<td class="product-subtotal">Unit Price</td>
 												<td class="product-stock">Quantity</td>
-												<td>Amount</td>
+												<td class="product">Amount</td>
 											</tr>
 										</thead>
 										<tbody>
@@ -57,20 +103,20 @@
 											 
 										</tbody>
 									</table>
-									<h3 id='showAmount' style='float:right; margin-right:300px;'>Total Amount :$ ${amount} </h3>
-									
 								</div>
+								<h3 id='showAmount' style='float:right; margin-right:300px;'>Total Amount :$ ${amount} </h3>
 							</div>
 						</div>
+							<div>
 								<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemService"></jsp:useBean>
-								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox' style='width:30px;height:30px;'><font size='+2'>使用積分:${memSvc.getMemBonus(memVO.memID).memBonus}分可用</font><br><br>
-								<img src='<%=request.getContextPath()%>/resource/images/recipient.png' width='50px' height='50px'>
-								<input id='openModal' type='button' value='選擇收貨人地址資訊'>
+								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox'><font class="fontscore">使用積分:${memSvc.getMemBonus(memVO.memID).memBonus}分可用</font><br><br>
+								<img src='<%=request.getContextPath()%>/resource/images/recipient.png' width='30px' height='30px' style="position:absolute;margin-top:-70px;margin-left:15px;">
+								<input id='openModal' type='button' value='選擇收貨人地址資訊' >
 								<br><br><br>
 								<c:if test="${not empty memrVO}">
-								<font size='5'>收貨人姓名: ${memrVO.memrName}</font><br><br>
-								<font size='5'>收貨人電話: ${memrVO.memrPhone}</font><br><br>
-								<font size='5'>收貨人地址: ${memrVO.memrAddress}</font><br><br>
+								<font class="fontstyle">收貨人姓名: ${memrVO.memrName}</font><br><br>
+								<font class="fontstyle">收貨人電話: ${memrVO.memrPhone}</font><br><br>
+								<font class="fontstyle">收貨人地址: ${memrVO.memrAddress}</font><br><br>
 								</c:if>
 								<input id='submitBtn' type='submit' value='付款結帳'>
 								<input type="hidden" name="action"  value="BUY">
@@ -78,6 +124,7 @@
 								<input type="hidden" id="memrID" name="memrID"  value="${memrVO.memrID}">
 								<input type="hidden" id='totalAmount' name="totalAmount"  value="${amount}">
 </form>
+							</div>
 					</div>
 				</div>
  
@@ -86,7 +133,7 @@
     <div class="modal-dialog" role="document" style="width:1000px">
       <div class="modal-content" background-color="red">
         <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">請選擇常用收貨人資訊</h2>
+          <h2 class="modal-title" id="exampleModalLabel" style="font-size:20px;">請選擇常用收貨人資訊</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

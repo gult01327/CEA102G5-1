@@ -11,24 +11,63 @@
 <html>
 <head><title>ÁÊª«¨®¦Cªí - listAllCart.jsp</title>
 </head>
-<body style="width:800px">
+<body >
+<style>
+	#subtotal{
+	text-align:end;
+	
+	}
+	#cartSub{
+	text-align:left;
+	font-size:25px;
+	margin-left:-10px;
+	}
+	.cart-totals{
+	padding:15px 100px 40px 15px;
+	margin-bottom:130px;
+	position:relative;
+	top:-20px;
+	
+	}
+	#checkout{
+	position:absolute;
+	margin-left:670px;
+	margin-top:-80px;
+	
+	}
+	#checkAll{
+	position:absolute;
+	margin-top:-50px;
+	margin-left:10px;
+	}
+
+	.product{
+	font-size:20px;
+	padding:10px;
+	}
+	.wishlist-wrap{
+	overflow-y:auto;
+	max-height:700px;
+	padding:10px;
+	}
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 
-<h2 class="page-title text-center" style='color:black;'>Cart List</h2>
-				<div class="section pt-7 pb-7" width='1000px'>
+<h2 class="page-title text-center" style='color:black;font-size:50px;margin-bottom:20px;'>Shopping List</h2>
+				<div class="section">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-9">
 								<div class="wishlist-wrap">
-									<table class="table shop-cart" style="width:800px">
+									<table class="table shop-cart" >
 										<thead>
 											<tr class="cart_item">
 												<td class="product-remove">&nbsp;</td>
+												<td class="product">Product</td>
 												<td class="product-thumbnail">&nbsp;</td>
-												<td class="product-info">Product Name</td>
-												<td class="product-subtotal">Unit Price</td>
-												<td class="product-stock">Quantity</td>
+												<td class="product">Price</td>
+												<td class="product">Quantity</td>
 												<td>&nbsp;</td>
 											</tr>
 										</thead>
@@ -72,12 +111,12 @@
 									
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="cart-totals" style='display:inline-block; width:500px;'>
+							<div class="col-md-9">
+								<div class="cart-totals" style='display:inline-block;width:100%;height:100px;margin-top:20px;'>
 									<table>
 										<tbody>
 											<tr class="cart-subtotal">
-												<th>Subtotal</th>
+												<th id="subtotal">Subtotal</th>
 												<td id='cartSub'>$ ${cartTotalPrice}</td>
 											</tr>
 										</tbody>
@@ -88,11 +127,7 @@
 										<input type="hidden" name="action"  value="CHECKOUT">
 									</div>
 								</div>
-								<div class="coupon-shipping" style='display:inline-block;'>
-									<div class="coupon" style='display:inline-block;'>
-										
-									</div>
-								</div>
+
 							</div>
 						</div>
 								

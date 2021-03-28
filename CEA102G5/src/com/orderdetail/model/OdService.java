@@ -13,7 +13,7 @@ public class OdService {
 		dao = new OdDAO();
 	}
 	
-	public OmVO addOd (List<CartVO> checkOutList,Integer memID, Integer mrID, Integer omPrice, String omrName, String omrPhone, String omrAdd) {
+	public OmVO addOd (List<CartVO> checkOutList,Integer memID, Integer mrID, Integer omPrice, String omrName, String omrPhone, String omrAdd,Integer omDiscount) {
 		OmVO omVO = new OmVO();
 		
 		omVO.setMemID(memID);
@@ -22,6 +22,7 @@ public class OdService {
 		omVO.setOmrName(omrName);
 		omVO.setOmrPhone(omrPhone);
 		omVO.setOmrAddress(omrAdd);
+		omVO.setOmDiscount(omDiscount);
 		
 		
 		

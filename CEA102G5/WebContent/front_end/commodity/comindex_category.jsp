@@ -108,7 +108,7 @@
                             </div>
                         </div>
 <div class="product-grid">
-
+<%@ include file="pagen1.file" %>
 <c:forEach var="comVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
                             <div class="col-md-4 col-sm-6 product-item text-center mb-3">
                                 <div class="product-thumb">
@@ -146,7 +146,7 @@
 </div>
  
 <div>
-<%@ include file="page2_category.file" %>
+<%@ include file="pagen2.file" %>
 </div>
 
 

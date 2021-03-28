@@ -63,7 +63,7 @@
 							</div>
 						</div>
 								<jsp:useBean id="memSvc" scope="page" class="com.member.model.MemService"></jsp:useBean>
-								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox' style='width:30px;height:30px;'><font size='+2'>使用積分:${memSvc.getMemBonus(memVO.memID).memBonus}分可用</font><br><br>
+								<input id='checkBonus' value='${memSvc.getMemBonus(memVO.memID).memBonus}' type='checkbox' style='width:30px;height:30px;' name="omDiscount"><font size='+2'>使用積分:${memSvc.getMemBonus(memVO.memID).memBonus}分可用</font><br><br>
 								<img src='<%=request.getContextPath()%>/resource/images/recipient.png' width='50px' height='50px'>
 								<input id='openModal' type='button' value='選擇收貨人地址資訊'>
 								<br><br><br>

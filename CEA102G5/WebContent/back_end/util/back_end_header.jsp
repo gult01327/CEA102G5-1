@@ -500,7 +500,7 @@ div.memberListMain{
                                     
                                     <div id=Order>
                                    		<li><a href=${listAllOm}>訂單列表</a></li>
-                                   		<li><a href=${listOd_ByOmID} class=disabled>訂單明細</a></li>
+                                   		<a href=${listOd_ByOmID} class=disabled></a>
                                    		<li><a href=${listAllComComment}>未回覆清單</a></li>
                                    		
                                     </div>

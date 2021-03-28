@@ -160,7 +160,6 @@ $(".status").click(function(){
 		cache:false,
 		ifModified :true,
 		success : function(date){
-			console.log(date);
 			if(date==="1"){
 				status.children().text("¤W¬[");
 				status.next().next().val("1");
@@ -173,9 +172,7 @@ $(".status").click(function(){
 	
  });
 </script>
-<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
- 
-<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+
 </body>
 
 </html>

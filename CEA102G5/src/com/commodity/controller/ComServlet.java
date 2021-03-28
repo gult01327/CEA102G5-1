@@ -274,7 +274,7 @@ public class ComServlet extends HttpServlet {
 				if(comName == null || comName.trim().length()==0) {
 					errorMsgs.put("comName","商品名稱請勿空白");
 				} else if (!comName.matches(comNameReg)) {
-					errorMsgs.put("comName","長度需在2到30間(只能英文或中文)");
+					errorMsgs.put("comName","長度需在2到10間(只能英文或中文)");
 				}
 				ComService confirm = new ComService();
 				List<ComVO> list = confirm.getAll();
